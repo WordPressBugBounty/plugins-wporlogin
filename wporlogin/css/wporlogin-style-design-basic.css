@@ -1,0 +1,199 @@
+/* 
+    Author     : Oregoom
+    WP LOGIN   : DESIGN BASIC 
+    Version    : 1.3
+*/
+
+
+@media (max-width: 575.98px) { /* MOVIL */
+
+    body.login {
+        background-color: #ffffff !important;
+    
+        /* Vesión 1.2 */
+        display: flex;
+        flex-direction: column;
+        /*justify-content: center;*/
+        align-items: center;
+    }
+    
+    body.login div#login {
+        width: 350px !important;
+        background-color: #ffffff !important;
+    }
+
+}
+
+@media (min-width: 576px) { /* ESCRITORIO */
+
+    body.login {
+        background-color: #ffffff !important;
+    
+        /* Vesión 1.2 */
+        display: flex;
+        flex-direction: column;
+        /*justify-content: center;*/
+        align-items: center;
+    }
+    
+    body.login div#login {
+        width: 100% !important;
+        background-color: #ffffff !important;
+    }
+
+}
+
+
+
+body.login div#login h1 {
+    margin-bottom: 2% !important;
+}            
+body.login div#login h1 a {
+    background-image:none !important;
+    background-color: #ffffff !important;
+    display: inline !important;
+    cursor: auto !important;
+    font-size: 48px !important;
+    font-family: "Roboto",sans-serif !important;
+}
+body.login div#login h1 a:hover {
+    color: #444444 !important;
+}
+body.login div#login h1 a:focus {
+    box-shadow: none !important;
+}
+
+body.login div#login p.message {
+    max-width: 360px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border-left: 4px solid #1a73e8 !important;
+    background-color: #1a73e8 !important;
+    background-color: rgba(26, 115, 232, 0.1) !important;
+}
+
+body.login div#login div#login_error {
+    max-width: 360px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+body.login div#login form#loginform,
+body.login div#login form#registerform,
+body.login div#login form#lostpasswordform {
+    border: none !important;
+    box-shadow: none !important;
+    padding-bottom: 15px !important;
+    padding-top: 10px !important;
+    max-width: 360px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+body.login div#login form#loginform p {}
+body.login div#login form#loginform p label {}
+body.login div#login form#loginform input {} 
+
+body.login div#login form#loginform input#user_login,
+body.login div#login form#registerform input#user_login,
+body.login div#login form#registerform input#user_email,
+body.login div#login form#lostpasswordform input#user_login {
+    background-color: #ffffff !important;
+    font-size: 14px !important;
+    line-height: 1.33333333 !important;
+    width: 100% !important;
+    margin: 0 6px 16px 0 !important;
+    min-height: 40px !important;
+    max-height: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    border-bottom: #a4a7b5 1px solid !important;
+    padding: 0 !important;
+}
+body.login div#login form#loginform input#user_login:focus,
+body.login div#login form#registerform input#user_login:focus,
+body.login div#login form#registerform input#user_email:focus,
+body.login div#login form#lostpasswordform input#user_login:focus {
+    background-color: #ffffff !important;
+    outline: 0 none !important;
+    border-bottom: #006fff 1px solid !important;
+    box-shadow: none !important;
+}
+
+body.login div#login form#loginform input#user_pass {
+    background-color: #ffffff !important;
+    font-size: 14px !important;
+    line-height: 1.33333333 !important;
+    width: 100% !important;
+    margin: 0 6px 16px 0 !important;
+    min-height: 40px !important;
+    max-height: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    border-bottom: #a4a7b5 1px solid !important;
+    padding: 0 !important;
+}
+body.login div#login form#loginform input#user_pass:focus {
+    background-color: #ffffff !important;
+    outline: 0 none !important;
+    border-bottom: #006fff 1px solid !important;
+    box-shadow: none !important;
+}
+
+body.login div#login form#loginform button.button-secondary {
+    color: #1a73e8 !important;        
+}
+body.login div#login form#loginform button.button-secondary:hover {
+    border-color: transparent !important;        
+}
+
+body.login div#login form#loginform p.forgetmenot {}
+body.login div#login form#loginform p.forgetmenot input#rememberme {}
+body.login div#login form#loginform p.submit {}
+
+body.login div#login form#loginform p.submit input#wp-submit,
+body.login div#login form#registerform p.submit input#wp-submit,
+body.login div#login form#lostpasswordform p.submit input#wp-submit {
+    background-color: #1a73e8 !important;
+    border: solid 1px #1a73e8 !important;
+    float: none !important;
+    width: 100% !important;
+    height: 50px !important;
+    font-size: 16px !important;
+    margin-top: 10px !important;
+    border-radius: 6px !important;
+    font-family: "Roboto",sans-serif !important;
+}
+body.login div#login form#loginform p.submit input#wp-submit:hover,
+body.login div#login form#registerform p.submit input#wp-submit:hover,
+body.login div#login form#lostpasswordform p.submit input#wp-submit:hover {
+    background-color: #287ae6 !important;
+}
+body.login div#login form#loginform p.submit input#wp-submit:focus,
+body.login div#login form#registerform p.submit input#wp-submit:focus,
+body.login div#login form#lostpasswordform p.submit input#wp-submit:focus {
+    box-shadow: none !important;
+}
+
+body.login div#login p#nav {                
+    text-align: center !important;
+    margin: 0px !important;
+}
+body.login div#login p#nav a {
+    color: #1A73E8 !important;
+    font-size: 14px !important;
+    font-family: "Roboto",sans-serif !important;
+}
+body.login div#login p#nav a:focus {
+    box-shadow: none !important;
+}
+
+body.login div#login p#backtoblog {
+    max-width: 360px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+}
+body.login div#login p#backtoblog a {}
+body.login div#login p#backtoblog a:focus {
+    box-shadow: none !important;
+}

@@ -1,0 +1,189 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WPOrLogin - Personalizar login de WordPress\n"
+"POT-Creation-Date: 2020-07-16 14:59-0500\n"
+"PO-Revision-Date: 2020-07-16 15:02-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: wporlogin.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: includes/wporloginpage.php:37
+msgid "WPOrLogin options"
+msgstr "Opciones de WPOrLogin"
+
+#: includes/wporloginpage.php:37
+msgid "Version"
+msgstr "Versión"
+
+#: includes/wporloginpage.php:39
+msgid "Options to customize WordPress login with"
+msgstr "Opciones para personalizar el Login de WordPress con"
+
+#: includes/wporloginpage.php:56
+msgid "Select an option"
+msgstr "Selecciona una opción"
+
+#: includes/wporloginpage.php:71 includes/wporloginpage.php:82
+msgid "Basic"
+msgstr "Básico"
+
+#: includes/wporloginpage.php:73 includes/wporloginpage.php:85
+msgid "Standard"
+msgstr "Estándar"
+
+#: includes/wporloginpage.php:114
+msgid "Logo"
+msgstr "Logotipo"
+
+#: includes/wporloginpage.php:124
+msgid "Select the logo"
+msgstr "Seleccione el logotipo"
+
+#: includes/wporloginpage.php:125
+msgid "You can upload your logo from here"
+msgstr "Puedes subir tu logotipo desde aquí"
+
+#: includes/wporloginpage.php:126
+msgid "You'll get the best results with a"
+msgstr "Obtendrá los mejores resultados con una"
+
+#: includes/wporloginpage.php:126
+msgid "dimension of 200 by 84 pixels"
+msgstr "dimensión de 200 por 84 píxeles"
+
+#: includes/wporloginpage.php:132
+msgid "Logo URL"
+msgstr "URL del Logotipo"
+
+#: includes/wporloginpage.php:135
+msgid "Change the login logo URL"
+msgstr "Cambiar la URL del logo de login"
+
+#: includes/wporloginpage.php:141
+msgid "Logo Title"
+msgstr "Título del Logo"
+
+#: includes/wporloginpage.php:144
+msgid "Change the logo title in login"
+msgstr "Cambiar el título del logo en login"
+
+#: includes/wporloginpage.php:150
+msgid "Background image"
+msgstr "Imagen de fondo"
+
+#: includes/wporloginpage.php:160
+msgid "Select background image"
+msgstr "Seleccione imagen de fondo"
+
+#: includes/wporloginpage.php:161
+msgid "You can upload a background image from here"
+msgstr "Puedes subir una imagen de fondo desde aquí"
+
+#: includes/wporloginpage.php:162
+msgid ""
+"You'll get the best results when using images with a dimension of 1920 by "
+"1080 pixels"
+msgstr ""
+"Obtendrás los mejores resultados al usar imágenes con una dimensión de 1920 "
+"por 1080 píxeles"
+
+#: includes/wporloginpage.php:177
+msgid "Donate now"
+msgstr "Donar ahora"
+
+#: includes/wporloginpage.php:180
+msgid "en_US"
+msgstr "es_ES/ES"
+
+#: includes/wporloginpage.php:183
+msgid "Important"
+msgstr "Importante"
+
+#: includes/wporloginpage.php:183
+msgid ""
+"If you value my work, considered a small donation to show your appreciation. "
+"Thank you!"
+msgstr ""
+"Si valoras mi trabajo, considera una pequeña donación para mostrar tu "
+"agradecimiento. ¡Gracias!"
+
+#: includes/wporloginpage.php:185
+msgid "To donate now, click the Donate button"
+msgstr "Para donar ahora, haga clic en el botón Donar"
+
+#: js/img-fondo.js:23
+msgctxt "wporlogin"
+msgid "Logo"
+msgstr "Logotipo"
+
+#: js/img-fondo.js:25
+msgctxt "wporlogin"
+msgid "Select logo"
+msgstr "Seleccione el logotipo"
+
+#: js/img-fondo.js:57
+msgctxt "wporlogin"
+msgid "Background image"
+msgstr "Imagen de fondo"
+
+#: js/img-fondo.js:59
+msgctxt "wporlogin"
+msgid "Select background image"
+msgstr "Seleccione imagen de fondo"
+
+#: wporlogin.php:372
+msgid "Sign Up"
+msgstr "Regístrate"
+
+#: wporlogin.php:378
+msgid "Reset Password"
+msgstr "Restablecer contraseña"
+
+#: wporlogin.php:382 wporlogin.php:389
+msgid "Log In"
+msgstr "Iniciar sesión"
+
+#. Plugin Name of the plugin/theme
+msgid "WPOrLogin - Customize WordPress login"
+msgstr "WPOrLogin - Personalizar Login de WordPress"
+
+#. Plugin URI of the plugin/theme
+msgid "https://oregoom.com/wporlogin/"
+msgstr "https://oregoom.com/wporlogin/"
+
+#. Description of the plugin/theme
+msgid "Plugin to customize the WordPress login."
+msgstr "Plugin para personalizar el login de WordPress."
+
+#. Author of the plugin/theme
+msgid "Nivardo Ch"
+msgstr "Nivardo Ch"
+
+#. Author URI of the plugin/theme
+msgid "https://nivardoch.com"
+msgstr "https://nivardoch.com"
+
+#, fuzzy
+#~| msgid "Logo"
+#~ msgid "Logotipo"
+#~ msgstr "Logotipo"
+
+#~ msgid "Imagen de fondo"
+#~ msgstr "Background image"
+
+#~ msgid "Iniciar sesión"
+#~ msgstr "Log in"
