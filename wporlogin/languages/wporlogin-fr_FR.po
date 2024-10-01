@@ -1,0 +1,479 @@
+# WPOrLogin - Customize WordPress Login
+# Copyright (C) 2024 Oregoom
+# This file is distributed under the same license as the WPOrLogin plugin.
+# Oregoom <nivardo.choqque@oregoom.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WPOrLogin 2.9.2\n"
+"Report-Msgid-Bugs-To: https://oregoom.com\\wporlogi\n"
+"\\POT-Creation-Date: 2024-09-25 12:00+0000\n"
+"PO-Revision-Date: 2024-09-26 19:31-0500\n"
+"Language-Team: Spanish <contacto@oregoom.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-KeywordsList: __;_e;_x;esc_html__;esc_html_e;esc_html_x;esc_attr__;"
+"esc_attr_e;esc_attr_x\n"
+"X-Domain: wporlogin\n"
+"POT-Creation-Date: \n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+#: includes/wporloginpage.php:423
+msgid " están hechas para ser usadas libremente"
+msgstr " sont faits pour être portés librement"
+
+#: wporlogin.php:1010
+msgid " o limpiar la caché de WordPress."
+msgstr " ou videz le cache WordPress."
+
+#: includes/wporloginpage.php:436
+msgid " totalmente gratis"
+msgstr " Libre"
+
+#: includes/wporloginpage.php:423
+msgid " y "
+msgstr " et "
+
+#: includes/wporloginpage.php:302
+msgid "300 píxeles"
+msgstr "300 pixels (en anglais)"
+
+#: includes/templates/recaptcha-settings-template-form.php:88
+msgid "Activar reCAPTCHA para"
+msgstr "Activer reCAPTCHA pour"
+
+#: includes/wporloginpage.php:320
+msgid "Altura del logotipo"
+msgstr "Hauteur du logo"
+
+#: includes/wporloginpage.php:309
+msgid "Ancho del logotipo"
+msgstr "Largeur du logo"
+
+#: includes/wporloginpage.php:156
+msgid "Apariencia"
+msgstr "Apparence"
+
+#: includes/wporloginpage.php:436
+msgid "aquí"
+msgstr "ici"
+
+#: wporlogin.php:1011
+msgid "Borrar la caché de WordPress"
+msgstr "Vider le cache WordPress"
+
+#: includes/wporloginpage.php:190
+msgid "Básico"
+msgstr "Basic"
+
+#: includes/wporloginpage.php:382
+msgid "Cambia el título del logotipo en el inicio de sesión"
+msgstr "Changer le titre du logo lors de la connexion"
+
+#: includes/wporloginpage.php:371
+msgid "Cambia la URL del logotipo de inicio de sesión"
+msgstr "Modifier l’URL du logo de connexion"
+
+#: includes/wporloginpage.php:342
+msgid "centro centro"
+msgstr "centre-ville"
+
+#: includes/wporloginpage.php:343
+msgid "centro inferior"
+msgstr "en bas au centre"
+
+#: includes/wporloginpage.php:341
+msgid "centro superior"
+msgstr "études supérieures"
+
+#: includes/templates/recaptcha-settings-template-form.php:52
+msgid "Clave del sitio (v2)"
+msgstr "Clé de site (v2)"
+
+#: includes/templates/recaptcha-settings-template-form.php:70
+msgid "Clave del sitio (v3)"
+msgstr "Clé de site (v3)"
+
+#: includes/templates/recaptcha-settings-template-form.php:60
+msgid "Clave secreta (v2)"
+msgstr "Clé secrète (v2)"
+
+#: includes/templates/recaptcha-settings-template-form.php:78
+msgid "Clave secreta (v3)"
+msgstr "Clé secrète (v3)"
+
+#: includes/wporloginpage.php:345
+msgid "Define la posición inicial de la imagen de fondo"
+msgstr "Définir la position de départ de l’image d’arrière-plan"
+
+#: includes/wporloginpage.php:339
+msgid "derecha centro"
+msgstr "centre droit"
+
+#: includes/wporloginpage.php:340
+msgid "derecha inferior"
+msgstr "en bas à droite"
+
+#: includes/wporloginpage.php:338
+msgid "derecha superior"
+msgstr "en haut à droite"
+
+#: includes/templates/recaptcha-settings-template-form.php:37
+msgid "Desactivado Google reCAPTCHA"
+msgstr "Google reCAPTCHA désactivé"
+
+#: wporlogin.php:406
+#, php-format
+msgid ""
+"Desarrollado por <a href=\"%s\" target=\"_blank\" class=\"text-info"
+"\">Oregoom.com</a>"
+msgstr ""
+"Propulsé par <a href=\"%s\" target=\"_blank\" class=\"text-info\">Oregoom."
+"com</a>"
+
+#: includes/templates/wporlogin-paypal-done.php:9
+msgid "Donar ahora"
+msgstr "Faites un don maintenant"
+
+#: includes/wporloginpage.php:73
+msgid "Eliminar"
+msgstr "Supprimmer"
+
+#: includes/wporloginpage.php:77
+msgid "Eliminar el menú"
+msgstr "Supprimer le menu"
+
+#: includes/wporloginpage.php:80
+msgid "Eliminar el menú desplegable de idioma"
+msgstr "Supprimer le menu déroulant des langues"
+
+#: includes/wporloginpage.php:42
+msgid ""
+"Eliminar el selector de idioma disponible en la pantalla de inicio de sesión"
+msgstr "Supprimer le sélecteur de langue disponible sur l’écran de connexion"
+
+#: includes/wporloginpage.php:21
+msgid "Eliminar Idioma"
+msgstr "Supprimer la langue"
+
+#: includes/wporloginpage.php:40
+msgid "Eliminar selector de idioma"
+msgstr "Supprimer le sélecteur de langue"
+
+#: wporlogin.php:627 wporlogin.php:797 wporlogin.php:901
+msgid "Error al verificar reCAPTCHA. Por favor, inténtalo de nuevo."
+msgstr "Erreur lors de la vérification de reCAPTCHA. Veuillez réessayer."
+
+#: wporlogin.php:886
+msgid "Error de configuración de reCAPTCHA."
+msgstr "Erreur de configuration reCAPTCHA."
+
+#: wporlogin.php:991
+msgid "Error de nonce"
+msgstr "L’erreur de Noce"
+
+#: includes/wporloginpage.php:360
+msgid "Especifica el tamaño de la imagen de fondo"
+msgstr "Spécifier la taille de l’image d’arrière-plan"
+
+#: includes/wporloginpage.php:200
+msgid "Estándar"
+msgstr "Standard"
+
+#: wporlogin.php:986
+msgid "Excelente"
+msgstr "Excellente"
+
+#: includes/templates/recaptcha-settings-template-form.php:93
+msgid "Formulario de acceso"
+msgstr "Formulaire d’accès"
+
+#: includes/templates/recaptcha-settings-template-form.php:100
+msgid "Formulario de recuperación de contraseña"
+msgstr "Formulaire de récupération de mot de passe"
+
+#: includes/templates/recaptcha-settings-template-form.php:96
+msgid "Formulario de registro"
+msgstr "Formulaire d’inscription"
+
+#: includes/wporloginpage.php:20
+#: includes/templates/recaptcha-settings-template.php:9
+msgid "Google reCAPTCHA"
+msgstr "Google reCAPTCHA"
+
+#: includes/templates/recaptcha-settings-template-form.php:38
+msgid "Google reCAPTCHA v2"
+msgstr "Google reCAPTCHA v2"
+
+#: wporlogin.php:369
+msgid ""
+"Google reCAPTCHA v2 está seleccionado, pero las claves del sitio o secretas "
+"no están configuradas."
+msgstr ""
+"Google reCAPTCHA v2 est sélectionné, mais les clés de site ou secrètes ne "
+"sont pas configurées."
+
+#: includes/templates/recaptcha-settings-template-form.php:39
+msgid "Google reCAPTCHA v3"
+msgstr "Google reCAPTCHA v3"
+
+#: wporlogin.php:382
+msgid ""
+"Google reCAPTCHA v3 está seleccionado, pero la clave del sitio no está "
+"configurada."
+msgstr ""
+"Google reCAPTCHA v3 est sélectionné, mais la clé de site n’est pas "
+"configurée."
+
+#: includes/templates/recaptcha-settings-template-form.php:45
+msgid "Haz clic aquí para"
+msgstr "Cliquez ici pour"
+
+#. URI of the plugin
+#. Author URI of the plugin
+msgid "https://oregoom.com/wporlogin/"
+msgstr "https://oregoom.com/wporlogin/"
+
+#: includes/wporloginpage.php:429
+msgid "Imagen "
+msgstr "Image "
+
+#: includes/wporloginpage.php:389 includes/wporloginpage.php:397
+msgid "Imagen de fondo"
+msgstr "Image d’arrière-plan"
+
+#: includes/templates/wporlogin-paypal-done.php:15
+msgid "Importante"
+msgstr "Important"
+
+#: wporlogin.php:1010
+msgid "IMPORTANTE: "
+msgstr "IMPORTANT: "
+
+#: includes/wporloginpage.php:402
+msgid "Imágenes gratuitas"
+msgstr "Images gratuites"
+
+#: includes/wporloginpage.php:313
+msgid "Ingrese el ancho deseado del logotipo"
+msgstr "Entrez la largeur souhaitée du logo"
+
+#: includes/wporloginpage.php:324
+msgid "Ingrese la altura deseada del logotipo"
+msgstr "Entrez la hauteur souhaitée du logo"
+
+#: includes/wporloginpage.php:336
+msgid "izquierda centro"
+msgstr "centre gauche"
+
+#: includes/wporloginpage.php:337
+msgid "izquierda inferior"
+msgstr "en bas à gauche"
+
+#: includes/wporloginpage.php:335
+msgid "izquierda superior"
+msgstr "en haut à gauche"
+
+#: wporlogin.php:917
+msgid "La puntuación de reCAPTCHA v3 es muy baja. Inténtalo de nuevo."
+msgstr "Le score reCAPTCHA v3 est très faible. Veuillez réessayer."
+
+#: wporlogin.php:636 wporlogin.php:643 wporlogin.php:807 wporlogin.php:815
+#: wporlogin.php:911
+msgid "La verificación de reCAPTCHA ha fallado. Por favor, inténtalo de nuevo."
+msgstr "La vérification reCAPTCHA a échoué. Veuillez réessayer."
+
+#: includes/wporloginpage.php:423
+msgid "Las imágenes de "
+msgstr "Les images de "
+
+#: wporlogin.php:470
+msgid "Log In"
+msgstr "S'identifier"
+
+#: includes/wporloginpage.php:281 includes/wporloginpage.php:289
+msgid "Logotipo"
+msgstr "Logo Lacunza"
+
+#: includes/wporloginpage.php:405
+msgid "Mis imágenes"
+msgstr "Mes images"
+
+#: wporlogin.php:1011
+msgid "Más información aquí"
+msgstr "Plus d’informations ici"
+
+#: includes/wporloginpage.php:417
+msgid ""
+"Obtendrás los mejores resultados al usar imágenes con una dimensión de "
+"1920x1080 píxeles"
+msgstr ""
+"Vous obtiendrez les meilleurs résultats en utilisant des images d’une "
+"dimension de 1920x1080 pixels"
+
+#. Author of the plugin
+msgid "Oregoom"
+msgstr "Oregoom"
+
+#: includes/templates/wporlogin-paypal-done.php:17
+msgid "Para donar ahora, haz clic en el botón de Donar"
+msgstr "Pour faire un don maintenant, cliquez sur le bouton Faire un don"
+
+#. Description of the plugin
+msgid "Plugin para personalizar la página de inicio de sesión de WordPress."
+msgstr "Plugin pour personnaliser la page de connexion WordPress."
+
+#: includes/wporloginpage.php:12
+msgid "Plugin WPOrLogin"
+msgstr "Plugin WPOrLogin"
+
+#: wporlogin.php:590 wporlogin.php:759 wporlogin.php:873
+msgid "Por favor, completa la verificación de reCAPTCHA."
+msgstr "Veuillez effectuer la vérification reCAPTCHA."
+
+#: includes/wporloginpage.php:331
+msgid "Posición del logotipo"
+msgstr "Position du logo"
+
+#: includes/wporloginpage.php:211
+msgid "Premium"
+msgstr "Premium"
+
+#: includes/templates/recaptcha-settings-template.php:13
+msgid "Protege tu sitio con reCAPTCHA v2 o v3"
+msgstr "Protégez votre site avec reCAPTCHA v2 ou v3"
+
+#: includes/wporloginpage.php:436
+msgid "Puedes descargar más imágenes desde "
+msgstr "Vous pouvez télécharger plus d’images à partir de "
+
+#: includes/wporloginpage.php:422
+msgid "Puedes seleccionar una imagen de fondo desde aquí"
+msgstr "Vous pouvez sélectionner une image d’arrière-plan à partir d’ici"
+
+#: includes/wporloginpage.php:301
+msgid "Puedes subir tu logotipo desde aquí"
+msgstr "Vous pouvez télécharger votre logo à partir d’ici"
+
+#: includes/wporloginpage.php:416
+msgid "Puedes subir una imagen de fondo desde aquí"
+msgstr "Vous pouvez télécharger une image d’arrière-plan à partir d’ici"
+
+#: includes/wporloginpage.php:302
+msgid "Recomendaría un ancho máximo de"
+msgstr "Je recommanderais une largeur maximale de"
+
+#: includes/templates/recaptcha-settings-template-form.php:44
+msgid ""
+"Registra tu nombre de dominio en el servicio de Google reCAPTCHA y luego "
+"añade las claves en los siguientes campos."
+msgstr ""
+"Enregistrez votre nom de domaine dans le service Google reCAPTCHA, puis "
+"ajoutez les clés dans les champs suivants."
+
+#: includes/templates/recaptcha-settings-template-form.php:45
+msgid "registrar tu dominio"
+msgstr "enregistrez votre domaine"
+
+#: wporlogin.php:465
+msgid "Reset Password"
+msgstr "Réinitialiser le mot de passe"
+
+#: includes/templates/recaptcha-settings-template-form.php:41
+msgid "Selecciona la versión de Google reCAPTCHA que deseas utilizar."
+msgstr ""
+"Sélectionnez la version de Google reCAPTCHA que vous souhaitez utiliser."
+
+#: includes/wporloginpage.php:175
+msgid "Selecciona una opción"
+msgstr "Sélectionnez une option"
+
+#: includes/wporloginpage.php:300
+msgid "Seleccionar el logotipo"
+msgstr "Sélectionnez le logo"
+
+#: includes/wporloginpage.php:415
+msgid "Seleccionar imagen de fondo"
+msgstr "Sélectionnez l’image d’arrière-plan"
+
+#: wporlogin.php:1010
+msgid ""
+"Si no puedes ver los cambios que has realizado en tu sitio web, puede que "
+"necesites forzar a la página a cargar desde el servidor con "
+msgstr ""
+"Si vous ne voyez pas les modifications que vous avez apportées à votre site "
+"Web, vous devrez peut-être forcer le chargement de la page à partir du "
+"serveur avec "
+
+#: includes/templates/wporlogin-paypal-done.php:15
+msgid ""
+"Si valoras mi trabajo, considera hacer una pequeña donación para mostrar tu "
+"aprecio. ¡Gracias!"
+msgstr ""
+"Si vous appréciez mon travail, veuillez envisager de faire un petit don pour "
+"montrer votre appréciation. Merci!"
+
+#: wporlogin.php:463
+msgid "Sign Up"
+msgstr "S’enregistrer"
+
+#: includes/wporloginpage.php:352
+msgid "Tamaño del fondo"
+msgstr "Taille de l’arrière-plan"
+
+#: includes/wporloginpage.php:158
+msgid ""
+"te permite modificar la apariencia de la página de inicio de sesión de "
+"WordPress"
+msgstr "vous permet de modifier l’apparence de la page de connexion WordPress"
+
+#: includes/wporloginpage.php:378
+msgid "Título del logotipo"
+msgstr "Titre du logo"
+
+#: includes/wporloginpage.php:367
+msgid "URL del logotipo"
+msgstr "Logo URL"
+
+#: wporlogin.php:958
+msgid "Vale, te lo mereces"
+msgstr "D’accord, vous le méritez"
+
+#: includes/wporloginpage.php:63
+msgid "Ver el video"
+msgstr "Voir la vidéo"
+
+#: includes/templates/recaptcha-settings-template.php:30
+msgid "Ver el vídeo"
+msgstr "Voir la vidéo"
+
+#: includes/templates/recaptcha-settings-template-form.php:33
+msgid "Versión de Google reCAPTCHA"
+msgstr "Version de Google reCAPTCHA"
+
+#: includes/wporloginpage.php:13
+msgid "WPOrLogin"
+msgstr "WPOrLogin"
+
+#. Name of the plugin
+msgid "WPOrLogin - Personalizar el inicio de sesión de WordPress"
+msgstr "WPOrLogin - Personnaliser WordPress Login"
+
+#: wporlogin.php:952
+msgid ""
+"¡Hola! Ya has estado usando el plugin WPOrLogin en tu sitio durante 2 "
+"semanas - Esperamos que te haya sido útil. Si estás disfrutando del plugin, "
+"¿te importaría valorarlo con 5 estrellas para ayudar a hacer correr la voz?"
+msgstr ""
+"Bonjour! Vous utilisez déjà le plugin WPOrLogin sur votre site depuis 2 "
+"semaines - nous espérons que vous l’avez trouvé utile. Si vous appréciez le "
+"plugin, pourriez-vous lui donner 5 étoiles pour aider à faire passer le mot ?"
+
+#: includes/wporloginpage.php:63
+#: includes/templates/recaptcha-settings-template.php:30
+msgid "¿Necesitas ayuda? "
+msgstr "Vous avez besoin d’aide ? "

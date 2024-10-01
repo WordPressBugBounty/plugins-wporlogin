@@ -43,7 +43,6 @@ jQuery(document).ready(function($){
             // Abre el diálogo del cargador
             mediaUploaderLogo.open();        
 	});
-        
                 
         /*  
         *  ///////////////////////////////////////////////////////////////////////
@@ -77,9 +76,6 @@ jQuery(document).ready(function($){
             // Abre el diálogo del cargador
             mediaUploader.open();
 	});
-        
-        
-        
         
         /*
          * Script JQuery para selecionar opciones
@@ -121,8 +117,6 @@ jQuery(document).ready(function($){
             
         });
         
-        
-        
         /*
          * Script JQuery para selecionar opciones images
          */
@@ -138,7 +132,5 @@ jQuery(document).ready(function($){
             jQuery('#wporlogin-container-background-free-image').hide();//Ocultar
             
         });
-        
-        
         
 });
