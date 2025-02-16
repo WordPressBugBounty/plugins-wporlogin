@@ -4,11 +4,13 @@ Contributors: Oregoom
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CTG69VCQ5TZZN&source=url  
 Tags: wp-login, custom login, wordpress login, custom login logo, style login  
 Requires at least: 5.2  
-Tested up to: 6.6.2  
-Stable tag: 2.9.2
+Tested up to: 6.7.2  
+Stable tag: 2.9.3
 Requires PHP: 7.2  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
+
+WPOrLogin te permite personalizar completamente la página de inicio de sesión y registro de WordPress, con opciones avanzadas de diseño y seguridad como Google reCAPTCHA v2 y v3.
 
 == Description ==
 
@@ -30,6 +32,7 @@ Con **WPOrLogin**, personalizar la apariencia y reforzar la seguridad de tu siti
 - **Compatibilidad con dispositivos móviles:** Diseño optimizado para pantallas móviles.
 - **Opciones de seguridad:** Permite Google reCAPTCHA en formularios de acceso, registro y recuperación de contraseña.
 - **Opciones avanzadas:** Elimina el selector de idioma en la página de inicio de sesión.
+- **Redirección Personalizada:* Permite redirigir a los usuarios después de iniciar o cerrar sesión en WordPress.
 - **Soporte multilingüe:** Disponible en 5 idiomas (español, inglés, francés, italiano y alemán).
 
 ### Seguridad avanzada con Google reCAPTCHA:
@@ -142,6 +145,9 @@ Este plugin está disponible en los siguientes idiomas:
 
 == Changelog ==
 
+= 2.9.3 =
+* Añadido soporte para redirección personalizada en Login y Logout
+
 = 2.9 =
 * Añadido soporte para Google reCAPTCHA v3
 * Añadido Google reCAPTCHA al formulario de recuperación de contraseña
@@ -220,5 +226,5 @@ Este plugin está disponible en los siguientes idiomas:
 
 == Upgrade Notice ==
 
-= 2.9.2 =
-Esta versión añade compatibilidad con Google reCAPTCHA v3 y mejoras de seguridad. También añade validación de reCAPTCHA en el formulario de recuperación de contraseña. Recomendamos actualizar para mejorar la protección de tu sitio.
+= 2.9.3 =
+Esta versión permite redirigir a los usuarios después de iniciar o cerrar sesión en WordPress.

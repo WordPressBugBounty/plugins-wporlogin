@@ -19,7 +19,8 @@ function wporlogin_add_admin_menu_page(){
     add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url);
     add_submenu_page( $menu_slug, __('Google reCAPTCHA', 'wporlogin'), __('Google reCAPTCHA', 'wporlogin'), 'manage_options', 'recaptcha-wporlogin-plugin', 'recaptcha_wporlogin_content_page_menu');
     add_submenu_page( $menu_slug, __('Eliminar Idioma', 'wporlogin'), __('Eliminar Idioma', 'wporlogin'), 'manage_options', 'remove-language-plugin', 'remove_language_content_page_menu');
-    
+    add_submenu_page( $menu_slug, __('Redirecciones', 'wporlogin'), __('Redirecciones', 'wporlogin'), 'manage_options', 'redirects-wporlogin-plugin', 'redirects_wporlogin_content_page_menu');
+
 }
 add_action('admin_menu','wporlogin_add_admin_menu_page');
 

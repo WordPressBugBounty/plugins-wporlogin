@@ -3,7 +3,7 @@
  * Plugin Name: WPOrLogin - Personalizar el inicio de sesión de WordPress
  * Plugin URI: https://oregoom.com/wporlogin/
  * Description: Plugin para personalizar la página de inicio de sesión de WordPress.
- * Version: 2.9.2
+ * Version: 2.9.3
  * Author: Oregoom
  * Author URI: https://oregoom.com/wporlogin/
  * License: GPL2
@@ -38,6 +38,7 @@ define( 'WPORLOGIN_PLUGIN_PATH', plugin_dir_path(__FILE__));
 // Inclusión de archivos necesarios
 require_once plugin_dir_path(__FILE__) .'includes/wporloginpage.php';
 require_once plugin_dir_path(__FILE__) .'includes/remove-language-wporlogin.php';
+require_once plugin_dir_path(__FILE__) .'includes/redirects-wporlogin.php';
 
 // Función para insertar scripts en el área de administración
 function wporlogin_insert_script_upload($hook){
