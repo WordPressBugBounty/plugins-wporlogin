@@ -10,7 +10,7 @@
         </h1>
         
         <p style="margin-bottom: 20px; text-align: center; font-family: 'Roboto', sans-serif; font-size: 16px; margin-top: 5px; margin-bottom: 40px;">
-            <?php _e('Protege tu sitio con reCAPTCHA v2 o v3', 'wporlogin'); ?>
+            <?php _e('Protect your website from bots and unauthorized access with <strong>reCAPTCHA v2</strong> or <strong>v3</strong>.', 'wporlogin'); ?>
         </p>
         
         <?php settings_errors(); ?>
@@ -27,7 +27,7 @@
                 
                 <div class="wporlogin-container-design" style="width: 90%; margin-left: auto; margin-right: auto;">
                     <div style="border-bottom: 1px solid #e5e7e8; padding-bottom: 15px; padding-top: 10px;">
-                        <span><?php _e('¿Necesitas ayuda? ', 'wporlogin'); ?><a href="https://youtu.be/U5x6FE5rre0" target="_blank"> <?php _e('Ver el vídeo', 'wporlogin'); ?></a></span>
+                        <span><?php _e('Do you need help? ', 'wporlogin'); ?><a href="https://youtu.be/U5x6FE5rre0" target="_blank"> <?php _e('Watch the video', 'wporlogin'); ?></a></span>
                     </div>
                     
                     <!-- Aquí va el contenido del formulario de reCAPTCHA -->

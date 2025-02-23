@@ -50,9 +50,9 @@ function redirects_wporlogin_content_page_menu(){
 
         <div style="width: 95%; margin-left: auto; margin-right: auto; position: relative;">
         
-            <h1 style="text-align: center; font-size: 34px; padding-top: 30px; font-weight: bold; font-family: 'Roboto', sans-serif;"><strong><?php _e('Redirecciones personalizadas', 'wporlogin'); ?></strong></h1>  
+            <h1 style="text-align: center; font-size: 34px; padding-top: 30px; font-weight: bold; font-family: 'Roboto', sans-serif;"><strong><?php _e('Session Redirection Settings', 'wporlogin'); ?></strong></h1>  
         
-            <p style="margin-bottom: 20px; text-align: center; font-family: 'Roboto', sans-serif; font-size: 16px; margin-top: 5px; margin-bottom: 40px;"><?php _e('Permite redirigir a los usuarios a páginas personalizadas al iniciar y cerrar sesión en WordPress.', 'wporlogin'); ?></p>
+            <p style="margin-bottom: 20px; text-align: center; font-family: 'Roboto', sans-serif; font-size: 16px; margin-top: 5px; margin-bottom: 40px;"><?php _e('Set up automatic redirects for users when they log in or log out of WordPress.', 'wporlogin'); ?></p>
     
         
             <?php settings_errors(); // Muestra los mensajes de éxito o de error cuando se envía el formulario ?>
@@ -73,37 +73,37 @@ function redirects_wporlogin_content_page_menu(){
                 <div class="wporlogin-container-design" style="width: 90%; margin-left: auto; margin-right: auto;">
 
                     <div style="border-bottom: 1px solid #e5e7e8; padding-bottom: 15px; padding-top: 10px;">
-                        <span><?php _e('¿Necesitas ayuda? ', 'wporlogin'); ?><a href="#" target="_blank"><?php _e('Ver el video', 'wporlogin'); ?></a></span>
+                        <span><?php _e('Need help? ', 'wporlogin'); ?><a href="#" target="_blank"><?php _e('Watch the video', 'wporlogin'); ?></a></span>
                     </div>
                                     
                     <!-- Sección de Redirección al Iniciar Sesión -->
-            <h2 class="title"><?php _e('Redirección al Iniciar Sesión', 'wporlogin'); ?></h2>
+            <h2 class="title"><?php _e('Redirect After Login', 'wporlogin'); ?></h2>
             <table class="form-table">
                 <tbody>
                     <tr>
-                        <th scope="row"><?php _e('Activar redirección al iniciar sesión', 'wporlogin'); ?></th>
+                        <th scope="row"><?php _e('Enable redirection after login', 'wporlogin'); ?></th>
                         <td>
                             <fieldset>
                                 <label for="wporlogin_enable_login_redirect">
                                     <input type="checkbox" id="wporlogin_enable_login_redirect" name="wporlogin_enable_login_redirect" value="1" <?php checked(get_option('wporlogin_enable_login_redirect'), '1'); ?> />
-                                    <?php _e('Sí, activar redirección', 'wporlogin'); ?>
+                                    <?php _e('Yes, enable redirection', 'wporlogin'); ?>
                                 </label>
                             </fieldset>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php _e('URL de redirección al iniciar sesión', 'wporlogin'); ?></th>
+                        <th scope="row"><?php _e('Page to redirect users after login (URL)', 'wporlogin'); ?></th>
                         <td>
                             <input type="text" name="wporlogin_login_redirect" value="<?php echo esc_attr(get_option('wporlogin_login_redirect')); ?>" class="regular-text" />
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php _e('Incluir administradores en la redirección', 'wporlogin'); ?></th>
+                        <th scope="row"><?php _e('Apply redirection to administrators as well', 'wporlogin'); ?></th>
                         <td>
                             <fieldset>
                                 <label for="wporlogin_enable_admin_redirect">
                                     <input type="checkbox" id="wporlogin_enable_admin_redirect" name="wporlogin_enable_admin_redirect" value="1" <?php checked(get_option('wporlogin_enable_admin_redirect'), '1'); ?> />
-                                    <?php _e('Sí, redirigir administradores también', 'wporlogin'); ?>
+                                    <?php _e('Yes, redirect administrators too', 'wporlogin'); ?>
                                 </label>
                             </fieldset>
                         </td>
@@ -112,22 +112,22 @@ function redirects_wporlogin_content_page_menu(){
             </table>
 
             <!-- Separador -->
-            <h2 class="title"><?php _e('Redirección al Cerrar Sesión', 'wporlogin'); ?></h2>
+            <h2 class="title"><?php _e('Redirect on Logout', 'wporlogin'); ?></h2>
             <table class="form-table">
                 <tbody>
                     <tr>
-                        <th scope="row"><?php _e('Activar redirección al cerrar sesión', 'wporlogin'); ?></th>
+                        <th scope="row"><?php _e('Enable redirection after logout', 'wporlogin'); ?></th>
                         <td>
                             <fieldset>
                                 <label for="wporlogin_enable_logout_redirect">
                                     <input type="checkbox" id="wporlogin_enable_logout_redirect" name="wporlogin_enable_logout_redirect" value="1" <?php checked(get_option('wporlogin_enable_logout_redirect'), '1'); ?> />
-                                    <?php _e('Sí, activar redirección', 'wporlogin'); ?>
+                                    <?php _e('Yes, enable redirection', 'wporlogin'); ?>
                                 </label>
                             </fieldset>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php _e('URL de redirección al cerrar sesión', 'wporlogin'); ?></th>
+                        <th scope="row"><?php _e('Page to redirect users after logout (URL)', 'wporlogin'); ?></th>
                         <td>
                             <input type="text" name="wporlogin_logout_redirect" value="<?php echo esc_attr(get_option('wporlogin_logout_redirect')); ?>" class="regular-text" />
                         </td>

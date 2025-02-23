@@ -30,26 +30,26 @@ function wporlogin_render_recaptcha_form() {
         <!-- Selector para elegir la versión de reCAPTCHA -->
         <tr style="border-bottom: 1px solid #e5e7e8;">
             <th scope="row">
-                <label for="recaptcha_version_wporlogin"><?php _e('Versión de Google reCAPTCHA', 'wporlogin'); ?></label>
+                <label for="recaptcha_version_wporlogin"><?php _e('Google reCAPTCHA version', 'wporlogin'); ?></label>
             </th>
             <td>
                 <select name="recaptcha_version_wporlogin" id="recaptcha_version_wporlogin">
-                    <option value="none" <?php selected($recaptcha_version, 'none'); ?>><?php _e('Desactivado Google reCAPTCHA', 'wporlogin'); ?></option>
+                    <option value="none" <?php selected($recaptcha_version, 'none'); ?>><?php _e('Google reCAPTCHA disabled', 'wporlogin'); ?></option>
                     <option value="v2" <?php selected($recaptcha_version, 'v2'); ?>><?php _e('Google reCAPTCHA v2', 'wporlogin'); ?></option>
                     <option value="v3" <?php selected($recaptcha_version, 'v3'); ?>><?php _e('Google reCAPTCHA v3', 'wporlogin'); ?></option>
                 </select>
-                <p><?php _e('Selecciona la versión de Google reCAPTCHA que deseas utilizar.', 'wporlogin'); ?></p>
+                <p><?php _e('Select the Google reCAPTCHA version you want to use.', 'wporlogin'); ?></p>
                 <br>
                 <!-- Registro de dominio para Google reCAPTCHA -->
-                <p><?php _e('Registra tu nombre de dominio en el servicio de Google reCAPTCHA y luego añade las claves en los siguientes campos.', 'wporlogin'); ?></p>
-                <p><?php _e('Haz clic aquí para', 'wporlogin'); ?> <a href="https://www.google.com/recaptcha/admin" target="_blank"><?php _e('registrar tu dominio', 'wporlogin'); ?></a></p>
+                <p><?php _e("To use reCAPTCHA, first register your domain with Google's service, then enter the keys in the fields below.", 'wporlogin'); ?></p>
+                <p><?php _e('<a href="https://www.google.com/recaptcha/admin" target="_blank">Click here to register your domain</a>', 'wporlogin'); ?></a></p>
             </td>
         </tr>
 
         <!-- Claves reCAPTCHA v2 -->
         <tr class="wporlogin-recaptcha-v2-fields">
             <th scope="row">
-                <label for="wporlogin_recaptcha_v2_site_key"><?php _e('Clave del sitio (v2)', 'wporlogin'); ?></label>
+                <label for="wporlogin_recaptcha_v2_site_key"><?php _e('Site key (v2)', 'wporlogin'); ?></label>
             </th>
             <td>
                 <input id="wporlogin_recaptcha_v2_site_key" type="text" name="recaptcha_v2_site_key_wporlogin" class="regular-text" value="<?php echo esc_html(get_option('recaptcha_v2_site_key_wporlogin')); ?>" />
@@ -57,7 +57,7 @@ function wporlogin_render_recaptcha_form() {
         </tr>
         <tr class="wporlogin-recaptcha-v2-fields" style="border-bottom: 1px solid #e5e7e8;">
             <th scope="row">
-                <label for="wporlogin_recaptcha_v2_secret_key"><?php _e('Clave secreta (v2)', 'wporlogin'); ?></label>
+                <label for="wporlogin_recaptcha_v2_secret_key"><?php _e('Secret key (v2)', 'wporlogin'); ?></label>
             </th>
             <td>
                 <input id="wporlogin_recaptcha_v2_secret_key" type="text" name="recaptcha_v2_secret_key_wporlogin" class="regular-text" value="<?php echo esc_html(get_option('recaptcha_v2_secret_key_wporlogin')); ?>" />
@@ -67,7 +67,7 @@ function wporlogin_render_recaptcha_form() {
         <!-- Claves reCAPTCHA v3 -->
         <tr class="wporlogin-recaptcha-v3-fields">
             <th scope="row">
-                <label for="wporlogin_recaptcha_v3_site_key"><?php _e('Clave del sitio (v3)', 'wporlogin'); ?></label>
+                <label for="wporlogin_recaptcha_v3_site_key"><?php _e('Site key (v3)', 'wporlogin'); ?></label>
             </th>
             <td>
                 <input id="wporlogin_recaptcha_v3_site_key" type="text" name="recaptcha_v3_site_key_wporlogin" class="regular-text" value="<?php echo esc_html(get_option('recaptcha_v3_site_key_wporlogin')); ?>" />
@@ -75,7 +75,7 @@ function wporlogin_render_recaptcha_form() {
         </tr>
         <tr class="wporlogin-recaptcha-v3-fields" style="border-bottom: 1px solid #e5e7e8;">
             <th scope="row">
-                <label for="wporlogin_recaptcha_v3_secret_key"><?php _e('Clave secreta (v3)', 'wporlogin'); ?></label>
+                <label for="wporlogin_recaptcha_v3_secret_key"><?php _e('Secret key (v3)', 'wporlogin'); ?></label>
             </th>
             <td>
                 <input id="wporlogin_recaptcha_v3_secret_key" type="text" name="recaptcha_v3_secret_key_wporlogin" class="regular-text" value="<?php echo esc_html(get_option('recaptcha_v3_secret_key_wporlogin')); ?>" />
@@ -85,19 +85,19 @@ function wporlogin_render_recaptcha_form() {
         <!-- Opción para activar reCAPTCHA en login, registro y recuperación de contraseña -->
         <tr>
             <th scope="row">
-                <label for="activar_recaptcha_wporlogin"><?php _e('Activar reCAPTCHA para', 'wporlogin'); ?></label>
+                <label for="activar_recaptcha_wporlogin"><?php _e('Enable reCAPTCHA for:', 'wporlogin'); ?></label>
             </th>
             <td>
 
                 <input name="activa_acceso_recaptcha_v2_wporlogin" type="checkbox" value="1" <?php checked( '1', get_option('activa_acceso_recaptcha_v2_wporlogin')); ?> id="activa_acceso_recaptcha_v2_wporlogin"/>
-                <label for="activa_acceso_recaptcha_v2_wporlogin"><?php _e('Formulario de acceso', 'wporlogin'); ?></label><br>
+                <label for="activa_acceso_recaptcha_v2_wporlogin"><?php _e('Login form', 'wporlogin'); ?></label><br>
 
                 <input name="activa_registro_recaptcha_v2_wporlogin" type="checkbox" value="1" <?php checked( '1', get_option('activa_registro_recaptcha_v2_wporlogin')); ?> id="activa_registro_recaptcha_v2_wporlogin"/>
-                <label for="activa_registro_recaptcha_v2_wporlogin"><?php _e('Formulario de registro', 'wporlogin'); ?></label><br>
+                <label for="activa_registro_recaptcha_v2_wporlogin"><?php _e('Registration form', 'wporlogin'); ?></label><br>
                         
                 <!-- Activar para el formulario de recuperación de contraseña -->
                 <input name="activa_recuperar_recaptcha_wporlogin" type="checkbox" value="1" <?php checked('1', get_option('activa_recuperar_recaptcha_wporlogin')); ?> id="activa_recuperar_recaptcha_wporlogin"/>
-                <label for="activa_recuperar_recaptcha_wporlogin"><?php _e('Formulario de recuperación de contraseña', 'wporlogin'); ?></label>
+                <label for="activa_recuperar_recaptcha_wporlogin"><?php _e('Password recovery form', 'wporlogin'); ?></label>
 
             </td>
         </tr>

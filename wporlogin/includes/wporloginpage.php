@@ -18,8 +18,9 @@ function wporlogin_add_admin_menu_page(){
     
     add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url);
     add_submenu_page( $menu_slug, __('Google reCAPTCHA', 'wporlogin'), __('Google reCAPTCHA', 'wporlogin'), 'manage_options', 'recaptcha-wporlogin-plugin', 'recaptcha_wporlogin_content_page_menu');
-    add_submenu_page( $menu_slug, __('Eliminar Idioma', 'wporlogin'), __('Eliminar Idioma', 'wporlogin'), 'manage_options', 'remove-language-plugin', 'remove_language_content_page_menu');
-    add_submenu_page( $menu_slug, __('Redirecciones', 'wporlogin'), __('Redirecciones', 'wporlogin'), 'manage_options', 'redirects-wporlogin-plugin', 'redirects_wporlogin_content_page_menu');
+    add_submenu_page( $menu_slug, __('Remove Language', 'wporlogin'), __('Remove Language', 'wporlogin'), 'manage_options', 'remove-language-plugin', 'remove_language_content_page_menu');
+    add_submenu_page( $menu_slug, __('Redirect', 'wporlogin'), __('Redirect', 'wporlogin'), 'manage_options', 'redirects-wporlogin-plugin', 'redirects_wporlogin_content_page_menu');
+    //add_submenu_page( $menu_slug, __('Configure URLs', 'wporlogin'), __('Configure URLs', 'wporlogin'), 'manage_options', 'configure-urls-wporlogin-plugin', 'configure_urls_wporlogin_content_page_menu');
 
 }
 add_action('admin_menu','wporlogin_add_admin_menu_page');
@@ -38,9 +39,9 @@ function remove_language_content_page_menu(){
 
         <div style="width: 95%; margin-left: auto; margin-right: auto; position: relative;">
         
-            <h1 style="text-align: center; font-size: 34px; padding-top: 30px; font-weight: bold; font-family: 'Roboto', sans-serif;"><strong><?php _e('Eliminar selector de idioma', 'wporlogin'); ?></strong></h1>  
+            <h1 style="text-align: center; font-size: 34px; padding-top: 30px; font-weight: bold; font-family: 'Roboto', sans-serif;"><strong><?php _e('Remove language selector', 'wporlogin'); ?></strong></h1>  
         
-            <p style="margin-bottom: 20px; text-align: center; font-family: 'Roboto', sans-serif; font-size: 16px; margin-top: 5px; margin-bottom: 40px;"><?php _e('Eliminar el selector de idioma disponible en la pantalla de inicio de sesión', 'wporlogin'); ?></p>
+            <p style="margin-bottom: 20px; text-align: center; font-family: 'Roboto', sans-serif; font-size: 16px; margin-top: 5px; margin-bottom: 40px;"><?php _e('Hide or remove the language selector from the login page.', 'wporlogin'); ?></p>
     
         
             <?php settings_errors(); // Muestra los mensajes de éxito o de error cuando se envía el formulario ?>
@@ -61,7 +62,7 @@ function remove_language_content_page_menu(){
                 <div class="wporlogin-container-design" style="width: 90%; margin-left: auto; margin-right: auto;">
 
                     <div style="border-bottom: 1px solid #e5e7e8; padding-bottom: 15px; padding-top: 10px;">
-                        <span><?php _e('¿Necesitas ayuda? ', 'wporlogin'); ?><a href="#" target="_blank"><?php _e('Ver el video', 'wporlogin'); ?></a></span>
+                        <span><?php _e('Need help? ', 'wporlogin'); ?><a href="#" target="_blank"><?php _e('Watch the video', 'wporlogin'); ?></a></span>
                     </div>
                                     
                     <table class="form-table" role="presentation">
@@ -71,14 +72,11 @@ function remove_language_content_page_menu(){
                             <!-- Google reCAPTCHA -->
                             <tr>
                                 <th scope="row">
-                                    <label for="remove_language_wporlogin"><?php _e('Eliminar', 'wporlogin'); ?></label>
+                                    <label for="remove_language_wporlogin"><?php _e('Delete', 'wporlogin'); ?></label>
                                 </th>
                                 <td> 
                                     <input name="remove_language_wporlogin" type="checkbox" value="1" <?php checked( '1', get_option( 'remove_language_wporlogin' ) ); ?> id="remove_language_wporlogin" />
-                                    <label for="remove_language_wporlogin"><?php _e('Eliminar el menú', 'wporlogin'); ?></label>
-                                    <br><br>
-                                    <!-- Sitio web de Google reCAPTCHA -->
-                                    <p><?php _e('Eliminar el menú desplegable de idioma', 'wporlogin'); ?>.</p>
+                                    <label for="remove_language_wporlogin"><?php _e('Remove the dropdown language selector from the login page.', 'wporlogin'); ?></label>
                                 </td>
                             </tr>
 
@@ -154,9 +152,9 @@ function wporlogin_content_page_menu() {
     
     <div style="width: 95%; margin-left: auto; margin-right: auto; position: relative;">    
         
-        <h1 style="text-align: center; font-size: 34px; padding-top: 30px; font-weight: bold; font-family: 'Roboto', sans-serif;"><strong><?php _e('Apariencia', 'wporlogin'); ?></strong></h1>  
+        <h1 style="text-align: center; font-size: 34px; padding-top: 30px; font-weight: bold; font-family: 'Roboto', sans-serif;"><strong><?php _e('Appearance', 'wporlogin'); ?></strong></h1>  
         
-        <p style="margin-bottom: 20px; text-align: center; font-family: 'Roboto', sans-serif; font-size: 16px; margin-top: 5px; margin-bottom: 40px;"><strong>WPOrLogin</strong> <?php _e('te permite modificar la apariencia de la página de inicio de sesión de WordPress', 'wporlogin'); ?></p>
+        <p style="margin-bottom: 20px; text-align: center; font-family: 'Roboto', sans-serif; font-size: 16px; margin-top: 5px; margin-bottom: 40px;"><?php _e('<strong>WPOrLogin</strong> allows you to customize the appearance of the WordPress login page.', 'wporlogin'); ?></p>
     
         <?php settings_errors(); // Muestra los mensajes de éxito o de error cuando se envía el formulario ?>
                 
@@ -173,7 +171,7 @@ function wporlogin_content_page_menu() {
             <div style="padding-top: 15px; padding-bottom: 50px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);">
                 
                 <div style="width: 90%; margin-left: auto; margin-right: auto; text-align: center;">
-                    <h2 style="font-size: 20px; font-family: 'Roboto', sans-serif; color: #0073AA;"><?php _e('Selecciona una opción', 'wporlogin'); ?></h2>
+                    <h2 style="font-size: 20px; font-family: 'Roboto', sans-serif; color: #0073AA;"><?php _e('Select an option', 'wporlogin'); ?></h2>
                 </div>    
 
                 <?php
@@ -188,7 +186,7 @@ function wporlogin_content_page_menu() {
                         <div style="margin-bottom: 5px;">
                             <label for="wporlogin_design_basic">
                                 <input <?php checked( 'wporlogin_design_basic', get_option( 'wporlogin_design' ) ); ?> type="radio" id="wporlogin_design_basic" class="wporlogin-option-input wporlogin-radio" name="wporlogin_design" value="wporlogin_design_basic">
-                                <?php _e('Básico', 'wporlogin'); ?>
+                                <?php _e('Basic', 'wporlogin'); ?>
                             </label>
                         </div>                        
                         <div id="wporlogin-container-basic-triangulo" style="width: 0; height: 0; border-right: 15px solid transparent; border-bottom: 15px solid #AEB6BF; border-left: 15px solid transparent; margin-left: auto; margin-right: auto; <?php if(get_option('wporlogin_design') != 'wporlogin_design_basic'){ echo 'display: none;';} ?>"></div>
@@ -198,7 +196,7 @@ function wporlogin_content_page_menu() {
                         <div style="margin-bottom: 5px;">
                             <label for="wporlogin_design_standard">
                                 <input <?php checked( 'wporlogin_design_standard', get_option( 'wporlogin_design' ) ); ?> type="radio" id="wporlogin_design_standard" class="wporlogin-option-input wporlogin-radio" name="wporlogin_design" value="wporlogin_design_standard">
-                                <?php _e('Estándar', 'wporlogin'); ?>
+                                <?php _e('Standard', 'wporlogin'); ?>
                             </label>
                         </div>
                         <div id="wporlogin-container-standard-triangulo" style="width: 0; height: 0; border-right: 15px solid transparent; border-bottom: 15px solid #AEB6BF; border-left: 15px solid transparent; margin-left: auto; margin-right: auto; <?php if(get_option('wporlogin_design') != 'wporlogin_design_standard'){ echo 'display: none;';} ?>"></div>
@@ -213,8 +211,7 @@ function wporlogin_content_page_menu() {
                             </label>
                         </div>
                         <div id="wporlogin-container-premium-triangulo" style="width: 0; height: 0; border-right: 15px solid transparent; border-bottom: 15px solid #AEB6BF; border-left: 15px solid transparent; margin-left: auto; margin-right: auto; <?php if(get_option('wporlogin_design') != 'wporlogin_design_premium'){ echo 'display: none;';} ?>"></div>
-                    </div>
-                    
+                    </div>                    
 
                 </div>
                 
@@ -270,7 +267,7 @@ function wporlogin_content_page_menu() {
 
                 
                 <!--BEGIN DISEÑO ESTÁNDAR Y PREMIUM-->
-<div class="wporlogin-container-design-premium" id="wporlogin-container-standard-premium" style="padding-top: 40px; <?php if(get_option('wporlogin_design') != 'wporlogin_design_standard' && get_option('wporlogin_design') != 'wporlogin_design_premium'){ echo 'display: none;'; } ?> width: 90%; margin-left: auto; margin-right: auto;">
+                <div class="wporlogin-container-design-premium" id="wporlogin-container-standard-premium" style="padding-top: 40px; <?php if(get_option('wporlogin_design') != 'wporlogin_design_standard' && get_option('wporlogin_design') != 'wporlogin_design_premium'){ echo 'display: none;'; } ?> width: 90%; margin-left: auto; margin-right: auto;">
                     
                     <table class="form-table" role="presentation">
                 
@@ -279,7 +276,7 @@ function wporlogin_content_page_menu() {
                         <!--CABEZA DEL LOGOTIPO-->
                         <tr>
                             <th scope="row">
-                                <label style="font-size: 1.5em;"><strong><?php _e('Logotipo', 'wporlogin'); ?></strong></label>
+                                <label style="font-size: 1.5em;"><strong><?php _e('Logo', 'wporlogin'); ?></strong></label>
                             </th>
                             <td><hr></td>
                         </tr>
@@ -287,7 +284,7 @@ function wporlogin_content_page_menu() {
                         <!--URL DEL LOGOTIPO-->
                         <tr>
                             <th scope="row">
-                                <label for="wporlogin_url_logotipo_text"><?php _e('Logotipo', 'wporlogin'); ?></label>
+                                <label for="wporlogin_url_logotipo_text"><?php _e('Logo', 'wporlogin'); ?></label>
                             </th>
                             <td>
                                 <?php
@@ -297,97 +294,96 @@ function wporlogin_content_page_menu() {
                                 <?php
                                 }
                                 ?>
-                                <input aria-label="Cerrar" id="wporlogin_url_logotipo_text" type="text" name="wporlogin_url_logotipo" class="regular-text" style="margin-bottom: 10px;" value="<?php echo esc_url(get_option('wporlogin_url_logotipo')); ?>"/><br>
-                                <input id="wporlogin_url_logotipo_button" type="button" class="button" value="<?php _e('Seleccionar el logotipo', 'wporlogin'); ?>" />
-                                <p class="description" id="tagline-description"><?php _e('Puedes subir tu logotipo desde aquí', 'wporlogin'); ?>.</p>
-                                <p class="description" id="tagline-description"><?php _e('Recomendaría un ancho máximo de', 'wporlogin'); ?> <strong><?php _e('300 píxeles', 'wporlogin'); ?>.</strong></p>
+                                <input aria-label="Close" id="wporlogin_url_logotipo_text" type="text" name="wporlogin_url_logotipo" class="regular-text" style="margin-bottom: 10px;" value="<?php echo esc_url(get_option('wporlogin_url_logotipo')); ?>"/><br>
+                                <input id="wporlogin_url_logotipo_button" type="button" class="button" value="<?php _e('Upload logo', 'wporlogin'); ?>" />
+                                <p class="description" id="tagline-description"><?php _e('You can upload your logo here. A maximum width of <strong>300 pixels</strong> is recommended.', 'wporlogin'); ?></p>
                             </td>
                         </tr>
                 
                         <!--Ancho de la imagen-->
                         <tr>
                             <th scope="row">
-                                <label for="wporlogin_width_logotipo_text"><?php _e('Ancho del logotipo', 'wporlogin'); ?></label>
+                                <label for="wporlogin_width_logotipo_text"><?php _e('Logo width', 'wporlogin'); ?></label>
                             </th>
                             <td>
                                 <input id="wporlogin_width_logotipo_text" type="number" name="wporlogin_width_logotipo_text" class="small-text" value="<?php echo esc_html(get_option('wporlogin_width_logotipo_text')); ?>"/>
-                                <span class="description" id="tagline-description"><?php _e('Ingrese el ancho deseado del logotipo', 'wporlogin'); ?>.</span>
+                                <span class="description" id="tagline-description"><?php _e('Specify the logo width in pixels.', 'wporlogin'); ?></span>
                             </td>
                         </tr>
                 
                         <!--Altura de la imagen-->
                         <tr>
                             <th scope="row">
-                                <label for="wporlogin_height_logotipo_text"><?php _e('Altura del logotipo', 'wporlogin'); ?></label>
+                                <label for="wporlogin_height_logotipo_text"><?php _e('Logo height', 'wporlogin'); ?></label>
                             </th>
                             <td>
                                 <input id="wporlogin_height_logotipo_text" type="number" name="wporlogin_height_logotipo_text" class="small-text" value="<?php echo esc_html(get_option('wporlogin_height_logotipo_text')); ?>"/>
-                                <span class="description" id="tagline-description"><?php _e('Ingrese la altura deseada del logotipo', 'wporlogin'); ?>.</span>
+                                <span class="description" id="tagline-description"><?php _e('Specify the logo height in pixels.', 'wporlogin'); ?></span>
                             </td>
                         </tr>
                 
                         <!--Posición de fondo-->
                         <tr>
                             <th scope="row">
-                                <label for="wporlogin_background_position_logotipo_select"><?php _e('Posición del logotipo', 'wporlogin'); ?></label>
+                                <label for="wporlogin_background_position_logotipo_select"><?php _e('Logo position', 'wporlogin'); ?></label>
                             </th>
                             <td>
                                 <select name="wporlogin_background_position_logotipo_select" id="wporlogin_background_position_logotipo_select" class="regular">
-                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '0'); ?> value="0"><?php _e('izquierda superior', 'wporlogin'); ?></option>
-                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '1'); ?> value="1"><?php _e('izquierda centro', 'wporlogin'); ?></option>
-                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '2'); ?> value="2"><?php _e('izquierda inferior', 'wporlogin'); ?></option>
-                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '3'); ?> value="3"><?php _e('derecha superior', 'wporlogin'); ?></option>
-                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '4'); ?> value="4"><?php _e('derecha centro', 'wporlogin'); ?></option>
-                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '5'); ?> value="5"><?php _e('derecha inferior', 'wporlogin'); ?></option>
-                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '6'); ?> value="6"><?php _e('centro superior', 'wporlogin'); ?></option>
-                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '7'); ?> value="7"><?php _e('centro centro', 'wporlogin'); ?></option>  
-                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '8'); ?> value="8"><?php _e('centro inferior', 'wporlogin'); ?></option>                                       
+                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '0'); ?> value="0"><?php _e('Top left', 'wporlogin'); ?></option>
+                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '1'); ?> value="1"><?php _e('Center left', 'wporlogin'); ?></option>
+                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '2'); ?> value="2"><?php _e('Bottom left', 'wporlogin'); ?></option>
+                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '3'); ?> value="3"><?php _e('Top right', 'wporlogin'); ?></option>
+                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '4'); ?> value="4"><?php _e('Center right', 'wporlogin'); ?></option>
+                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '5'); ?> value="5"><?php _e('Bottom right', 'wporlogin'); ?></option>
+                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '6'); ?> value="6"><?php _e('Top center', 'wporlogin'); ?></option>
+                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '7'); ?> value="7"><?php _e('Center', 'wporlogin'); ?></option>  
+                                    <option <?php selected(get_option('wporlogin_background_position_logotipo_select'), '8'); ?> value="8"><?php _e('Bottom center', 'wporlogin'); ?></option>                                       
                                 </select>
-                                <span class="description" id="tagline-description"><?php _e('Define la posición inicial de la imagen de fondo', 'wporlogin'); ?>.</span>
+                                <span class="description" id="tagline-description"><?php _e('Set the initial position of the logo on the login page.', 'wporlogin'); ?></span>
                             </td>
                         </tr>
                 
                         <!--Tamaño de fondo-->
                         <tr>
                             <th scope="row">
-                                <label for="wporlogin_background_size_logotipo_select"><?php _e('Tamaño del fondo', 'wporlogin'); ?></label>
+                                <label for="wporlogin_background_size_logotipo_select"><?php _e('Background size', 'wporlogin'); ?></label>
                             </th>
                             <td>
                                 <select name="wporlogin_background_size_logotipo_select" id="wporlogin_background_size_logotipo_select" class="regular">
-                                    <option <?php selected(get_option('wporlogin_background_size_logotipo_select'), '0'); ?> value="0">none</option>
-                                    <option <?php selected(get_option('wporlogin_background_size_logotipo_select'), '1'); ?> value="1">cover</option>
-                                    <option <?php selected(get_option('wporlogin_background_size_logotipo_select'), '2'); ?> value="2">contain</option>                                   
+                                    <option <?php selected(get_option('wporlogin_background_size_logotipo_select'), '0'); ?> value="0"><?php _e('None → No background size adjustment.', 'wporlogin'); ?></option>
+                                    <option <?php selected(get_option('wporlogin_background_size_logotipo_select'), '1'); ?> value="1"><?php _e('Cover → The image will cover the entire background without losing proportion.', 'wporlogin'); ?></option>
+                                    <option <?php selected(get_option('wporlogin_background_size_logotipo_select'), '2'); ?> value="2"><?php _e('Contain → The image will fit within the background without being cropped.', 'wporlogin'); ?></option>                                   
                                 </select>
-                                <span class="description" id="tagline-description"><?php _e('Especifica el tamaño de la imagen de fondo', 'wporlogin'); ?>.</span>
+                                <span class="description" id="tagline-description"><?php _e('Adjust how the background image is displayed.', 'wporlogin'); ?></span>
                             </td>
                         </tr>
                 
                         <!--URL del LOGOTIPO-->
                         <tr>
                             <th scope="row">
-                                <label for="wporlogin_ruta_url_logotipo_text"><?php _e('URL del logotipo', 'wporlogin'); ?></label>
+                                <label for="wporlogin_ruta_url_logotipo_text"><?php _e('Logo URL', 'wporlogin'); ?></label>
                             </th>
                             <td>
                                 <input id="wporlogin_ruta_url_logotipo_text" type="text" name="wporlogin_ruta_url_logotipo" class="regular-text" placeholder="https://ejemplo.com" value="<?php echo esc_html(get_option('wporlogin_ruta_url_logotipo')); ?>"/><br>
-                                <p class="description" id="tagline-description"><?php _e('Cambia la URL del logotipo de inicio de sesión', 'wporlogin'); ?>.</p>
+                                <p class="description" id="tagline-description"><?php _e('Specify the URL where the logo will redirect when clicked.', 'wporlogin'); ?></p>
                             </td>
                         </tr>
                 
                         <!--Título del LOGOTIPO-->
                         <tr>                            
                             <th scope="row">
-                                <label for="wporlogin_titulo_logotipo_text"><?php _e('Título del logotipo', 'wporlogin'); ?></label>
+                                <label for="wporlogin_titulo_logotipo_text"><?php _e('Logo title', 'wporlogin'); ?></label>
                             </th>
                             <td>
                                 <input id="wporlogin_titulo_logotipo_text" type="text" name="wporlogin_titulo_logotipo" class="regular-text" value="<?php echo esc_html(get_option('wporlogin_titulo_logotipo')); ?>"/><br>
-                                <p class="description" id="tagline-description"><?php _e('Cambia el título del logotipo en el inicio de sesión', 'wporlogin'); ?>.</p>
+                                <p class="description" id="tagline-description"><?php _e('Set the alternative title for the logo (useful for accessibility and SEO).', 'wporlogin'); ?></p>
                             </td>
                         </tr>
                 
                         <!--IMAGEN DE FONDO-->
                         <tr>
                             <th scope="row">
-                                <label style="font-size: 1.5em;"><strong><?php _e('Imagen de fondo', 'wporlogin'); ?></strong></label>
+                                <label style="font-size: 1.5em;"><strong><?php _e('Background image', 'wporlogin'); ?></strong></label>
                             </th>
                             <td><hr></td>
                         </tr>
@@ -395,15 +391,15 @@ function wporlogin_content_page_menu() {
                         <!--URL de la imagen de fondo-->
                         <tr>
                             <th scope="row">
-                                <label for="wporlogin-img-fondo"><?php _e('Imagen de fondo', 'wporlogin'); ?></label>
+                                <label for="wporlogin-img-fondo"><?php _e('Background image', 'wporlogin'); ?></label>
                             </th>
                             <td>
                                 <div style="margin-bottom: 20px;">
                                     <input type="radio" id="wporlogin_free_images" name="wporlogin_background_images" value="wporlogin_free_images" <?php checked(get_option('wporlogin_background_images'), 'wporlogin_free_images'); ?>>
-                                    <label id="wporlogin_free_images" for="wporlogin_free_images"><?php _e('Imágenes gratuitas', 'wporlogin'); ?></label>
+                                    <label id="wporlogin_free_images" for="wporlogin_free_images"><?php _e('Free images', 'wporlogin'); ?></label>
                 
                                     <input type="radio" id="wporlogin_my_images" name="wporlogin_background_images" value="wporlogin_my_images" <?php checked(get_option('wporlogin_background_images'), 'wporlogin_my_images'); ?> style="margin-left: 20px;">
-                                    <label id="wporlogin_my_images" for="wporlogin_my_images"><?php _e('Mis imágenes', 'wporlogin'); ?></label>
+                                    <label id="wporlogin_my_images" for="wporlogin_my_images"><?php _e('My images', 'wporlogin'); ?></label>
                                 </div>                                    
                 
                                 <!--IMAGEN DE FONDO PERSONALIZADA-->
@@ -413,28 +409,27 @@ function wporlogin_content_page_menu() {
                                         <img id="wporlogin_url_img_fondo_img" src="<?php echo esc_url(get_option('wporlogin_url_img_fondo')); ?>" style="margin-bottom: 10px; width: 220px; padding: 10px; background-color: #ffffff; border: 2px dashed rgba(0,0,0,.1);"><br>
                                     <?php } ?>
                                     <input id="wporlogin_url_img_fondo_text" type="text" name="wporlogin_url_img_fondo" class="regular-text" style="margin-bottom: 10px;" value="<?php echo esc_html(get_option('wporlogin_url_img_fondo')); ?>"/><br>
-                                    <input id="wporlogin_url_img_fondo_button" type="button" class="button" value="<?php _e('Seleccionar imagen de fondo', 'wporlogin'); ?>" />
-                                    <p class="description" id="tagline-description"><?php _e('Puedes subir una imagen de fondo desde aquí', 'wporlogin'); ?>.</p>
-                                    <p class="description" id="tagline-description"><?php _e('Obtendrás los mejores resultados al usar imágenes con una dimensión de 1920x1080 píxeles', 'wporlogin'); ?>.</p>
+                                    <input id="wporlogin_url_img_fondo_button" type="button" class="button" value="<?php _e('Upload or Select Background Image', 'wporlogin'); ?>" />
+                                    <p class="description" id="tagline-description"><?php _e('Select a background image from here. For the best results, use images with a resolution of <strong>1920x1080 pixels</strong>.', 'wporlogin'); ?>.</p>
                                 </div><!--FIN IMAGEN DE FONDO PERSONALIZADA-->                                    
                 
                                 <!--IMÁGENES GRATUITAS-->
                                 <div id="wporlogin-container-background-free-image" style="<?php if( get_option('wporlogin_background_images') == 'wporlogin_my_images' ){ echo 'display: none;'; } ?>">
-                                    <p class="description"><?php _e('Puedes seleccionar una imagen de fondo desde aquí', 'wporlogin'); ?></p>
-                                    <p class="description"><?php _e('Las imágenes de ', 'wporlogin'); ?><a href="https://unsplash.com/" target="_blank"><strong>Unsplash</strong></a><?php _e(' y ', 'wporlogin'); ?><a href="https://pixabay.com/" target="_blank"><strong>Pixabay</strong></a><?php _e(' están hechas para ser usadas libremente', 'wporlogin'); ?>.</p><br><br>
+                                    <p class="description"><?php _e('You can select a background image from here', 'wporlogin'); ?></p>
+                                    <br><br>
                 
                                     <div style="overflow: hidden;">
                                         <?php for($i=0; $i<14; $i++){ ?>
                                         <div style="float: left;">
                                             <input type="radio" id="wporlogin-background-free-image-<?php echo $i; ?>" name="wporlogin-background-free-image" value="<?php echo esc_url(WPORLOGINBACKGROUNDIMAGE[$i]); ?>" <?php if($i == 0){ if( get_option('wporlogin-background-free-image') != false){ checked( get_option('wporlogin-background-free-image'), WPORLOGINBACKGROUNDIMAGE[$i]); } else { echo 'checked'; } } else { checked( get_option('wporlogin-background-free-image'), WPORLOGINBACKGROUNDIMAGE[$i]); } ?>>
-                                            <label for="wporlogin-background-free-image-<?php echo $i; ?>"><?php _e('Imagen ', 'wporlogin'); ?><?php echo $i+1; ?></label>
+                                            <label for="wporlogin-background-free-image-<?php echo $i; ?>"><?php _e('Image ', 'wporlogin'); ?><?php echo $i+1; ?></label>
                                             <div style="padding-top: 10px; margin-right: 15px;">
                                                 <img id="wporlogin_url_img_fondo_img" src="<?php echo esc_url(WPORLOGINBACKGROUNDIMAGE[$i]); ?>" style="margin-bottom: 10px; width: 220px; padding: 10px; background-color: #ffffff; border: 2px dashed rgba(0,0,0,.1);"><br>
                                             </div>
                                         </div>
                                         <?php } ?>
                                     </div>
-                                    <p><?php _e('Puedes descargar más imágenes desde ', 'wporlogin'); ?><a href="https://unsplash.com/" target="_blank"><strong><?php _e('aquí', 'wporlogin'); ?></strong></a><?php _e(' totalmente gratis', 'wporlogin'); ?>.</p>
+                                    <p class="description"><?php _e('Images from Unsplash and Pixabay are free to use. You can download more images from <a href="https://unsplash.com/" target="_blank"><strong>Unsplash</strong></a> and <a href="https://pixabay.com/" target="_blank"><strong>Pixabay</strong></a>.', 'wporlogin'); ?></p>
                                 </div>    
                             </td>
                         </tr>  

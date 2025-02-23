@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: WPOrLogin - Personalizar el inicio de sesión de WordPress
+ * Plugin Name: WPOrLogin - Customize WordPress Login and Registration Page
  * Plugin URI: https://oregoom.com/wporlogin/
- * Description: Plugin para personalizar la página de inicio de sesión de WordPress.
- * Version: 2.9.3
+ * Description: WPOrLogin allows you to customize the WordPress login and registration page. You can change the logo, background, and layout. Choose from pre-designed templates and improve security with Google reCAPTCHA. Additionally, you can redirect users after login and hide the language switcher for a cleaner interface.
+ * Version: 2.9.4
  * Author: Oregoom
  * Author URI: https://oregoom.com/wporlogin/
  * License: GPL2
@@ -11,7 +11,7 @@
  * Text Domain: wporlogin
  * Domain Path: /languages/
  */
-define("VERSIONWPORLOGIN", "2.9.2");
+define("VERSIONWPORLOGIN", "2.9.4");
 
 // Definición de las imágenes de fondo
 define('WPORLOGINBACKGROUNDIMAGE', array(
@@ -39,6 +39,7 @@ define( 'WPORLOGIN_PLUGIN_PATH', plugin_dir_path(__FILE__));
 require_once plugin_dir_path(__FILE__) .'includes/wporloginpage.php';
 require_once plugin_dir_path(__FILE__) .'includes/remove-language-wporlogin.php';
 require_once plugin_dir_path(__FILE__) .'includes/redirects-wporlogin.php';
+//require_once plugin_dir_path(__FILE__) .'includes/configure-urls-wporlogin.php';
 
 // Función para insertar scripts en el área de administración
 function wporlogin_insert_script_upload($hook){
@@ -367,7 +368,7 @@ if ($recaptcha_version === 'v2') {
     } else {
         // Si las claves no están configuradas, mostrar una advertencia en el backend
         add_action('admin_notices', function() {
-            echo '<div class="notice notice-error"><p>' . __('Google reCAPTCHA v2 está seleccionado, pero las claves del sitio o secretas no están configuradas.', 'wporlogin') . '</p></div>';
+            echo '<div class="notice notice-error"><p>' . __('Google reCAPTCHA v2 is selected, but the site or secret keys are not configured.', 'wporlogin') . '</p></div>';
         });
     }
 } elseif ($recaptcha_version === 'v3') {
@@ -380,7 +381,7 @@ if ($recaptcha_version === 'v2') {
     } else {
         // Si las claves no están configuradas, mostrar una advertencia en el backend
         add_action('admin_notices', function() {
-            echo '<div class="notice notice-error"><p>' . __('Google reCAPTCHA v3 está seleccionado, pero la clave del sitio no está configurada.', 'wporlogin') . '</p></div>';
+            echo '<div class="notice notice-error"><p>' . __('Google reCAPTCHA v3 is selected, but the site or secret keys are not configured.', 'wporlogin') . '</p></div>';
         });
     }
 }
@@ -404,7 +405,7 @@ function wporlogin_add_menu_login_footer() {
     
             <div class="login_oregoom">
     
-                <?php echo sprintf(__('Desarrollado por <a href="%s" target="_blank" class="text-info">Oregoom.com</a>', 'wporlogin'), esc_url('https://oregoom.com/wporlogin/')); ?>
+                <?php echo sprintf(__('Developed by <a href="%s" target="_blank" class="text-info">Oregoom.com</a>', 'wporlogin'), esc_url('https://oregoom.com/wporlogin/')); ?>
     
             </div> <?php 
         }
@@ -588,7 +589,7 @@ function wporlogin_captcha_login_check($user, $password) {
 
     // Si no hay respuesta de reCAPTCHA, mostrar un mensaje de error
     if (empty($recaptcha_response)) {
-        return new WP_Error('invalid_captcha', __('Por favor, completa la verificación de reCAPTCHA.', 'wporlogin'));
+        return new WP_Error('invalid_captcha', __('Please complete the reCAPTCHA verification.', 'wporlogin'));
     }
 
     // Configuración de las URLs y claves de reCAPTCHA
@@ -625,7 +626,7 @@ function wporlogin_captcha_login_check($user, $password) {
 
     // Verificar si hubo un error en la solicitud HTTP
     if (is_wp_error($response)) {
-        return new WP_Error('recaptcha_error', __('Error al verificar reCAPTCHA. Por favor, inténtalo de nuevo.', 'wporlogin'));
+        return new WP_Error('recaptcha_error', __('Error verifying reCAPTCHA. Please try again.', 'wporlogin'));
     }
 
     // Obtener el cuerpo de la respuesta y decodificar JSON
@@ -634,14 +635,14 @@ function wporlogin_captcha_login_check($user, $password) {
 
     // Verificar si la respuesta de reCAPTCHA es válida y si fue exitosa
     if (!isset($recaptcha_data['success']) || !$recaptcha_data['success']) {
-        return new WP_Error('invalid_captcha', __('La verificación de reCAPTCHA ha fallado. Por favor, inténtalo de nuevo.', 'wporlogin'));
+        return new WP_Error('invalid_captcha', __('The reCAPTCHA verification has failed. Please try again.', 'wporlogin'));
     }
 
     // Verificación adicional para reCAPTCHA v3 (basado en la puntuación)
     if ($recaptcha_version === 'v3' && isset($recaptcha_data['score'])) {
         $score = floatval($recaptcha_data['score']);
         if ($score < 0.5) { // Puedes ajustar este valor según el nivel de seguridad requerido
-            return new WP_Error('low_recaptcha_score', __('La verificación de reCAPTCHA ha fallado. Por favor, inténtalo de nuevo.', 'wporlogin'));
+            return new WP_Error('low_recaptcha_score', __('The reCAPTCHA verification has failed. Please try again.', 'wporlogin'));
         }
     }
 
@@ -757,7 +758,7 @@ function wporlogin_captcha_register_check($errors, $sanitized_user_login, $user_
 
     // Si no hay respuesta de reCAPTCHA, agregar un error
     if (empty($recaptcha_response)) {
-        $errors->add('invalid_captcha', __('Por favor, completa la verificación de reCAPTCHA.', 'wporlogin'));
+        $errors->add('invalid_captcha', __('Please complete the reCAPTCHA verification.', 'wporlogin'));
         return $errors;
     }
 
@@ -795,7 +796,7 @@ function wporlogin_captcha_register_check($errors, $sanitized_user_login, $user_
 
     // Verificar si hubo un error en la solicitud HTTP
     if (is_wp_error($response)) {
-        $errors->add('recaptcha_error', __('Error al verificar reCAPTCHA. Por favor, inténtalo de nuevo.', 'wporlogin'));
+        $errors->add('recaptcha_error', __('Error verifying reCAPTCHA. Please try again.', 'wporlogin'));
         return $errors;
     }
 
@@ -805,7 +806,7 @@ function wporlogin_captcha_register_check($errors, $sanitized_user_login, $user_
 
     // Verificar si la respuesta de reCAPTCHA es válida y si fue exitosa
     if (!isset($recaptcha_data['success']) || !$recaptcha_data['success']) {
-        $errors->add('invalid_captcha', __('La verificación de reCAPTCHA ha fallado. Por favor, inténtalo de nuevo.', 'wporlogin'));
+        $errors->add('invalid_captcha', __('The reCAPTCHA verification has failed. Please try again.', 'wporlogin'));
         return $errors;
     }
 
@@ -813,7 +814,7 @@ function wporlogin_captcha_register_check($errors, $sanitized_user_login, $user_
     if ($recaptcha_version === 'v3' && isset($recaptcha_data['score'])) {
         $score = floatval($recaptcha_data['score']);
         if ($score < 0.5) { // Puedes ajustar este valor según el nivel de seguridad requerido
-            $errors->add('low_recaptcha_score', __('La verificación de reCAPTCHA ha fallado. Por favor, inténtalo de nuevo.', 'wporlogin'));
+            $errors->add('low_recaptcha_score', __('The reCAPTCHA verification has failed. Please try again.', 'wporlogin'));
             return $errors;
         }
     }
@@ -871,7 +872,7 @@ function wporlogin_validate_recaptcha_on_password_reset($validation_errors) {
         
         // Verificar si la respuesta de reCAPTCHA está vacía
         if (empty($recaptcha_response)) {
-            $validation_errors->add('recaptcha_error', __('Por favor, completa la verificación de reCAPTCHA.', 'wporlogin'));
+            $validation_errors->add('recaptcha_error', __('Please complete the reCAPTCHA verification.', 'wporlogin'));
             return $validation_errors;
         }
 
@@ -884,7 +885,7 @@ function wporlogin_validate_recaptcha_on_password_reset($validation_errors) {
         }
 
         if (empty($recaptcha_secret)) {
-            $validation_errors->add('recaptcha_error', __('Error de configuración de reCAPTCHA.', 'wporlogin'));
+            $validation_errors->add('recaptcha_error', __('reCAPTCHA configuration error.', 'wporlogin'));
             return $validation_errors;
         }
 
@@ -899,7 +900,7 @@ function wporlogin_validate_recaptcha_on_password_reset($validation_errors) {
 
         // Verificar si hubo un error en la solicitud
         if (is_wp_error($response)) {
-            $validation_errors->add('recaptcha_error', __('Error al verificar reCAPTCHA. Por favor, inténtalo de nuevo.', 'wporlogin'));
+            $validation_errors->add('recaptcha_error', __('Error verifying reCAPTCHA. Please try again.', 'wporlogin'));
             return $validation_errors;
         }
 
@@ -909,13 +910,13 @@ function wporlogin_validate_recaptcha_on_password_reset($validation_errors) {
 
         // Si la respuesta de reCAPTCHA no es válida, agregamos un error
         if (!$recaptcha_data || !$recaptcha_data->success) {
-            $validation_errors->add('recaptcha_error', __('La verificación de reCAPTCHA ha fallado. Por favor, inténtalo de nuevo.', 'wporlogin'));
+            $validation_errors->add('recaptcha_error', __('The reCAPTCHA verification has failed. Please try again.', 'wporlogin'));
         }
 
         // Validar la puntuación de reCAPTCHA v3
         if ($recaptcha_version === 'v3' && isset($recaptcha_data->score)) {
             if ($recaptcha_data->score < 0.5) {
-                $validation_errors->add('recaptcha_error', __('La puntuación de reCAPTCHA v3 es muy baja. Inténtalo de nuevo.', 'wporlogin'));
+                $validation_errors->add('recaptcha_error', __('The reCAPTCHA v3 score is very low. Please try again.', 'wporlogin'));
             }
         }
     }
@@ -950,13 +951,13 @@ function wporlogin_admin_notice__success() {
                     <img class="logo" src="https://oregoom.com/wp-content/uploads/2022/01/icon-wporlogin.png" style="background-color: #fff; float: right; margin-left: 10px; width: 75px; padding: 0.25em; border: 1px solid #ccc;">
                 </a>
                 <strong>
-                    <?php _e('¡Hola! Ya has estado usando el plugin WPOrLogin en tu sitio durante 2 semanas - Esperamos que te haya sido útil. Si estás disfrutando del plugin, ¿te importaría valorarlo con 5 estrellas para ayudar a hacer correr la voz?', 'wporlogin'); ?>
+                    <?php _e("Hello! You have been using the WPOrLogin plugin on your site for 2 weeks - we hope it has been helpful. If you're enjoying the plugin, would you mind rating it with 5 stars to help spread the word?", 'wporlogin'); ?>
                 </strong>
             </p>
             <ul>
                 <li>
                     <a class="jpum-dismiss" target="_blank" href="https://wordpress.org/support/plugin/wporlogin/reviews/?filter=5" data-reason="am_now">
-                        <strong><?php _e('Vale, te lo mereces', 'wporlogin'); ?></strong>
+                        <strong><?php _e('Okay, you deserve it.', 'wporlogin'); ?></strong>
                     </a>
                 </li>
             </ul>
@@ -1008,8 +1009,8 @@ function wporlogin_admin_notice_warning(){
         
         <div class="notice notice-warning">
 
-            <p><strong><?php _e('IMPORTANTE: ', 'wporlogin'); ?></strong><?php _e('Si no puedes ver los cambios que has realizado en tu sitio web, puede que necesites forzar a la página a cargar desde el servidor con ', 'wporlogin'); ?><strong>Ctrl + f5</strong><?php _e(' o limpiar la caché de WordPress.', 'wporlogin'); ?></p>
-            <p><a target="_blank" href="https://raiolanetworks.es/blog/borrar-cache-wordpress/" title="<?php _e('Borrar la caché de WordPress', 'wporlogin'); ?>"><?php _e('Más información aquí', 'wporlogin'); ?></a></p>
+            <p><strong><?php _e('IMPORTANT: ', 'wporlogin'); ?></strong><?php _e('If you can\'t see the changes you\'ve made to your website, you may need to force the page to reload from the server with <strong>Ctrl + F5</strong> or clear the WordPress cache.', 'wporlogin'); ?></p>
+            <p><a target="_blank" href="https://raiolanetworks.es/blog/borrar-cache-wordpress/" title="<?php _e('Clear WordPress cache', 'wporlogin'); ?>"><?php _e('More information here', 'wporlogin'); ?></a></p>
 
         </div> 
         <?php

@@ -2,11 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPOrLogin - Customize WordPress Login and Registration "
 "Page\n"
-"POT-Creation-Date: 2025-02-19 08:14-0500\n"
-"PO-Revision-Date: 2025-02-19 08:22-0500\n"
+"POT-Creation-Date: 2025-02-19 09:03-0500\n"
+"PO-Revision-Date: 2025-02-19 09:10-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: fr_FR\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,69 +23,69 @@ msgstr ""
 
 #: includes/redirects-wporlogin.php:53
 msgid "Session Redirection Settings"
-msgstr "Paramètres de redirection de session"
+msgstr "Configurações de redirecionamento de sessão"
 
 #: includes/redirects-wporlogin.php:55
 msgid ""
 "Set up automatic redirects for users when they log in or log out of "
 "WordPress."
 msgstr ""
-"Configurez des redirections automatiques pour les utilisateurs lorsqu'ils se "
-"connectent ou se déconnectent de WordPress."
+"Configure redirecionamentos automáticos para usuários quando eles fizerem "
+"login ou logout do WordPress."
 
 #: includes/redirects-wporlogin.php:76 includes/wporloginpage.php:65
 msgid "Need help? "
-msgstr "Besoin d'aide? "
+msgstr "Precisa de ajuda?"
 
 #: includes/redirects-wporlogin.php:76
 #: includes/templates/recaptcha-settings-template.php:30
 #: includes/wporloginpage.php:65
 msgid "Watch the video"
-msgstr "Voir la vidéo"
+msgstr "Assista o vídeo"
 
 #: includes/redirects-wporlogin.php:80
 msgid "Redirect After Login"
-msgstr "Rediriger après connexion"
+msgstr "Redirecionar após login"
 
 #: includes/redirects-wporlogin.php:84
 msgid "Enable redirection after login"
-msgstr "Activer la redirection après la connexion"
+msgstr "Habilitar redirecionamento após login"
 
 #: includes/redirects-wporlogin.php:89 includes/redirects-wporlogin.php:124
 msgid "Yes, enable redirection"
-msgstr "Oui, activer la redirection"
+msgstr "Sim, habilitar redirecionamento"
 
 #: includes/redirects-wporlogin.php:95
 msgid "Page to redirect users after login (URL)"
-msgstr "Page pour rediriger les utilisateurs après la connexion (URL)"
+msgstr "Página para redirecionar usuários após login (URL)"
 
 #: includes/redirects-wporlogin.php:101
 msgid "Apply redirection to administrators as well"
-msgstr "Appliquer également la redirection aux administrateurs"
+msgstr "Aplique o redirecionamento também aos administradores"
 
 #: includes/redirects-wporlogin.php:106
 msgid "Yes, redirect administrators too"
-msgstr "Oui, rediriger également les administrateurs"
+msgstr "Sim, redirecionar administradores também"
 
 #: includes/redirects-wporlogin.php:115
 msgid "Redirect on Logout"
-msgstr "Redirection lors de la déconnexion"
+msgstr "Redirecionar no Logout"
 
 #: includes/redirects-wporlogin.php:119
 msgid "Enable redirection after logout"
-msgstr "Activer la redirection après la déconnexion"
+msgstr "Habilitar redirecionamento após logout"
 
 #: includes/redirects-wporlogin.php:130
 msgid "Page to redirect users after logout (URL)"
-msgstr "Page pour rediriger les utilisateurs après la déconnexion (URL)"
+msgstr "Página para redirecionar usuários após logout (URL)"
 
 #: includes/templates/recaptcha-settings-template-form.php:33
 msgid "Google reCAPTCHA version"
-msgstr "Version reCAPTCHA de Google"
+msgstr "Versão do Google reCAPTCHA"
 
 #: includes/templates/recaptcha-settings-template-form.php:37
 msgid "Google reCAPTCHA disabled"
-msgstr "Google reCAPTCHA désactivé"
+msgstr "Google reCAPTCHA desabilitado"
 
 #: includes/templates/recaptcha-settings-template-form.php:38
 msgid "Google reCAPTCHA v2"
@@ -97,56 +97,55 @@ msgstr "Google reCAPTCHA v3"
 
 #: includes/templates/recaptcha-settings-template-form.php:41
 msgid "Select the Google reCAPTCHA version you want to use."
-msgstr ""
-"Sélectionnez la version de Google reCAPTCHA que vous souhaitez utiliser."
+msgstr "Selecione a versão do Google reCAPTCHA que você deseja usar."
 
 #: includes/templates/recaptcha-settings-template-form.php:44
 msgid ""
 "To use reCAPTCHA, first register your domain with Google's service, then "
 "enter the keys in the fields below."
 msgstr ""
-"Pour utiliser reCAPTCHA, enregistrez d'abord votre domaine auprès du service "
-"de Google, puis saisissez les clés dans les champs ci-dessous."
+"Para usar o reCAPTCHA, primeiro registre seu domínio no serviço do Google e "
+"depois insira as chaves nos campos abaixo."
 
 #: includes/templates/recaptcha-settings-template-form.php:45
 msgid ""
 "<a href=\"https://www.google.com/recaptcha/admin\" target=\"_blank\">Click "
 "here to register your domain</a>"
 msgstr ""
-"<a href=\"https://www.google.com/recaptcha/admin\" target=\"_blank\">Cliquez "
-"ici pour enregistrer votre domaine</a>"
+"<a href=\"https://www.google.com/recaptcha/admin\" target=\"_blank\">Clique "
+"aqui para registrar seu domínio</a>"
 
 #: includes/templates/recaptcha-settings-template-form.php:52
 msgid "Site key (v2)"
-msgstr "Clé du site (v2)"
+msgstr "Chave do site (v2)"
 
 #: includes/templates/recaptcha-settings-template-form.php:60
 msgid "Secret key (v2)"
-msgstr "Clé secrète (v2)"
+msgstr "Chave secreta (v2)"
 
 #: includes/templates/recaptcha-settings-template-form.php:70
 msgid "Site key (v3)"
-msgstr "Clé du site (v3)"
+msgstr "Chave do site (v3)"
 
 #: includes/templates/recaptcha-settings-template-form.php:78
 msgid "Secret key (v3)"
-msgstr "Clé secrète (v3)"
+msgstr "Chave secreta (v3)"
 
 #: includes/templates/recaptcha-settings-template-form.php:88
 msgid "Enable reCAPTCHA for:"
-msgstr "Activer reCAPTCHA pour :"
+msgstr "Habilitar reCAPTCHA para:"
 
 #: includes/templates/recaptcha-settings-template-form.php:93
 msgid "Login form"
-msgstr "Formulaire de connexion"
+msgstr "Formulário de login"
 
 #: includes/templates/recaptcha-settings-template-form.php:96
 msgid "Registration form"
-msgstr "Formulaire d'enregistrement"
+msgstr "Formulário de registro"
 
 #: includes/templates/recaptcha-settings-template-form.php:100
 msgid "Password recovery form"
-msgstr "Formulaire de récupération de mot de passe"
+msgstr "Formulário de recuperação de senha"
 
 #: includes/templates/recaptcha-settings-template.php:9
 #: includes/wporloginpage.php:20
@@ -158,35 +157,34 @@ msgid ""
 "Protect your website from bots and unauthorized access with "
 "<strong>reCAPTCHA v2</strong> or <strong>v3</strong>."
 msgstr ""
-"Protégez votre site Web contre les robots et les accès non autorisés avec "
-"<strong>reCAPTCHA v2</strong> ou <strong>v3</strong>."
+"Proteja seu site contra bots e acesso não autorizado com <strong>o reCAPTCHA "
+"v2</strong> ou <strong>v3</strong> ."
 
 #: includes/templates/recaptcha-settings-template.php:30
 msgid "Do you need help? "
-msgstr "Avez-vous besoin d'aide?"
+msgstr "Você precisa de ajuda?"
 
 #: includes/templates/wporlogin-paypal-done.php:9
 msgid "Donate now"
-msgstr "Faire un don"
+msgstr "Doe Agora"
 
 #: includes/templates/wporlogin-paypal-done.php:15
 msgid "Important"
-msgstr "Important"
+msgstr "Importante"
 
 #: includes/templates/wporlogin-paypal-done.php:15
 msgid ""
 "If you appreciate my work, consider making a small donation to support it. "
 "Your help is greatly appreciated!"
 msgstr ""
-"Si vous appréciez mon travail, pensez à faire un petit don pour le soutenir. "
-"Votre aide est grandement appréciée !"
+"Se você aprecia meu trabalho, considere fazer uma pequena doação para apoiá-"
+"lo. Sua ajuda é muito apreciada!"
 
 #: includes/templates/wporlogin-paypal-done.php:17
 msgid ""
 "To donate, simply click the <strong>Donate</strong> button. Thank you! 😊"
 msgstr ""
-"Pour faire un don, cliquez simplement sur le bouton <strong>Faire un don</"
-"strong> . Merci ! 😊"
+"Para doar, basta clicar no botão <strong>Donate</strong> . Obrigado! 😊"
 
 #: includes/wporloginpage.php:12
 msgid "Plugin WPOrLogin"
@@ -198,51 +196,51 @@ msgstr "WPOrLogin"
 
 #: includes/wporloginpage.php:21
 msgid "Remove Language"
-msgstr "Supprimer la langue"
+msgstr "Remover idioma"
 
 #: includes/wporloginpage.php:22
 msgid "Redirect"
-msgstr "Redirection"
+msgstr "Redirecionar"
 
 #: includes/wporloginpage.php:42
 msgid "Remove language selector"
-msgstr "Supprimer le sélecteur de langue"
+msgstr "Remover seletor de idioma"
 
 #: includes/wporloginpage.php:44
 msgid "Hide or remove the language selector from the login page."
-msgstr "Masquer ou supprimer le sélecteur de langue de la page de connexion."
+msgstr "Oculte ou remova o seletor de idioma da página de login."
 
 #: includes/wporloginpage.php:75
 msgid "Delete"
-msgstr "Supprimer"
+msgstr "Eliminar"
 
 #: includes/wporloginpage.php:79
 msgid "Remove the dropdown language selector from the login page."
-msgstr "Supprimez le sélecteur de langue déroulant de la page de connexion."
+msgstr "Remova o seletor de idioma suspenso da página de login."
 
 #: includes/wporloginpage.php:155
 msgid "Appearance"
-msgstr "Apparence"
+msgstr "Aparência"
 
 #: includes/wporloginpage.php:157
 msgid ""
 "<strong>WPOrLogin</strong> allows you to customize the appearance of the "
 "WordPress login page."
 msgstr ""
-"<strong>WPOrLogin</strong> vous permet de personnaliser l'apparence de la "
-"page de connexion WordPress."
+"<strong>O WPOrLogin</strong> permite que você personalize a aparência da "
+"página de login do WordPress."
 
 #: includes/wporloginpage.php:174
 msgid "Select an option"
-msgstr "Sélectionnez une option"
+msgstr "Selecione uma opção"
 
 #: includes/wporloginpage.php:189
 msgid "Basic"
-msgstr "Basique"
+msgstr "Básico"
 
 #: includes/wporloginpage.php:199
 msgid "Standard"
-msgstr "Standard"
+msgstr "Padrão"
 
 #: includes/wporloginpage.php:210
 msgid "Premium"
@@ -254,151 +252,148 @@ msgstr "Logo"
 
 #: includes/wporloginpage.php:298
 msgid "Upload logo"
-msgstr "Télécharger un logo"
+msgstr "Enviar logo"
 
 #: includes/wporloginpage.php:299
 msgid ""
 "You can upload your logo here. A maximum width of <strong>300 pixels</"
 "strong> is recommended."
 msgstr ""
-"Vous pouvez télécharger votre logo ici. Une largeur maximale de <strong>300 "
-"pixels</strong> est recommandée."
+"Você pode carregar seu logotipo aqui. Uma largura máxima de <strong>300 "
+"pixels</strong> é recomendada."
 
 #: includes/wporloginpage.php:306
 msgid "Logo width"
-msgstr "Largeur du logo"
+msgstr "Largura do Logo"
 
 #: includes/wporloginpage.php:310
 msgid "Specify the logo width in pixels."
-msgstr "Spécifiez la largeur du logo en pixels."
+msgstr "Especifique a largura do logotipo em pixels."
 
 #: includes/wporloginpage.php:317
 msgid "Logo height"
-msgstr "Hauteur du logo"
+msgstr "Altura do logo"
 
 #: includes/wporloginpage.php:321
 msgid "Specify the logo height in pixels."
-msgstr "Spécifiez la hauteur du logo en pixels."
+msgstr "Especifique a altura do logotipo em pixels."
 
 #: includes/wporloginpage.php:328
 msgid "Logo position"
-msgstr "Position du logo"
+msgstr "Posição do logotipo"
 
 #: includes/wporloginpage.php:332
 msgid "Top left"
-msgstr "En haut à gauche"
+msgstr "Topo esquerdo"
 
 #: includes/wporloginpage.php:333
 msgid "Center left"
-msgstr "Centre gauche"
+msgstr "Centro à esquerda"
 
 #: includes/wporloginpage.php:334
 msgid "Bottom left"
-msgstr "En bas à gauche"
+msgstr "Inferior esquerdo"
 
 #: includes/wporloginpage.php:335
 msgid "Top right"
-msgstr "En haut à droite"
+msgstr "Topo direito"
 
 #: includes/wporloginpage.php:336
 msgid "Center right"
-msgstr "Centre droite"
+msgstr "Centralizado direito"
 
 #: includes/wporloginpage.php:337
 msgid "Bottom right"
-msgstr "En bas à droite"
+msgstr "Inferior direito"
 
 #: includes/wporloginpage.php:338
 msgid "Top center"
-msgstr "Haut centre"
+msgstr "Centralizar acima"
 
 #: includes/wporloginpage.php:339
 msgid "Center"
-msgstr "Centre"
+msgstr "Centro"
 
 #: includes/wporloginpage.php:340
 msgid "Bottom center"
-msgstr "En bas au centre"
+msgstr "Centralizar abaixo"
 
 #: includes/wporloginpage.php:342
 msgid "Set the initial position of the logo on the login page."
-msgstr "Définissez la position initiale du logo sur la page de connexion."
+msgstr "Defina a posição inicial do logotipo na página de login."
 
 #: includes/wporloginpage.php:349
 msgid "Background size"
-msgstr "Taille de l’arrière-plan"
+msgstr "Tamanho do fundo"
 
 #: includes/wporloginpage.php:353
 msgid "None → No background size adjustment."
-msgstr "Aucun → Aucun réglage de la taille de l’arrière-plan."
+msgstr "Nenhum → Nenhum ajuste de tamanho de fundo."
 
 #: includes/wporloginpage.php:354
 msgid ""
 "Cover → The image will cover the entire background without losing proportion."
-msgstr ""
-"Couverture → L’image couvrira tout l’arrière-plan sans perdre de proportion."
+msgstr "Capa → A imagem cobrirá todo o fundo sem perder proporção."
 
 #: includes/wporloginpage.php:355
 msgid ""
 "Contain → The image will fit within the background without being cropped."
-msgstr "Contenir → L’image s’adaptera à l’arrière-plan sans être recadrée."
+msgstr "Contém → A imagem caberá no fundo sem ser cortada."
 
 #: includes/wporloginpage.php:357
 msgid "Adjust how the background image is displayed."
-msgstr "Ajustez la façon dont l'image d'arrière-plan est affichée."
+msgstr "Ajuste como a imagem de fundo é exibida."
 
 #: includes/wporloginpage.php:364
 msgid "Logo URL"
-msgstr "URL du logo"
+msgstr "Logo URL"
 
 #: includes/wporloginpage.php:368
 msgid "Specify the URL where the logo will redirect when clicked."
 msgstr ""
-"Spécifiez l'URL vers laquelle le logo redirigera lorsqu'on clique dessus."
+"Especifique a URL para onde o logotipo será redirecionado quando clicado."
 
 #: includes/wporloginpage.php:375
 msgid "Logo title"
-msgstr "Titre du logo"
+msgstr "Título do logotipo"
 
 #: includes/wporloginpage.php:379
 msgid ""
 "Set the alternative title for the logo (useful for accessibility and SEO)."
 msgstr ""
-"Définissez le titre alternatif pour le logo (utile pour l'accessibilité et "
-"le référencement)."
+"Defina o título alternativo para o logotipo (útil para acessibilidade e SEO)."
 
 #: includes/wporloginpage.php:386 includes/wporloginpage.php:394
 msgid "Background image"
-msgstr "Image de fond"
+msgstr "Imagem de fundo"
 
 #: includes/wporloginpage.php:399
 msgid "Free images"
-msgstr "Images gratuites"
+msgstr "Imagens gratuitas"
 
 #: includes/wporloginpage.php:402
 msgid "My images"
-msgstr "Mes images"
+msgstr "Minhas imagens"
 
 #: includes/wporloginpage.php:412
 msgid "Upload or Select Background Image"
-msgstr "Télécharger ou sélectionner une image d'arrière-plan"
+msgstr "Carregar ou selecionar imagem de fundo"
 
 #: includes/wporloginpage.php:413
 msgid ""
 "Select a background image from here. For the best results, use images with a "
 "resolution of <strong>1920x1080 pixels</strong>."
 msgstr ""
-"Sélectionnez ici une image d'arrière-plan. Pour obtenir les meilleurs "
-"résultats, utilisez des images avec une résolution de <strong>1920x1080 "
-"pixels</strong> ."
+"Selecione uma imagem de fundo aqui. Para obter os melhores resultados, use "
+"imagens com resolução de <strong>1920x1080 pixels</strong> ."
 
 #: includes/wporloginpage.php:418
 msgid "You can select a background image from here"
-msgstr "Vous pouvez sélectionner une image d'arrière-plan à partir d'ici"
+msgstr "Você pode selecionar uma imagem de fundo aqui"
 
 #: includes/wporloginpage.php:425
 msgid "Image "
-msgstr "Image "
+msgstr "Imagem "
 
 #: includes/wporloginpage.php:432
 msgid ""
@@ -407,10 +402,10 @@ msgid ""
 "target=\"_blank\"><strong>Unsplash</strong></a> and <a href=\"https://"
 "pixabay.com/\" target=\"_blank\"><strong>Pixabay</strong></a>."
 msgstr ""
-"Les images provenant d'Unsplash et de Pixabay sont libres de droit. Vous "
-"pouvez télécharger davantage d'images depuis <a href=\"https://unsplash.com/"
-"\" target=\"_blank\"><strong>Unsplash</strong></a> et <a href=\"https://"
-"pixabay.com/\" target=\"_blank\"><strong>Pixabay</strong></a>."
+"Imagens do Unsplash e Pixabay são gratuitas para uso. Você pode baixar mais "
+"imagens do <a href=\"https://unsplash.com/\" "
+"target=\"_blank\"><strong>Unsplash</strong></a> e <a href=\"https://pixabay."
+"com/\" target=\"_blank\"><strong>Pixabay</strong></a>."
 
 #: js/img-fondo.js:27
 msgctxt "wporlogin"
@@ -420,33 +415,33 @@ msgstr "Logo"
 #: js/img-fondo.js:29
 msgctxt "wporlogin"
 msgid "Select logo"
-msgstr "Sélectionnez le logo"
+msgstr "Selecionar Logo"
 
 #: js/img-fondo.js:64
 msgctxt "wporlogin"
 msgid "Background image"
-msgstr "Image de fond"
+msgstr "Imagem de fundo"
 
 #: js/img-fondo.js:66
 msgctxt "wporlogin"
 msgid "Select background image"
-msgstr "Sélectionner l’image d'arrière-plan"
+msgstr "Selecionar imagem de fundo"
 
 #: wporlogin.php:371
 msgid ""
 "Google reCAPTCHA v2 is selected, but the site or secret keys are not "
 "configured."
 msgstr ""
-"Google reCAPTCHA v2 est sélectionné, mais le site ou les clés secrètes ne "
-"sont pas configurés."
+"O Google reCAPTCHA v2 está selecionado, mas o site ou as chaves secretas não "
+"estão configuradas."
 
 #: wporlogin.php:384
 msgid ""
 "Google reCAPTCHA v3 is selected, but the site or secret keys are not "
 "configured."
 msgstr ""
-"Google reCAPTCHA v3 est sélectionné, mais le site ou les clés secrètes ne "
-"sont pas configurés."
+"O Google reCAPTCHA v3 está selecionado, mas o site ou as chaves secretas não "
+"estão configuradas."
 
 #: wporlogin.php:408
 #, php-format
@@ -454,41 +449,41 @@ msgid ""
 "Developed by <a href=\"%s\" target=\"_blank\" class=\"text-info\">Oregoom."
 "com</a>"
 msgstr ""
-"Développé par <a href=\"%s\" target=\"_blank\" class=\"text-info\">Oregoom."
-"com</a>"
+"Desenvolvido por <a href=\"%s\" target=\"_blank\" class=\"text-"
+"info\">Oregoom.com</a>"
 
 #: wporlogin.php:465
 msgid "Sign Up"
-msgstr "S'inscrire"
+msgstr "Cadastre-se"
 
 #: wporlogin.php:467
 msgid "Reset Password"
-msgstr "Réinitialiser le mot de passe"
+msgstr "Redefinir senha"
 
 #: wporlogin.php:472
 msgid "Log In"
-msgstr "Connexion"
+msgstr "Entrar"
 
 #: wporlogin.php:592 wporlogin.php:761 wporlogin.php:875
 msgid "Please complete the reCAPTCHA verification."
-msgstr "Veuillez compléter la vérification reCAPTCHA."
+msgstr "Por favor, conclua a verificação do reCAPTCHA."
 
 #: wporlogin.php:629 wporlogin.php:799 wporlogin.php:903
 msgid "Error verifying reCAPTCHA. Please try again."
-msgstr "Erreur lors de la vérification de reCAPTCHA. Veuillez réessayer."
+msgstr "Erro ao verificar o reCAPTCHA. Tente novamente."
 
 #: wporlogin.php:638 wporlogin.php:645 wporlogin.php:809 wporlogin.php:817
 #: wporlogin.php:913
 msgid "The reCAPTCHA verification has failed. Please try again."
-msgstr "La vérification reCAPTCHA a échoué. Veuillez réessayer."
+msgstr "A verificação do reCAPTCHA falhou. Tente novamente."
 
 #: wporlogin.php:888
 msgid "reCAPTCHA configuration error."
-msgstr "Erreur de configuration reCAPTCHA."
+msgstr "Erro de configuração do reCAPTCHA."
 
 #: wporlogin.php:919
 msgid "The reCAPTCHA v3 score is very low. Please try again."
-msgstr "Le score reCAPTCHA v3 est très faible. Veuillez réessayer."
+msgstr "A pontuação do reCAPTCHA v3 é muito baixa. Tente novamente."
 
 #: wporlogin.php:954
 msgid ""
@@ -496,26 +491,25 @@ msgid ""
 "we hope it has been helpful. If you're enjoying the plugin, would you mind "
 "rating it with 5 stars to help spread the word?"
 msgstr ""
-"Bonjour ! Vous utilisez le plugin WPOrLogin sur votre site depuis 2 "
-"semaines. Nous espérons qu'il vous a été utile. Si vous appréciez le plugin, "
-"pourriez-vous lui attribuer une note de 5 étoiles pour aider à faire passer "
-"le message ?"
+"Olá! Você tem usado o plugin WPOrLogin em seu site por 2 semanas - esperamos "
+"que tenha sido útil. Se você está gostando do plugin, você se importaria em "
+"classificá-lo com 5 estrelas para ajudar a espalhar a palavra?"
 
 #: wporlogin.php:960
 msgid "Okay, you deserve it."
-msgstr "Ok, tu le mérites."
+msgstr "Ok, você merece."
 
 #: wporlogin.php:988
 msgid "Excelente"
-msgstr "Excellent"
+msgstr "Excelente"
 
 #: wporlogin.php:993
 msgid "Error de nonce"
-msgstr "Erreur de nonce"
+msgstr "Erro de nonce"
 
 #: wporlogin.php:1012
 msgid "IMPORTANT: "
-msgstr "IMPORTANT: "
+msgstr "IMPORTANTE: "
 
 #: wporlogin.php:1012
 msgid ""
@@ -523,22 +517,21 @@ msgid ""
 "force the page to reload from the server with <strong>Ctrl + F5</strong> or "
 "clear the WordPress cache."
 msgstr ""
-"Si vous ne voyez pas les modifications que vous avez apportées à votre site "
-"Web, vous devrez peut-être forcer la page à se recharger à partir du serveur "
-"avec <strong>Ctrl + F5</strong> ou vider le cache WordPress."
+"Se você não conseguir ver as alterações feitas no seu site, talvez seja "
+"necessário forçar o recarregamento da página do servidor com <strong>Ctrl + "
+"F5</strong> ou limpar o cache do WordPress."
 
 #: wporlogin.php:1013
 msgid "Clear WordPress cache"
-msgstr "Vider le cache WordPress"
+msgstr "Limpar cache do WordPress"
 
 #: wporlogin.php:1013
 msgid "More information here"
-msgstr "Plus d'informations ici"
+msgstr "Mais informações aqui"
 
 #. Plugin Name of the plugin/theme
 msgid "WPOrLogin - Customize WordPress Login and Registration Page"
-msgstr ""
-"WPOrLogin - Personnaliser la page de connexion et d'inscription WordPress"
+msgstr "WPOrLogin - Personalize a página de login e registro do WordPress"
 
 #. Plugin URI of the plugin/theme
 #. Author URI of the plugin/theme
@@ -553,11 +546,11 @@ msgid ""
 "redirect users after login and hide the language switcher for a cleaner "
 "interface."
 msgstr ""
-"WPOrLogin vous permet de personnaliser la page de connexion et d'inscription "
-"de WordPress. Vous pouvez modifier le logo, l'arrière-plan et la mise en "
-"page. Choisissez parmi des modèles prédéfinis et améliorez la sécurité avec "
-"Google reCAPTCHA. De plus, vous pouvez rediriger les utilisateurs après la "
-"connexion et masquer le sélecteur de langue pour une interface plus claire."
+"O WPOrLogin permite que você personalize a página de login e registro do "
+"WordPress. Você pode alterar o logotipo, o plano de fundo e o layout. "
+"Escolha entre modelos pré-concebidos e melhore a segurança com o Google "
+"reCAPTCHA. Além disso, você pode redirecionar usuários após o login e "
+"ocultar o seletor de idiomas para uma interface mais limpa."
 
 #. Author of the plugin/theme
 msgid "Oregoom"

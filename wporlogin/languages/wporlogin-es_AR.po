@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPOrLogin - Customize the WordPress login\n"
-"POT-Creation-Date: 2025-02-18 22:10-0500\n"
-"PO-Revision-Date: 2025-02-18 22:10-0500\n"
+"POT-Creation-Date: 2025-02-18 22:07-0500\n"
+"PO-Revision-Date: 2025-02-18 22:07-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: es_ES\n"
+"Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,7 +52,7 @@ msgstr "Activar la redirección después de iniciar sesión"
 
 #: includes/redirects-wporlogin.php:89 includes/redirects-wporlogin.php:124
 msgid "Yes, enable redirection"
-msgstr "Sí, habilitar redirección"
+msgstr "Sí, habilitar la redirección"
 
 #: includes/redirects-wporlogin.php:95
 msgid "Page to redirect users after login (URL)"
@@ -64,7 +64,7 @@ msgstr "Aplicar redirección también a los administradores"
 
 #: includes/redirects-wporlogin.php:106
 msgid "Yes, redirect administrators too"
-msgstr "Sí, redirigir a los administradores también"
+msgstr "Sí, redireccionar a los administradores también"
 
 #: includes/redirects-wporlogin.php:115
 msgid "Redirect on Logout"
@@ -161,7 +161,7 @@ msgstr ""
 
 #: includes/templates/recaptcha-settings-template.php:30
 msgid "Do you need help? "
-msgstr "¿Necesitas ayuda? "
+msgstr "¿Necesita ayuda? "
 
 #: includes/templates/wporlogin-paypal-done.php:9
 msgid "Donate now"
@@ -566,25 +566,41 @@ msgstr "Oregoom"
 #~ msgstr ""
 #~ "Plugin para personalizar la página de inicio de sesión de WordPress."
 
+#~ msgid "Custom redirects"
+#~ msgstr "Redirecciones personalizadas"
+
+#~ msgid "Login redirection URL"
+#~ msgstr "URL de redireccionamiento de inicio de sesión"
+
+#~ msgid "Include administrators in the redirection"
+#~ msgstr "Incluir administradores en la redirección"
+
+#~ msgid "Enable logout redirection"
+#~ msgstr "Habilitar el redireccionamiento de cierre de sesión"
+
+#~ msgid "Logout redirection URL"
+#~ msgstr "URL de redireccionamiento de cierre de sesión"
+
 #~ msgid "Protect your site with reCAPTCHA v2 or v3"
 #~ msgstr "Protege tu sitio con reCAPTCHA v2 o v3"
 
-#~ msgid "Choose Background Image"
-#~ msgstr "Elija una imagen de fondo"
+#~ msgid "Delete the menu"
+#~ msgstr "Eliminar el menú"
 
-#~ msgid "You can select a background image from here."
-#~ msgstr "Puede seleccionar una imagen de fondo desde aquí."
+#~ msgid "Delete the language dropdown menu"
+#~ msgstr "Eliminar el menú desplegable de idioma"
 
-#~ msgid ""
-#~ "You can download more images from <a href=\"https://unsplash.com/\" "
-#~ "target=\"_blank\"><strong>here</strong></a> completely for free."
-#~ msgstr ""
-#~ "Puedes descargar más imágenes desde <a href=\"https://unsplash.com/\" "
-#~ "target=\"_blank\"><strong>aquí</strong></a> de forma completamente "
-#~ "gratuita."
+#~ msgid "Select the logo"
+#~ msgstr "Seleccione el logotipo"
 
-#~ msgid "You can upload a background image here"
-#~ msgstr "Puedes subir una imagen de fondo aquí"
+#~ msgid "You can upload your logo here"
+#~ msgstr "Puedes subir tu logo aquí"
+
+#~ msgid "Enter the desired logo width"
+#~ msgstr "Introduzca el ancho del logotipo deseado"
+
+#~ msgid "Enter the desired logo height"
+#~ msgstr "Introduzca la altura deseada del logotipo"
 
 #~ msgid "Left center"
 #~ msgstr "Centro izquierdo"
@@ -601,44 +617,22 @@ msgstr "Oregoom"
 #~ msgid "Right bottom"
 #~ msgstr "Abajo a la derecha"
 
-#~ msgid "Select the logo"
-#~ msgstr "Seleccione el logotipo"
-
-#~ msgid "You can upload your logo here"
-#~ msgstr "Puedes subir tu logo aquí"
-
-#~ msgid "Enter the desired logo width"
-#~ msgstr "Introduzca el ancho del logotipo deseado"
-
-#~ msgid "Enter the desired logo height"
-#~ msgstr "Introduzca la altura deseada del logotipo"
-
 #~ msgid "Change the login logo URL"
 #~ msgstr "Cambiar la URL del logotipo de inicio de sesión"
 
 #~ msgid "Change the logo title on the login page"
 #~ msgstr "Cambiar el título del logotipo en la página de inicio de sesión"
 
-#~ msgid "Delete the menu"
-#~ msgstr "Eliminar el menú"
+#~ msgid "You can upload a background image here"
+#~ msgstr "Puedes subir una imagen de fondo aquí"
 
-#~ msgid "Delete the language dropdown menu"
-#~ msgstr "Eliminar el menú desplegable de idioma"
+#~ msgid ""
+#~ "You can download more images from <a href=\"https://unsplash.com/\" "
+#~ "target=\"_blank\"><strong>here</strong></a> completely for free."
+#~ msgstr ""
+#~ "Puedes descargar más imágenes desde <a href=\"https://unsplash.com/\" "
+#~ "target=\"_blank\"><strong>aquí</strong></a> de forma completamente "
+#~ "gratuita."
 
-#~ msgid "Login Redirection"
-#~ msgstr "Redirección de inicio de sesión"
-
-#~ msgid "Custom redirects"
-#~ msgstr "Redirecciones personalizadas"
-
-#~ msgid "Login redirection URL"
-#~ msgstr "URL de redirección de inicio de sesión"
-
-#~ msgid "Include administrators in the redirection"
-#~ msgstr "Incluir administradores en la redirección"
-
-#~ msgid "Enable logout redirection"
-#~ msgstr "Habilitar redirección de cierre de sesión"
-
-#~ msgid "Logout redirection URL"
-#~ msgstr "URL de redirección de cierre de sesión"
+#~ msgid "centro superior"
+#~ msgstr "Centro Superior"

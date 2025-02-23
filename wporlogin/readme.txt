@@ -1,125 +1,133 @@
-=== WPOrLogin - Personalizar página de inicio de sesión y registro de WordPress ===
+=== WPOrLogin - Customize WordPress Login and Registration Page ===
 
 Contributors: Oregoom  
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CTG69VCQ5TZZN&source=url  
-Tags: wp-login, custom login, wordpress login, custom login logo, style login  
+Tags: login, custom login, wordpress login, admin login, login page  
 Requires at least: 5.2  
 Tested up to: 6.7.2  
-Stable tag: 2.9.3
+Stable tag: 2.9.4
 Requires PHP: 7.2  
 License: GPLv2 or later  
-License URI: http://www.gnu.org/licenses/gpl-2.0.html  
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WPOrLogin te permite personalizar completamente la página de inicio de sesión y registro de WordPress, con opciones avanzadas de diseño y seguridad como Google reCAPTCHA v2 y v3.
+WPOrLogin allows you to fully customize the WordPress login and registration page, with advanced design and security options like Google reCAPTCHA v2 and v3.
 
 == Description ==
 
-¿Te gustaría personalizar la página de inicio de sesión de tu sitio WordPress y mejorar la seguridad al mismo tiempo? Con **WPOrLogin**, puedes transformar por completo la experiencia de inicio de sesión y registro, adaptándola a la identidad visual de tu marca mientras proteges tu sitio de amenazas externas.
+Would you like to customize your WordPress site's login page while enhancing security at the same time? With **WPOrLogin**, you can completely transform the login and registration experience, adapting it to your brand's visual identity while protecting your site from external threats.
 
-**WPOrLogin** te permite cambiar el logotipo, la imagen de fondo y los colores de los formularios de inicio de sesión y registro, ofreciendo una interfaz completamente personalizable. Ya no tendrás que usar la página de inicio de sesión genérica de WordPress: con WPOrLogin, puedes crear una experiencia profesional y visualmente atractiva para tus usuarios.
+**WPOrLogin** lets you change the logo, background image, and form colors for login and registration, providing a fully customizable interface. You no longer have to use the generic WordPress login page: with WPOrLogin, you can create a professional and visually appealing experience for your users.
 
-Pero **WPOrLogin** no se detiene en lo visual. Este plugin también refuerza la **seguridad** de tu sitio con la integración de **Google reCAPTCHA v2 y v3**, protegiendo los formularios de inicio de sesión, registro y recuperación de contraseñas contra bots y ataques de fuerza bruta. Esta capa adicional de protección garantiza que solo los usuarios legítimos puedan acceder a tu sitio.
+But **WPOrLogin** is not just about visuals. This plugin also enhances your site's **security** with **Google reCAPTCHA v2 and v3**, protecting login, registration, and password recovery forms from bots and brute-force attacks. This additional layer of protection ensures that only legitimate users can access your site.
 
-Además, si prefieres una página de inicio de sesión más sencilla, WPOrLogin te ofrece la opción de **eliminar el selector de idioma**, manteniendo la interfaz limpia y enfocada. Todo esto, mientras aseguras que los formularios sean **responsivos y optimizados para dispositivos móviles**, brindando una experiencia de usuario fluida en cualquier plataforma.
+Additionally, if you prefer a simpler login page, WPOrLogin offers the option to **remove the language selector**, keeping the interface clean and focused. All this while ensuring that the forms are **responsive and optimized for mobile devices**, providing a seamless user experience across all platforms.
 
-Con **WPOrLogin**, personalizar la apariencia y reforzar la seguridad de tu sitio nunca ha sido tan fácil. ¡Descubre cómo este plugin puede transformar la página de inicio de sesión de tu WordPress hoy mismo!
+With **WPOrLogin**, customizing the appearance and strengthening the security of your site has never been easier. Discover how this plugin can transform your WordPress login page today!
 
-### **Características clave:**
+### **Key Features:**
 
-- **Personalización del logotipo y fondo:** Cambia el logotipo y ajusta la imagen de fondo según tu preferencia.
-- **Diseños predefinidos:** Selección entre varios diseños (Básico, Estándar y Premium).
-- **Compatibilidad con Google reCAPTCHA v2 y v3:** Mejora la seguridad con opciones de verificación de reCAPTCHA en formularios de acceso, registro y recuperación de contraseña.
-- **Compatibilidad con dispositivos móviles:** Diseño optimizado para pantallas móviles.
-- **Opciones de seguridad:** Permite Google reCAPTCHA en formularios de acceso, registro y recuperación de contraseña.
-- **Opciones avanzadas:** Elimina el selector de idioma en la página de inicio de sesión.
-- **Redirección Personalizada:* Permite redirigir a los usuarios después de iniciar o cerrar sesión en WordPress.
-- **Soporte multilingüe:** Disponible en 5 idiomas (español, inglés, francés, italiano y alemán).
+- **Custom Logo and Background:** Change the logo and adjust the background image to your preference.
+- **Predefined Layouts:** Choose from multiple layouts (Basic, Standard, and Premium).
+- **Google reCAPTCHA v2 and v3 Compatibility:** Enhance security with reCAPTCHA verification options for login, registration, and password recovery forms.
+- **Mobile-Friendly Design:** Optimized layout for mobile screens.
+- **Security Options:** Enables Google reCAPTCHA on login, registration, and password recovery forms.
+- **Advanced Options:** Remove the language selector from the login page.
+- **Custom Redirection:** Allows users to be redirected after login or logout.
+- **Multilingual Support:** Available in 5 languages (Spanish, English, French, Italian, and German).
 
-### Seguridad avanzada con Google reCAPTCHA:
+### **Advanced Security with Google reCAPTCHA:**
 
-Hoy en día, los ataques cibernéticos, especialmente los automatizados, representan una gran amenaza para la seguridad de los sitios web. Entre estos ataques se encuentran los bots que intentan acceder a tu sitio web utilizando credenciales robadas o mediante intentos de fuerza bruta, es decir, probando múltiples combinaciones de usuarios y contraseñas hasta acceder. Esto puede comprometer la seguridad de tu sitio y poner en riesgo información sensible.
+Today, cyberattacks, especially automated ones, pose a major threat to website security. Among these attacks are bots attempting to access your site using stolen credentials or brute-force attacks—trying multiple username and password combinations until they gain access. This can compromise your site's security and put sensitive information at risk.
 
-**Google reCAPTCHA** es una de las herramientas más eficaces para combatir estos ataques. Con WPOrLogin, puedes integrar fácilmente **Google reCAPTCHA v2 y v3** en tus formularios de inicio de sesión, registro y recuperación de contraseña, lo que añade una capa adicional de seguridad.
+**Google reCAPTCHA** is one of the most effective tools for combating these attacks. With WPOrLogin, you can easily integrate **Google reCAPTCHA v2 and v3** into your login, registration, and password recovery forms, adding an extra layer of security.
 
-#### ¿Qué es Google reCAPTCHA?
+#### **What is Google reCAPTCHA?**
 
-Google reCAPTCHA es un servicio que ayuda a proteger los sitios web contra bots maliciosos, que intentan automatizar procesos como el registro de usuarios, envío de formularios o acceder a cuentas sin autorización. Al implementar reCAPTCHA, el sistema determina si el usuario es humano o un bot, asegurando que solo los usuarios legítimos puedan interactuar con tu sitio.
+Google reCAPTCHA is a service that helps protect websites from malicious bots that attempt to automate processes such as user registration, form submissions, or unauthorized account access. By implementing reCAPTCHA, the system determines whether the user is human or a bot, ensuring that only legitimate users can interact with your site.
 
-#### Versiones de reCAPTCHA:
-- **Google reCAPTCHA v2**: Es el sistema más conocido, en el que los usuarios deben marcar una casilla de verificación ("No soy un robot") o resolver un desafío visual (como seleccionar imágenes) cuando el sistema detecta actividad sospechosa.
-- **Google reCAPTCHA v3**: Ofrece una experiencia más fluida, ya que no requiere interacción directa con el usuario. En lugar de desafíos visibles, reCAPTCHA v3 analiza el comportamiento del usuario en la página y asigna una puntuación que indica la probabilidad de que sea un bot. Esta puntuación se usa para decidir si se permite o bloquea la interacción.
+#### **reCAPTCHA Versions:**
 
-#### Protección en formularios clave:
-WPOrLogin te permite integrar Google reCAPTCHA tanto en:
-1. **Formulario de inicio de sesión**: Bloquea intentos de acceso no autorizados y ataques de fuerza bruta.
-2. **Formulario de registro**: Evita que los bots creen cuentas falsas en tu sitio web.
-3. **Formulario de recuperación de contraseña**: Protege contra intentos maliciosos de restablecimiento de contraseñas.
+- **Google reCAPTCHA v2:** The most well-known system, where users must check a verification box ("I'm not a robot") or solve a visual challenge (such as selecting images) when suspicious activity is detected.
+- **Google reCAPTCHA v3:** Offers a smoother experience, as it requires no direct user interaction. Instead of visible challenges, reCAPTCHA v3 analyzes user behavior on the page and assigns a score indicating the likelihood of being a bot. This score is used to decide whether to allow or block interactions.
 
-#### ¿Por qué es tan importante hoy en día?
+#### **Protection for Key Forms:**
 
-Los bots maliciosos se han vuelto cada vez más sofisticados, y los ataques de fuerza bruta son una de las técnicas más comunes que los atacantes utilizan para acceder a los sitios web. Si bien las contraseñas fuertes y otras medidas de seguridad ayudan, el uso de reCAPTCHA añade una defensa proactiva.
+WPOrLogin allows you to integrate Google reCAPTCHA in:
 
-Implementar **Google reCAPTCHA** en tus formularios clave con WPOrLogin te asegura:
-- **Protección automatizada**: reCAPTCHA filtra automáticamente el tráfico sospechoso, sin necesidad de intervención manual.
-- **Experiencia de usuario mejorada**: La versión v3 permite una verificación sin fricciones para los usuarios genuinos, sin obligarlos a resolver desafíos.
-- **Mayor seguridad**: Bloquea accesos no autorizados y previene la creación de cuentas de spam o el uso indebido del formulario de recuperación de contraseñas.
+1. **Login Form:** Blocks unauthorized access attempts and brute-force attacks.
+2. **Registration Form:** Prevents bots from creating fake accounts on your site.
+3. **Password Recovery Form:** Protects against malicious password reset attempts.
 
-Al incorporar reCAPTCHA en tus formularios con WPOrLogin, aseguras que solo los usuarios legítimos puedan interactuar con tu sitio, brindando una defensa sólida y fácil de implementar.
+#### **Why is it so important today?**
+
+Malicious bots have become increasingly sophisticated, and brute-force attacks are one of the most common techniques attackers use to access websites. While strong passwords and other security measures help, using reCAPTCHA adds proactive defense.
+
+Implementing **Google reCAPTCHA** in your key forms with WPOrLogin ensures:
+
+- **Automated Protection:** reCAPTCHA automatically filters suspicious traffic without manual intervention.
+- **Improved User Experience:** Version v3 enables frictionless verification for genuine users, without forcing them to solve challenges.
+- **Increased Security:** Blocks unauthorized access and prevents spam accounts or misuse of the password recovery form.
+
+By incorporating reCAPTCHA into your forms with WPOrLogin, you ensure that only legitimate users can interact with your site, providing strong and easy-to-implement protection.
 
 == Installation ==
 
-Existen dos maneras de instalar **WPOrLogin** en tu sitio WordPress: directamente desde el repositorio oficial de WordPress o mediante la carga manual del archivo .zip. A continuación, te explicamos ambos métodos paso a paso.
+There are two ways to install WPOrLogin on your WordPress site: directly from the official WordPress repository or by manually uploading the .zip file. Below, we explain both methods step by step.
 
-### Opción 1: Instalación directa desde el repositorio de WordPress (Método recomendado)
+### **Option 1: Direct Installation from the WordPress Repository (Recommended Method)**
 
-1. Inicia sesión en el panel de administración de tu sitio WordPress.
-2. En el menú lateral, haz clic en **Plugins** y luego selecciona **Añadir nuevo**.
-3. En la barra de búsqueda que aparece, escribe **WPOrLogin** y presiona **Enter**.
-4. Busca **WPOrLogin** en los resultados de búsqueda y haz clic en **Instalar ahora**.
-5. Una vez completada la instalación, aparecerá el botón **Activar**. Haz clic en él para habilitar **WPOrLogin**.
-6. Tras la activación, podrás acceder a las configuraciones de **WPOrLogin** desde la sección de ajustes del panel de administración de WordPress, donde podrás comenzar a personalizar la página de inicio de sesión y registro.
+1. Log in to your WordPress admin panel.
+2. In the sidebar menu, click **Plugins** and then select **Add New**.
+3. In the search bar, type **WPOrLogin** and press **Enter**.
+4. Find **WPOrLogin** in the search results and click **Install Now**.
+5. Once the installation is complete, the **Activate** button will appear. Click it to enable **WPOrLogin**.
+6. After activation, you can access the **WPOrLogin** settings from the WordPress admin panel, where you can start customizing the login and registration page.
 
-### Opción 2: Instalación manual desde un archivo .zip
+### **Option 2: Manual Installation from a .zip File**
 
-1. Inicia sesión en el panel de administración de tu sitio WordPress.
-2. En el menú lateral, haz clic en **Plugins** y luego selecciona **Añadir nuevo**.
-3. En la parte superior de la página, verás el botón **Subir plugin**. Haz clic en él.
-4. Selecciona **Elegir archivo** y localiza el archivo **wporlogin.zip** en tu ordenador.
-5. Haz clic en **Instalar ahora** y espera mientras WordPress instala el plugin.
-6. Después de la instalación, haz clic en el botón **Activar** para habilitar **WPOrLogin**.
-7. Ahora puedes acceder a las opciones de configuración de **WPOrLogin** en el panel de administración, donde podrás personalizar el logotipo, los colores, las imágenes de fondo y habilitar Google reCAPTCHA para mayor seguridad.
+1. Log in to your WordPress admin panel.
+2. In the sidebar menu, click **Plugins** and then select **Add New**.
+3. At the top of the page, click the **Upload Plugin** button.
+4. Click **Choose File** and locate the **wporlogin.zip** file on your computer.
+5. Click **Install Now** and wait while WordPress installs the plugin.
+6. After installation, click the **Activate** button to enable **WPOrLogin**.
+7. You can now access the **WPOrLogin** settings in the admin panel, where you can customize the logo, colors, background images, and enable Google reCAPTCHA for added security.
 
-### Nota importante:
-Tras activar **WPOrLogin**, te recomendamos que explores todas las opciones de personalización disponibles para optimizar tu página de inicio de sesión. Además, la activación de **Google reCAPTCHA** te ayudará a proteger tu sitio web contra bots y accesos no autorizados.
+### **Important Note:**
+
+After activating WPOrLogin, we recommend exploring all the available customization options to optimize your login page. Additionally, enabling Google reCAPTCHA will help protect your website from bots and unauthorized access.
 
 == Frequently Asked Questions ==
 
-= ¿Cuál es el tamaño recomendado para el logotipo? =
-Se recomienda un logotipo con un ancho de 200px y una altura de 84px para la mejor visualización en la página de inicio de sesión personalizada de WordPress.
+= **What is the recommended size for the logo?** =  
+A logo with a width of 200px and a height of 84px is recommended for the best display on the custom WordPress login page.  
 
-= ¿Es compatible WPOrLogin con Google reCAPTCHA v3? =
-Sí, WPOrLogin es totalmente compatible tanto con Google reCAPTCHA v2 como con v3. Puedes seleccionar la versión que mejor se adapte a tus necesidades directamente desde la página de configuración del plugin.
+= **Is WPOrLogin compatible with Google reCAPTCHA v3?** =  
+Yes, WPOrLogin is fully compatible with both Google reCAPTCHA v2 and v3. You can select the version that best suits your needs directly from the plugin's settings page.  
 
-= ¿Cómo puedo eliminar el menú de selección de idioma en la página de inicio de sesión? =
-El plugin incluye una opción para desactivar el menú de selección de idioma en la página de inicio de sesión. Simplemente, activa esta opción desde el panel de administración en la configuración de WPOrLogin.
+= **How can I remove the language selection menu on the login page?** =  
+The plugin includes an option to disable the language selection menu on the login page. Simply enable this option from the WPOrLogin settings in the admin panel.  
 
-= ¿Puedo personalizar el fondo de la página de inicio de sesión? =
-Sí, puedes elegir entre varias imágenes gratuitas predefinidas o cargar tu propia imagen de fondo desde las opciones de personalización del plugin.
+= **Can I customize the background of the login page?** =  
+Yes, you can choose from several predefined free images or upload your own background image from the plugin's customization options.  
 
-= ¿Qué sucede si olvido agregar una clave de Google reCAPTCHA? =
-Si no ingresas las claves de Google reCAPTCHA, no se aplicará el reCAPTCHA en los formularios de inicio de sesión, registro o recuperación de contraseña. Asegúrate de añadir tanto la clave del sitio como la clave secreta en la configuración del plugin para garantizar la protección adecuada.
+= **What happens if I forget to add a Google reCAPTCHA key?** =  
+If you do not enter the Google reCAPTCHA keys, reCAPTCHA will not be applied to the login, registration, or password recovery forms. Make sure to add both the site key and the secret key in the plugin settings to ensure proper protection.  
 
-= ¿WPOrLogin es compatible con dispositivos móviles? =
-Sí, WPOrLogin está diseñado para ser completamente responsive, lo que garantiza que la página de inicio de sesión y registro personalizada se vea y funcione perfectamente en dispositivos móviles y tabletas.
+= **Is WPOrLogin compatible with mobile devices?** =  
+Yes, WPOrLogin is designed to be fully responsive, ensuring that the custom login and registration page looks and functions perfectly on mobile devices and tablets.  
 
-= ¿Cómo afecta WPOrLogin al rendimiento de mi sitio web? =
-WPOrLogin está optimizado para un rendimiento eficiente y no afecta de manera significativa la velocidad de carga de tu página de inicio de sesión. Además, cuenta con las mejores prácticas de desarrollo para asegurar una integración fluida con WordPress.
+= **How does WPOrLogin affect my website's performance?** =  
+WPOrLogin is optimized for efficient performance and does not significantly impact the loading speed of your login page. It also follows best development practices to ensure smooth integration with WordPress.  
 
-= ¿Puedo cambiar el enlace del logotipo en la página de inicio de sesión? =
-Sí, WPOrLogin te permite modificar la URL del logotipo en la página de inicio de sesión. Puedes establecer la dirección de tu sitio web u otra página personalizada.
+= **Can I change the logo link on the login page?** =  
+Yes, WPOrLogin allows you to modify the logo URL on the login page. You can set it to your website's homepage or another custom page.  
 
-= ¿Qué sucede si cambio de tema, WPOrLogin seguirá funcionando? =
-Sí, WPOrLogin funcionará independientemente del tema que utilices, ya que se centra en la personalización de la página de inicio de sesión de WordPress y no afecta a la apariencia general de tu tema.
+= **What happens if I change my theme? Will WPOrLogin still work?** =  
+Yes, WPOrLogin will work regardless of the theme you use, as it focuses on customizing the WordPress login page and does not affect the overall appearance of your theme.  
+
+= **Does WPOrLogin allow users to be redirected after login or logout?** =  
+Yes, WPOrLogin includes an option to redirect users to a specific page after login or logout. You can configure custom redirections based on user roles directly from the plugin settings.
 
 == Screenshots ==
 
@@ -136,95 +144,97 @@ Sí, WPOrLogin funcionará independientemente del tema que utilices, ya que se c
 11. Eliminar selector de idioma
 
 == Languages ==
-Este plugin está disponible en los siguientes idiomas:
-* Español (predeterminado)
-* Inglés
-* Francés
-* Italiano
-* Alemán
+This plugin is available in the following languages:  
+* English (default)  
+* Spanish  
+* French  
+* Italian  
+* German
+* Portuguese (Brazil)
+* Indonesian
 
 == Changelog ==
 
-= 2.9.3 =
-* Añadido soporte para redirección personalizada en Login y Logout
+= 2.9.3 =  
+* Added support for custom redirection on Login and Logout  
 
-= 2.9 =
-* Añadido soporte para Google reCAPTCHA v3
-* Añadido Google reCAPTCHA al formulario de recuperación de contraseña
-* Mejoras de seguridad y rendimiento
-* Actualización de los requisitos mínimos de PHP a 7.2
+= 2.9 =  
+* Added support for Google reCAPTCHA v3  
+* Added Google reCAPTCHA to the password recovery form  
+* Security and performance improvements  
+* Updated minimum PHP requirements to 7.2  
 
-= 2.8.6 =
-* Probado hasta la versión 6.5.2 de WordPress
+= 2.8.6 =  
+* Tested up to WordPress version 6.5.2  
 
-= 2.8.5 =
-* Corregido: Problema de SSL al verificar reCAPTCHA durante el inicio de sesión
-* Actualizado el método de verificación de reCAPTCHA para usar `wp_remote_post()` en lugar de `file_get_contents()`
-* Solucionado un problema con la modificación de encabezados en el proceso de autenticación
+= 2.8.5 =  
+* Fixed: SSL issue when verifying reCAPTCHA during login  
+* Updated reCAPTCHA verification method to use `wp_remote_post()` instead of `file_get_contents()`  
+* Resolved an issue with header modification in the authentication process  
 
-= 2.8.4 =
-* Probado hasta la versión 6.3.1 de WordPress
+= 2.8.4 =  
+* Tested up to WordPress version 6.3.1  
 
-= 2.8.3 =
-* Nuevas imágenes gratuitas
-* Mejoras en el código - Avisos de administración
+= 2.8.3 =  
+* New free images  
+* Code improvements - Admin notices  
 
-= 2.8.2 =
-* Añadido: Ancho del logotipo - Diseño Estándar y Premium
-* Añadido: Altura del logotipo - Diseño Estándar y Premium
-* Añadido: Posición del logotipo - Diseño Estándar y Premium
-* Añadido: Tamaño del fondo - Diseño Estándar y Premium
-* Mejoras en el código CSS - Mis imágenes
+= 2.8.2 =  
+* Added: Logo width - Standard and Premium Design  
+* Added: Logo height - Standard and Premium Design  
+* Added: Logo position - Standard and Premium Design  
+* Added: Background size - Standard and Premium Design  
+* CSS code improvements - My Images  
 
-= 2.8.1 =
-* Mejoras en el código CSS - Diseño Estándar
+= 2.8.1 =  
+* CSS code improvements - Standard Design  
 
-= 2.8 =
-* Mejoras en el código
-* Mejoras en el formulario de inicio de sesión para móviles
-* Mejoras en el formulario de registro para móviles
+= 2.8 =  
+* Code improvements  
+* Login form improvements for mobile devices  
+* Registration form improvements for mobile devices  
 
-= 2.7 =
-* Mejoras en el código
-* Mejoras en el formulario de inicio de sesión
-* Añadido: Menú de "política de privacidad" en la pantalla de inicio de sesión de WordPress
-* Nuevo: Añadido un diseño Premium
-* Nuevo: Opción para eliminar el selector de idioma en la pantalla de inicio de sesión (añadido en WordPress 5.9)
+= 2.7 =  
+* Code improvements  
+* Login form improvements  
+* Added: "Privacy Policy" menu on the WordPress login screen  
+* New: Added a Premium design  
+* New: Option to remove the language selector on the login screen (added in WordPress 5.9)  
 
-= 2.6 =
-* Mejoras en el código
-* Mejoras en Google reCAPTCHA v2 en los formularios de inicio de sesión y registro
-* Añadido: Dos nuevos diseños Premium
+= 2.6 =  
+* Code improvements  
+* Google reCAPTCHA v2 improvements in login and registration forms  
+* Added: Two new Premium designs  
 
-= 2.5 =
-* Añadido: Google reCAPTCHA v2 para formularios de inicio de sesión y registro
-* Nuevo: Posibilidad de desactivar Google reCAPTCHA v2 en los formularios de inicio de sesión y registro
+= 2.5 =  
+* Added: Google reCAPTCHA v2 for login and registration forms  
+* New: Option to disable Google reCAPTCHA v2 in login and registration forms  
 
-= 2.4.1 =
-* Corregido error de JavaScript
+= 2.4.1 =  
+* Fixed JavaScript error  
 
-= 2.4 =
-* Nuevas imágenes gratuitas
+= 2.4 =  
+* New free images  
 
-= 2.3 =
-* Mejoras en el código
+= 2.3 =  
+* Code improvements  
 
-= 2.2 =
-* Mejoras en el código
+= 2.2 =  
+* Code improvements  
 
-= 2.1 =
-* Corrección de errores
+= 2.1 =  
+* Bug fixes  
 
-= 2.0 =
-* Añadido: Nuevo diseño básico y estándar para la página de inicio de sesión
+= 2.0 =  
+* Added: New basic and standard design for the login page  
 
-= 1.1 =
-* Añadido nuevo CSS
+= 1.1 =  
+* Added new CSS  
 
-= 1.0 =
-* Lanzamiento inicial
+= 1.0 =  
+* Initial release  
 
 == Upgrade Notice ==
 
-= 2.9.3 =
-Esta versión permite redirigir a los usuarios después de iniciar o cerrar sesión en WordPress.
+= 2.9.3 =  
+This version allows users to be redirected after logging in or out of WordPress.
