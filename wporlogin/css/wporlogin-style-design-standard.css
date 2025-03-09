@@ -1,8 +1,12 @@
 /* 
     Author     : Oregoom
     WP LOGIN   : DESIGN STANDARD 
-    Version    : 1.4.1
+    Version    : 1.4.2
 */
+
+body.login {
+    font-family: "Roboto",sans-serif !important;
+}
 
 /* Extra small devices (portrait phones, less than 576px)*/
 /* MOVIL */
@@ -35,7 +39,9 @@
         margin: 20px auto 20px auto !important;
     }
 
-    body.login div#login form#loginform, form#registerform, form#lostpasswordform {
+    body.login div#login form#loginform, 
+    form#registerform, 
+    form#lostpasswordform {
         box-shadow: none !important;
     }
 
@@ -87,7 +93,9 @@
                     height: 100vh !important;
                 }
 
-                body.login div#login form#loginform, form#registerform, form#lostpasswordform {
+                body.login div#login form#loginform, 
+                form#registerform, 
+                form#lostpasswordform {
                     margin-top: 20px;
                     margin-left: 0;
                     padding: 26px 50px 46px;
@@ -134,7 +142,13 @@
                 display: block;
             }
 
-            body.login div#login form#loginform, form#registerform, form#lostpasswordform {
+            body.login div#login div.notice-info{
+                border-left-color: #3858e9 !important;
+            }
+
+            body.login div#login form#loginform, 
+            form#registerform, 
+            form#lostpasswordform {
                 margin-top: 20px;
                 margin-left: 0;
                 /*padding: 26px 50px 46px;*/
@@ -198,15 +212,17 @@
             }
 
             body.login div#login form#loginform button.button-secondary {
-                color: #1a73e8;
+                color: #3858e9;
             }
 
 
 
-            body.login div#login form#loginform p.submit input#wp-submit, form#registerform p.submit input#wp-submit, form#lostpasswordform p.submit input#wp-submit {
+            body.login div#login form#loginform p.submit input#wp-submit, 
+            form#registerform p.submit input#wp-submit, 
+            form#lostpasswordform p.submit input#wp-submit {
                 /*background-color: #0780F9 !important;*/
-                background-color: #1a73e8 !important;
-                border: solid 1px #1a73e8 !important;
+                background-color: #3858e9 !important;
+                border: solid 1px #3858e9 !important;
                 float: none !important;
                 width: 100%;
                 height: 50px;
@@ -215,10 +231,14 @@
                 border-radius: 6px;
                 font-family: Lato, sans-serif;
             }
-            body.login div#login form#loginform p.submit input#wp-submit:hover, form#registerform p.submit input#wp-submit:hover, form#lostpasswordform p.submit input#wp-submit:hover {
-                background-color: #287ae6 !important;
+            body.login div#login form#loginform p.submit input#wp-submit:hover, 
+            form#registerform p.submit input#wp-submit:hover, 
+            form#lostpasswordform p.submit input#wp-submit:hover {
+                background-color: #213fd4 !important;
             }
-            body.login div#login form#loginform p.submit input#wp-submit:focus, form#registerform p.submit input#wp-submit:focus, form#lostpasswordform p.submit input#wp-submit:focus {
+            body.login div#login form#loginform p.submit input#wp-submit:focus, 
+            form#registerform p.submit input#wp-submit:focus, 
+            form#lostpasswordform p.submit input#wp-submit:focus {
                 box-shadow: none;
             }
 
@@ -227,10 +247,25 @@
                 padding-bottom: 30px;
             }
 
-            body.login div#login p#nav a:hover {
-                color: #1a73e8 !important;
+            body.login div#login p#nav a,
+            body.login div#login div.privacy-policy-page-link a.privacy-policy-link, 
+            body.login div#login form.admin-email-confirm-form p a,
+            body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-secondary a {
+                color: #3858e9 !important;
+                font-size: 14px !important;
+                font-family: "Roboto",sans-serif !important;
             }
-            body.login div#login p#nav a:focus {
+
+            body.login div#login p#nav a:hover,
+            body.login div#login div.privacy-policy-page-link a.privacy-policy-link:hover, 
+            body.login div#login form.admin-email-confirm-form p a:hover,
+            body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-secondary a:hover {
+                color: #213fd4 !important;
+            }
+            body.login div#login p#nav a:focus,
+            body.login div#login div.privacy-policy-page-link a.privacy-policy-link:focus, 
+            body.login div#login form.admin-email-confirm-form p a:focus,
+            body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-secondary a:focus {
                 box-shadow: none;
             }
 
@@ -247,3 +282,60 @@
             #login #backtoblog{
                 display: none;
             }
+
+    body.login div.language-switcher form#language-switcher input{
+        background-color: #3858e9 !important;
+        border: solid 1px #3858e9 !important;
+        color: #ffffff;
+        /*float: none !important;
+        width: 100% !important;
+        height: 50px !important;
+        font-size: 16px !important;
+        margin-top: 10px !important;
+        border-radius: 6px !important;*/
+        font-family: "Roboto",sans-serif !important;
+    }
+    body.login div.language-switcher form#language-switcher input:hover {
+        background-color: #213fd4 !important;
+        border-color: #213fd4 !important;
+    }
+    body.login div.language-switcher form#language-switcher input:focus {
+        box-shadow: none !important;
+    }
+
+    body.login div#login form.admin-email-confirm-form{
+        border-style: none !important;
+        padding-top: 0px !important;
+        box-shadow: none !important;
+    }
+    body.login div#login form.admin-email-confirm-form h1{
+        text-align: left !important;
+        font-size: 24px !important;
+        line-height: 26px !important;
+        padding-top: 10px !important;
+        padding-bottom: 16px !important;
+    }
+
+    body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary input{
+        background-color: #3858e9 !important;
+        border: solid 1px #3858e9 !important;
+        font-family: "Roboto",sans-serif !important;
+    }
+    body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary input:hover{
+        background-color: #213fd4 !important;
+        border-color: #213fd4 !important;
+    }
+    body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary input:focus{
+        box-shadow: none !important;
+    }
+
+    body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary a {
+        border-color: #3858e9 !important; 
+        color: #3858e9 !important;
+        background-color: #ffffff !important;
+    }
+    body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary a:hover {
+        border-color: #000000 !important;
+        color: #ffffff !important;
+        background-color: #000000 !important;
+    }

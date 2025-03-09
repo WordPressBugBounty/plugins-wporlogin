@@ -97,12 +97,11 @@ function yes_recaptcha_active_login_and_register_wporlogin_style(){
             if(get_option('activa_acceso_recaptcha_v2_wporlogin') == 1){
 
                 not_remove_language_wporlogin_style_login();
-
                 not_remove_language_wporlogin_style_login_min_height();
 
             } else {
-                yes_remove_language_wporlogin_style_login();
 
+                yes_remove_language_wporlogin_style_login();
                 yes_remove_language_wporlogin_style_login_min_height();
 
             }
@@ -110,22 +109,24 @@ function yes_recaptcha_active_login_and_register_wporlogin_style(){
             if(get_option('activa_registro_recaptcha_v2_wporlogin') == 1 ){
 
                 not_remove_language_wporlogin_style_register();
-
                 yes_remove_language_wporlogin_style_register_min_height();
 
             } else {
-                yes_remove_language_wporlogin_style_register();
 
+                yes_remove_language_wporlogin_style_register();
                 yes_remove_language_wporlogin_style_register_min_height();
+
             }
             
         }
     } else{
+
         yes_remove_language_wporlogin_style_login();
         yes_remove_language_wporlogin_style_register();
 
         yes_remove_language_wporlogin_style_login_min_height();
         yes_remove_language_wporlogin_style_register_min_height();
+
     }
 
 }
