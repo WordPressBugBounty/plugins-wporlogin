@@ -34,21 +34,86 @@ body.login div#login h1 a {
 }
 
 body.login div#login h1 a:hover {
-color: #ffffff !important;
+    color: #ffffff !important;
 }
 body.login div#login h1 a:focus {
-box-shadow: none !important;
+    box-shadow: none !important;
 }
 
+body.login div#login form#loginform p.forgetmenot input#rememberme{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 4px !important;
+}
+body.login div#login form#loginform p.forgetmenot input#rememberme:focus{
+    border-color: var(--wporlogin-color-principal-marca);
+    box-shadow: 0 0 0 1px var(--wporlogin-color-principal-marca);
+}
+body.login div#login form#loginform p.forgetmenot input#rememberme:checked::before {
+    content: "✔"; 
+    position: absolute;
+    left: 2px;
+    top: 12px;
+    font-size: 16px;
+    color: var(--wporlogin-color-principal-marca);
+    border-color: var(--wporlogin-color-principal-marca);
+    font-weight: bold;
+    border-radius: 4px !important;
+}
 
+/*PC*/
+@media (max-width: 782px){
 
+    .login-action-confirm_admin_email #login{
+        width: 90vw !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    body.login div#login form#loginform p.forgetmenot input#rememberme{
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 18px;
+        height: 18px;
+        position: relative;
+        cursor: pointer;
+    }
+    body.login div#login form#loginform p.forgetmenot input#rememberme:focus{
+        border-color: var(--wporlogin-color-principal-marca);
+        box-shadow: 0 0 0 1px var(--wporlogin-color-principal-marca);
+    }
+    body.login div#login form#loginform p.forgetmenot input#rememberme:checked::before {
+        content: "✔"; 
+        position: absolute;
+        left: -2px;
+        top: 13px;
+        font-size: 16px;
+        color: var(--wporlogin-color-principal-marca);
+        border-color: var(--wporlogin-color-principal-marca);
+        font-weight: bold;
+    }
+
+} /* @media (max-width: 782px) */
+
+@media (max-width: 600px){
+
+}
+
+@media (max-width: 400px){
+
+}
 
 /* Extra small devices (portrait phones, less than 576px)*/
+/* MOVIL */
 @media (max-width: 575.98px) {
 
-    /*
-    CUANDO EL USUARIO USA GRATIS / Movil
-    */
+    /* CUANDO EL USUARIO USA GRATIS / Movil */
     .login_oregoom{
         display: none !important;
     }
@@ -63,28 +128,30 @@ box-shadow: none !important;
         background-attachment: fixed;
     
         /* Vesión 1.2 */
-        display: flex;
-        flex-direction: column;
+        display: flex !important;
+        flex-direction: column !important;
         /*justify-content: var(--wporlogin-lostpassword-justify-content);*/
-        align-items: center;
+        align-items: center !important;
     }
+
+    body.login-action-confirm_admin_email #login{
+        margin-top: 0px !important;
+    }
+
     body.login-action-lostpassword div#login,
     body.login-action-login div#login,
     body.login-action-register div#login {                   
-        padding: 2em 0 0 0;
+        /*padding: 2em 0 0 0;*/
         width: 350px !important;
         border-radius: 5px;
         margin: 0;
     }
     body.login-action-confirm_admin_email div#login {
-        padding: 2em 0 0 0;
-        width: 350px !important;
+        /*padding: 2em 0 0 0;*/
+        /*width: 350px !important;*/
         border-radius: 5px;
         margin: auto !important;
     }
-
-
-
 }
 
 @media (min-width: 576px) {
@@ -99,37 +166,35 @@ box-shadow: none !important;
         background-size: cover; 
         background-attachment: fixed;
     
-        display: flex;
-        flex-direction: column;
+        display: flex !important;
+        flex-direction: column !important;
         /*justify-content: center;*/
-        align-items: center;
+        align-items: center !important;
+    }
+
+    body.login-action-confirm_admin_email #login{
+        margin-top: auto !important;
     }
 
     body.login-action-lostpassword div#login,
     body.login-action-login div#login,
-    body.login-action-register div#login {                   
-        width: 350px !important;
-        padding: auto !important;
-        margin: auto !important;
-    }
-
+    body.login-action-register div#login,
     body.login-action-confirm_admin_email div#login {
         width: 350px !important;
-        padding: auto !important;
+        padding: 2px !important;
         margin: auto !important;
     }
 
 }
 
-
-body.login div#login p.message {
-    color: #ffffff !important;
+body.login div#login div.message {
+    color: #3c434a !important;
     max-width: 360px !important;
-
+    border-radius: 5px !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    border-left: 4px solid #1a73e8 !important;
-    background-color: rgba(0, 0, 0, 0.5) !important;  
+    border-left: 5px solid var(--wporlogin-color-principal-marca) !important;
+    background-color: #ffffff !important;  
 }
 
 body.login div#login p.message a {
@@ -142,6 +207,14 @@ body.login div#login div#login_error {
     margin-left: auto !important;
     margin-right: auto !important;
     background-color: rgba(255, 0, 0, 0.5) !important;
+    border-radius: 5px !important;
+    border-left-color: #ff0000 !important;
+}
+body.login div#login div#login_error p a{
+    color: var(--wporlogin-color-principal-marca);
+}
+body.login div#login div#login_error p a:hover{
+    color: var(--wporlogin-color-hover-marca);
 }
 
 
@@ -206,7 +279,7 @@ body.login div#login form#lostpasswordform input#user_login {
     min-height: 40px !important;
     max-height: none !important;
     border: 1px solid #e0e0e0 !important;
-    border-radius: 0 !important;
+    border-radius: 4px !important;
     padding: 0 !important;
     padding-left: 5px !important;
 }
@@ -216,7 +289,7 @@ body.login div#login form#registerform input#user_email:focus,
 body.login div#login form#lostpasswordform input#user_login:focus {
     background-color: #ffffff !important;
     outline: 0 none !important;
-    border: #006fff 1px solid !important;
+    border: 2px solid var(--wporlogin-color-principal-marca) !important;
     box-shadow: none !important;
 }
 
@@ -233,15 +306,23 @@ body.login div#login form#loginform input#user_pass {
     min-height: 40px !important;
     max-height: none !important;
     border: 1px solid #e0e0e0 !important;
-    border-radius: 0 !important;
+    border-radius: 4px !important;
     padding: 0 !important;
     padding-left: 5px !important;
 }
 body.login div#login form#loginform input#user_pass:focus {
     background-color: #ffffff !important;
     outline: 0 none !important;
-    border: #006fff 1px solid !important;
+    border: 2px solid var(--wporlogin-color-principal-marca) !important;
     box-shadow: none !important;
+}
+
+body.login div#login form#loginform button.button-secondary:focus {
+    border: none !important;
+    box-shadow: none;
+}
+body.login div#login form#loginform button.button-secondary span.dashicons {
+    color: var(--wporlogin-color-principal-marca);
 }
 
 body.login div#login p#nav {                
@@ -257,12 +338,15 @@ body.login div#login p#nav a,
 body.login div#login div.privacy-policy-page-link a.privacy-policy-link, 
 body.login div#login form.admin-email-confirm-form p a,
 body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-secondary a {
-    color: #00ADEF !important;
+    color: var(--wporlogin-color-principal-marca);
     font-size: 14px !important;
     font-family: "Roboto",sans-serif !important;
 }
-body.login div#login p#nav a:hover {
-    color: #08C !important;
+body.login div#login p#nav a:hover,
+body.login div#login div.privacy-policy-page-link a.privacy-policy-link:hover,
+body.login div#login form.admin-email-confirm-form p a:hover,
+body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-secondary a:hover {
+    color: var(--wporlogin-color-hover-marca);
 }
 body.login div#login p#nav a:focus
 body.login div#login div.privacy-policy-page-link a.privacy-policy-link:focus, 
@@ -287,7 +371,7 @@ body.login div#login p#backtoblog a {
     color: #000000 !important;
 }
 body.login div#login p#backtoblog a:hover {
-    color: #08C !important;
+    color: var(--wporlogin-color-hover-marca) !important;
 }
 body.login div#login p#backtoblog a:focus {
     box-shadow: none !important;
@@ -329,8 +413,9 @@ body.login div#login form#loginform p.submit {}
 body.login div#login form#loginform p.submit input#wp-submit,
 body.login div#login form#registerform p.submit input#wp-submit,
 body.login div#login form#lostpasswordform p.submit input#wp-submit {
-    background-color: #1a73e8 !important;
-    border: solid 1px #1a73e8 !important;
+    background-color: var(--wporlogin-color-principal-marca);
+    border: solid 1px var(--wporlogin-color-principal-marca);
+    color: var(--wporlogin-color-principal-marca-text-submit) !important;
     float: none !important;
     width: 100% !important;
     height: 50px !important;
@@ -342,7 +427,8 @@ body.login div#login form#lostpasswordform p.submit input#wp-submit {
 body.login div#login form#loginform p.submit input#wp-submit:hover,
 body.login div#login form#registerform p.submit input#wp-submit:hover,
 body.login div#login form#lostpasswordform p.submit input#wp-submit:hover {
-    background-color: #287ae6 !important;
+    background-color: var(--wporlogin-color-hover-marca);
+    border: solid 1px var(--wporlogin-color-hover-marca);
 }
 body.login div#login form#loginform p.submit input#wp-submit:focus,
 body.login div#login form#registerform p.submit input#wp-submit:focus,
@@ -357,33 +443,56 @@ body.login div.privacy-policy-page-link a.privacy-policy-link{
     color: #ffffff !important;
 }
 
+body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary input{
+    background-color: var(--wporlogin-color-principal-marca);
+    border: solid 1px var(--wporlogin-color-principal-marca);
+    color: var(--wporlogin-color-principal-marca-text-submit) !important;
+    font-family: "Roboto",sans-serif !important;
+}
+body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary input:hover{
+    background-color: var(--wporlogin-color-hover-marca);
+    border-color: var(--wporlogin-color-hover-marca);
+}
+body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary input:focus{
+    box-shadow: none !important;
+}
+
+body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary a {
+    border-color: var(--wporlogin-color-principal-marca);
+    color: var(--wporlogin-color-principal-marca);
+    background-color: #ffffff !important;
+}
+body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary a:hover {
+    border-color: #000000 !important;
+    color: #ffffff !important;
+    background-color: #000000 !important;
+}
+
 body.login div.language-switcher form#language-switcher input{
-    background-color: #1a73e8 !important;
-    border: solid 1px #1a73e8 !important;
-    color: #ffffff;
-    /*float: none !important;
-    width: 100% !important;
-    height: 50px !important;
-    font-size: 16px !important;
-    margin-top: 10px !important;
-    border-radius: 6px !important;*/
+    background-color: var(--wporlogin-color-principal-marca);
+    border: solid 1px var(--wporlogin-color-principal-marca);
+    color: var(--wporlogin-color-principal-marca-text-submit) !important;
     font-family: "Roboto",sans-serif !important;
 }
 body.login div.language-switcher form#language-switcher input:hover {
-    background-color: #287ae6 !important;
+    background-color: var(--wporlogin-color-hover-marca);
+    border: solid 1px var(--wporlogin-color-hover-marca);
 }
 body.login div.language-switcher form#language-switcher input:focus {
     box-shadow: none !important;
 }
 
-body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary input{
-    background-color: #1a73e8 !important;
-    border: solid 1px #1a73e8 !important;
-    font-family: "Roboto",sans-serif !important;
-}
-body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary input:hover{
-    background-color: #287ae6 !important;
-}
-body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary input:focus{
+body.login div.language-switcher form#language-switcher select#language-switcher-locales{
+}  
+body.login div.language-switcher form#language-switcher select#language-switcher-locales:hover{
+    color: var(--wporlogin-color-principal-marca) !important;
+}    
+body.login div.language-switcher form#language-switcher select#language-switcher-locales:focus {
+    border-color: var(--wporlogin-color-principal-marca) !important;
+    color: var(--wporlogin-color-principal-marca) !important;
+    box-shadow: 0 0 0 1px var(--wporlogin-color-principal-marca) !important;
+}    
+body.login div.language-switcher form#language-switcher select#language-switcher-locales:active {
+    border-color: var(--wporlogin-color-principal-marca) !important;
     box-shadow: none !important;
 }

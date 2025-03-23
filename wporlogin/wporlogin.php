@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Customize WordPress Login and Registration Page - WPOrLogin
+ * Plugin Name: WPOrLogin - Customize WordPress Login and Registration Page
  * Plugin URI: https://oregoom.com/wporlogin/
  * Description: WPOrLogin allows you to customize the WordPress login and registration page. You can change the logo, background, and layout. Choose from pre-designed templates and improve security with Google reCAPTCHA. Additionally, you can redirect users after login and hide the language switcher for a cleaner interface.
- * Version: 2.9.5
+ * Version: 2.9.6
  * Author: Oregoom
  * Author URI: https://oregoom.com/wporlogin/
  * License: GPL2
@@ -11,7 +11,12 @@
  * Text Domain: wporlogin
  * Domain Path: /languages/
  */
-define("VERSIONWPORLOGIN", "2.9.5");
+
+ if (!defined('ABSPATH')) {
+    exit; // Evitar acceso directo
+}
+
+define("VERSIONWPORLOGIN", "2.9.6");
 
 // Definición de las imágenes de fondo
 define('WPORLOGINBACKGROUNDIMAGE', array(
@@ -72,12 +77,19 @@ function wporlogin_insert_script_upload($hook){
         wp_register_script('wporlogin-recaptcha-version', plugin_dir_url(__FILE__) . 'js/wporlogin-recaptcha-version.js', array('jquery', 'wp-i18n'), VERSIONWPORLOGIN, true);
         wp_enqueue_script('wporlogin-recaptcha-version');
     }
+
+    // Verificar si estamos en la página del plugin
+    if ($hook !== 'toplevel_page_wporlogin-plugin') {
+        return;
+    }
+
+    // Cargar el estilo y script del selector de color de WordPress
+    wp_enqueue_style('wp-color-picker');
+    wp_enqueue_script('wp-color-picker');
+    wp_add_inline_script('wp-color-picker', 'jQuery(document).ready(function($){ $(".wporlogin-color-picker").wpColorPicker(); });');
     
 } 
 add_action("admin_enqueue_scripts", "wporlogin_insert_script_upload");
-
-
-
 
 
 
@@ -125,266 +137,283 @@ function wporlogin_page_login() {
                     }
                     </style>
                     <?php
-
                 }
-
             }
-
         }
     }
-
-
 
     // FUNCIÓN PARA OBTENER URL DE LOGOTIPO Y ANCHO/ALTO
-// Pasarlo como variable a CSS en todos los diseños
-function wporlogin_url_logo_css() {
+    // Pasarlo como variable a CSS en todos los diseños
+    function wporlogin_url_logo_css() {
 
-    if (get_option("wporlogin_url_logotipo")) {
+        if (get_option("wporlogin_url_logotipo")) {
 
-        ?><style>
-        :root {
-            --wporlogin-logo: url(<?php echo esc_url(get_option('wporlogin_url_logotipo')); ?>)!important;
-
-            /*--wporlogin-width: 200px;*/
-            <?php 
-            if (get_option('wporlogin_width_logotipo_text')) {
-                echo '--wporlogin-width: ' . intval(get_option('wporlogin_width_logotipo_text')) . 'px !important;';
-            } else {
-                echo '--wporlogin-width: 84px;';
-            } ?>
-
-            /*--wporlogin-height: 84px;*/
-            <?php 
-            if (get_option('wporlogin_height_logotipo_text')) {
-                echo '--wporlogin-height: ' . intval(get_option('wporlogin_height_logotipo_text')) . 'px !important;';
-            } else {
-                echo '--wporlogin-height: 84px;';
-            } ?>
-
-            /* POSICIÓN DE FONDO */
-            <?php 
-            if (get_option('wporlogin_background_position_logotipo_select')) {
-                switch (esc_html(get_option('wporlogin_background_position_logotipo_select'))) {
-                    case 0:
-                        echo '--background-position: left top !important;';
-                        break;
-                    case 1:
-                        echo '--background-position: left center !important;';
-                        break;
-                    case 2:
-                        echo '--background-position: left bottom !important;';
-                        break;
-                    case 3:
-                        echo '--background-position: right top !important;';
-                        break;
-                    case 4:
-                        echo '--background-position: right center !important;';
-                        break;
-                    case 5:
-                        echo '--background-position: right bottom !important;';
-                        break;
-                    case 6:
-                        echo '--background-position: center top !important;';
-                        break;
-                    case 7:
-                        echo '--background-position: center center !important;';
-                        break;
-                    case 8:
-                        echo '--background-position: center bottom !important;';
-                        break;
-                }
-            } else {
-                echo '--background-position: left top !important;';
-            } ?>
-
-            /* TAMAÑO DE FONDO */
-            <?php 
-            if (get_option('wporlogin_background_size_logotipo_select')) {
-                switch (esc_html(get_option('wporlogin_background_size_logotipo_select'))) {
-                    case 0:
-                        echo '--background-size: inherit !important;';
-                        break;
-                    case 1:
-                        echo '--background-size: cover !important;';
-                        break;
-                    case 2:
-                        echo '--background-size: contain !important;';
-                        break;
-                }
-            } else {
-                echo '--background-size: inherit !important;';
-            } ?>
-
-        }
-        </style><?php 
-
-    } else {
-
-        // OBTENER LOGOTIPO DEL TEMA
-        $custom_logo_id = get_theme_mod('custom_logo');
-        $image = wp_get_attachment_image_src($custom_logo_id, 'full');    
-
-        // SI EL TEMA TIENE UN LOGOTIPO ASIGNADO
-        if (has_custom_logo()) {
             ?><style>
             :root {
-                --wporlogin-logo: url(<?php echo esc_url($image[0]); ?>)!important;
-                --wporlogin-width: 200px;
-                --wporlogin-height: auto;
-                --background-size: 200px !important;
+                --wporlogin-logo: url(<?php echo esc_url(get_option('wporlogin_url_logotipo')); ?>)!important;
+
+                /*--wporlogin-width: 200px;*/
+                <?php 
+                if (get_option('wporlogin_width_logotipo_text')) {
+                    echo '--wporlogin-width: ' . intval(get_option('wporlogin_width_logotipo_text')) . 'px !important;';
+                } else {
+                    echo '--wporlogin-width: 84px;';
+                } ?>
+
+                /*--wporlogin-height: 84px;*/
+                <?php 
+                if (get_option('wporlogin_height_logotipo_text')) {
+                    echo '--wporlogin-height: ' . intval(get_option('wporlogin_height_logotipo_text')) . 'px !important;';
+                } else {
+                    echo '--wporlogin-height: 84px;';
+                } ?>
+
+                /* POSICIÓN DE FONDO */
+                <?php 
+                if (get_option('wporlogin_background_position_logotipo_select')) {
+                    switch (esc_html(get_option('wporlogin_background_position_logotipo_select'))) {
+                        case 0:
+                            echo '--background-position: left top !important;';
+                            break;
+                        case 1:
+                            echo '--background-position: left center !important;';
+                            break;
+                        case 2:
+                            echo '--background-position: left bottom !important;';
+                            break;
+                        case 3:
+                            echo '--background-position: right top !important;';
+                            break;
+                        case 4:
+                            echo '--background-position: right center !important;';
+                            break;
+                        case 5:
+                            echo '--background-position: right bottom !important;';
+                            break;
+                        case 6:
+                            echo '--background-position: center top !important;';
+                            break;
+                        case 7:
+                            echo '--background-position: center center !important;';
+                            break;
+                        case 8:
+                            echo '--background-position: center bottom !important;';
+                            break;
+                    }
+                } else {
+                    echo '--background-position: left top !important;';
+                } ?>
+
+                /* TAMAÑO DE FONDO */
+                <?php 
+                if (get_option('wporlogin_background_size_logotipo_select')) {
+                    switch (esc_html(get_option('wporlogin_background_size_logotipo_select'))) {
+                        case 0:
+                            echo '--background-size: inherit !important;';
+                            break;
+                        case 1:
+                            echo '--background-size: cover !important;';
+                            break;
+                        case 2:
+                            echo '--background-size: contain !important;';
+                            break;
+                    }
+                } else {
+                    echo '--background-size: inherit !important;';
+                } ?>
+
             }
-            </style><?php
+            </style><?php 
+
         } else {
-            // LOGOTIPO POR DEFECTO DE WORDPRESS
-            ?><style>
-            :root {
-                --wporlogin-logo: url(<?php echo esc_url(home_url('/wp-admin/images/wordpress-logo.svg?ver=20131107')); ?>);
-                --wporlogin-width: 84px;
-                --wporlogin-height: 84px;
-                --background-size: 84px !important;
+
+            // OBTENER LOGOTIPO DEL TEMA
+            $custom_logo_id = get_theme_mod('custom_logo');
+            $image = wp_get_attachment_image_src($custom_logo_id, 'full');    
+
+            // SI EL TEMA TIENE UN LOGOTIPO ASIGNADO
+            if (has_custom_logo()) {
+                ?><style>
+                :root {
+                    --wporlogin-logo: url(<?php echo esc_url($image[0]); ?>)!important;
+                    --wporlogin-width: 200px;
+                    --wporlogin-height: auto;
+                    --background-size: 200px !important;
+                }
+                </style><?php
+            } else {
+                // LOGOTIPO POR DEFECTO DE WORDPRESS
+                ?><style>
+                :root {
+                    --wporlogin-logo: url(<?php echo esc_url(home_url('/wp-admin/images/wordpress-logo.svg?ver=20131107')); ?>);
+                    --wporlogin-width: 84px;
+                    --wporlogin-height: 84px;
+                    --background-size: 84px !important;
+                }
+                </style><?php
             }
-            </style><?php
         }
     }
-}
 
 
+    // FUNCIÓN PARA OBTENER COLOR DE MARCA
+    // Pasarlo como variable a CSS en todos los diseños
+    function wporlogin_color_principal_marca() {
 
+            ?><style>
+            :root {
 
-   // Función para eliminar o mantener el menú de idiomas en las páginas de login, registro y recuperación de contraseña.
-function remove_language_wporlogin_css() {
+                --wporlogin-color-principal-marca: <?php echo get_option('wporlogin_color_principal_marca'); ?> !important;
+                --wporlogin-color-hover-marca: <?php echo get_option('wporlogin_color_hover_marca'); ?> !important;
+                --wporlogin-color-principal-marca-text-submit: <?php echo get_option('wporlogin_color_principal_marca_text_submit'); ?>;
 
-    // Verifica si la opción 'remove_language_wporlogin' está activada
-    if (get_option("remove_language_wporlogin") == 1) { 
-        // CUANDO EL MENÚ DE IDIOMA ESTÁ ELIMINADO
-        yes_recaptcha_active_login_and_register_wporlogin_style();
-        yes_remove_language_wporlogin_style_lostpassword();
-        yes_remove_language_wporlogin_style_login();
-
-    } else { 
-        // CUANDO EL MENÚ DE IDIOMA NO ESTÁ ELIMINADO
-
-        not_remove_language_wporlogin_style_login();
-        not_remove_language_wporlogin_style_register();
-        not_remove_language_wporlogin_style_lostpassword();
-
-        // Aplicar estilos de altura mínima cuando no se elimina el menú de idioma
-        not_remove_language_wporlogin_style_login_min_height();
-        not_remove_language_wporlogin_style_register_min_height();
-        not_remove_language_wporlogin_style_lostpassword_min_height();
+            }
+            </style><?php 
     }
-}
 
 
-    
+
+
+    // Función para eliminar o mantener el menú de idiomas en las páginas de login, registro y recuperación de contraseña.
+    function remove_language_wporlogin_css() {
+
+        // Verifica si la opción 'remove_language_wporlogin' está activada
+        if (get_option("remove_language_wporlogin") == 1) { 
+            // CUANDO EL MENÚ DE IDIOMA ESTÁ ELIMINADO
+            yes_recaptcha_active_login_and_register_wporlogin_style();
+            yes_remove_language_wporlogin_style_lostpassword();
+            yes_remove_language_wporlogin_style_login();
+
+        } else { 
+            // CUANDO EL MENÚ DE IDIOMA NO ESTÁ ELIMINADO
+
+            not_remove_language_wporlogin_style_login();
+            not_remove_language_wporlogin_style_register();
+            not_remove_language_wporlogin_style_lostpassword();
+
+            // Aplicar estilos de altura mínima cuando no se elimina el menú de idioma
+            not_remove_language_wporlogin_style_login_min_height();
+            not_remove_language_wporlogin_style_register_min_height();
+            not_remove_language_wporlogin_style_lostpassword_min_height();
+        }
+    }
+
+
+        
     ////////////////////////////////////////////////////////////////////////////
-// WP LOGIN: CONDICIÓN PARA APLICAR CSS A LA PÁGINA DE LOGIN
-////////////////////////////////////////////////////////////////////////////
+    // WP LOGIN: CONDICIÓN PARA APLICAR CSS A LA PÁGINA DE LOGIN
+    ////////////////////////////////////////////////////////////////////////////
 
-$design = get_option('wporlogin_design'); // Obtener el diseño seleccionado
-$premium_design = get_option('wporlogin-design-img-premium'); // Obtener el diseño premium si está seleccionado
+    $design = get_option('wporlogin_design'); // Obtener el diseño seleccionado
+    $premium_design = get_option('wporlogin-design-img-premium'); // Obtener el diseño premium si está seleccionado
 
-if ($design === 'wporlogin_design_basic') {
+    if ($design === 'wporlogin_design_basic') {
 
-    // Aplicar configuraciones comunes como eliminar menú de idiomas
-    remove_language_wporlogin_css();
+        wporlogin_color_principal_marca();
 
-    // Cargar el estilo básico
-    wp_enqueue_style('wporlogin-style-design-basic', plugin_dir_url(__FILE__) . 'css/wporlogin-style-design-basic.css', array(), VERSIONWPORLOGIN, false);
+        // Aplicar configuraciones comunes como eliminar menú de idiomas
+        remove_language_wporlogin_css();
 
-} elseif ($design === 'wporlogin_design_standard') {
+        // Cargar el estilo básico
+        wp_enqueue_style('wporlogin-style-design-basic', plugin_dir_url(__FILE__) . 'css/wporlogin-style-design-basic.css', array(), VERSIONWPORLOGIN, false);
 
-    // Aplicar configuraciones comunes
-    wporlogin_url_img_fondo_css();
-    wporlogin_url_logo_css();
-    remove_language_wporlogin_css();
+    } elseif ($design === 'wporlogin_design_standard') {
 
-    // Cargar el estilo estándar
-    wp_enqueue_style('wporlogin-style-design-standard', plugin_dir_url(__FILE__) . 'css/wporlogin-style-design-standard.css', array(), VERSIONWPORLOGIN, false);
-
-} elseif ($design === 'wporlogin_design_premium') {
-
-    // Verificar si el usuario ha seleccionado un diseño premium
-    if ($premium_design) {
+        wporlogin_color_principal_marca();
 
         // Aplicar configuraciones comunes
         wporlogin_url_img_fondo_css();
         wporlogin_url_logo_css();
         remove_language_wporlogin_css();
 
-        // Determinar qué diseño premium se ha seleccionado y cargar el estilo correspondiente
-        switch ($premium_design) {
-            case 'wporlogin_design_img_premium_one':
-                wp_enqueue_style('wporlogin-style-design-premium-one', plugin_dir_url(__FILE__) . 'css/wporlogin-style-design-premium-one.css', array(), VERSIONWPORLOGIN, false);
-                break;
+        // Cargar el estilo estándar
+        wp_enqueue_style('wporlogin-style-design-standard', plugin_dir_url(__FILE__) . 'css/wporlogin-style-design-standard.css', array(), VERSIONWPORLOGIN, false);
 
-            case 'wporlogin_design_img_premium_two':
-                wp_enqueue_style('wporlogin-style-design-premium-two', plugin_dir_url(__FILE__) . 'css/wporlogin-style-design-premium-two.css', array(), VERSIONWPORLOGIN, false);
-                break;
+    } elseif ($design === 'wporlogin_design_premium') {
 
-            case 'wporlogin_design_img_premium_three':
-                wp_enqueue_style('wporlogin-style-design-premium-three', plugin_dir_url(__FILE__) . 'css/wporlogin-style-design-premium-three.css', array(), VERSIONWPORLOGIN, false);
-                break;
+        // Verificar si el usuario ha seleccionado un diseño premium
+        if ($premium_design) {
 
-            default:
-                // Si no hay diseño premium seleccionado, se podría cargar uno predeterminado o hacer algo diferente
-                break;
+            wporlogin_color_principal_marca();
+
+            // Aplicar configuraciones comunes
+            wporlogin_url_img_fondo_css();
+            wporlogin_url_logo_css();
+            remove_language_wporlogin_css();
+
+            // Determinar qué diseño premium se ha seleccionado y cargar el estilo correspondiente
+            switch ($premium_design) {
+                case 'wporlogin_design_img_premium_one':
+                    wp_enqueue_style('wporlogin-style-design-premium-one', plugin_dir_url(__FILE__) . 'css/wporlogin-style-design-premium-one.css', array(), VERSIONWPORLOGIN, false);
+                    break;
+
+                case 'wporlogin_design_img_premium_two':
+                    wp_enqueue_style('wporlogin-style-design-premium-two', plugin_dir_url(__FILE__) . 'css/wporlogin-style-design-premium-two.css', array(), VERSIONWPORLOGIN, false);
+                    break;
+
+                case 'wporlogin_design_img_premium_three':
+                    wp_enqueue_style('wporlogin-style-design-premium-three', plugin_dir_url(__FILE__) . 'css/wporlogin-style-design-premium-three.css', array(), VERSIONWPORLOGIN, false);
+                    break;
+
+                default:
+                    // Si no hay diseño premium seleccionado, se podría cargar uno predeterminado o hacer algo diferente
+                    break;
+            }
         }
     }
-}
 
-    
-    
-///////////////////////////////////////////////////////////////////////////////
-/////////// CÓDIGO PARA MANTENER COMPATIBLE CON LA VERSIÓN 2.8.6  /////////////
-///////////////////////////////////////////////////////////////////////////////
+        
+        
+    ///////////////////////////////////////////////////////////////////////////////
+    /////////// CÓDIGO PARA MANTENER COMPATIBLE CON LA VERSIÓN 2.8.6  /////////////
+    ///////////////////////////////////////////////////////////////////////////////
 
-// Recuperar el valor del checkbox de reCAPTCHA v2 (para compatibilidad con versiones anteriores)
-$recaptcha_v2_enabled = get_option('recaptcha_v2_wporlogin', 0); // Si no está configurado, retorna 0
+    // Recuperar el valor del checkbox de reCAPTCHA v2 (para compatibilidad con versiones anteriores)
+    $recaptcha_v2_enabled = get_option('recaptcha_v2_wporlogin', 0); // Si no está configurado, retorna 0
 
-// Recuperar la versión de reCAPTCHA seleccionada (v2, v3, o ninguna)
-$recaptcha_version = get_option('recaptcha_version_wporlogin', 'none');
+    // Recuperar la versión de reCAPTCHA seleccionada (v2, v3, o ninguna)
+    $recaptcha_version = get_option('recaptcha_version_wporlogin', 'none');
 
-// Si 'recaptcha_version_wporlogin' no está configurado y reCAPTCHA v2 está activado, usar v2 como versión por defecto
-if ($recaptcha_version === 'none' && $recaptcha_v2_enabled == 1) {
-    $recaptcha_version = 'v2';
-    update_option('recaptcha_version_wporlogin', 'v2'); // Actualizar la opción a v2 para futuras referencias
-}
-
-//////////////////////////////////////////////////////////////////////////////
-///////////////      FIN DEL CÓDIGO DE COMPROBACIÓN      /////////////////////
-//////////////////////////////////////////////////////////////////////////////
-
-// Manejo de la carga condicional de scripts para reCAPTCHA v2 y v3
-if ($recaptcha_version === 'v2') {
-    // Verificar si el usuario ha configurado correctamente las claves de reCAPTCHA v2
-    $recaptcha_v2_site_key = esc_html(get_option('recaptcha_v2_site_key_wporlogin'));
-    $recaptcha_v2_secret_key = esc_html(get_option('recaptcha_v2_secret_key_wporlogin'));
-
-    // Si las claves están configuradas, proceder con la carga del script
-    if (!empty($recaptcha_v2_site_key) && !empty($recaptcha_v2_secret_key)) {
-        wp_register_script('recaptcha_v2', 'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit', array(), VERSIONWPORLOGIN, true);
-        wp_enqueue_script('recaptcha_v2');
-    } else {
-        // Si las claves no están configuradas, mostrar una advertencia en el backend
-        add_action('admin_notices', function() {
-            echo '<div class="notice notice-error"><p>' . __('Google reCAPTCHA v2 is selected, but the site or secret keys are not configured.', 'wporlogin') . '</p></div>';
-        });
+    // Si 'recaptcha_version_wporlogin' no está configurado y reCAPTCHA v2 está activado, usar v2 como versión por defecto
+    if ($recaptcha_version === 'none' && $recaptcha_v2_enabled == 1) {
+        $recaptcha_version = 'v2';
+        update_option('recaptcha_version_wporlogin', 'v2'); // Actualizar la opción a v2 para futuras referencias
     }
-} elseif ($recaptcha_version === 'v3') {
-    // Verificar si el usuario ha configurado correctamente las claves de reCAPTCHA v3
-    $recaptcha_v3_site_key = esc_html(get_option('recaptcha_v3_site_key_wporlogin'));
 
-    if (!empty($recaptcha_v3_site_key)) {
-        wp_register_script('recaptcha_v3', 'https://www.google.com/recaptcha/api.js?render=' . $recaptcha_v3_site_key, array(), VERSIONWPORLOGIN, true);
-        wp_enqueue_script('recaptcha_v3');
-    } else {
-        // Si las claves no están configuradas, mostrar una advertencia en el backend
-        add_action('admin_notices', function() {
-            echo '<div class="notice notice-error"><p>' . __('Google reCAPTCHA v3 is selected, but the site or secret keys are not configured.', 'wporlogin') . '</p></div>';
-        });
+    //////////////////////////////////////////////////////////////////////////////
+    ///////////////      FIN DEL CÓDIGO DE COMPROBACIÓN      /////////////////////
+    //////////////////////////////////////////////////////////////////////////////
+
+    // Manejo de la carga condicional de scripts para reCAPTCHA v2 y v3
+    if ($recaptcha_version === 'v2') {
+        // Verificar si el usuario ha configurado correctamente las claves de reCAPTCHA v2
+        $recaptcha_v2_site_key = esc_html(get_option('recaptcha_v2_site_key_wporlogin'));
+        $recaptcha_v2_secret_key = esc_html(get_option('recaptcha_v2_secret_key_wporlogin'));
+
+        // Si las claves están configuradas, proceder con la carga del script
+        if (!empty($recaptcha_v2_site_key) && !empty($recaptcha_v2_secret_key)) {
+            wp_register_script('recaptcha_v2', 'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit', array(), VERSIONWPORLOGIN, true);
+            wp_enqueue_script('recaptcha_v2');
+        } else {
+            // Si las claves no están configuradas, mostrar una advertencia en el backend
+            add_action('admin_notices', function() {
+                echo '<div class="notice notice-error"><p>' . __('Google reCAPTCHA v2 is selected, but the site or secret keys are not configured.', 'wporlogin') . '</p></div>';
+            });
+        }
+    } elseif ($recaptcha_version === 'v3') {
+        // Verificar si el usuario ha configurado correctamente las claves de reCAPTCHA v3
+        $recaptcha_v3_site_key = esc_html(get_option('recaptcha_v3_site_key_wporlogin'));
+
+        if (!empty($recaptcha_v3_site_key)) {
+            wp_register_script('recaptcha_v3', 'https://www.google.com/recaptcha/api.js?render=' . $recaptcha_v3_site_key, array(), VERSIONWPORLOGIN, true);
+            wp_enqueue_script('recaptcha_v3');
+        } else {
+            // Si las claves no están configuradas, mostrar una advertencia en el backend
+            add_action('admin_notices', function() {
+                echo '<div class="notice notice-error"><p>' . __('Google reCAPTCHA v3 is selected, but the site or secret keys are not configured.', 'wporlogin') . '</p></div>';
+            });
+        }
     }
-}
 }
 add_action('login_enqueue_scripts', 'wporlogin_page_login');
 
@@ -924,11 +953,6 @@ function wporlogin_validate_recaptcha_on_password_reset($validation_errors) {
     return $validation_errors;
 }
 
-
-
-
-
-
 function wporlogin_admin_notice__success() {
 
     $wporlogin_fecha_initial = get_option('wporlogin_date_5_review'); //Fecha Inicial - Instalación del Plugin WPOrLogin
@@ -1021,3 +1045,7 @@ add_action('admin_notices', 'wporlogin_admin_notice_warning' );
 
 // Incluir el contenido del formulario reCAPTCHA
 include(WPORLOGIN_PLUGIN_PATH . 'includes/templates/recaptcha-settings-template-form.php');
+
+
+
+

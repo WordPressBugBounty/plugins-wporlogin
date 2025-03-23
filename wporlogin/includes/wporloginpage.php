@@ -123,6 +123,10 @@ function recaptcha_wporlogin_content_page_menu(){
  * Función para agregar contenido HTML en la página del Plugin WPOrLogin
  */
 function wporlogin_content_page_menu() {     
+
+    // Verificar si la versión Pro está activa
+    //$wporlogin_is_premium = apply_filters('wporlogin_is_premium', false);
+
     ?>
 
 <style type="text/css">
@@ -133,8 +137,7 @@ function wporlogin_content_page_menu() {
         margin-right: auto !important; 
         text-align: center !important;
         /*padding-bottom: 30px !important;*/
-    }
-    
+    }   
 
     .wporlogin_container_select_option label {  
         font-family: 'Roboto', sans-serif !important;
@@ -254,7 +257,25 @@ function wporlogin_content_page_menu() {
                             <input <?php checked( 'wporlogin_design_img_premium_three', get_option( 'wporlogin-design-img-premium' ) ); ?> value="wporlogin_design_img_premium_three" name="wporlogin-design-img-premium" id="wporlogin-design-img-premium-three" type="radio" style="position: absolute; margin: 10px 0 0 10px;">
                             <img onclick="wporloginimgclick('wporlogin-design-img-premium-three')" id="wporlogin-design-img-premium-three" src="<?php echo esc_url(plugin_dir_url( __FILE__ ).'../img/wporlogin-design-premium-three.jpg'); ?>" style="margin-bottom: 10px; max-width: 100%; height: auto; cursor: pointer;">
                         </div>
-
+<!--
+                        <?php if ($wporlogin_is_premium): ?>
+                            <div style="position: relative; margin-bottom: 15px;">
+                                <input <?php checked( 'wporlogin_design_img_premium_four', get_option( 'wporlogin-design-img-premium' ) ); ?> value="wporlogin_design_img_premium_four" name="wporlogin-design-img-premium" id="wporlogin-design-img-premium-four" type="radio" style="position: absolute; margin: 10px 0 0 10px;">
+                                <img onclick="wporloginimgclick('wporlogin-design-img-premium-four')" id="wporlogin-design-img-premium-four" src="<?php echo esc_url(plugin_dir_url( __FILE__ ).'../img/wporlogin-design-premium-four.jpg'); ?>" style="margin-bottom: 10px; max-width: 100%; height: auto; cursor: pointer;">
+                            </div>
+                        <?php else: ?>                            
+                            <div style="position: relative; margin-bottom: 15px;">
+                                <a href="https://tudominio.com/pro" target="_blank" style="text-decoration: none;">  
+                                    <img src="<?php echo esc_url(plugin_dir_url( __FILE__ ).'../img/wporlogin-design-premium-four.jpg'); ?>" 
+                                        style="max-width: 100%; height: auto; background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));">                                
+                                    <p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+                                        background: #000000; color: white; padding: 5px; border-radius: 5px; text-align: center;">
+                                        🔒 Disponible en <span style="font-weight: bold;">WPORLogin Pro</span>
+                                    </p>  
+                                </a>                              
+                            </div>                            
+                        <?php endif; ?>
+                        -->
                         <script>
                             function wporloginimgclick(valor){
                                 document.getElementById(valor).checked=true;
@@ -267,11 +288,36 @@ function wporlogin_content_page_menu() {
 
                 
                 <!--BEGIN DISEÑO ESTÁNDAR Y PREMIUM-->
-                <div class="wporlogin-container-design-premium" id="wporlogin-container-standard-premium" style="padding-top: 40px; <?php if(get_option('wporlogin_design') != 'wporlogin_design_standard' && get_option('wporlogin_design') != 'wporlogin_design_premium'){ echo 'display: none;'; } ?> width: 90%; margin-left: auto; margin-right: auto;">
+                <div class="wporlogin-container-design-premium" style="padding-top: 40px; width: 90%; margin-left: auto; margin-right: auto;">
                     
                     <table class="form-table" role="presentation">
                 
-                        <tbody>
+                        <thead>
+
+                        <!--COLOR DE MARCA-->
+                        <tr>
+                            <th scope="row">
+                                <label style="font-size: 1.5em;"><strong><?php _e('Color de Marca', 'wporlogin'); ?></strong></label>
+                            </th>
+                            <td><hr></td>
+                        </tr>
+
+                        <!--COLOR PRINCIPAL-->
+                        <tr>
+                            <th scope="row">
+                                <label for="wporlogin_color_principal_marca"><?php _e('Color principal', 'wporlogin'); ?></label>
+                            </th>
+                            <td>
+                            <input type="text" id="wporlogin_color_principal_marca" name="wporlogin_color_principal_marca" 
+                                value="<?php echo esc_attr(get_option('wporlogin_color_principal_marca', '#1a73e8')); ?>" 
+                                class="wporlogin-color-picker" data-default-color="#1a73e8" />
+                                <p class="description" id="tagline-description"><?php _e('Define el color principal de tu marca. Se usará en botones y elementos destacados.', 'wporlogin'); ?></p>
+                            </td>
+                        </tr>
+
+                        </thead>
+
+                        <tbody id="wporlogin-container-standard-premium" style="<?php if(get_option('wporlogin_design') != 'wporlogin_design_standard' && get_option('wporlogin_design') != 'wporlogin_design_premium'){ echo 'display: none;'; } ?> ">
                 
                         <!--CABEZA DEL LOGOTIPO-->
                         <tr>
@@ -424,10 +470,15 @@ function wporlogin_content_page_menu() {
                                             <input type="radio" id="wporlogin-background-free-image-<?php echo $i; ?>" name="wporlogin-background-free-image" value="<?php echo esc_url(WPORLOGINBACKGROUNDIMAGE[$i]); ?>" <?php if($i == 0){ if( get_option('wporlogin-background-free-image') != false){ checked( get_option('wporlogin-background-free-image'), WPORLOGINBACKGROUNDIMAGE[$i]); } else { echo 'checked'; } } else { checked( get_option('wporlogin-background-free-image'), WPORLOGINBACKGROUNDIMAGE[$i]); } ?>>
                                             <label for="wporlogin-background-free-image-<?php echo $i; ?>"><?php _e('Image ', 'wporlogin'); ?><?php echo $i+1; ?></label>
                                             <div style="padding-top: 10px; margin-right: 15px;">
-                                                <img id="wporlogin_url_img_fondo_img" src="<?php echo esc_url(WPORLOGINBACKGROUNDIMAGE[$i]); ?>" style="margin-bottom: 10px; width: 220px; padding: 10px; background-color: #ffffff; border: 2px dashed rgba(0,0,0,.1);"><br>
+                                                <img onclick="wporloginimgfreeclick('wporlogin-background-free-image-<?php echo $i; ?>')" id="wporlogin_url_img_fondo_img" src="<?php echo esc_url(WPORLOGINBACKGROUNDIMAGE[$i]); ?>" style="margin-bottom: 10px; width: 220px; padding: 10px; background-color: #ffffff; border: 2px dashed rgba(0,0,0,.1);"><br>
                                             </div>
                                         </div>
                                         <?php } ?>
+                                        <script>
+                                        function wporloginimgfreeclick(valor){
+                                            document.getElementById(valor).checked=true;
+                                            }
+                                        </script>
                                     </div>
                                     <p class="description"><?php _e('Images from Unsplash and Pixabay are free to use. You can download more images from <a href="https://unsplash.com/" target="_blank"><strong>Unsplash</strong></a> and <a href="https://pixabay.com/" target="_blank"><strong>Pixabay</strong></a>.', 'wporlogin'); ?></p>
                                 </div>    
@@ -461,6 +512,8 @@ function wporlogin_content_page_menu() {
 
 
 function wporlogin_register_options_admin_page() {
+     // Eliminar la copia de seguridad del diseño premium si el usuario ha cambiado configuraciones
+     delete_option('wporlogin_design_img_premium_backup');
 
     //delete_option('delete_notice_wporlogin_condition');
     //delete_option('wporlogin_date_5_review');
@@ -481,6 +534,59 @@ function wporlogin_register_options_admin_page() {
 
     add_option( 'wporlogin_background_images', 'wporlogin_free_images');
     add_option( 'wporlogin_url_img_fondo', esc_url(WPORLOGINBACKGROUNDIMAGE[0]));
+
+    // Registrar el color principal en la base de datos para que el usuario pueda modificarlo
+    add_option('wporlogin_color_principal_marca', '#1a73e8');
+    register_setting('wporlogin_custom_admin_settings_group', 'wporlogin_color_principal_marca');
+
+    // Registrar el color de texto del botón con un valor por defecto blanco
+    add_option('wporlogin_color_principal_marca_text_submit', '#ffffff'); // Valor predeterminado
+
+    // Función para oscurecer un color
+    function wporlogin_darken_color($hex, $percent) {
+        $hex = str_replace('#', '', $hex);
+        
+        if (strlen($hex) == 3) {
+            $r = hexdec(str_repeat(substr($hex, 0, 1), 2));
+            $g = hexdec(str_repeat(substr($hex, 1, 1), 2));
+            $b = hexdec(str_repeat(substr($hex, 2, 1), 2));
+        } else {
+            $r = hexdec(substr($hex, 0, 2));
+            $g = hexdec(substr($hex, 2, 2));
+            $b = hexdec(substr($hex, 4, 2));
+        }
+
+        $factor = (100 - $percent) / 100;
+        $r = max(0, min(255, round($r * $factor)));
+        $g = max(0, min(255, round($g * $factor)));
+        $b = max(0, min(255, round($b * $factor)));
+
+        return sprintf("#%02x%02x%02x", $r, $g, $b);
+    }
+
+    // Obtener el color principal elegido por el usuario
+    $color_principal = get_option('wporlogin_color_principal_marca', '#1a73e8');
+
+    // Calcular el color hover (30% más oscuro)
+    $color_hover = wporlogin_darken_color($color_principal, 25);
+
+    // Guardar el color hover en la base de datos (pero sin permitir edición directa en el admin)
+    update_option('wporlogin_color_hover_marca', $color_hover);
+
+    // Función para determinar si un color es claro u oscuro
+    function wporlogin_get_contrasting_text_color($hexColor) {
+        $hexColor = ltrim($hexColor, '#'); // Eliminar el "#" si está presente
+        $r = hexdec(substr($hexColor, 0, 2));
+        $g = hexdec(substr($hexColor, 2, 2));
+        $b = hexdec(substr($hexColor, 4, 2));
+        $luminance = (0.299 * $r) + (0.587 * $g) + (0.114 * $b);
+        return ($luminance > 128) ? '#000000' : '#ffffff'; // Negro si es claro, blanco si es oscuro
+    }
+
+    $color_text_submit = wporlogin_get_contrasting_text_color($color_principal);
+
+    // Guardar el color de texto en la base de datos (sin permitir edición en el admin)
+    update_option('wporlogin_color_principal_marca_text_submit', $color_text_submit);
 
     //AGREGAR Diseño one premium
     add_option( 'wporlogin-design-img-premium', 'wporlogin_design_img_premium_one' );
@@ -539,10 +645,5 @@ function remove_language_wporlogin_register_options_admin_page(){
 
 }
 add_action('admin_init','remove_language_wporlogin_register_options_admin_page');
-
-
-
-
-
 
 

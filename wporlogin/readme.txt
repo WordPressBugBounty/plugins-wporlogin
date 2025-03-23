@@ -1,13 +1,13 @@
 === Customize WordPress Login and Registration Page - WPOrLogin ===
 
-Contributors: Oregoom  
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CTG69VCQ5TZZN&source=url  
-Tags: login, custom login, wordpress login, admin login, login page  
-Requires at least: 5.2  
-Tested up to: 6.7.2  
-Stable tag: 2.9.5
-Requires PHP: 7.2  
-License: GPLv2 or later  
+Contributors: Oregoom
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CTG69VCQ5TZZN&source=url
+Tags: login, custom login, wordpress login, admin login, login page
+Requires at least: 5.2
+Tested up to: 6.7.2
+Stable tag: 2.9.6
+Requires PHP: 7.2
+License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Customize the WordPress login and registration page with design and security features like Google reCAPTCHA.
@@ -99,34 +99,34 @@ After activating WPOrLogin, we recommend exploring all the available customizati
 
 == Frequently Asked Questions ==
 
-= What is the recommended size for the logo? =  
-A logo with a width of 200px and a height of 84px is recommended for the best display on the custom WordPress login page.  
+= What is the recommended size for the logo? =
+A logo with a width of 200px and a height of 84px is recommended for the best display on the custom WordPress login page.
 
-= Is WPOrLogin compatible with Google reCAPTCHA v3? =  
-Yes, WPOrLogin is fully compatible with both Google reCAPTCHA v2 and v3. You can select the version that best suits your needs directly from the plugin's settings page.  
+= Is WPOrLogin compatible with Google reCAPTCHA v3? =
+Yes, WPOrLogin is fully compatible with both Google reCAPTCHA v2 and v3. You can select the version that best suits your needs directly from the plugin's settings page.
 
-= How can I remove the language selection menu on the login page? =  
-The plugin includes an option to disable the language selection menu on the login page. Simply enable this option from the WPOrLogin settings in the admin panel.  
+= How can I remove the language selection menu on the login page? =
+The plugin includes an option to disable the language selection menu on the login page. Simply enable this option from the WPOrLogin settings in the admin panel.
 
-= Can I customize the background of the login page? =  
-Yes, you can choose from several predefined free images or upload your own background image from the plugin's customization options.  
+= Can I customize the background of the login page? =
+Yes, you can choose from several predefined free images or upload your own background image from the plugin's customization options.
 
-= What happens if I forget to add a Google reCAPTCHA key? =  
-If you do not enter the Google reCAPTCHA keys, reCAPTCHA will not be applied to the login, registration, or password recovery forms. Make sure to add both the site key and the secret key in the plugin settings to ensure proper protection.  
+= What happens if I forget to add a Google reCAPTCHA key? =
+If you do not enter the Google reCAPTCHA keys, reCAPTCHA will not be applied to the login, registration, or password recovery forms. Make sure to add both the site key and the secret key in the plugin settings to ensure proper protection.
 
-= Is WPOrLogin compatible with mobile devices? =  
-Yes, WPOrLogin is designed to be fully responsive, ensuring that the custom login and registration page looks and functions perfectly on mobile devices and tablets.  
+= Is WPOrLogin compatible with mobile devices? =
+Yes, WPOrLogin is designed to be fully responsive, ensuring that the custom login and registration page looks and functions perfectly on mobile devices and tablets.
 
-= How does WPOrLogin affect my website's performance? =  
-WPOrLogin is optimized for efficient performance and does not significantly impact the loading speed of your login page. It also follows best development practices to ensure smooth integration with WordPress.  
+= How does WPOrLogin affect my website's performance? =
+WPOrLogin is optimized for efficient performance and does not significantly impact the loading speed of your login page. It also follows best development practices to ensure smooth integration with WordPress.
 
-= Can I change the logo link on the login page? =  
-Yes, WPOrLogin allows you to modify the logo URL on the login page. You can set it to your website's homepage or another custom page.  
+= Can I change the logo link on the login page? =
+Yes, WPOrLogin allows you to modify the logo URL on the login page. You can set it to your website's homepage or another custom page.
 
-= What happens if I change my theme? Will WPOrLogin still work? =  
-Yes, WPOrLogin will work regardless of the theme you use, as it focuses on customizing the WordPress login page and does not affect the overall appearance of your theme.  
+= What happens if I change my theme? Will WPOrLogin still work? =
+Yes, WPOrLogin will work regardless of the theme you use, as it focuses on customizing the WordPress login page and does not affect the overall appearance of your theme.
 
-= Does WPOrLogin allow users to be redirected after login or logout? =  
+= Does WPOrLogin allow users to be redirected after login or logout? =
 Yes, WPOrLogin includes an option to redirect users to a specific page after login or logout. You can configure custom redirections based on user roles directly from the plugin settings.
 
 == Screenshots ==
@@ -144,103 +144,108 @@ Yes, WPOrLogin includes an option to redirect users to a specific page after log
 11. Remove Language Selector
 
 == Languages ==
-This plugin is available in the following languages:  
-* English (default)  
-* Spanish  
-* French  
-* Italian  
+This plugin is available in the following languages:
+* English (default)
+* Spanish
+* French
+* Italian
 * German
 * Portuguese (Brazil)
 * Indonesian
 
 == Changelog ==
 
+= 2.9.6 =
+* Added an option to customize the color of buttons and links on the login, registration, and password recovery pages to match your brand identity.  
+* Improved the design and styling of the plugin’s built-in layouts for a better visual experience.  
+* Optimized styles to ensure smooth performance on mobile devices.  
+
 = 2.9.5 =
-In this update, the login design styles have been improved for a more polished and user-friendly experience.
+* In this update, the login design styles have been improved for a more polished and user-friendly experience.
 
 = 2.9.4 =
-*This version introduces multi-language support, including the following languages: English (default), Spanish, French, Italian, German, Portuguese (Brazil) and Indonesian.
+* This version introduces multi-language support, including the following languages: English (default), Spanish, French, Italian, German, Portuguese (Brazil) and Indonesian.
 
-= 2.9.3 =  
-* Added support for custom redirection on Login and Logout  
+= 2.9.3 =
+* Added support for custom redirection on Login and Logout
 
-= 2.9 =  
-* Added support for Google reCAPTCHA v3  
-* Added Google reCAPTCHA to the password recovery form  
-* Security and performance improvements  
-* Updated minimum PHP requirements to 7.2  
+= 2.9 =
+* Google reCAPTCHA v3 has been implemented on the WordPress login page to enhance security
+* Added Google reCAPTCHA to the password recovery form
+* Security and performance improvements
+* Updated minimum PHP requirements to 7.2
 
-= 2.8.6 =  
-* Tested up to WordPress version 6.5.2  
+= 2.8.6 =
+* Tested up to WordPress version 6.5.2
 
-= 2.8.5 =  
-* Fixed: SSL issue when verifying reCAPTCHA during login  
-* Updated reCAPTCHA verification method to use `wp_remote_post()` instead of `file_get_contents()`  
-* Resolved an issue with header modification in the authentication process  
+= 2.8.5 =
+* Fixed: SSL issue when verifying reCAPTCHA during login
+* Updated reCAPTCHA verification method to use `wp_remote_post()` instead of `file_get_contents()`
+* Resolved an issue with header modification in the authentication process
 
-= 2.8.4 =  
-* Tested up to WordPress version 6.3.1  
+= 2.8.4 =
+* Tested up to WordPress version 6.3.1
 
-= 2.8.3 =  
-* New free images  
-* Code improvements - Admin notices  
+= 2.8.3 =
+* New free images
+* Code improvements - Admin notices
 
-= 2.8.2 =  
-* Added: Logo width - Standard and Premium Design  
-* Added: Logo height - Standard and Premium Design  
-* Added: Logo position - Standard and Premium Design  
-* Added: Background size - Standard and Premium Design  
-* CSS code improvements - My Images  
+= 2.8.2 =
+* Added: Logo width - Standard and Premium Design
+* Added: Logo height - Standard and Premium Design
+* Added: Logo position - Standard and Premium Design
+* Added: Background size - Standard and Premium Design
+* CSS code improvements - My Images
 
-= 2.8.1 =  
-* CSS code improvements - Standard Design  
+= 2.8.1 =
+* CSS code improvements - Standard Design
 
-= 2.8 =  
-* Code improvements  
-* Login form improvements for mobile devices  
-* Registration form improvements for mobile devices  
+= 2.8 =
+* Code improvements
+* Login form improvements for mobile devices
+* Registration form improvements for mobile devices
 
-= 2.7 =  
-* Code improvements  
-* Login form improvements  
-* Added: "Privacy Policy" menu on the WordPress login screen  
-* New: Added a Premium design  
-* New: Option to remove the language selector on the login screen (added in WordPress 5.9)  
+= 2.7 =
+* Code improvements
+* Login form improvements
+* Added: "Privacy Policy" menu on the WordPress login screen
+* New: Added a Premium design
+* New: Option to remove the language selector on the login screen (added in WordPress 5.9)
 
-= 2.6 =  
-* Code improvements  
-* Google reCAPTCHA v2 improvements in login and registration forms  
-* Added: Two new Premium designs  
+= 2.6 =
+* Code improvements
+* Google reCAPTCHA v2 improvements in login and registration forms
+* Added: Two new Premium designs
 
 = 2.5 =  
-* Added: Google reCAPTCHA v2 for login and registration forms  
-* New: Option to disable Google reCAPTCHA v2 in login and registration forms  
+* Added: Google reCAPTCHA v2 for login and registration forms
+* New: Option to disable Google reCAPTCHA v2 in login and registration forms
 
-= 2.4.1 =  
-* Fixed JavaScript error  
+= 2.4.1 =
+* Fixed JavaScript error
 
-= 2.4 =  
-* New free images  
+= 2.4 =
+* New free images
 
-= 2.3 =  
-* Code improvements  
+= 2.3 =
+* Code improvements
 
-= 2.2 =  
-* Code improvements  
+= 2.2 =
+* Code improvements
 
-= 2.1 =  
-* Bug fixes  
+= 2.1 =
+* Bug fixes
 
-= 2.0 =  
-* Added: New basic and standard design for the login page  
+= 2.0 =
+* Added: New basic and standard design for the login page
 
-= 1.1 =  
-* Added new CSS  
+= 1.1 =
+* Added new CSS
 
-= 1.0 =  
+= 1.0 =
 * Initial Release: This is the first stable version of the application, marking the beginning of its journey. It includes all the foundational features for an optimized user experience.
 
 == Upgrade Notice ==
 
-= 2.9.5 =  
-introduces improvements to the login design, making it more visually appealing and easier to use. Make sure to update to this latest version to enjoy a smoother and more intuitive login process.
+= 2.9.6 =  
+This update allows you to customize the color of buttons and links on login, registration, and password recovery pages to match your brand. It also includes design improvements and optimizations for better performance on mobile devices. Update now to enhance your site's login experience!  
