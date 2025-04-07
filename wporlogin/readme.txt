@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: login, custom login, wordpress login, admin login, login page
 Requires at least: 5.2
 Tested up to: 6.7.2
-Stable tag: 2.9.6
+Stable tag: 2.9.7
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -155,10 +155,15 @@ This plugin is available in the following languages:
 
 == Changelog ==
 
+= 2.9.7 =
+* Fixed the review notice so it can now be properly dismissed after two weeks of plugin use.
+* Improved internal scripts loading to ensure better compatibility across all admin pages.
+* Minor code improvements and optimizations for a smoother admin experience.
+
 = 2.9.6 =
-* Added an option to customize the color of buttons and links on the login, registration, and password recovery pages to match your brand identity.  
-* Improved the design and styling of the plugin’s built-in layouts for a better visual experience.  
-* Optimized styles to ensure smooth performance on mobile devices.  
+* Added an option to customize the color of buttons and links on the login, registration, and password recovery pages to match your brand identity.
+* Improved the design and styling of the plugin’s built-in layouts for a better visual experience.
+* Optimized styles to ensure smooth performance on mobile devices.
 
 = 2.9.5 =
 * In this update, the login design styles have been improved for a more polished and user-friendly experience.
@@ -247,5 +252,5 @@ This plugin is available in the following languages:
 
 == Upgrade Notice ==
 
-= 2.9.6 =  
-This update allows you to customize the color of buttons and links on login, registration, and password recovery pages to match your brand. It also includes design improvements and optimizations for better performance on mobile devices. Update now to enhance your site's login experience!  
+= 2.9.7 =
+This update fixes the review notice behavior so it can now be dismissed correctly after two weeks. It also includes script loading improvements and minor backend optimizations for better plugin performance.

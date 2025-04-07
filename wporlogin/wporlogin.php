@@ -3,7 +3,7 @@
  * Plugin Name: WPOrLogin - Customize WordPress Login and Registration Page
  * Plugin URI: https://oregoom.com/wporlogin/
  * Description: WPOrLogin allows you to customize the WordPress login and registration page. You can change the logo, background, and layout. Choose from pre-designed templates and improve security with Google reCAPTCHA. Additionally, you can redirect users after login and hide the language switcher for a cleaner interface.
- * Version: 2.9.6
+ * Version: 2.9.7
  * Author: Oregoom
  * Author URI: https://oregoom.com/wporlogin/
  * License: GPL2
@@ -16,7 +16,7 @@
     exit; // Evitar acceso directo
 }
 
-define("VERSIONWPORLOGIN", "2.9.6");
+define("VERSIONWPORLOGIN", "2.9.7");
 
 // Definición de las imágenes de fondo
 define('WPORLOGINBACKGROUNDIMAGE', array(
@@ -48,6 +48,20 @@ require_once plugin_dir_path(__FILE__) .'includes/redirects-wporlogin.php';
 
 // Función para insertar scripts en el área de administración
 function wporlogin_insert_script_upload($hook){
+    
+    // Mostrar aviso solo si no ha sido descartado
+    if (get_option('delete_notice_wporlogin_condition') != 1) {        
+        // Registrar el script para avisos descartables
+        wp_register_script('update_notice_wporlogin', plugins_url( 'js/update-notice.js', __FILE__ ), array('jquery', 'wp-i18n'), VERSIONWPORLOGIN, true);
+        wp_enqueue_script('update_notice_wporlogin');
+
+        // Parámetros localizados para el script de avisos
+        wp_localize_script( 'update_notice_wporlogin', 'notice_params_wporlogin', array(
+            'url' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('my-ajax-nonce-wporlogin'),
+            'action' => 'delete-notice-wp'
+        ));
+    }
 
     //error_log($hook); // Esto enviará el valor del hook al archivo de registro de errores de WordPress
 
@@ -61,17 +75,6 @@ function wporlogin_insert_script_upload($hook){
         wp_enqueue_script('wporlogin_my_upload'); // Cargar el script en el área de administración
         
         wp_set_script_translations('wporlogin_my_upload', 'wporlogin'); // Cargar traducciones
-
-        // Registrar el script para avisos descartables
-        wp_register_script('update_notice_wporlogin', plugins_url( 'js/update-notice.js', __FILE__ ), array('jquery', 'wp-i18n'), VERSIONWPORLOGIN, true);
-        wp_enqueue_script('update_notice_wporlogin');
-
-        // Parámetros localizados para el script de avisos
-        wp_localize_script( 'update_notice_wporlogin', 'notice_params_wporlogin', array(
-            'url' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('my-ajax-nonce-wporlogin'),
-            'action' => 'delete-notice-wp'
-        ));
 
         // Registrar y cargar el script de selección de versión de reCAPTCHA solo en la página de configuración
         wp_register_script('wporlogin-recaptcha-version', plugin_dir_url(__FILE__) . 'js/wporlogin-recaptcha-version.js', array('jquery', 'wp-i18n'), VERSIONWPORLOGIN, true);
@@ -967,26 +970,77 @@ function wporlogin_admin_notice__success() {
 
     // Mostrar notificación si han pasado más de 15 días
     if($number_days_plugin_wporlogin >= 15 ){ ?>
+            
+        <div class="notice notice-success is-dismissible jpum-notice delete_notice_wporlogin" style="background: #ffffff; border: 1px solid rgba(108, 26, 107, 0.15); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 26px 30px; display: flex; align-items: flex-start; border-radius: 14px; gap: 20px; margin-top: 24px; ">
 
-        <div class="notice notice-success is-dismissible jpum-notice delete_notice_wporlogin" style="padding-bottom: 10px;">
+            <img src="https://oregoom.com/wp-content/uploads/2022/01/icon-wporlogin.png" alt="WPOrLogin" style="width: 70px; height: auto; border-radius: 12px; flex-shrink: 0;">
 
-            <p>
-                <a target="_blank" href="https://es.wordpress.org/plugins/wporlogin/" title="Plugin WPOrLogin">
-                    <img class="logo" src="https://oregoom.com/wp-content/uploads/2022/01/icon-wporlogin.png" style="background-color: #fff; float: right; margin-left: 10px; width: 75px; padding: 0.25em; border: 1px solid #ccc;">
-                </a>
-                <strong>
-                    <?php _e("Hello! You have been using the WPOrLogin plugin on your site for 2 weeks - we hope it has been helpful. If you're enjoying the plugin, would you mind rating it with 5 stars to help spread the word?", 'wporlogin'); ?>
-                </strong>
-            </p>
-            <ul>
-                <li>
-                    <a class="jpum-dismiss" target="_blank" href="https://wordpress.org/support/plugin/wporlogin/reviews/?filter=5" data-reason="am_now">
-                        <strong><?php _e('Okay, you deserve it.', 'wporlogin'); ?></strong>
+            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 16px; color: #1d1d1f;">
+                <p style="margin: 0 0 5px; font-size: 17px; font-weight: 600;">
+                    <?php echo esc_html__('Hello! You’ve been using ', 'wporlogin'); ?>
+                    <span style="font-weight: 600; color: #6c1a6b;">WPOrLogin</span>
+                    <?php echo esc_html__(' on your site for 2 weeks — we hope it’s been helpful.', 'wporlogin'); ?>
+                </p>
+
+                <p style="margin: 0 0 10px; color: #4d4d4d; font-size: 15.2px;">
+                    <?php echo esc_html__('If you’re enjoying the plugin, would you mind rating it with 5 stars to help more people discover it?', 'wporlogin'); ?>
+                </p>
+
+                <div style="display: flex; align-items: center; gap: 14px;">
+                    <span style="font-size: 14.5px; color: #4d4d4d; font-weight: bold;">
+                        <?php echo esc_html__('Sure, you deserve it', 'wporlogin'); ?>
+                    </span>
+
+                    <a href="https://wordpress.org/support/plugin/wporlogin/reviews/?filter=5" 
+                        class="jpum-dismiss" target="_blank" data-reason="am_now" style="display: inline-block; background: #6c1a6b; color: #fff; font-size: 15px; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: 500; transition: background 0.2s ease;">
+                        <?php echo esc_html__('Click here ⭐️⭐️⭐️⭐️⭐️', 'wporlogin'); ?>
                     </a>
-                </li>
-            </ul>
+                </div>
+            </div>
 
-        </div> <?php
+        </div>
+        
+        <!--<div class="notice notice-success is-dismissible jpum-notice delete_notice_wporlogin" style=" 
+            background: linear-gradient(145deg, #f0f4f8, #ffffff);
+            border: 1px solid rgba(0, 113, 227, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            padding: 26px 30px;
+            display: flex;
+            align-items: flex-start;
+            border-radius: 14px;
+            gap: 20px;
+            margin-top: 24px;
+        ">
+            <img src="https://oregoom.com/wp-content/uploads/2022/01/icon-wporlogin.png" alt="WPOrLogin"
+                 style="width: 60px; height: auto; border-radius: 12px; flex-shrink: 0;">
+
+            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 16px; color: #1d1d1f;">
+
+
+                <p style="margin: 0 0 5px; font-size: 17px; font-weight: 600;">
+            <?php _e("¡Hola! Has estado utilizando ", 'wporlogin'); ?>
+            <span style="font-weight: 600; color: #0071e3;">WPOrLogin</span>
+            <?php _e(" en tu sitio durante 2 semanas — esperamos que te haya sido útil.", 'wporlogin'); ?>
+        </p>
+
+                <p style="margin: 0 0 8px; color: #4d4d4d; font-size: 15.2px;">
+                    <?php _e("Si estás disfrutando del plugin, ¿te importaría valorarlo con 5 estrellas para ayudar a que más personas lo descubran?", 'wporlogin'); ?>
+                </p>
+
+                <div style="display: flex; align-items: center; gap: 14px;">
+                    <span style="font-size: 14.5px; color: #4d4d4d; font-weight: bold;">
+                        <?php _e('Vale, te lo mereces', 'wporlogin'); ?>
+                    </span>
+
+                    <a href="https://wordpress.org/support/plugin/wporlogin/reviews/?filter=5" class="jpum-dismiss" target="_blank" data-reason="am_now"
+                       style="display: inline-block; background: #0071e3; color: #fff; font-size: 15px; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: 500;">
+                        <?php _e('Clic aquí ⭐️⭐️⭐️⭐️⭐️', 'wporlogin'); ?>
+                    </a>
+                </div>
+            </div>
+        </div>-->
+
+            <?php
 
     }        
 
