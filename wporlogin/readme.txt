@@ -4,8 +4,8 @@ Contributors: Oregoom
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CTG69VCQ5TZZN&source=url
 Tags: login, custom login, wordpress login, admin login, login page
 Requires at least: 5.2
-Tested up to: 6.7.2
-Stable tag: 2.9.7
+Tested up to: 6.8
+Stable tag: 2.9.8
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -155,6 +155,9 @@ This plugin is available in the following languages:
 
 == Changelog ==
 
+= 2.9.8 =
+* Confirmed compatibility with WordPress 6.8.
+
 = 2.9.7 =
 * Fixed the review notice so it can now be properly dismissed after two weeks of plugin use.
 * Improved internal scripts loading to ensure better compatibility across all admin pages.
@@ -252,5 +255,5 @@ This plugin is available in the following languages:
 
 == Upgrade Notice ==
 
-= 2.9.7 =
-This update fixes the review notice behavior so it can now be dismissed correctly after two weeks. It also includes script loading improvements and minor backend optimizations for better plugin performance.
+= 2.9.8 =
+This update confirms full compatibility with WordPress 6.8

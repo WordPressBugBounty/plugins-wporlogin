@@ -3,7 +3,7 @@
  * Plugin Name: WPOrLogin - Customize WordPress Login and Registration Page
  * Plugin URI: https://oregoom.com/wporlogin/
  * Description: WPOrLogin allows you to customize the WordPress login and registration page. You can change the logo, background, and layout. Choose from pre-designed templates and improve security with Google reCAPTCHA. Additionally, you can redirect users after login and hide the language switcher for a cleaner interface.
- * Version: 2.9.7
+ * Version: 2.9.8
  * Author: Oregoom
  * Author URI: https://oregoom.com/wporlogin/
  * License: GPL2
@@ -16,7 +16,7 @@
     exit; // Evitar acceso directo
 }
 
-define("VERSIONWPORLOGIN", "2.9.7");
+define("VERSIONWPORLOGIN", "2.9.8");
 
 // Definición de las imágenes de fondo
 define('WPORLOGINBACKGROUNDIMAGE', array(

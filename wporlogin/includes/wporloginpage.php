@@ -262,15 +262,14 @@ function wporlogin_content_page_menu() {
                             <img onclick="wporloginimgclick('wporlogin-design-img-premium-three')" id="wporlogin-design-img-premium-three" src="<?php echo esc_url(plugin_dir_url( __FILE__ ).'../img/wporlogin-design-premium-three.jpg'); ?>" style="margin-bottom: 10px; max-width: 100%; height: auto; cursor: pointer;">
                         </div>
 
-<!--
                         <?php if ($wporlogin_is_premium): 
 
                             do_action('wporlogin_pro_admin_design_img_premium'); ?>                            
 
                         <?php else: ?>    
 
-                            <div style="position: relative; margin-bottom: 15px;">
-                                <a href="https://tudominio.com/pro" target="_blank" style="text-decoration: none;">  
+                            <!--<div style="position: relative; margin-bottom: 15px;">
+                                <a href="https://wporlogin.com/" target="_blank" style="text-decoration: none;">  
                                     <img src="<?php echo esc_url(plugin_dir_url( __FILE__ ).'../img/wporlogin-design-premium-four.jpg'); ?>" 
                                         style="max-width: 100%; height: auto; background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));">                                
                                     <p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
@@ -281,7 +280,7 @@ function wporlogin_content_page_menu() {
                             </div>   
 
                             <div style="position: relative; margin-bottom: 15px;">
-                                <a href="https://tudominio.com/pro" target="_blank" style="text-decoration: none;">  
+                                <a href="https://wporlogin.com/" target="_blank" style="text-decoration: none;">  
                                     <img src="<?php echo esc_url(plugin_dir_url( __FILE__ ).'../img/wporlogin-design-premium-six.png'); ?>" 
                                         style="max-width: 100%; height: auto; background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));">                                
                                     <p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
@@ -289,10 +288,10 @@ function wporlogin_content_page_menu() {
                                         🔒 Disponible en <span style="font-weight: bold;">WPORLogin Pro</span>
                                     </p>  
                                 </a>                              
-                            </div>   
+                            </div>-->
 
 
-                        <?php endif; ?>-->
+                        <?php endif; ?>
 
                         
                         <script>
