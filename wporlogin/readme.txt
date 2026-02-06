@@ -1,259 +1,303 @@
-=== Customize WordPress Login and Registration Page - WPOrLogin ===
+=== WPOrLogin - Custom Login, Social Login, Limit Attempts, Hide Login & reCAPTCHA ===
 
 Contributors: Oregoom
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CTG69VCQ5TZZN&source=url
-Tags: login, custom login, wordpress login, admin login, login page
+Tags: custom login, hide login, limit login, recaptcha, security
 Requires at least: 5.2
-Tested up to: 6.8
-Stable tag: 2.9.8
+Tested up to: 6.9
+Stable tag: 3.0.2
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Customize the WordPress login and registration page with design and security features like Google reCAPTCHA.
+Stop installing 7 plugins! WPOrLogin is the All-in-One Suite: Custom Login Design, Social Login (Google), Hide Login URL, Limit Attempts & reCAPTCHA.
 
 == Description ==
 
-Would you like to customize your WordPress site's login page while enhancing security at the same time? With **WPOrLogin**, you can completely transform the login and registration experience, adapting it to your brand's visual identity while protecting your site from external threats.
+Is your WordPress login page secure? Does it look professional? Do users hate remembering passwords?
 
-**WPOrLogin** lets you change the logo, background image, and form colors for login and registration, providing a fully customizable interface. You no longer have to use the generic WordPress login page: with WPOrLogin, you can create a professional and visually appealing experience for your users.
+The default `wp-login.php` page is the #1 target for hackers, looks unbranded, and causes friction for users.
 
-But **WPOrLogin** is not just about visuals. This plugin also enhances your site's **security** with **Google reCAPTCHA v2 and v3**, protecting login, registration, and password recovery forms from bots and brute-force attacks. This additional layer of protection ensures that only legitimate users can access your site.
+**WPOrLogin** is not just a customizer; it is a **complete 7-Module Suite** designed to secure, brand, and optimize the access point of your website. We combine forensic-grade security with pixel-perfect design and the new **Google Social Login** to boost conversions.
 
-Additionally, if you prefer a simpler login page, WPOrLogin offers the option to **remove the language selector**, keeping the interface clean and focused. All this while ensuring that the forms are **responsive and optimized for mobile devices**, providing a seamless user experience across all platforms.
+Stop installing 7 different plugins.
+WPOrLogin does it all:
 
-With **WPOrLogin**, customizing the appearance and strengthening the security of your site has never been easier. Discover how this plugin can transform your WordPress login page today!
+=== 1. SOCIAL LOGIN MODULE (NEW!) ===
 
-### Key Features:
+**Why do you need it?**
+Passwords are the biggest friction point on the web. Over 30% of users abandon registration forms because they don't want to create yet another account.
 
-- **Custom Logo and Background:** Change the logo and adjust the background image to your preference.
-- **Predefined Layouts:** Choose from multiple layouts (Basic, Standard, and Premium).
-- **Google reCAPTCHA v2 and v3 Compatibility:** Enhance security with reCAPTCHA verification options for login, registration, and password recovery forms.
-- **Mobile-Friendly Design:** Optimized layout for mobile screens.
-- **Security Options:** Enables Google reCAPTCHA on login, registration, and password recovery forms.
-- **Advanced Options:** Remove the language selector from the login page.
-- **Custom Redirection:** Allows users to be redirected after login or logout.
-- **Multilingual Support:** Available in 7 languages (English, Spanish, French, Italian, German, Portuguese and Indonesian)
+**What it does:**
 
-### Advanced Security with Google reCAPTCHA:
+* **Google Integration:** Enable "One-Click Login" and Registration using Google Accounts. This drastically increases conversion rates for membership sites and shops.
 
-Today, cyberattacks, especially automated ones, pose a major threat to website security. Among these attacks are bots attempting to access your site using stolen credentials or brute-force attacks—trying multiple username and password combinations until they gain access. This can compromise your site's security and put sensitive information at risk.
+* **Smart Avatar Sync (The "Wow" Factor):** Unlike basic plugins, WPOrLogin automatically fetches the user's high-quality Google profile picture and replaces the generic "Mystery Man" Gravatar. This provides an instant, personalized welcome experience across your entire site (comments, toolbar, author bio).
 
-**Google reCAPTCHA** is one of the most effective tools for combating these attacks. With WPOrLogin, you can easily integrate **Google reCAPTCHA v2 and v3** into your login, registration, and password recovery forms, adding an extra layer of security.
+* **Intelligent Account Linking:** If a user attempts to log in with Google but already has an account with the same email, the system securely links them, preventing duplicate accounts.
 
-#### What is Google reCAPTCHA?
+* **Force Social Registration (Anti-Spam Strategy):**
+    * Option to **hide the standard registration form** completely.
+    * This forces users to sign up via Google, virtually eliminating bot registrations without needing captchas.
 
-Google reCAPTCHA is a service that helps protect websites from malicious bots that attempt to automate processes such as user registration, form submissions, or unauthorized account access. By implementing reCAPTCHA, the system determines whether the user is human or a bot, ensuring that only legitimate users can interact with your site.
+* **Full Identity Sync:**
+    * We don't just sync the email. WPOrLogin now imports the **First Name** and **Last Name** from Google.
+    * Say "Hello, John!" instead of "Hello, john123" in your emails and dashboard.
 
-#### reCAPTCHA Versions:
+**See how Social Login works:**
 
-- **Google reCAPTCHA v2:** The most well-known system, where users must check a verification box ("I'm not a robot") or solve a visual challenge (such as selecting images) when suspicious activity is detected.
-- **Google reCAPTCHA v3:** Offers a smoother experience, as it requires no direct user interaction. Instead of visible challenges, reCAPTCHA v3 analyzes user behavior on the page and assigns a score indicating the likelihood of being a bot. This score is used to decide whether to allow or block interactions.
+=== 2. HIDE LOGIN MODULE ===
 
-#### Protection for Key Forms:
+**Why do you need it?**
+Bots and scripts target `wp-login.php` thousands of times a day, slowing down your server and increasing vulnerability.
 
-WPOrLogin allows you to integrate Google reCAPTCHA in:
+**What it does:**
 
-1. **Login Form:** Blocks unauthorized access attempts and brute-force attacks.
-2. **Registration Form:** Prevents bots from creating fake accounts on your site.
-3. **Password Recovery Form:** Protects against malicious password reset attempts.
+* **Rename URL:** Change your login address to a secret slug like `/access`, `/my-portal`, or `/private`.
 
-#### Why is it so important today?
+* **Stop Attacks:** Anyone visiting the old URL gets a "404 Not Found" error, rendering brute-force scripts useless.
 
-Malicious bots have become increasingly sophisticated, and brute-force attacks are one of the most common techniques attackers use to access websites. While strong passwords and other security measures help, using reCAPTCHA adds proactive defense.
+* **Hybrid Email Strategy:** Our unique technology ensures password reset emails **never break**, keeping your site functional even when the URL is hidden.
 
-Implementing **Google reCAPTCHA** in your key forms with WPOrLogin ensures:
+**Tutorial: How to hide your login safely:**
 
-- **Automated Protection:** reCAPTCHA automatically filters suspicious traffic without manual intervention.
-- **Improved User Experience:** Version v3 enables frictionless verification for genuine users, without forcing them to solve challenges.
-- **Increased Security:** Blocks unauthorized access and prevents spam accounts or misuse of the password recovery form.
+https://www.youtube.com/watch?v=7zKFE5EjEfE
 
-By incorporating reCAPTCHA into your forms with WPOrLogin, you ensure that only legitimate users can interact with your site, providing strong and easy-to-implement protection.
+=== 3. LIMIT LOGIN ATTEMPTS MODULE ===
+**Why do you need it?**
+Hackers use "Brute Force" to guess your password by trying millions of combinations.
+**What it does:**
+* **Block Intruders:** Automatically locks out IPs after too many failed attempts (e.g., 3 failures = 20-minute ban).
+* **High Performance Architecture:** Now uses a custom database table to handle high-traffic attacks without slowing down your site.
+* **Forensic Report:** Provides a live report of blocked IPs, attack times, and geolocation.
+* **Smart Warning:** Warns real users before they get locked out to prevent frustration.
+
+**Watch how to block hackers instantly:**
+
+https://www.youtube.com/watch?v=uTtG9zSAXa0
+
+=== 4. VISUAL DESIGNER & BRANDING MODULE (MAJOR UPGRADE) ===
+
+Your login page is not just a formality; it is the digital front door to your business.
+With WPOrLogin, we have democratized high-end design. You no longer need to hire a developer to achieve that "five-star reception" look.
+
+**Why do you need it?**
+A generic WordPress login confuses users and hurts your brand authority. You need a login page that looks like *your* business.
+
+**What it does:**
+
+* **Native Live Customizer:** Forget about guessing CSS code. Design your login page using the native WordPress Customizer. What you see is exactly what you get.
+
+* **Cinematic Video Backgrounds:** Bring your login page to life with motion.
+    * **Universal Support:** Easily embed videos from **YouTube**, **Vimeo**, or upload your own **MP4** directly to your Media Library.
+    * **Smart Engine:** Videos play automatically in a loop without sound (mute), creating an elegant, distraction-free atmosphere.
+    * **Mobile Fallback:** We automatically serve a lightweight image on mobile devices to ensure lightning-fast loading speeds.
+
+* **Dynamic Slideshows:** Can't decide on a single photo?
+    * Select multiple images to create a beautiful, rotating background slideshow.
+    * Control the speed (duration) of the transitions to match your brand's pace.
+
+* **Smart Overlay & Readability:**
+    * Ensure your logo and form are always readable, no matter how busy your background is.
+    * Apply a **Color Overlay** (tint) with adjustable **Opacity** over your videos or images. This creates that professional "dimmed" look found on top-tier apps.
+
+* **Professional Gallery:**
+    * Don't have images? Use our built-in gallery of professional textures and landscapes with one click.
+
+* **Conflict-Free Mode:** Our "Smart Asset Cleaner" ensures that your theme's styles don't break your login design while you are editing.
+
+**Design your login page in minutes:**
+
+=== 5. GOOGLE reCAPTCHA MODULE ===
+**Why do you need it?**
+To distinguish between a human user and an automated script instantly, preventing spam registrations.
+**What it does:**
+* **Dual Support:** Compatible with **v2 (Checkbox)** and **v3 (Invisible)**.
+* **Full Coverage:** Protects Login, Registration, and "Lost Password" forms.
+
+**How to configure reCAPTCHA keys:**
+
+=== 6. REDIRECT MODULE ===
+**Why do you need it?**
+Sending a customer to the erratic "Dashboard" after login is bad User Experience (UX).
+**What it does:**
+* **Login Flow:** Send users directly to a Welcome Page, Shop, or Member Area upon login.
+* **Logout Flow:** Redirect users to your Home Page or a special "Goodbye" offer page after logging out.
+
+**Setup custom redirects easily:**
+
+https://www.youtube.com/watch?v=AkT8zoTF-jA
+
+=== 7. REMOVE LANGUAGE MODULE ===
+**Why do you need it?**
+The language dropdown added by WordPress can be distracting and break your custom design.
+**What it does:**
+* **Clean Interface:** Completely removes the language selector from the login screen with one click, keeping your design minimalist and focused.
+
+**Quick look: Clean up your interface:**
+
+https://www.youtube.com/watch?v=WeDN4tx2_8k
 
 == Installation ==
 
-There are two ways to install WPOrLogin on your WordPress site: directly from the official WordPress repository or by manually uploading the .zip file. Below, we explain both methods step by step.
+= Automatic Installation =
+1.  Go to **Plugins > Add New** in your WordPress Dashboard.
+2.  Search for **WPOrLogin**.
+3.  Click **Install Now** and **Activate**.
+4.  Navigate to the "WPOrLogin" menu to configure your modules.
 
-### Option 1: Direct Installation from the WordPress Repository (Recommended Method)
-
-1. Log in to your WordPress admin panel.
-2. In the sidebar menu, click **Plugins** and then select **Add New**.
-3. In the search bar, type **WPOrLogin** and press **Enter**.
-4. Find **WPOrLogin** in the search results and click **Install Now**.
-5. Once the installation is complete, the **Activate** button will appear. Click it to enable **WPOrLogin**.
-6. After activation, you can access the **WPOrLogin** settings from the WordPress admin panel, where you can start customizing the login and registration page.
-
-### Option 2: Manual Installation from a .zip File
-
-1. Log in to your WordPress admin panel.
-2. In the sidebar menu, click **Plugins** and then select **Add New**.
-3. At the top of the page, click the **Upload Plugin** button.
-4. Click **Choose File** and locate the **wporlogin.zip** file on your computer.
-5. Click **Install Now** and wait while WordPress installs the plugin.
-6. After installation, click the **Activate** button to enable **WPOrLogin**.
-7. You can now access the **WPOrLogin** settings in the admin panel, where you can customize the logo, colors, background images, and enable Google reCAPTCHA for added security.
-
-### Important Note:
-
-After activating WPOrLogin, we recommend exploring all the available customization options to optimize your login page. Additionally, enabling Google reCAPTCHA will help protect your website from bots and unauthorized access.
+= Manual Installation =
+1.  Download the `.zip` file.
+2.  Go to **Plugins > Add New > Upload**.
+3.  Upload `wporlogin.zip` and activate.
 
 == Frequently Asked Questions ==
 
-= What is the recommended size for the logo? =
-A logo with a width of 200px and a height of 84px is recommended for the best display on the custom WordPress login page.
+= If a user logs in with Google, what happens to their Avatar? =
+WPOrLogin features "Smart Avatar Sync". By default, we pull their Google profile photo to replace the WordPress default Gravatar. This creates a highly personalized experience. As an admin, you can disable this feature in the settings if you prefer standard Gravatars.
 
-= Is WPOrLogin compatible with Google reCAPTCHA v3? =
-Yes, WPOrLogin is fully compatible with both Google reCAPTCHA v2 and v3. You can select the version that best suits your needs directly from the plugin's settings page.
+= Can I use Social Login if user registration is disabled on my site? =
+Yes! Existing users can still link their Google accounts to log in faster. However, new visitors won't be able to create accounts if you have unchecked "Anyone can register" in WordPress General Settings.
 
-= How can I remove the language selection menu on the login page? =
-The plugin includes an option to disable the language selection menu on the login page. Simply enable this option from the WPOrLogin settings in the admin panel.
+= If I hide my login, will I get locked out? =
+No. If you forget your custom URL, you can simply rename the `/plugins/wporlogin/` folder via FTP to deactivate the plugin temporarily. Additionally, the plugin protects you from configuring a broken URL.
 
-= Can I customize the background of the login page? =
-Yes, you can choose from several predefined free images or upload your own background image from the plugin's customization options.
+= Does "Hide Login" break caching plugins (WP Rocket, etc.)? =
+It works fine, but we recommend adding your new login slug (e.g., `/access`) to the "Never Cache" exclusion list of your caching plugin to ensure smooth performance.
 
-= What happens if I forget to add a Google reCAPTCHA key? =
-If you do not enter the Google reCAPTCHA keys, reCAPTCHA will not be applied to the login, registration, or password recovery forms. Make sure to add both the site key and the secret key in the plugin settings to ensure proper protection.
+= How does Limit Login differ from other security plugins? =
+WPOrLogin is lightweight. We don't bloat your database with millions of logs. We use transient data to handle bans efficiently, keeping your site fast while secure.
 
-= Is WPOrLogin compatible with mobile devices? =
-Yes, WPOrLogin is designed to be fully responsive, ensuring that the custom login and registration page looks and functions perfectly on mobile devices and tablets.
+= Why remove the Language Switcher? =
+For membership sites or client portals, the language switcher often looks out of place or breaks the visual layout. Removing it creates a seamless "App-like" feel.
 
-= How does WPOrLogin affect my website's performance? =
-WPOrLogin is optimized for efficient performance and does not significantly impact the loading speed of your login page. It also follows best development practices to ensure smooth integration with WordPress.
+= Can I use reCAPTCHA v3 (Invisible)? =
+Yes! We fully support v3. It analyzes user behavior behind the scenes without requiring them to click a checkbox, offering the best friction-less experience.
 
-= Can I change the logo link on the login page? =
-Yes, WPOrLogin allows you to modify the logo URL on the login page. You can set it to your website's homepage or another custom page.
+= Does the Redirect module work for Administrators? =
+By default, we prioritize user experience for Subscribers, Customers, and Editors. We often prevent Admin redirection to ensure you always have access to the dashboard settings.
 
-= What happens if I change my theme? Will WPOrLogin still work? =
-Yes, WPOrLogin will work regardless of the theme you use, as it focuses on customizing the WordPress login page and does not affect the overall appearance of your theme.
+= Will a video background slow down my login page? =
+Not at all. WPOrLogin is optimized for performance. We use asynchronous loading for YouTube/Vimeo APIs, meaning the login form appears instantly while the video loads in the background. Furthermore, on mobile devices, we automatically disable the video to save your users' data and battery.
 
-= Does WPOrLogin allow users to be redirected after login or logout? =
-Yes, WPOrLogin includes an option to redirect users to a specific page after login or logout. You can configure custom redirections based on user roles directly from the plugin settings.
+= Why don't I see the video on my mobile phone? =
+This is a feature, not a bug. Most mobile operating systems (iOS and Android) block auto-playing videos to save data and battery life. To ensure a fast and professional experience, WPOrLogin detects mobile devices and automatically displays the "Mobile Fallback Image" you selected instead of the video.
+
+= Will the video play sound? (I don't want to annoy visitors) =
+No. By default, our Smart Video Engine forces the video to play in "Mute" mode. This ensures a professional, distraction-free environment appropriate for a business or membership portal.
+
+= My logo is hard to read over the video/image. What can I do? =
+Use the "Overlay" feature in the Customizer. You can add a black (or any color) layer over your background and adjust the opacity (e.g., 50%). This creates a "dimmed" effect that makes your logo and white text pop perfectly, regardless of how bright or busy the background video is.
+
+= If I enable "Social Registration Only", can existing users still log in with a password? =
+Yes, absolutely.
+This setting only affects the **Registration** form to stop spam. The **Login** form remains available for everyone, so old users can still sign in with their username and password as usual.
+
+= Does WPOrLogin store private data from Google? =
+We only store the essentials required to create a user account on your site: Email, First Name, Last Name, and Profile Picture URL. We do not touch or store passwords, contacts, or any other private Google data.
 
 == Screenshots ==
 
-1. Premium Design - One
-2. Premium Design - Two
-3. Premium Design - Three
-4. Standard Design
-5. Basic Design
-6. Configuration - Basic Design
-7. Configuration - Standard Design
-8. Configuration - Premium Design
-9. Configuration - Google reCAPTCHA v2
-10. Login Screen - Google reCAPTCHA v2
-11. Remove Language Selector
-
-== Languages ==
-This plugin is available in the following languages:
-* English (default)
-* Spanish
-* French
-* Italian
-* German
-* Portuguese (Brazil)
-* Indonesian
+1. Premium Design - Layout Example
+2. Premium Design - Layout Example
+3. Premium Design - Layout Example
+4. Premium Design - Layout Example
+5. Standard Design Layout
+6. Basic Design Layout
+7. Module: Design Configuration
+8. Module: Standard Configuration
+9. Module: Premium Configuration
+10. Module: Google reCAPTCHA Settings
+11. Module: Remove Language Selector
+12. Module: Redirect Settings
+13. Module: Limit Login (Security Report)
+14. Module: Hide Login (Custom URLs)
+15. Module: Social Login
+16. Custom: Custom Design
 
 == Changelog ==
+
+= 3.0.2 =
+* **NEW FEATURE:** **Social Registration Only.**
+* Now you can **disable the manual registration form**. This effectively stops spam bots that try to create fake accounts via scripts.
+* Users can only register using the secure "Sign in with Google" button.
+* **IMPROVEMENT:** **Real Name Import.**
+* The plugin now automatically fetches and saves the user's **First Name** and **Last Name** from their Google Profile.
+* Great for membership sites and shops that need real user data.
+* **UX:** Improved the layout of the registration page when the manual form is hidden.
+
+= 3.0.1 =
+* **NEW FEATURE:** **Video Backgrounds:** Now you can turn your login page into a cinematic experience.
+    * Support for **YouTube** and **Vimeo** (just paste the URL).
+    * Support for **Local MP4** videos (upload from Media Library).
+    * Includes "Smart Mobile Fallback" to replace video with an image on phones for speed.
+* **NEW FEATURE:** **Background Slideshow:** Create a dynamic login screen with random rotating images.
+    * Includes a slider to control the duration (seconds) between images.
+* **NEW FEATURE:** **Smart Overlays:** Added a color/opacity layer control.
+    * Now you can darken or tint your background videos/images to make your text and logo pop.
+* **IMPROVEMENT:** **Image Gallery:** Added a built-in gallery with professional backgrounds ready to use.
+* **UX:** Improved the Live Preview responsiveness when switching between Video, Static, and Random modes.
+
+= 3.0 =
+* **MAJOR FEATURE!** **Full Visual Customizer:** Now you can design your login page using the native WordPress Customizer. Change colors, borders, shadows, opacity, and backgrounds while viewing the result in real-time.
+* **NEW:** **Premium Design Gallery:** We added new professional templates ready to use. Select your favorite and give your site a modern look in a second.
+* **IMPROVEMENT:** Smoother design experience. We made the customizer smart so it doesn't clash with your theme styles while you design.
+* **NEW:** **All-in-One Suite:** All tools (Social Login, Security, Design) are consolidated into a single robust and easy-to-use panel.
+* **COMPATIBILITY:** Ready to work perfectly with the latest WordPress themes (Full Site Editing).
+
+= 2.12.2 =
+* **SECURITY:** Enhanced protection algorithms for more accurate visitor detection (Cloudflare compatible).
+* **PERFORMANCE:** Database optimizations to speed up the login process.
+* **FIX:** Improved accuracy of the "Limit Login" timer and attempt counters.
+* **STABILITY:** Fixed minor internal warnings and improved dashboard responsiveness.
+
+= 2.12.1 =
+* **NEW:** **Redirect by Role**: Send customers to the shop and editors to the dashboard automatically.
+* **SECURITY:** **"Stealth Mode"**: Hides your dashboard login completely from bots.
+* **SECURITY:** Stronger protection against brute-force attacks.
+* **FEATURE:** **Smart Avatar Sync**: Automatically shows the user's Google profile picture instead of a generic icon.
+* **UX:** Added a simple "Add my IP" button to prevent locking yourself out.
+* **UX:** You can now choose where to send strangers who try to access your hidden login page (404 Error, Home, etc.).
+* **FIX:** Solved timezone issues with the lockout timer.
+
+= 2.12 =
+* **NEW MODULE:** **Social Login**. Let users sign in with one click using Google.
+* **FEATURE:** **Profile Picture Sync**. Automatically updates user avatars from their Google account.
+* **COMPATIBILITY:** Ready for the latest WordPress versions.
+
+= 2.11 =
+* **NEW MODULE:** **Hide Login**. Change your login URL (e.g., /my-access) to stop bot attacks instantly.
+* **FEATURE:** "Smart Links" technology ensures password reset emails always work, even with a hidden login.
+
+= 2.10 =
+* **NEW MODULE:** **Limit Login Attempts**. Automatically blocks hackers who guess wrong passwords too many times.
+* **FEATURE:** Live Security Report showing blocked intruders.
 
 = 2.9.8 =
 * Confirmed compatibility with WordPress 6.8.
 
 = 2.9.7 =
-* Fixed the review notice so it can now be properly dismissed after two weeks of plugin use.
-* Improved internal scripts loading to ensure better compatibility across all admin pages.
-* Minor code improvements and optimizations for a smoother admin experience.
+* Improved review notice logic.
 
 = 2.9.6 =
-* Added an option to customize the color of buttons and links on the login, registration, and password recovery pages to match your brand identity.
-* Improved the design and styling of the plugin’s built-in layouts for a better visual experience.
-* Optimized styles to ensure smooth performance on mobile devices.
-
-= 2.9.5 =
-* In this update, the login design styles have been improved for a more polished and user-friendly experience.
+* Added color customization for buttons/links.
 
 = 2.9.4 =
-* This version introduces multi-language support, including the following languages: English (default), Spanish, French, Italian, German, Portuguese (Brazil) and Indonesian.
+* Multi-language support added.
 
 = 2.9.3 =
-* Added support for custom redirection on Login and Logout
+* Added Redirect Module functionality.
 
 = 2.9 =
-* Google reCAPTCHA v3 has been implemented on the WordPress login page to enhance security
-* Added Google reCAPTCHA to the password recovery form
-* Security and performance improvements
-* Updated minimum PHP requirements to 7.2
-
-= 2.8.6 =
-* Tested up to WordPress version 6.5.2
-
-= 2.8.5 =
-* Fixed: SSL issue when verifying reCAPTCHA during login
-* Updated reCAPTCHA verification method to use `wp_remote_post()` instead of `file_get_contents()`
-* Resolved an issue with header modification in the authentication process
-
-= 2.8.4 =
-* Tested up to WordPress version 6.3.1
-
-= 2.8.3 =
-* New free images
-* Code improvements - Admin notices
-
-= 2.8.2 =
-* Added: Logo width - Standard and Premium Design
-* Added: Logo height - Standard and Premium Design
-* Added: Logo position - Standard and Premium Design
-* Added: Background size - Standard and Premium Design
-* CSS code improvements - My Images
-
-= 2.8.1 =
-* CSS code improvements - Standard Design
-
-= 2.8 =
-* Code improvements
-* Login form improvements for mobile devices
-* Registration form improvements for mobile devices
+* Added Google reCAPTCHA v3 support.
 
 = 2.7 =
-* Code improvements
-* Login form improvements
-* Added: "Privacy Policy" menu on the WordPress login screen
-* New: Added a Premium design
-* New: Option to remove the language selector on the login screen (added in WordPress 5.9)
-
-= 2.6 =
-* Code improvements
-* Google reCAPTCHA v2 improvements in login and registration forms
-* Added: Two new Premium designs
-
-= 2.5 =  
-* Added: Google reCAPTCHA v2 for login and registration forms
-* New: Option to disable Google reCAPTCHA v2 in login and registration forms
-
-= 2.4.1 =
-* Fixed JavaScript error
-
-= 2.4 =
-* New free images
-
-= 2.3 =
-* Code improvements
-
-= 2.2 =
-* Code improvements
-
-= 2.1 =
-* Bug fixes
-
-= 2.0 =
-* Added: New basic and standard design for the login page
-
-= 1.1 =
-* Added new CSS
+* Added "Remove Language" module.
 
 = 1.0 =
-* Initial Release: This is the first stable version of the application, marking the beginning of its journey. It includes all the foundational features for an optimized user experience.
+* Initial Release.
 
 == Upgrade Notice ==
 
-= 2.9.8 =
-This update confirms full compatibility with WordPress 6.8
+= 3.0.2 =
+Stop Spam Bots! New "Social Registration Only" mode disables manual sign-ups to block fake accounts. Plus: We now sync First & Last Names from Google for better user data.

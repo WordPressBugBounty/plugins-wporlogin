@@ -1,0 +1,486 @@
+/* WP LOGIN: CORPORATE PORTAL (FINAL POLISHED - UX SAFE MODE + MESSAGES)
+   Status: Impeccable / Production Ready
+   Fixes: Scroll Safety, Soft Shadows, Mobile Overflow, Custom Error Alerts
+   Author: Gemini & Nivardo
+*/
+
+:root {
+    /* --- TUS VARIABLES (INTACTAS) --- */
+    --wporlogin-color-principal-marca: #00bfa5;  /* Primario */
+    --wporlogin-color-hover-marca: #103040;      /* Secundario */
+    
+    /* --- AMBIENTE --- */
+    --input-border-idle: #e0e0e0;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --bg-card: #ffffff;
+    --radius-card: 25px;
+    
+    /* Variable para alertas de error */
+    --color-error: #e74c3c; 
+}
+
+/* 1. LAYOUT PRINCIPAL */
+html, body {
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+body.login {
+    background-image: var(--wporlogin-img-fondo) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-color: #f4f6f8 !important;
+    
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; 
+    align-items: flex-start !important;     
+    
+    padding-top: 8vh !important;  
+    padding-left: 8vw !important; 
+    
+    box-sizing: border-box !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+/* SCROLL INTELIGENTE */
+@media screen and (min-width: 769px) {
+    html, body {
+        overflow-y: auto !important;
+        min-height: 100vh !important;
+    }
+}
+@media screen and (max-width: 768px) {
+    html, body {
+        overflow-y: auto !important;
+        height: auto !important;
+        min-height: 100% !important;
+    }
+}
+
+/* Capa de protección */
+body.login::before {
+    content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0%, rgba(255,255,255,0) 70%);
+    pointer-events: none; z-index: 0;
+}
+
+/* 2. CONTENEDOR */
+body.login div#login {
+    position: relative; z-index: 10;
+    width: 100% !important;
+    max-width: 380px !important;
+    padding: 0 !important; margin: 0 !important;
+}
+
+/* 3. LOGO */
+body.login div#login h1 a {
+    height: 70px !important;
+    background-size: contain !important;
+}
+
+/* PC: LOGO DERECHA FIJO */
+@media screen and (min-width: 769px) {
+    body.login div#login h1 a {
+        position: fixed !important;
+        top: 8vh !important;
+        right: 8vw !important;
+        margin: 0 !important;
+        width: 250px !important;
+        background-position: right center !important;
+
+        background-image: var(--wporlogin-logo);
+        background-size: var(--background-size);
+        background-position: var(--background-position);
+        background-repeat: no-repeat !important; 
+
+        width: var(--wporlogin-width);
+        height: var(--wporlogin-height);
+    }
+    
+    /* Protección para pantallas bajas */
+    @media screen and (max-height: 600px) {
+        body.login div#login h1 a {
+            position: absolute !important;
+            top: 20px !important;
+            right: 20px !important;
+            width: 150px !important;
+        }
+    }
+}
+
+/* MÓVIL: LOGO ARRIBA */
+@media screen and (max-width: 768px) {
+    body.login div#login h1 a {
+        display: block !important;
+        position: relative !important;
+        width: 160px !important;
+        margin: 0 auto 20px auto !important;
+        background-position: center !important;
+
+        background-image: var(--wporlogin-logo);
+        background-size: var(--background-size);
+        background-position: var(--background-position);
+        background-repeat: no-repeat !important; 
+
+        width: var(--wporlogin-width) !important;
+        height: var(--wporlogin-height) !important;
+    }
+}
+
+/* 4. TARJETA */
+body.login div#login form#loginform,
+body.login div#login form#registerform,
+body.login div#login form#lostpasswordform {
+    background-color: var(--bg-card) !important;
+    border: none !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important; 
+    /*border-radius: var(--radius-card) var(--radius-card) 0 0 !important;*/
+
+    /* --- CAMBIO AQUÍ: Solo esquina superior izquierda --- */
+    /* Orden: Arriba-Izq | Arriba-Der | Abajo-Der | Abajo-Izq */
+    border-radius: var(--radius-card) 0 0 0 !important;
+    padding: 40px 40px 30px 40px !important;
+    margin: 0 !important;
+    position: relative;
+}
+
+/* Línea superior */
+/*body.login div#login form::before {
+    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+    background: var(--wporlogin-color-principal-marca);
+}*/
+
+/* 5. INPUTS */
+body.login div#login form input[type="text"],
+body.login div#login form input[type="password"],
+body.login div#login form input[type="email"] {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid var(--input-border-idle) !important;
+    border-radius: 0 !important;
+    color: var(--text-main) !important;
+    font-size: 16px !important;
+    padding: 10px 40px 10px 0 !important;
+    height: 45px !important;
+    margin-bottom: 25px !important;
+    transition: all 0.3s ease;
+    box-shadow: none !important;
+}
+
+body.login div#login form input:focus {
+    border-bottom-color: var(--wporlogin-color-principal-marca) !important;
+    outline: none !important;
+}
+
+body.login input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 100px #ffffff inset !important;
+    -webkit-text-fill-color: #333 !important;
+}
+
+body.login label {
+    font-size: 12px !important;
+    color: var(--text-muted) !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700 !important;
+}
+
+/* 6. OJO DE CONTRASEÑA */
+body.login div#login form .user-pass-wrap { position: relative !important; }
+body.login div#login form .wp-hide-pw {
+    position: absolute !important; top: 10px !important; right: 0 !important;
+    background: transparent !important; border: none !important;
+    color: #999 !important; cursor: pointer;
+}
+body.login div#login form .wp-hide-pw:hover {
+    color: var(--wporlogin-color-principal-marca) !important;
+}
+
+/* 7. CHECKBOX REPARADO (Centrado Geométrico Perfecto) */
+body.login div#login form#loginform p.forgetmenot {
+    margin-top: 5px !important; margin-bottom: 25px !important;
+    display: flex; align-items: center; float: none !important;
+}
+
+body.login div#login form#loginform p.forgetmenot input#rememberme {
+    appearance: none; -webkit-appearance: none;
+    width: 20px !important; /* Un pelín más grande para mejor clic */
+    height: 20px !important;
+    border: 2px solid #ccc !important;
+    border-radius: 4px !important;
+    background: #fff; 
+    margin-right: 12px !important; 
+    cursor: pointer;
+    position: relative; /* Necesario para contener el check */
+    transition: all 0.2s ease;
+}
+
+/* Estado Activo (Fondo de color) */
+body.login div#login form#loginform p.forgetmenot input#rememberme:checked {
+    background-color: var(--wporlogin-color-principal-marca) !important;
+    border-color: var(--wporlogin-color-principal-marca) !important;
+}
+
+/* DIBUJO DEL CHECK (La Palomita) */
+body.login div#login form#loginform p.forgetmenot input#rememberme:checked::before {
+    content: "" !important; /* Borramos la letra "L" */
+    display: block !important;
+    position: absolute !important;
+    
+    /* Centrado Matemático Exacto */
+    top: 45% !important; 
+    left: 50% !important;
+    transform: translate(-5%, -40%) rotate(45deg) !important;
+    
+    /* Dimensiones del check */
+    width: 5px !important;
+    height: 10px !important;
+    
+    /* Dibujamos el check con bordes */
+    border: solid #ffffff !important;
+    border-width: 0 2px 2px 0 !important; /* Borde derecho y abajo crean la forma */
+}
+
+/* 8. BOTÓN ACCEDER */
+body.login div#login form p.submit input#wp-submit {
+    background-color: var(--wporlogin-color-principal-marca) !important;
+    color: var(--wporlogin-color-principal-marca-text-submit) !important;
+    border: none !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    width: 100% !important; height: 50px !important;
+    margin-top: 10px !important; cursor: pointer;
+    box-shadow: 0 6px 15px color-mix(in srgb, var(--wporlogin-color-principal-marca), transparent 70%) !important;
+    transition: all 0.2s;
+}
+body.login div#login form p.submit input#wp-submit:hover {
+    filter: brightness(0.9); transform: translateY(-1px);
+}
+
+/* 9. FOOTER (Enlaces: Recuperar, Volver y Privacidad) */
+body.login #nav {
+    background-color: var(--wporlogin-color-principal-marca) !important;
+    width: 100% !important; padding: 15px 0 !important; margin: 0 !important;
+    text-align: center;
+    /*border-radius: 0 0 var(--radius-card) var(--radius-card) !important;*/
+
+    /* --- CAMBIO AQUÍ: Solo esquina inferior derecha --- */
+    /* Orden: Arriba-Izq | Arriba-Der | Abajo-Der | Abajo-Izq */
+    border-radius: 0 0 var(--radius-card) 0 !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+    color: #fff !important;
+}
+
+body.login #nav a {
+    color: var(--wporlogin-color-principal-marca-text-submit) !important;
+    font-size: 13px !important; text-decoration: none !important; font-weight: 500;
+}
+body.login #nav a:hover {
+    text-decoration: underline !important;
+    opacity: 0.8;
+}
+
+/* Enlaces externos (Volver al blog + Privacidad) */
+body.login #backtoblog,
+body.login .privacy-policy-page-link {
+    width: 100% !important; 
+    padding: 15px 0 0 0 !important; 
+    margin: 0 !important;
+    text-align: center;
+    display: block !important; /* Asegura que ocupen su propia línea */
+}
+
+/* El color de tu marca para estos enlaces */
+body.login #backtoblog a,
+body.login .privacy-policy-page-link a {
+    color: var(--wporlogin-color-principal-marca) !important; /* AQUÍ ESTÁ LA MAGIA */
+    font-size: 13px !important; 
+    text-decoration: none !important; 
+    font-weight: 600 !important;
+    transition: color 0.2s ease;
+}
+
+body.login #backtoblog a:hover,
+body.login .privacy-policy-page-link a:hover { 
+    text-decoration: underline !important;
+}
+
+/* Ajuste de márgenes para que no se peguen */
+body.login .privacy-policy-page-link {
+    margin-top: 10px !important;
+    margin-bottom: 30px !important; /* Espacio extra al final para scroll */
+}
+
+
+/* ============================================================
+   10. SELECTOR DE IDIOMA
+   ============================================================ */
+body.login .language-switcher {
+    z-index: 1000;
+    width: auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+@media screen and (min-width: 769px) {
+    body.login .language-switcher {
+        position: fixed !important;
+        bottom: 30px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+    @media screen and (max-height: 500px) {
+        body.login .language-switcher {
+            position: relative !important;
+            bottom: auto !important;
+            left: auto !important;
+            transform: none !important;
+            margin-top: 20px !important;
+        }
+    }
+}
+
+body.login .language-switcher form select {
+    appearance: none; -webkit-appearance: none;
+    background-color: #ffffff !important;
+    border: 1px solid #dcdcdc !important;
+    border-radius: 50px !important;
+    height: 36px !important; 
+    line-height: normal !important;
+    padding: 0 35px 0 20px !important;
+    min-width: 140px;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: var(--text-muted) !important;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+    transition: all 0.2s ease;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2210%22%20height%3D%226%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M1%201l4%204%204-4%22%20stroke%3D%22%23666%22%20stroke-width%3D%221.5%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E') !important;
+    background-repeat: no-repeat !important;
+    background-position: right 15px center !important;
+    background-size: 10px !important;
+}
+
+body.login .language-switcher form select:hover,
+body.login .language-switcher form select:focus {
+    border-color: var(--wporlogin-color-principal-marca) !important;
+    color: var(--wporlogin-color-principal-marca) !important;
+    outline: none !important;
+}
+
+body.login .language-switcher form input[type="submit"] {
+    display: inline-block !important;
+    background-color: var(--wporlogin-color-principal-marca) !important;
+    border: 1px solid var(--wporlogin-color-principal-marca) !important;
+    border-radius: 50px !important;
+    height: 36px !important;
+    line-height: normal !important;
+    padding: 0 16px !important;
+    margin: 0 0 0 5px !important;
+    color: var(--wporlogin-color-principal-marca-text-submit) !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: none !important;
+}
+
+body.login .language-switcher form input[type="submit"]:hover {
+    background-color: var(--wporlogin-color-hover-marca) !important;
+    border: var(--wporlogin-color-hover-marca) !important;
+    color: var(--wporlogin-color-principal-marca-text-submit) !important;
+    transform: translateY(-1px);
+}
+
+/* ============================================================
+   11. MENSAJES DE WORDPRESS (NUEVO: ESTILO ELEGANTE)
+   ============================================================ */
+
+/* Base para todas las alertas: Tarjeta limpia flotante */
+body.login #login_error,
+body.login .message,
+body.login .success {
+    background-color: #ffffff !important;
+    border: none !important;
+    /* Borde izquierdo grueso para identificar tipo de mensaje */
+    border-left: 5px solid !important; 
+    
+    margin-left: 0 !important;
+    /* Margen inferior clave para no chocar con el formulario */
+    margin-bottom: 25px !important; 
+    
+    padding: 15px 20px !important;
+    
+    /* Sombra independiente para separar visualmente del fondo */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important; 
+    
+    border-radius: 8px !important; /* Radio más pequeño que la tarjeta principal */
+    color: var(--text-muted) !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+}
+
+/* A. ERROR (Rojo Elegante) */
+body.login #login_error {
+    border-left-color: var(--color-error) !important;
+}
+
+/* B. INFO / MENSAJE (Color de tu Marca - Azul/Verde) */
+body.login .message,
+body.login .success {
+    border-left-color: var(--wporlogin-color-principal-marca) !important;
+}
+
+/* C. LINKS DENTRO DE MENSAJES */
+/* Forzamos que los links dentro de alertas usen tu color de marca */
+body.login #login_error a, 
+body.login .message a {
+    color: var(--wporlogin-color-principal-marca) !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+}
+
+body.login #login_error a:hover, 
+body.login .message a:hover {
+    text-decoration: underline !important;
+}
+
+
+/* ============================================================
+   RESPONSIVE (MÓVIL)
+   ============================================================ */
+@media screen and (max-width: 768px) {
+    body.login {
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 40px 20px !important;
+        padding-top: 20px !important;
+        padding-left: 20px !important;
+        height: auto !important; 
+        min-height: 100vh !important;
+        overflow-y: auto !important; 
+    }
+    
+    body.login::before { background: rgba(0, 0, 0, 0.55); }
+    body.login div#login { max-width: 100% !important; }
+    body.login div#login form#loginform { padding: 30px 25px !important; }
+
+    body.login .language-switcher {
+        position: static !important;
+        margin-top: 30px !important;
+        transform: none !important;
+        padding-bottom: 20px !important;
+    }
+    body.login .language-switcher form input[type="submit"] {
+        padding: 0 20px !important;
+    }
+}

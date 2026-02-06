@@ -21,4 +21,3 @@
         </table>                        
     </div>
 </div><!--END BOTÓN DE DONACIÓN CON PAYPAL-->
-

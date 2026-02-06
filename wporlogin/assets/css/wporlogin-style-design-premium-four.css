@@ -1,0 +1,446 @@
+/* WP LOGIN: FINAL STABLE VERSION (CLEAN & RESTORED)
+   Author: Gemini & Nivardo
+   Description: Diseño Glassmorphism limpio, sin hacks de layout, scroll corregido.
+*/
+
+:root {
+    /* --- TUS VARIABLES DE MARCA --- */
+    --wporlogin-color-principal-marca: #0071e3; 
+    --wporlogin-color-hover-marca: #0077ed;
+    --wporlogin-color-text-btn: #ffffff;
+
+    /* --- VARIABLES DE DISEÑO (CRISTAL) --- */
+    --bg-gradient: radial-gradient(circle at 50% 20%, #2b2e4a 0%, #08080a 100%);
+    --glass-bg: rgba(22, 22, 28, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 10px 20px -7px rgba(0, 0, 0, 0.9);
+    --glass-blur: 50px;
+
+    /* --- RADIO DE BORDES --- */
+    --radius-card: 12px;
+    --radius-input: 6px;
+    --radius-btn: 6px;
+}
+
+/* =================================================================
+   1. ESTRUCTURA BASE (FIX SCROLL)
+   ================================================================= */
+
+html, body {
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden; /* Evita scroll lateral */
+}
+
+body.login {
+    background: var(--bg-gradient) !important;
+    background-color: #08080a !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    color: #fff !important;
+
+    /* CENTRADO FLEXBOX LIMPIO */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    
+    /* Importante: min-height permite scroll solo si la pantalla es muy pequeña */
+    min-height: 100vh !important;
+    height: auto !important;
+}
+
+/* Capa oscura de fondo para contraste */
+body.login::before {
+    content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.3); pointer-events: none; z-index: -1;
+}
+
+/* =================================================================
+   2. LOGOTIPO
+   ================================================================= */
+
+body.login h1 { margin-top: 0 !important; }
+
+body.login h1 a {
+    background-image: var(--wporlogin-logo) !important;
+    background-size: contain !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    width: var(--wporlogin-width, 100%) !important;
+    height: var(--wporlogin-height, 80px) !important;
+    margin-bottom: 20px !important;
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)) !important;
+}
+
+/* =================================================================
+   3. TARJETA (GLASSMORPHISM)
+   ================================================================= */
+
+body.login div#login {
+    position: relative; z-index: 10 !important;
+    width: 100% !important; max-width: 400px !important;
+    padding: 15px !important; /* Margen seguro para móviles */
+}
+
+body.login form {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(var(--glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--glass-shadow) !important;
+    border-radius: var(--radius-card) !important;
+    padding: 40px !important;
+    margin: 0 !important;
+    overflow: hidden;
+}
+
+/* =================================================================
+   4. INPUTS (CAMPOS)
+   ================================================================= */
+
+body.login form .input, 
+body.login form input[type="text"], 
+body.login form input[type="password"] {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: var(--radius-input) !important;
+    color: #fff !important;
+    font-size: 16px !important;
+    padding: 0 15px !important;
+    height: 48px !important;
+    margin-bottom: 20px !important;
+    box-shadow: none !important;
+    font-weight: 400 !important;
+    transition: all 0.3s ease;
+}
+
+/* Hover & Focus */
+body.login form .input:focus, 
+body.login form input:focus {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    border-color: var(--wporlogin-color-principal-marca) !important;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--wporlogin-color-principal-marca), transparent 80%) !important;
+    outline: none !important;
+}
+
+/* Fix Autocomplete Amarillo */
+body.login input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #1c1c1e inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    caret-color: white !important;
+    border-radius: var(--radius-input) !important;
+}
+
+/* Labels */
+body.login label {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: rgba(255,255,255,0.7) !important;
+    margin-bottom: 8px !important;
+    text-transform: uppercase;
+}
+
+/* =================================================================
+   5. EL OJO (CONTRASEÑA) - POSICIÓN CORREGIDA
+   ================================================================= */
+
+/* Aseguramos que el contenedor sea relativo */
+body.login form .user-pass-wrap {
+    position: relative !important;
+    margin-bottom: 20px !important;
+}
+/* Quitamos margen al input interno para que no empuje */
+body.login form .user-pass-wrap input { margin-bottom: 0 !important; }
+
+/* El botón del ojo */
+body.login .wp-hide-pw {
+    position: absolute !important;
+    top: 50% !important;
+    right: 10px !important; /* Un poco separado del borde derecho */
+    transform: translateY(-50%) !important; /* Centrado vertical exacto */
+    z-index: 100 !important;
+    
+    background: transparent !important;
+    border: none !important;
+    color: rgba(255,255,255,0.5) !important;
+    width: 30px !important; height: 30px !important;
+    padding: 0 !important;
+    display: flex !important; align-items: center; justify-content: center;
+    cursor: pointer;
+}
+
+body.login .wp-hide-pw .dashicons { font-size: 20px; }
+body.login .wp-hide-pw:hover { color: var(--wporlogin-color-principal-marca) !important; }
+
+/* Damos espacio al texto para que no choque con el ojo */
+body.login form input[type="password"] { padding-right: 45px !important; }
+
+/* =================================================================
+   6. BOTONES Y CHECKBOX (PREMIUM STYLE)
+   ================================================================= */
+
+/* Botón Acceder */
+body.login .button-primary {
+    background: var(--wporlogin-color-principal-marca) !important;
+    border: none !important;
+    border-radius: var(--radius-btn) !important;
+    color: var(--wporlogin-color-text-btn) !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    height: 48px !important;
+    width: 100% !important;
+    margin-top: 15px !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+    transition: all 0.2s ease !important;
+}
+
+body.login .button-primary:hover {
+    background: var(--wporlogin-color-hover-marca) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* --- CHECKBOX PERSONALIZADO --- */
+
+body.login .forgetmenot {
+    float: none !important;
+    margin-bottom: 20px !important;
+    display: flex; align-items: center !important; /* Alineación vertical perfecta con el texto */
+    cursor: pointer !important;
+}
+
+/* 1. Matamos el estilo por defecto del navegador */
+body.login .forgetmenot input[type="checkbox"] {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    
+    /* 2. Dibujamos la cajita de cristal */
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 6px !important; /* Bordes suaves modernos */
+    
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important; /* Evita que se aplaste en móviles */
+    
+    margin: 0 12px 0 0 !important; /* Separación con el texto */
+    position: relative !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease;
+    outline: none !important;
+}
+
+/* Estado Hover (Al pasar el mouse) */
+body.login .forgetmenot input[type="checkbox"]:hover {
+    border-color: #fff !important;
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Estado CHECKED (Activado con tu marca) */
+body.login .forgetmenot input[type="checkbox"]:checked {
+    background-color: var(--wporlogin-color-principal-marca) !important;
+    border-color: var(--wporlogin-color-principal-marca) !important;
+    box-shadow: 0 0 10px color-mix(in srgb, var(--wporlogin-color-principal-marca), transparent 60%) !important;
+}
+
+/* Dibujamos la "Palomita" (Check) blanca manualmente */
+body.login .forgetmenot input[type="checkbox"]:checked::after {
+    content: '' !important;
+    position: absolute !important;
+    left: 6px !important;
+    top: 2px !important;
+    width: 5px !important;
+    height: 10px !important;
+    border: solid white !important;
+    border-width: 0 2px 2px 0 !important;
+    transform: rotate(45deg) !important;
+}
+
+/* Eliminamos el icono feo que WordPress pone por defecto */
+body.login .forgetmenot input[type="checkbox"]::before {
+    display: none !important;
+    content: "" !important;
+}
+
+/* Texto "Recuérdame" */
+body.login .forgetmenot label {
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    color: rgba(255,255,255,0.7) !important;
+    margin-bottom: 0 !important;
+    padding-top: 2px !important; /* Ajuste fino óptico */
+    cursor: pointer !important;
+}
+
+/* =================================================================
+   7. ENLACES INFERIORES (RESTAURADOS Y LIMPIOS)
+   ================================================================= */
+
+/* Contenedor general de enlaces */
+body.login #nav, 
+body.login #backtoblog,
+body.login .privacy-policy-page-link {
+    margin: 20px 0 0 0 !important;
+    padding: 0 !important;
+    text-align: center !important; /* Centrado clásico */
+    width: 100% !important;
+    display: block !important; /* Restauramos comportamiento de bloque */
+    color: rgba(255,255,255,0.5) !important;
+}
+
+/* Estilo del texto de los enlaces */
+body.login #nav a, 
+body.login #backtoblog a,
+body.login .privacy-policy-page-link a {
+    color: rgba(255,255,255,0.5) !important;
+    font-size: 13px !important;
+    text-decoration: none !important;
+    transition: color 0.3s !important;
+}
+
+body.login #nav a:hover, 
+body.login #backtoblog a:hover,
+body.login .privacy-policy-page-link a:hover {
+    color: var(--wporlogin-color-principal-marca) !important;
+    text-decoration: underline !important;
+}
+
+/* Separación especial entre grupos */
+body.login #backtoblog { margin-top: 10px !important; }
+body.login .privacy-policy-page-link { margin-top: 10px !important; }
+
+
+/* =================================================================
+   8. SELECTOR DE IDIOMAS (LIMPIO)
+   ================================================================= */
+
+body.login .language-switcher {
+    margin-top: 25px !important;
+    z-index: 5;
+    display: flex; justify-content: center; width: 100%;
+}
+
+body.login .language-switcher form {
+    background: transparent !important; border: none !important;
+    box-shadow: none !important; padding: 0 !important;
+    display: flex; gap: 10px; align-items: center;
+}
+
+/* Dropdown */
+body.login .language-switcher select {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: var(--radius-btn) !important;
+    color: #ddd !important;
+    font-size: 13px !important;
+    height: 38px !important;
+    padding: 0 15px !important;
+    cursor: pointer;
+    outline: none !important; /* Quitamos borde azul navegador */
+}
+
+body.login .language-switcher select:focus {
+    border-color: var(--wporlogin-color-principal-marca) !important;
+    background-color: rgba(255,255,255,0.15) !important;
+}
+body.login .language-switcher option { background: #111; color: #fff; }
+
+/* Botón Cambiar */
+body.login .language-switcher input[type="submit"] {
+    background: transparent !important;
+    border: 1px solid var(--wporlogin-color-principal-marca) !important;
+    color: var(--wporlogin-color-principal-marca) !important;
+    border-radius: var(--radius-btn) !important;
+    height: 38px !important;
+    padding: 0 15px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: none !important;
+}
+
+body.login .language-switcher input[type="submit"]:hover {
+    background: var(--wporlogin-color-principal-marca) !important;
+    color: #fff !important;
+}
+
+body.login .language-switcher label { display: none !important; }
+
+/* =================================================================
+   9. MENSAJES DE ERROR / ÉXITO
+   ================================================================= */
+
+body.login #login_error, body.login .message {
+    background: #1c1c1e !important;
+    border-left: 4px solid #ff453a !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    margin-bottom: 20px !important;
+    padding: 15px !important;
+}
+body.login .message { border-left-color: #30d158 !important; }
+
+/* =================================================================
+   FIX CRÍTICO MÓVIL (SAMSUNG / ANDROID / IPHONE)
+   Evita que el formulario se salga de la pantalla a la derecha.
+   ================================================================= */
+
+/* 1. REGLA MAESTRA: El relleno NO debe sumar al ancho total */
+body.login,
+body.login div#login,
+body.login form {
+    box-sizing: border-box !important; /* Vital para que no se desborde */
+}
+
+@media screen and (max-width: 480px) {
+    
+    /* 2. CONTENEDOR FLUIDO PERO CONTENIDO */
+    body.login div#login {
+        width: 100% !important;
+        max-width: 100% !important; /* Asegura no exceder la pantalla */
+        padding: 0 20px !important; /* Margen de seguridad lateral */
+        margin: 0 auto !important;  /* Centrado estricto */
+        left: 0 !important;         /* Evita desplazamientos raros */
+        right: 0 !important;
+    }
+
+    /* 3. ARREGLO DEL FORMULARIO */
+    body.login form {
+        padding: 30px 20px !important; /* Reducimos padding interno */
+        margin: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 4. ALINEACIÓN SUPERIOR (SOLUCIÓN TECLADO) */
+    /* En vez de centrar, alineamos arriba para que el teclado no tape nada */
+    body.login {
+        justify-content: flex-start !important;
+        padding-top: 40px !important;
+        min-height: 100vh !important;
+        height: auto !important;
+    }
+
+    /* 5. SELECTOR DE IDIOMAS (ANCHO TOTAL) */
+    body.login .language-switcher form {
+        flex-direction: column !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+    }
+    
+    body.login .language-switcher select,
+    body.login .language-switcher input[type="submit"] {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+    }
+}

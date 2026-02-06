@@ -1,0 +1,369 @@
+/* 
+    Author     : Oregoom
+    WP LOGIN   : DESIGN BASIC 
+    Version    : 1.3.1
+*/
+
+body.login div#login form#loginform p.forgetmenot input#rememberme{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    cursor: pointer;
+}
+body.login div#login form#loginform p.forgetmenot input#rememberme:focus{
+    border-color: var(--wporlogin-color-principal-marca);
+    box-shadow: 0 0 0 1px var(--wporlogin-color-principal-marca);
+}
+body.login div#login form#loginform p.forgetmenot input#rememberme:checked::before {
+    content: "✔"; 
+    position: absolute;
+    left: 2px;
+    top: 12px;
+    font-size: 16px;
+    color: var(--wporlogin-color-principal-marca);
+    border-color: var(--wporlogin-color-principal-marca);
+    font-weight: bold;
+}
+
+/*PC*/
+@media (max-width: 782px){
+
+    body.login div#login form#loginform p.forgetmenot input#rememberme{
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 18px;
+        height: 18px;
+        position: relative;
+        cursor: pointer;
+    }
+    body.login div#login form#loginform p.forgetmenot input#rememberme:focus{
+        border-color: var(--wporlogin-color-principal-marca);
+        box-shadow: 0 0 0 1px var(--wporlogin-color-principal-marca);
+    }
+    body.login div#login form#loginform p.forgetmenot input#rememberme:checked::before {
+        content: "✔"; 
+        position: absolute;
+        left: -2px;
+        top: 13px;
+        font-size: 16px;
+        color: var(--wporlogin-color-principal-marca);
+        border-color: var(--wporlogin-color-principal-marca);
+        font-weight: bold;
+    }
+
+} /* @media (max-width: 782px) */
+
+@media (max-width: 600px){
+
+}
+
+@media (max-width: 400px){
+
+}
+
+@media (max-width: 575.98px) { /* MOVIL */
+
+    body.login {
+        background-color: #ffffff !important;
+    
+        /* Vesión 1.2 */
+        display: flex;
+        flex-direction: column;
+        /*justify-content: center;*/
+        align-items: center;
+    }
+    
+    body.login-action-login div#login ,
+    body.login-action-register div#login , 
+    body.login-action-lostpassword div#login {
+        width: 350px !important;
+        background-color: #ffffff !important;
+    }
+
+    body.login-action-confirm_admin_email div#login form.admin-email-confirm-form{
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        margin: 0 !important;
+    }
+
+}
+
+@media (min-width: 576px) { /* ESCRITORIO */
+
+    body.login {
+        background-color: #ffffff !important;
+    
+        /* Vesión 1.2 */
+        display: flex !important;
+        flex-direction: column !important;
+        /*justify-content: var(--wporlogin-login-justify-content);*/
+        align-items: center !important;
+    }
+    
+    body.login-action-confirm_admin_email #login{
+        margin-top: auto !important;
+    }
+
+    body.login-action-login div#login ,
+    body.login-action-register div#login , 
+    body.login-action-lostpassword div#login {
+        width: 400px !important;
+        background-color: #ffffff !important;
+    }
+
+    body.login-action-confirm_admin_email div#login {                   
+        background-color: #ffffff !important;
+        padding-top: 2% !important;
+    }
+
+}
+
+body.login-action-confirm_admin_email div#login h1.wp-login-logo {
+    display: none !important;
+}
+
+body.login-action-confirm_admin_email div#login form.admin-email-confirm-form {
+    border: none !important;
+    background-color: #ffffff !important;
+}
+
+
+
+body.login div#login h1 {
+    margin-bottom: 3% !important;
+}            
+body.login div#login h1 a {
+    background-image:none !important;
+    background-color: #ffffff !important;
+    display: inline !important;
+    cursor: auto !important;
+    font-size: 48px !important;
+    font-family: "Roboto",sans-serif !important;
+    line-height: 1 !important;
+}
+body.login div#login h1 a:hover {
+    color: #444444 !important;
+}
+body.login div#login h1 a:focus {
+    box-shadow: none !important;
+}
+
+body.login div#login div.message {
+    max-width: 300px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border-left: 4px solid var(--wporlogin-color-principal-marca) !important;
+    background-color: rgba(132, 179, 240, 0.2) !important;
+    border-radius: 4px !important;
+}
+
+body.login div#login div#login_error {
+    max-width: 300px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border-radius: 4px !important;
+    background-color: rgba(240, 132, 132, 0.2) !important;
+}
+body.login div#login div#login_error p a{
+    color: var(--wporlogin-color-principal-marca);
+}
+body.login div#login div#login_error p a:hover{
+    color: var(--wporlogin-color-hover-marca);
+}
+
+body.login div#login form#loginform,
+body.login div#login form#registerform,
+body.login div#login form#lostpasswordform {
+    border: none !important;
+    box-shadow: none !important;
+    padding-bottom: 15px !important;
+    padding-top: 10px !important;
+    max-width: 360px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+body.login div#login form#loginform p {}
+body.login div#login form#loginform p label {}
+body.login div#login form#loginform input {} 
+
+body.login div#login form#loginform input#user_login,
+body.login div#login form#registerform input#user_login,
+body.login div#login form#registerform input#user_email,
+body.login div#login form#lostpasswordform input#user_login {
+    background-color: #ffffff !important;
+    font-size: 14px !important;
+    line-height: 1.33333333 !important;
+    width: 100% !important;
+    margin: 0 6px 16px 0 !important;
+    min-height: 40px !important;
+    max-height: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    border-bottom: #a4a7b5 1px solid !important;
+    padding: 0 !important;
+}
+body.login div#login form#loginform input#user_login:focus,
+body.login div#login form#registerform input#user_login:focus,
+body.login div#login form#registerform input#user_email:focus,
+body.login div#login form#lostpasswordform input#user_login:focus {
+    background-color: #ffffff !important;
+    outline: 0 none !important;
+    border-bottom: 2px solid var(--wporlogin-color-principal-marca) !important;
+    box-shadow: none !important;
+}
+
+body.login div#login form#loginform input#user_pass {
+    background-color: #ffffff !important;
+    font-size: 14px !important;
+    line-height: 1.33333333 !important;
+    width: 100% !important;
+    margin: 0 6px 16px 0 !important;
+    min-height: 40px !important;
+    max-height: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    border-bottom: #a4a7b5 1px solid !important;
+    padding: 0 !important;
+}
+body.login div#login form#loginform input#user_pass:focus {
+    background-color: #ffffff !important;
+    outline: 0 none !important;
+    border-bottom: 2px solid var(--wporlogin-color-principal-marca) !important;
+    box-shadow: none !important;
+}
+
+body.login div#login form#loginform button.button-secondary:focus {
+    border: none !important;
+    box-shadow: none;
+}
+body.login div#login form#loginform button.button-secondary span.dashicons {
+    color: var(--wporlogin-color-principal-marca);
+}
+
+body.login div#login form#loginform p.forgetmenot {}
+body.login div#login form#loginform p.forgetmenot input#rememberme {}
+body.login div#login form#loginform p.submit {}
+
+body.login div#login form#loginform p.submit input#wp-submit,
+body.login div#login form#registerform p.submit input#wp-submit,
+body.login div#login form#lostpasswordform p.submit input#wp-submit {
+    background-color: var(--wporlogin-color-principal-marca) !important;
+    border: solid 1px var(--wporlogin-color-principal-marca) !important;
+    color: var(--wporlogin-color-principal-marca-text-submit) !important;
+    float: none !important;
+    width: 100% !important;
+    height: 50px !important;
+    font-size: 16px !important;
+    margin-top: 10px !important;
+    border-radius: 6px !important;
+    font-family: "Roboto",sans-serif !important;
+}
+body.login div#login form#loginform p.submit input#wp-submit:hover,
+body.login div#login form#registerform p.submit input#wp-submit:hover,
+body.login div#login form#lostpasswordform p.submit input#wp-submit:hover {
+    background-color: var(--wporlogin-color-hover-marca) !important;
+    border: solid 1px var(--wporlogin-color-hover-marca) !important;
+}
+body.login div#login form#loginform p.submit input#wp-submit:focus,
+body.login div#login form#registerform p.submit input#wp-submit:focus,
+body.login div#login form#lostpasswordform p.submit input#wp-submit:focus {
+    box-shadow: none !important;
+}
+
+body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary input{
+    background-color: var(--wporlogin-color-principal-marca) !important;
+    border: solid 1px var(--wporlogin-color-principal-marca) !important;
+    color: var(--wporlogin-color-principal-marca-text-submit) !important;
+    font-family: "Roboto",sans-serif !important;
+}
+body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary input:hover{
+    background-color: var(--wporlogin-color-hover-marca) !important;
+    border-color: var(--wporlogin-color-hover-marca) !important;
+}
+body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary input:focus{
+    box-shadow: none !important;
+}
+
+body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary a {
+    border-color: var(--wporlogin-color-principal-marca) !important;
+    color: var(--wporlogin-color-principal-marca) !important;
+    background-color: #ffffff !important;
+}
+body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-primary a:hover {
+    border-color: #000000 !important;
+    color: #ffffff !important;
+    background-color: #000000 !important;
+}
+
+body.login div.language-switcher form#language-switcher input{
+    background-color: var(--wporlogin-color-principal-marca) !important;
+    border: solid 1px var(--wporlogin-color-principal-marca) !important;
+    color: var(--wporlogin-color-principal-marca-text-submit) !important;
+    font-family: "Roboto",sans-serif !important;
+}
+body.login div.language-switcher form#language-switcher input:hover {
+    background-color: var(--wporlogin-color-hover-marca) !important;
+    border: solid 1px var(--wporlogin-color-hover-marca) !important;
+}
+body.login div.language-switcher form#language-switcher input:focus {
+    box-shadow: none !important;
+}
+
+body.login div.language-switcher form#language-switcher select#language-switcher-locales{
+
+}  
+body.login div.language-switcher form#language-switcher select#language-switcher-locales:hover{
+    color: var(--wporlogin-color-principal-marca) !important;
+}    
+body.login div.language-switcher form#language-switcher select#language-switcher-locales:focus {
+    border-color: var(--wporlogin-color-principal-marca) !important;
+    color: var(--wporlogin-color-principal-marca) !important;
+    box-shadow: 0 0 0 1px var(--wporlogin-color-principal-marca) !important;
+}    
+body.login div.language-switcher form#language-switcher select#language-switcher-locales:active {
+    border-color: var(--wporlogin-color-principal-marca) !important;
+    box-shadow: none !important;
+}
+
+body.login div#login p#nav {                
+    text-align: center !important;
+    margin: 0px !important;
+}
+body.login div#login p#nav a,
+body.login div#login div.privacy-policy-page-link a.privacy-policy-link, 
+body.login div#login form.admin-email-confirm-form p a,
+body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-secondary a {
+    color: var(--wporlogin-color-principal-marca);
+    font-size: 14px !important;
+    font-family: "Roboto",sans-serif !important;
+}
+body.login div#login p#nav a:hover,
+body.login div#login div.privacy-policy-page-link a.privacy-policy-link:hover,
+body.login div#login form.admin-email-confirm-form p a:hover,
+body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-secondary a:hover {
+    color: var(--wporlogin-color-hover-marca);
+}
+body.login div#login p#nav a:focus,
+body.login div#login div.privacy-policy-page-link a.privacy-policy-link:focus,
+body.login div#login form.admin-email-confirm-form p a:focus,
+body.login div#login form.admin-email-confirm-form div.admin-email__actions div.admin-email__actions-secondary a:focus {
+    box-shadow: none !important;
+}
+
+body.login div#login p#backtoblog {
+    max-width: 360px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+}
+body.login div#login p#backtoblog a {}
+body.login div#login p#backtoblog a:hover{
+    color: var(--wporlogin-color-hover-marca) !important;
+}
+body.login div#login p#backtoblog a:focus {
+    box-shadow: none !important;
+}
