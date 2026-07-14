@@ -3,7 +3,7 @@
  * Plugin Name:       WPOrLogin - Custom Login, Social Login, Limit Attempts, Hide Login & reCAPTCHA
  * Plugin URI:        https://oregoom.com/wporlogin/
  * Description:       Customize your WordPress login page design. Secure it with Google reCAPTCHA, Limit Login Attempts, and Hide Login URL. Includes Social Login and Role-Based Redirects.
- * Version:           3.0.2
+ * Version:           3.0.3
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Oregoom
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Definir constantes para rutas (ayuda a la escalabilidad)
-define( 'WPORLOGIN_VERSION', '3.0.2' );
+define( 'WPORLOGIN_VERSION', '3.0.3' );
 define( 'WPORLOGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WPORLOGIN_URL', plugin_dir_url( __FILE__ ) );
 

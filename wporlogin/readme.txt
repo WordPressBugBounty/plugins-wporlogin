@@ -4,8 +4,8 @@ Contributors: Oregoom
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CTG69VCQ5TZZN&source=url
 Tags: custom login, hide login, limit login, recaptcha, security
 Requires at least: 5.2
-Tested up to: 6.9
-Stable tag: 3.0.2
+Tested up to: 7.0.1
+Stable tag: 3.0.3
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -217,6 +217,9 @@ We only store the essentials required to create a user account on your site: Ema
 
 == Changelog ==
 
+= 3.0.3 =
+* **FIX:** Resolved a critical issue in the "Hide Login" module that prevented the native password reset link from working properly. Users can now securely reset their passwords even when a custom login URL is active.
+
 = 3.0.2 =
 * **NEW FEATURE:** **Social Registration Only.**
 * Now you can **disable the manual registration form**. This effectively stops spam bots that try to create fake accounts via scripts.
@@ -299,5 +302,5 @@ We only store the essentials required to create a user account on your site: Ema
 
 == Upgrade Notice ==
 
-= 3.0.2 =
-Stop Spam Bots! New "Social Registration Only" mode disables manual sign-ups to block fake accounts. Plus: We now sync First & Last Names from Google for better user data.
+= 3.0.3 =
+Critical Fix: Resolved an issue with the "Hide Login" module that prevented password recovery links from working. Update highly recommended.

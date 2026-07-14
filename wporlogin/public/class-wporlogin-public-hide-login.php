@@ -234,12 +234,15 @@ class Wporlogin_Public_Hide_Login {
                 $_GET['action'] = 'register';
                 if ( ! isset( $_GET['key'] ) ) $_REQUEST['action'] = 'register';
             } elseif ( $is_recovery_action ) {
-                $action = 'lostpassword';
-                $_GET['action'] = 'lostpassword';
-                $_REQUEST['action'] = 'lostpassword';
                 // Protección para resetpass (rp) que viene con key
-                if ( isset($_GET['action']) && in_array($_GET['action'], array('rp', 'resetpass')) ) {
-                    $action = $_GET['action'];
+                if ( in_array($current_action, array('rp', 'resetpass')) ) {
+                    $action = $current_action;
+                    $_GET['action'] = $current_action;
+                    $_REQUEST['action'] = $current_action;
+                } else {
+                    $action = 'lostpassword';
+                    $_GET['action'] = 'lostpassword';
+                    $_REQUEST['action'] = 'lostpassword';
                 }
             } else {
                 if ( isset($_GET['action']) ) $action = $_GET['action'];
