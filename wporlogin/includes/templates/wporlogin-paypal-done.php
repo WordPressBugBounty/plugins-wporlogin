@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+?>
 <!-- Archivo: templates/wporlogin-paypal-done.php -->
 
 <!--BEGIN BOTÓN DE DONACIÓN CON PAYPAL-->
@@ -6,15 +11,15 @@
         <table class="form-table">                
             <tbody>
                 <tr>
-                    <th scope="row"><label><?php _e('Donate now', 'wporlogin') ?></label></th>
+                    <th scope="row"><label><?php esc_html_e( 'Donate now', 'wporlogin' ) ?></label></th>
                     <td>
                         <a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CTG69VCQ5TZZN&source=url" rel="noopener noreferrer nofollow">
                             <img src="<?php echo esc_url('https://www.paypalobjects.com/es_ES/i/btn/btn_donate_SM.gif'); ?>">
                         </a>
                         <p class="description" id="tagline-description">
-                            <strong><?php _e('Important', 'wporlogin'); ?>: </strong><?php _e('If you appreciate my work, consider making a small donation to support it. Your help is greatly appreciated!', 'wporlogin'); ?>
+                            <strong><?php esc_html_e( 'Important', 'wporlogin' ); ?>: </strong><?php esc_html_e( 'If you appreciate my work, consider making a small donation to support it. Your help is greatly appreciated!', 'wporlogin' ); ?>
                         </p>
-                        <p class="description" id="tagline-description"><?php _e('To donate, simply click the <strong>Donate</strong> button. Thank you! 😊', 'wporlogin'); ?></p>
+                        <p class="description" id="tagline-description"><?php echo wp_kses_post( __( 'To donate, simply click the <strong>Donate</strong> button. Thank you! 😊', 'wporlogin' ) ); ?></p>
                     </td>
                 </tr>
             </tbody>

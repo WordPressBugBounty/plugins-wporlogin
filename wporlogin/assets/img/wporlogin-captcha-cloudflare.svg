@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Cloudflare">
+  <path d="M14 45a12 12 0 0 1 0-24 16 16 0 0 1 29-5 12 12 0 0 1 2 24H14z" fill="#f48120"/>
+  <path d="M26 51a9 9 0 0 1-1-18 12 12 0 0 1 22 0 9 9 0 0 1 5 17H26z" fill="#faae40"/>
+  <path d="M9 40h38" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</svg>

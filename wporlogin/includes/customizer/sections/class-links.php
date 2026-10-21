@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
  * Class responsible for registering Links & Extra settings options.
  * * UX OPTIMIZED: Ordered by Color -> Alignment -> Language Switcher.

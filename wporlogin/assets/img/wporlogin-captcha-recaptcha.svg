@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="reCAPTCHA">
+  <circle cx="32" cy="32" r="29" fill="#eef4fb"/>
+  <path d="M15 29a19 19 0 0 1 32-13l-5 5A12 12 0 0 0 23 29h7l-11 12-11-12z" fill="#4584d5"/>
+  <path d="M49 35a19 19 0 0 1-32 13l5-5A12 12 0 0 0 41 35h-7l11-12 11 12z" fill="#5b6573"/>
+</svg>

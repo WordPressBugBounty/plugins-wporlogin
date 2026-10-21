@@ -51,7 +51,15 @@ class Wporlogin_Deactivator {
 		// 3. AHORA sí borramos la página física.
 		// Como ya borramos la opción en el paso anterior, el Protector (si se activa) 
 		// leerá 'false' y permitirá el borrado sin bloquearnos.
-		if ( $page_id && get_post_status( $page_id ) ) {
+		// Solo eliminamos una página que realmente pertenezca a WPOrLogin.
+		// Comprobar el tipo y la marca interna evita borrar otra página
+		// si el ID almacenado apunta a un contenido diferente.
+		if (
+			$page_id &&
+			'page' === get_post_type( $page_id ) &&
+			'1' === (string) get_post_meta( $page_id, '_wporlogin_is_system_page', true ) &&
+			get_post_status( $page_id )
+		) {
 			wp_delete_post( $page_id, true );
 		}
 

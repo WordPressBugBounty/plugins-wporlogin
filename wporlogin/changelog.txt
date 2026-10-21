@@ -1,0 +1,83 @@
+# WPOrLogin - Previous Release History
+
+This file preserves the earlier release notes. The current version and the most recent update are documented in readme.txt.
+
+= 3.0.2 =
+* **NEW FEATURE:** **Social Registration Only.**
+* Now you can **disable the manual registration form**. This effectively stops spam bots that try to create fake accounts via scripts.
+* Users can only register using the secure "Sign in with Google" button.
+* **IMPROVEMENT:** **Real Name Import.**
+* The plugin now automatically fetches and saves the user's **First Name** and **Last Name** from their Google Profile.
+* Great for membership sites and shops that need real user data.
+* **UX:** Improved the layout of the registration page when the manual form is hidden.
+
+= 3.0.1 =
+* **NEW FEATURE:** **Video Backgrounds:** Now you can turn your login page into a cinematic experience.
+    * Support for **YouTube** and **Vimeo** (just paste the URL).
+    * Support for **Local MP4** videos (upload from Media Library).
+    * Includes "Smart Mobile Fallback" to replace video with an image on phones for speed.
+* **NEW FEATURE:** **Background Slideshow:** Create a dynamic login screen with random rotating images.
+    * Includes a slider to control the duration (seconds) between images.
+* **NEW FEATURE:** **Smart Overlays:** Added a color/opacity layer control.
+    * Now you can darken or tint your background videos/images to make your text and logo pop.
+* **IMPROVEMENT:** **Image Gallery:** Added a built-in gallery with professional backgrounds ready to use.
+* **UX:** Improved the Live Preview responsiveness when switching between Video, Static, and Random modes.
+
+= 3.0 =
+* **MAJOR FEATURE!** **Full Visual Customizer:** Now you can design your login page using the native WordPress Customizer. Change colors, borders, shadows, opacity, and backgrounds while viewing the result in real-time.
+* **NEW:** **Premium Design Gallery:** We added new professional templates ready to use. Select your favorite and give your site a modern look in a second.
+* **IMPROVEMENT:** Smoother design experience. We made the customizer smart so it doesn't clash with your theme styles while you design.
+* **NEW:** **All-in-One Suite:** All tools (Social Login, Security, Design) are consolidated into a single robust and easy-to-use panel.
+* **COMPATIBILITY:** Ready to work perfectly with the latest WordPress themes (Full Site Editing).
+
+= 2.12.2 =
+* **SECURITY:** Enhanced protection algorithms for more accurate visitor detection (Cloudflare compatible).
+* **PERFORMANCE:** Database optimizations to speed up the login process.
+* **FIX:** Improved accuracy of the "Limit Login" timer and attempt counters.
+* **STABILITY:** Fixed minor internal warnings and improved dashboard responsiveness.
+
+= 2.12.1 =
+* **NEW:** **Redirect by Role**: Send customers to the shop and editors to the dashboard automatically.
+* **SECURITY:** **"Stealth Mode"**: Hides your dashboard login completely from bots.
+* **SECURITY:** Stronger protection against brute-force attacks.
+* **FEATURE:** **Smart Avatar Sync**: Automatically shows the user's Google profile picture instead of a generic icon.
+* **UX:** Added a simple "Add my IP" button to prevent locking yourself out.
+* **UX:** You can now choose where to send strangers who try to access your hidden login page (404 Error, Home, etc.).
+* **FIX:** Solved timezone issues with the lockout timer.
+
+= 2.12 =
+* **NEW MODULE:** **Social Login**. Let users sign in with one click using Google.
+* **FEATURE:** **Profile Picture Sync**. Automatically updates user avatars from their Google account.
+* **COMPATIBILITY:** Ready for the latest WordPress versions.
+
+= 2.11 =
+* **NEW MODULE:** **Hide Login**. Change your login URL (e.g., /my-access) to stop bot attacks instantly.
+* **FEATURE:** "Smart Links" technology ensures password reset emails always work, even with a hidden login.
+
+= 2.10 =
+* **NEW MODULE:** **Limit Login Attempts**. Automatically blocks hackers who guess wrong passwords too many times.
+* **FEATURE:** Live Security Report showing blocked intruders.
+
+= 2.9.8 =
+* Confirmed compatibility with WordPress 6.8.
+
+= 2.9.7 =
+* Improved review notice logic.
+
+= 2.9.6 =
+* Added color customization for buttons/links.
+
+= 2.9.4 =
+* Multi-language support added.
+
+= 2.9.3 =
+* Added Redirect Module functionality.
+
+= 2.9 =
+* Added Google reCAPTCHA v3 support.
+
+= 2.7 =
+* Added "Remove Language" module.
+
+= 1.0 =
+* Initial Release.

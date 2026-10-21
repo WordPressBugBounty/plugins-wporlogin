@@ -1,12 +1,54 @@
 <?php
 class Wporlogin_Public_Social {
 
-    private $plugin_name;
-    private $version;
+    /** @var Wporlogin_Social_Handler[] Independent handlers keyed by provider. */
+    private $handlers = array();
 
+    /** Keep the existing constructor signature used by the plugin bootstrap. */
     public function __construct( $plugin_name, $version ) {
-        $this->plugin_name = $plugin_name;
-        $this->version     = $version;
+        require_once __DIR__ . '/social/class-wporlogin-social-providers.php';
+        require_once __DIR__ . '/social/class-wporlogin-social-avatar.php';
+        require_once __DIR__ . '/social/class-wporlogin-social-identity.php';
+        // Native password events may make social-created users eligible for
+        // WordPress password confirmation in future link requests.
+        add_action( 'after_password_reset', array( 'Wporlogin_Social_Identity', 'after_password_reset' ) );
+        add_action( 'wp_set_password', array( 'Wporlogin_Social_Identity', 'after_wp_set_password' ), 10, 2 );
+        add_action( 'profile_update', array( 'Wporlogin_Social_Identity', 'profile_updated' ), 10, 2 );
+        require_once __DIR__ . '/social/class-wporlogin-social-link.php';
+
+        require_once __DIR__ . '/social/class-wporlogin-social-handler.php';
+
+        // No provider requires another provider's files or credentials.
+        $modules = array(
+            'google'    => 'Wporlogin_Google_Handler',
+            'facebook'  => 'Wporlogin_Facebook_Handler',
+            'microsoft' => 'Wporlogin_Microsoft_Handler',
+        );
+        foreach ( $modules as $provider => $class ) {
+            $adapter = __DIR__ . '/social/class-wporlogin-social-' . $provider . '.php';
+            $handler = __DIR__ . '/social/class-wporlogin-' . $provider . '-handler.php';
+            if ( ! is_readable( $adapter ) || ! is_readable( $handler ) ) {
+                continue;
+            }
+            require_once $adapter;
+            require_once $handler;
+            $this->handlers[ $provider ] = new $class();
+        }
+
+        // Microsoft's REST return endpoint is specific to that module.
+        if ( isset( $this->handlers['microsoft'] ) ) {
+            $this->handlers['microsoft']->register_rest_hooks();
+        }
+    }
+
+    /** @return bool Whether any social provider is ready for login. */
+    private function has_social_provider() {
+        foreach ( $this->handlers as $provider => $handler ) {
+            if ( Wporlogin_Social_Providers::is_available( $provider ) ) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -15,7 +57,8 @@ class Wporlogin_Public_Social {
      * para que no parpadee en el lugar incorrecto.
      */
     public function enqueue_social_styles() {
-        if ( get_option( 'wporlogin_google_enable' ) !== '1' ) return;
+        Wporlogin_Social_Link::render_styles();
+        if ( ! $this->has_social_provider() && ! Wporlogin_Social_Link::has_pending() ) return;
         ?>
         <style type="text/css">
             .wporlogin-social-container {
@@ -63,6 +106,35 @@ class Wporlogin_Public_Social {
             .wporlogin-social-text {
                 padding-left: 20px;
             }
+            .wporlogin-facebook-btn {
+                background: #1877f2;
+                border-color: #1877f2;
+                color: #fff;
+            }
+            .wporlogin-facebook-btn:hover,
+            .wporlogin-facebook-btn:focus {
+                background: #1465cf;
+                border-color: #1465cf;
+                color: #fff;
+            }
+            .wporlogin-facebook-btn .wporlogin-social-icon-wrapper {
+                color: #fff;
+            }
+            .wporlogin-microsoft-btn {
+                background-color: #ffffff;
+                border-color: #d2d5da;
+                color: #242424;
+            }
+            .wporlogin-microsoft-btn:hover,
+            .wporlogin-microsoft-btn:focus {
+                background-color: #f5f5f5;
+                border-color: #aeb5bf;
+                color: #242424;
+            }
+            .wporlogin-social-btn:focus-visible {
+                outline: 2px solid #2271b1;
+                outline-offset: 3px;
+            }
             .wporlogin-separator {
                 width: 100%;
                 display: flex;
@@ -88,7 +160,23 @@ class Wporlogin_Public_Social {
      * VERSIÓN FINAL: Soporta Login (#loginform) y Registro (#registerform).
      */
     public function output_social_footer_script() {
-        if ( get_option( 'wporlogin_google_enable' ) !== '1' ) return;
+        if ( Wporlogin_Social_Link::has_pending() ) {
+            // On the password branch, put the instructions before credentials.
+            // Without JavaScript the form remains functional and styled.
+            if ( Wporlogin_Social_Link::password_mode() ) {
+                ?>
+                <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var form = document.getElementById('loginform');
+                    var confirmation = form && form.querySelector('.wporlogin-link-confirm');
+                    if (confirmation) form.insertBefore(confirmation, form.firstChild);
+                });
+                </script>
+                <?php
+            }
+            return;
+        }
+        if ( ! $this->has_social_provider() ) return;
         ?>
         <script type="text/javascript">
             document.addEventListener("DOMContentLoaded", function(event) {
@@ -124,199 +212,84 @@ class Wporlogin_Public_Social {
      * MEJORA: Oculta el botón en la página de Registro si el registro global está desactivado.
      */
     public function render_social_buttons() {
-        if ( get_option( 'wporlogin_google_enable' ) !== '1' ) return;
-
-        // Verificar si el registro está permitido globalmente en WP
-        $registration_enabled = get_option( 'users_can_register' );
-        $action = isset( $_GET['action'] ) ? $_GET['action'] : 'login';
-
-        // SI estamos en la pantalla de registro Y el registro está cerrado -> NO mostrar nada.
-        if ( $action === 'register' && ! $registration_enabled ) {
+        // Only linked methods are allowed during a pending confirmation.
+        // They are presented by the separate account-link guidance above.
+        if ( Wporlogin_Social_Link::has_pending() ) { return; }
+        if ( ! $this->has_social_provider() ) {
             return;
         }
 
-        require_once plugin_dir_path( __FILE__ ) . 'social/class-wporlogin-social-google.php';
-        
-        $client_id = get_option( 'wporlogin_google_client_id' );
-        $secret    = get_option( 'wporlogin_google_client_secret' );
-
-        if ( $client_id && $secret ) {
-            $google = new Wporlogin_Social_Google( $client_id, $secret );
-            
-            // Texto dinámico
-            if ( $action === 'register' ) {
-                $btn_text = __( 'Register with Google', 'wporlogin' );
-            } else {
-                $btn_text = __( 'Sign in with Google', 'wporlogin' );
-            }
-
-            echo '<div class="wporlogin-social-container">';
-            echo '<div class="wporlogin-separator">' . __( 'OR', 'wporlogin' ) . '</div>';
-            echo $google->render_button( $btn_text );
-            echo '</div>';
+        $action = isset( $_GET['action'] ) && is_string( $_GET['action'] )
+            ? sanitize_key( wp_unslash( $_GET['action'] ) ) : 'login';
+        if ( 'register' === $action && ! get_option( 'users_can_register' ) ) {
+            return;
         }
+
+        $buttons = array();
+        foreach ( $this->handlers as $provider => $handler ) {
+            if ( Wporlogin_Social_Providers::is_available( $provider ) ) {
+                $buttons[] = $handler->render_button( 'register' === $action );
+            }
+        }
+
+        if ( ! $buttons ) {
+            return;
+        }
+        echo '<div class="wporlogin-social-container">';
+        echo '<div class="wporlogin-separator">' . esc_html__( 'OR', 'wporlogin' ) . '</div>';
+        echo wp_kses( implode( "\n", $buttons ), self::allowed_social_markup() ); // Preserve the provider SVG icons.
+        echo '</div>';
     }
 
     /**
-     * Escucha cuando Google nos devuelve al usuario.
-     * Hook: init
+     * Allow only the elements generated by the three built-in providers and
+     * the account-confirmation view, including their branded inline SVG icons.
+     * This does not alter the provider URLs or the confirmation workflow.
      */
+    private static function allowed_social_markup() {
+        return array(
+            'a'    => array( 'href' => true, 'class' => true ),
+            'div'  => array( 'class' => true, 'role' => true, 'aria-labelledby' => true ),
+            'h2'   => array( 'class' => true, 'id' => true ),
+            'p'    => array( 'class' => true ),
+            'span' => array( 'class' => true, 'aria-hidden' => true ),
+            'svg'  => array(
+                'aria-hidden' => true, 'focusable' => true, 'xmlns' => true,
+                'version' => true, 'width' => true, 'height' => true,
+                'viewbox' => true, 'class' => true, 'fill' => true,
+                'stroke' => true, 'stroke-width' => true,
+                'stroke-linecap' => true, 'stroke-linejoin' => true,
+            ),
+            'g'    => array(),
+            'path' => array( 'fill' => true, 'd' => true ),
+            'rect' => array( 'x' => true, 'y' => true, 'width' => true, 'height' => true, 'rx' => true ),
+        );
+    }
+
+    /** Dispatch the existing init hook to each independent provider module. */
     public function handle_social_callback() {
-        if ( isset( $_GET['wporlogin_social_auth'] ) && $_GET['wporlogin_social_auth'] == 'google' ) {
-            
-            // Si Google devuelve un error (ej: usuario canceló) o no hay código
-            if ( isset( $_GET['error'] ) || ! isset( $_GET['code'] ) ) {
-                $this->redirect_with_error( 'google_cancel' );
-                return;
-            }
-
-            require_once plugin_dir_path( __FILE__ ) . 'social/class-wporlogin-social-google.php';
-            
-            $client_id = get_option( 'wporlogin_google_client_id' );
-            $secret    = get_option( 'wporlogin_google_client_secret' );
-            
-            // Validación básica de configuración
-            if ( ! $client_id || ! $secret ) {
-                $this->redirect_with_error( 'google_config' );
-                return;
-            }
-
-            $provider = new Wporlogin_Social_Google( $client_id, $secret );
-            
-            // Intentamos obtener datos. Si falla (claves mal, error de red), devuelve false.
-            $user_data = $provider->verify_token( sanitize_text_field( $_GET['code'] ) );
-
-            if ( $user_data && isset( $user_data['email'] ) ) {
-                $this->login_or_register_user( $user_data );
-            } else {
-                // AQUÍ ESTABA EL wp_die(). Lo cambiamos por redirección elegante.
-                $this->redirect_with_error( 'google_connect_fail' );
-            }
+        Wporlogin_Social_Link::handle_finish();
+        foreach ( $this->handlers as $handler ) {
+            $handler->handle_request();
         }
     }
 
-    /**
-     * Helper privado para redirigir con error (DRY - Don't Repeat Yourself)
-     */
-    private function redirect_with_error( $error_code ) {
-        $login_url = wp_login_url();
-        $redirect_url = add_query_arg( 'wporlogin_error', $error_code, $login_url );
-        wp_safe_redirect( $redirect_url );
-        exit;
+    /** Preserve only expiration notices above the login form. */
+    public function render_link_confirmation( $message ) {
+        return Wporlogin_Social_Link::expired_message( $message );
     }
 
-    /**
-     * Lógica universal para registrar/loguear en WP.
-     * MEJORA: Bloquea la creación de usuarios si 'users_can_register' es falso.
-     */
-    private function login_or_register_user( $social_user ) {
-        $email = $social_user['email'];
-        
-        // 1. Buscar si existe el usuario
-        $user = get_user_by( 'email', $email );
-
-        // 2. Si NO existe, intentamos crearlo
-        if ( ! $user ) {
-            
-            // --- BLOQUEO DE SEGURIDAD (MEJORADO UX) ---
-            // Si el registro está desactivado, NO matamos la página.
-            // Redirigimos al login con una variable 'wporlogin_error'
-            if ( ! get_option( 'users_can_register' ) ) {
-                
-                $login_url = wp_login_url();
-                
-                // Añadimos un parámetro a la URL: ?wporlogin_error=account_not_found
-                $redirect_url = add_query_arg( 'wporlogin_error', 'account_not_found', $login_url );
-                
-                wp_safe_redirect( $redirect_url );
-                exit; // Salimos limpiamente
-            }
-            // ------------------------------------------
-
-            $username = sanitize_user( current( explode( '@', $email ) ) );
-            if( username_exists($username) ) { $username .= rand(100, 999); }
-            $password = wp_generate_password();
-            
-            $user_id = wp_create_user( $username, $password, $email );
-            
-            if ( is_wp_error( $user_id ) ) wp_die( $user_id->get_error_message() );
-
-            // --- CORRECCIÓN: Actualizar Nombre y Apellido ---
-            // Google suele enviar 'given_name' y 'family_name'
-            $user_data_update = array(
-                'ID' => $user_id,
-                'first_name' => isset($social_user['given_name']) ? sanitize_text_field($social_user['given_name']) : '',
-                'last_name'  => isset($social_user['family_name']) ? sanitize_text_field($social_user['family_name']) : '',
-                // Opcional: Mostrar el nombre públicamente como "Nombre Apellido"
-                'display_name' => isset($social_user['name']) ? sanitize_text_field($social_user['name']) : '' 
-            );
-            
-            wp_update_user( $user_data_update );
-            // ------------------------------------------------
-            
-            $user = get_user_by( 'id', $user_id );
-        }
-
-        // --- [NUEVO] SINCRONIZACIÓN DE AVATAR ---
-        // Guardamos la URL de la foto en usermeta cada vez que hace login.
-        // Esto asegura que si cambia su foto en Google, se actualice aquí eventualmente.
-        if ( isset( $social_user['picture'] ) && ! empty( $social_user['picture'] ) ) {
-            update_user_meta( $user->ID, 'wporlogin_social_avatar', esc_url_raw( $social_user['picture'] ) );
-        }
-        // -----------------------------------------
-
-        // 3. Iniciar sesión (para usuarios existentes o recién creados si estaba permitido)
-        wp_set_current_user( $user->ID );
-        wp_set_auth_cookie( $user->ID );
-        
-        // 4. Redirección (Delegando a la clase Redirects como acordamos)
-        $redirect_url = home_url(); 
-        if ( class_exists( 'Wporlogin_Public_Redirects' ) ) {
-            //require_once plugin_dir_path( __FILE__ ) . 'class-wporlogin-public-redirects.php';
-            $redirect_url = Wporlogin_Public_Redirects::get_calculated_redirect_url( $user );
-        }
-
-        wp_safe_redirect( $redirect_url );
-        exit;
+    /** Confirmation options are children of the existing styled login form. */
+    public function render_link_inside_form() {
+        echo wp_kses( Wporlogin_Social_Link::render_confirmation(), self::allowed_social_markup() ); // Preserve confirmation links and icons.
     }
 
-    /**
-     * [NUEVO MÉTODO] Reemplaza el Avatar por defecto de WP/Gravatar
-     * por la foto de Google si existe en los metadatos.
-     */
-    public function replace_gravatar_with_social_image( $avatar, $id_or_email, $size, $default, $alt ) {
-        
-        // 1. [NUEVO] Verificación Global
-        // Si el admin NO activó la opción, retornamos el avatar normal y salimos.
-        if ( get_option( 'wporlogin_social_avatar_sync' ) !== '1' ) {
-            return $avatar;
-        }
-        
-        $user_id = false;
+    public function link_body_class( $classes ) {
+        return Wporlogin_Social_Link::login_body_class( $classes );
+    }
 
-        // Normalizamos para obtener el ID del usuario
-        if ( is_numeric( $id_or_email ) ) {
-            $user_id = (int) $id_or_email;
-        } elseif ( is_object( $id_or_email ) && ! empty( $id_or_email->user_id ) ) {
-            $user_id = (int) $id_or_email->user_id;
-        } elseif ( is_string( $id_or_email ) && is_email( $id_or_email ) ) {
-            $user = get_user_by( 'email', $id_or_email );
-            if ( $user ) $user_id = $user->ID;
-        }
-
-        if ( ! $user_id ) {
-            return $avatar;
-        }
-
-        // Buscamos si tiene avatar social guardado
-        $social_avatar = get_user_meta( $user_id, 'wporlogin_social_avatar', true );
-
-        if ( $social_avatar ) {
-            // [CAMBIO CLAVE] Añadimos referrerpolicy='no-referrer'
-            $avatar = "<img alt='" . esc_attr( $alt ) . "' src='" . esc_url( $social_avatar ) . "' referrerpolicy='no-referrer' class='avatar avatar-{$size} photo' height='{$size}' width='{$size}' loading='lazy' />";
-        }
-
-        return $avatar;
+    public function preserve_link_redirect( $redirect, $requested, $user ) {
+        return Wporlogin_Social_Link::preserve_password_redirect( $redirect, $requested, $user );
     }
 
     /**
@@ -325,16 +298,50 @@ class Wporlogin_Public_Social {
      */
     public function custom_login_error_message( $errors ) {
         
-        if ( ! isset( $_GET['wporlogin_error'] ) ) return $errors;
+        if ( ! isset( $_GET['wporlogin_error'] ) || ! is_string( $_GET['wporlogin_error'] ) ) return $errors;
 
-        $error_code = sanitize_text_field( $_GET['wporlogin_error'] );
+        $error_code = sanitize_key( wp_unslash( $_GET['wporlogin_error'] ) );
         $message    = '';
+
+        $social_notices = array(
+            'social_email_missing' => __( 'The provider did not supply a usable email address. Please use your usual sign-in method or contact the site administrator.', 'wporlogin' ),
+            'social_identity_conflict' => __( 'This external account could not be connected because its association conflicts with an existing account. Please use your usual sign-in method or contact the site administrator.', 'wporlogin' ),
+            'social_link_confirmation_required' => __( 'An account already uses this email address. Sign in with an existing method to confirm your identity before connecting another provider.', 'wporlogin' ),
+            'social_link_failed' => __( 'Account linking could not be completed. Confirm that you signed in to the original account and try again.', 'wporlogin' ),
+            'social_email_unverified' => __( 'Google has not confirmed this email address. Sign in using another method or verify your address with Google.', 'wporlogin' ),
+            'social_unavailable' => __( 'This sign-in provider is currently unavailable. Please use another sign-in method.', 'wporlogin' ),
+            'social_busy' => __( 'Another sign-in request is being processed. Please wait a moment and try again.', 'wporlogin' ),
+            'social_locked' => __( 'Sign-in is temporarily blocked because too many attempts were made. Please try again later.', 'wporlogin' ),
+            'social_access_failed' => __( 'Sign-in could not be completed. Please use your usual sign-in method or contact the site administrator.', 'wporlogin' ),
+        );
+        if ( isset( $social_notices[ $error_code ] ) ) {
+            $errors->add( 'wporlogin_social_error', $social_notices[ $error_code ] );
+            return $errors;
+        }
 
         switch ( $error_code ) {
             case 'account_not_found':
-                $message = __( '<strong>Error</strong>: No account found with this Google email. Please log in with your username and password.', 'wporlogin' );
+                $message = __( '<strong>Notice</strong>: No matching account was found and new registrations are disabled. Please sign in with your existing account or contact the site administrator.', 'wporlogin' );
                 break;
             
+            case 'facebook_cancel':
+                $message = __( '<strong>Notice</strong>: Facebook login was cancelled.', 'wporlogin' );
+                break;
+            case 'facebook_config':
+                $message = __( '<strong>System Error</strong>: Facebook Login is not configured correctly. Please contact the site administrator.', 'wporlogin' );
+                break;
+            case 'facebook_connection':
+                $message = __( '<strong>Connection Error</strong>: Could not verify your Facebook account. Please try again.', 'wporlogin' );
+                break;
+            case 'microsoft_cancel':
+                $message = __( '<strong>Notice</strong>: Microsoft login was cancelled.', 'wporlogin' );
+                break;
+            case 'microsoft_config':
+                $message = __( '<strong>System Error</strong>: Microsoft Login is not configured correctly. Please contact the site administrator.', 'wporlogin' );
+                break;
+            case 'microsoft_connection':
+                $message = __( '<strong>Connection Error</strong>: Could not verify your Microsoft account. Please try again.', 'wporlogin' );
+                break;
             case 'google_cancel':
                 $message = __( '<strong>Notice</strong>: Google login cancelled or denied.', 'wporlogin' );
                 break;

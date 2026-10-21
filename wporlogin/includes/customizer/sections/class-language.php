@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
  * Class responsible for registering Language Switcher options.
  * * STANDARD: English (US) base language.

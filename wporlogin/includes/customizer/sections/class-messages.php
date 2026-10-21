@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
  * Class responsible for registering Error Messages customization options.
  * * UX OPTIMIZED: Ordered by Visibility -> Border -> Background -> Text -> Links.

@@ -51,13 +51,22 @@ class Wporlogin_Admin_Dashboard {
         // 2. Si no existe caché, consultamos la BD
         global $wpdb;
         $table_name = $wpdb->prefix . 'wporlogin_activity';
+        // Los identificadores SQL se forman exclusivamente con caracteres admitidos.
+        if ( ! preg_match( '/\A[A-Za-z0-9_]+\z/D', $table_name ) ) {
+            return 0;
+        }
         
         // Verificación de seguridad por si la tabla no existe
-        if ( $wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name ) {
+        // Escapamos LIKE para buscar exactamente el nombre de nuestra tabla.
+        $table_exists = $wpdb->get_var( $wpdb->prepare(
+            'SHOW TABLES LIKE %s',
+            $wpdb->esc_like( $table_name )
+        ) );
+        if ( $table_exists !== $table_name ) {
             return 0;
         }
 
-        $count = (int) $wpdb->get_var("SELECT COUNT(*) FROM $table_name");
+        $count = (int) $wpdb->get_var("SELECT COUNT(*) FROM `{$table_name}`");
 
         // 3. Guardamos en caché por 1 hora (3600 segundos)
         // Nota: Debes borrar este transient cuando insertes un nuevo bloqueo para que se actualice al instante.
@@ -76,10 +85,10 @@ class Wporlogin_Admin_Dashboard {
         $redirect_active = ( get_option('wporlogin_enable_login_redirect') || get_option('wporlogin_enable_logout_redirect') );
 
         return array(
-            'social'    => (bool) get_option('wporlogin_google_enable'),
+            'social'    => (bool) ( get_option('wporlogin_google_enable') || get_option('wporlogin_facebook_enable') || get_option('wporlogin_microsoft_enable') ),
             'hide'      => get_option('wporlogin_hide_login_slug'),
             'limit'     => (bool) get_option('wporlogin_limit_enable'),
-            'recaptcha' => ($recaptcha_v !== 'none') ? strtoupper($recaptcha_v) : false,
+            'recaptcha' => in_array( $recaptcha_v, array( 'v2', 'v3' ), true ) ? 'Google ' . strtoupper( $recaptcha_v ) : false,
             'redirect'  => $redirect_active,
             'language'  => (bool) get_option('remove_language_wporlogin')
         );

@@ -8,9 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=<?php bloginfo( 'charset' ); ?>" />
+    <meta http-equiv="Content-Type" content="text/html; charset=<?php echo esc_attr( get_bloginfo( 'charset' ) ); ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo esc_html__( 'Confirm your administration email' ); ?> &lsaquo; <?php bloginfo( 'name' ); ?> &#8212; WordPress</title>
+    <title><?php echo esc_html__( 'Confirm your administration email', 'default' ); ?> &lsaquo; <?php echo esc_html( get_bloginfo( 'name' ) ); ?> &#8212; WordPress</title>
     <meta name='robots' content='noindex, follow' />
     
     <?php wp_head(); ?>
@@ -33,15 +33,15 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
     <div id="login">
         <h1 role="presentation" class="wp-login-logo">
-            <a href="javascript:void(0);"><?php _e( 'Powered by WordPress' ); ?></a>
+            <a href="javascript:void(0);"><?php esc_html_e( 'Powered by WordPress', 'default' ); ?></a>
         </h1>
 
         <div id="login_error" class="notice notice-error">
-            <p><?php _e( 'Error: The email could not be updated.' ); ?></p>
+            <p><?php esc_html_e( 'Error: The email could not be updated.', 'default' ); ?></p>
         </div>
         
         <div class="message notice notice-success">
-             <p><?php _e( 'Verification email sent.' ); ?></p>
+             <p><?php esc_html_e( 'Verification email sent.', 'default' ); ?></p>
         </div>
 
         <form class="admin-email-confirm-form" name="admin-email-confirm-form" action="javascript:void(0);" method="post">
@@ -50,50 +50,52 @@ if ( ! defined( 'ABSPATH' ) ) exit;
             <input type="hidden" name="redirect_to" value="#" />
 
             <h1 class="admin-email__heading">
-                <?php _e( 'Administration email verification' ); ?>
+                <?php esc_html_e( 'Administration email verification', 'default' ); ?>
             </h1>
 
             <p class="admin-email__details">
-                <?php _e( 'Please verify that the <strong>administration email</strong> for this website is still correct.' ); ?>
+                <?php echo wp_kses_post( __( 'Please verify that the <strong>administration email</strong> for this website is still correct.', 'default' ) ); ?>
                 <a href="javascript:void(0);" target="_blank">
-                    <?php _e( 'Why is this important?' ); ?>
-                    <span class="screen-reader-text"> <?php _e( '(opens in a new tab)' ); ?></span>
+                    <?php esc_html_e( 'Why is this important?', 'default' ); ?>
+                    <span class="screen-reader-text"> <?php esc_html_e( '(opens in a new tab)', 'default' ); ?></span>
                 </a>
             </p>
 
             <p class="admin-email__details">
                 <?php 
-                /* Traductores: %s: Email actual */
-                printf( 
-                    __( 'Current administration email: %s' ), 
-                    '<strong>' . get_option( 'admin_email', 'demo@example.com' ) . '</strong>' 
-                ); 
+                echo wp_kses_post( sprintf(
+                    /* translators: %s: Current administration email address for this website. */
+                    __( 'Current administration email: %s', 'default' ),
+                    '<strong>' . esc_html( get_option( 'admin_email', 'demo@example.com' ) ) . '</strong>'
+                ) ); 
                 ?>
             </p>
 
             <p class="admin-email__details">
-                <?php _e( 'This email may be different from your personal email address.' ); ?>
+                <?php esc_html_e( 'This email may be different from your personal email address.', 'default' ); ?>
             </p>
 
             <div class="admin-email__actions">
                 <div class="admin-email__actions-primary">
-                    <a class="button button-large" href="javascript:void(0);"><?php _e( 'Update' ); ?></a>
-                    <input type="submit" name="correct-admin-email" id="correct-admin-email" class="button button-primary button-large" value="<?php echo esc_attr__( 'The email is correct' ); ?>" />
+                    <a class="button button-large" href="javascript:void(0);"><?php esc_html_e( 'Update', 'default' ); ?></a>
+                    <input type="submit" name="correct-admin-email" id="correct-admin-email" class="button button-primary button-large" value="<?php echo esc_attr__( 'The email is correct', 'default' ); ?>" />
                 </div>
                 <div class="admin-email__actions-secondary">
-                    <a href="javascript:void(0);"><?php _e( 'Remind me later' ); ?></a>
+                    <a href="javascript:void(0);"><?php esc_html_e( 'Remind me later', 'default' ); ?></a>
                 </div>
             </div>
         </form>
 
         <p id="backtoblog">
             <a href="javascript:void(0);">
-                <?php printf( _x( '&larr; Go to %s', 'login' ), get_bloginfo( 'title', 'display' ) ); ?>
+                <?php
+                /* translators: %s: Title of the website linked from the login screen. */
+                echo esc_html( sprintf( _x( '&larr; Go to %s', 'login', 'default' ), get_bloginfo( 'title', 'display' ) ) ); ?>
             </a>
         </p>
 
         <div class="privacy-policy-page-link">
-            <a class="privacy-policy-link" href="javascript:void(0);"><?php _e( 'Privacy Policy' ); ?></a>
+            <a class="privacy-policy-link" href="javascript:void(0);"><?php esc_html_e( 'Privacy Policy', 'default' ); ?></a>
         </div>
     </div>
 
@@ -101,7 +103,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
         <form id="language-switcher" action="javascript:void(0);" method="get">
             <label for="language-switcher-locales">
                 <span class="dashicons dashicons-translation" aria-hidden="true"></span>
-                <span class="screen-reader-text"><?php _e( 'Language' ); ?></span>
+                <span class="screen-reader-text"><?php esc_html_e( 'Language', 'default' ); ?></span>
             </label>
 
             <select name="wp_lang" id="language-switcher-locales">
@@ -111,7 +113,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
             </select>
             
             <input type="hidden" name="action" value="confirm_admin_email" />
-            <input type="submit" class="button" value="<?php echo esc_attr__( 'Change' ); ?>">
+            <input type="submit" class="button" value="<?php echo esc_attr__( 'Change', 'default' ); ?>">
         </form>
     </div>
 

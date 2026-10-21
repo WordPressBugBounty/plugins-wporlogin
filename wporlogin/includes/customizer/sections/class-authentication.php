@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
  * Class responsible for registering Authentication Section options.
  * (The main container #login).
@@ -264,7 +268,10 @@ if ( ! class_exists( 'WPORLogin_Customizer_Authentication' ) ) {
                 ) );
 
                 $wp_customize->add_control( $setting_id, array(
-                    'label'    => sprintf( __( 'Padding %s', 'wporlogin' ), $data['label'] ),
+                    'label'    => sprintf(
+                        /* translators: %s: Side of the authentication button (Top, Right, Bottom or Left). */
+                        __( 'Padding %s', 'wporlogin' ), $data['label']
+                    ),
                     'section'  => 'wporlogin_authentication_section',
                     'settings' => $setting_id,
                     'type'     => 'select',

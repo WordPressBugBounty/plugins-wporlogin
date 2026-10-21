@@ -95,7 +95,10 @@ class WPORLogin_Customizer_EmailConfirm {
             $this->add_number_control( 
                 $wp_customize, 
                 "wporlogin_emailconfirm_padding_{$side}", 
-                sprintf( __( 'Padding %s (Default: %spx)', 'wporlogin' ), ucfirst($side), $default ), 
+                sprintf(
+                    /* translators: 1: Side (Top, Right, Bottom or Left); 2: Default padding in pixels. */
+                    __( 'Padding %1$s (Default: %2$spx)', 'wporlogin' ), ucfirst($side), $default
+                ), 
                 $default 
             );
         }

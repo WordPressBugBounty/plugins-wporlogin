@@ -8,8 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=<?php bloginfo( 'charset' ); ?>" />
-	<title><?php echo esc_html__( 'Log In' ); ?> &lsaquo; <?php bloginfo( 'name' ); ?> &#8212; WordPress</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo esc_attr( get_bloginfo( 'charset' ) ); ?>" />
+	<title><?php echo esc_html__( 'Log In', 'default' ); ?> &lsaquo; <?php echo esc_html( get_bloginfo( 'name' ) ); ?> &#8212; WordPress</title>
 	<meta name='robots' content='max-image-preview:large, noindex, noarchive' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
@@ -29,43 +29,43 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 document.body.className = document.body.className.replace('no-js','js');
 </script>
 
-    <h1 class="screen-reader-text"><?php _e( 'Log In' ); ?></h1>
+    <h1 class="screen-reader-text"><?php esc_html_e( 'Log In', 'default' ); ?></h1>
 
     <div id="login">
         <h1 role="presentation" class="wp-login-logo">
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php _e( 'Powered by WordPress' ); ?></a>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Powered by WordPress', 'default' ); ?></a>
         </h1>
     
         <p class="message">
-            <?php _e( 'You are now logged out.' ); ?>
+            <?php esc_html_e( 'You are now logged out.', 'default' ); ?>
         </p>
 
         <div id="login_error" class="notice notice-error">
             <p>
-                <strong><?php _e( 'Error:' ); ?></strong> 
+                <strong><?php esc_html_e( 'Error:', 'default' ); ?></strong> 
                 <?php 
-                    printf( 
+                    echo wp_kses_post( sprintf(
                         /* translators: %s: User Name */
-                        __( 'The password you entered for the username %s is incorrect.' ), 
-                        '<strong>nivardochoqque</strong>' 
-                    ); 
+                        __( 'The password you entered for the username %s is incorrect.', 'default' ),
+                        '<strong>nivardochoqque</strong>'
+                    ) ); 
                 ?> 
-                <a href="#"><?php _e( 'Lost your password?' ); ?></a>
+                <a href="#"><?php esc_html_e( 'Lost your password?', 'default' ); ?></a>
             </p>
         </div>
 
         <form name="loginform" id="loginform" action="#" method="post">
             <p>
-                <label for="user_login"><?php _e( 'Username or Email Address' ); ?></label>
+                <label for="user_login"><?php esc_html_e( 'Username or Email Address', 'default' ); ?></label>
                 <input type="text" name="log" id="user_login" aria-describedby="login_error" class="input" value="nivardochoqque" size="20" autocapitalize="off" autocomplete="username" required="required" />
             </p>
 
             <div class="user-pass-wrap">
-                <label for="user_pass"><?php _e( 'Password' ); ?></label>
+                <label for="user_pass"><?php esc_html_e( 'Password', 'default' ); ?></label>
                 <div class="wp-pwd">
                     <input type="password" name="pwd" id="user_pass" aria-describedby="login_error" class="input password-input" value="" size="20" autocomplete="current-password" spellcheck="false" required="required" />
                     
-                    <button type="button" class="button button-secondary wp-hide-pw hide-if-no-js" data-toggle="0" aria-label="<?php echo esc_attr__( 'Show password' ); ?>">
+                    <button type="button" class="button button-secondary wp-hide-pw hide-if-no-js" data-toggle="0" aria-label="<?php echo esc_attr__( 'Show password', 'default' ); ?>">
                         <span class="dashicons dashicons-visibility" aria-hidden="true"></span>
                     </button>
                 </div>
@@ -73,18 +73,18 @@ document.body.className = document.body.className.replace('no-js','js');
 
             <p class="forgetmenot">
                 <input name="rememberme" type="checkbox" id="rememberme" value="forever" /> 
-                <label for="rememberme"><?php _e( 'Remember Me' ); ?></label>
+                <label for="rememberme"><?php esc_html_e( 'Remember Me', 'default' ); ?></label>
             </p>
 
             <p class="submit">
-                <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php echo esc_attr__( 'Log In' ); ?>" />
+                <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php echo esc_attr__( 'Log In', 'default' ); ?>" />
                 <input type="hidden" name="redirect_to" value="<?php echo esc_url( admin_url() ); ?>" />
                 <input type="hidden" name="testcookie" value="1" />
             </p>
         </form>
 
         <p id="nav">
-            <a class="wp-login-lost-password" href="#"><?php _e( 'Lost your password?' ); ?></a>
+            <a class="wp-login-lost-password" href="#"><?php esc_html_e( 'Lost your password?', 'default' ); ?></a>
         </p>
 
         <script>
@@ -95,12 +95,14 @@ document.body.className = document.body.className.replace('no-js','js');
 
         <p id="backtoblog">
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                <?php printf( _x( '&larr; Go to %s', 'login' ), get_bloginfo( 'title', 'display' ) ); ?>
+                <?php
+                /* translators: %s: Title of the website linked from the login screen. */
+                echo esc_html( sprintf( _x( '&larr; Go to %s', 'login', 'default' ), get_bloginfo( 'title', 'display' ) ) ); ?>
             </a>
         </p>
 
         <div class="privacy-policy-page-link">
-            <a class="privacy-policy-link" href="#"><?php _e( 'Privacy Policy' ); ?></a>
+            <a class="privacy-policy-link" href="#"><?php esc_html_e( 'Privacy Policy', 'default' ); ?></a>
         </div>
 
     </div> 
@@ -109,13 +111,13 @@ document.body.className = document.body.className.replace('no-js','js');
         <form id="language-switcher" method="get">
             <label for="language-switcher-locales">
                 <span class="dashicons dashicons-translation" aria-hidden="true"></span>
-                <span class="screen-reader-text"><?php _e( 'Language' ); ?></span>
+                <span class="screen-reader-text"><?php esc_html_e( 'Language', 'default' ); ?></span>
             </label>
             <select name="wp_lang" id="language-switcher-locales">
                 <option value="en_US" lang="en">English (United States)</option>
                 <option value="es_ES" lang="es" selected='selected'>Español</option>
             </select>
-            <input type="submit" class="button" value="<?php echo esc_attr__( 'Change' ); ?>">
+            <input type="submit" class="button" value="<?php echo esc_attr__( 'Change', 'default' ); ?>">
         </form>
     </div>
 

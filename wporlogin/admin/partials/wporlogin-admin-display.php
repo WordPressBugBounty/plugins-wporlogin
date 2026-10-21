@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
  * Provee la vista de administración para el plugin.
  * ESTILO: "Apple Clean & Professional" - Grid 4 Columnas
@@ -258,14 +262,14 @@ $settings_display_style = ($active_design === 'wporlogin_design_img_premium_zero
 <div class="wrap"> 
     
     <div style="width: 95%; margin-left: auto; margin-right: auto; background-color: #ffffff; padding-top: 5px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; margin-top: -10px; box-shadow: 0 1px 2px rgba(0,0,0,0.16), 0 1px 2px rgba(0,0,0,0.23);">
-        <img src="<?php echo WPORLOGIN_URL . 'assets/img/logo-wporlogin.png'; ?>" style="margin-left: 20px; height: 48px;">
+        <img src="<?php echo esc_url( WPORLOGIN_URL . 'assets/img/logo-wporlogin.png' ); ?>" style="margin-left: 20px; height: 48px;">
     </div>
     
     <div style="width: 95%; margin-left: auto; margin-right: auto; position: relative;">       
         
-        <h1 style="text-align: center; font-size: 34px; padding-top: 30px; font-weight: bold; font-family: 'Roboto', sans-serif;"><strong><?php _e('Appearance', 'wporlogin'); ?></strong></h1>  
+        <h1 style="text-align: center; font-size: 34px; padding-top: 30px; font-weight: bold; font-family: 'Roboto', sans-serif;"><strong><?php esc_html_e( 'Appearance', 'wporlogin' ); ?></strong></h1>  
         
-        <p style="margin-bottom: 20px; text-align: center; font-family: 'Roboto', sans-serif; font-size: 16px; margin-top: 5px; margin-bottom: 40px;"><?php _e('<strong>WPORLogin</strong> allows you to customize the appearance of the WordPress login page.', 'wporlogin'); ?></p>
+        <p style="margin-bottom: 20px; text-align: center; font-family: 'Roboto', sans-serif; font-size: 16px; margin-top: 5px; margin-bottom: 40px;"><?php echo wp_kses_post( __( '<strong>WPORLogin</strong> allows you to customize the appearance of the WordPress login page.', 'wporlogin' ) ); ?></p>
     
         <?php settings_errors(); ?>
                 
@@ -282,7 +286,7 @@ $settings_display_style = ($active_design === 'wporlogin_design_img_premium_zero
                 
                 <div class="wporlogin-design-wrapper">
                     
-                    <h2 class="wporlogin-section-title"><?php _e('Choose your Login Style', 'wporlogin'); ?></h2>
+                    <h2 class="wporlogin-section-title"><?php esc_html_e( 'Choose your Login Style', 'wporlogin' ); ?></h2>
 
                     <?php
                     // URL del Personalizador
@@ -296,7 +300,7 @@ $settings_display_style = ($active_design === 'wporlogin_design_img_premium_zero
                     ?>
 
                     <div class="wporlogin-hero-container">
-                        <div id="wporlogin-hero-card" class="wporlogin-card-hero wporlogin-card-trigger <?php echo $is_custom_active ? 'selected-design' : ''; ?>">
+                        <div id="wporlogin-hero-card" class="wporlogin-card-hero wporlogin-card-trigger <?php echo esc_attr( $is_custom_active ? 'selected-design' : '' ); ?>">
                             
                             <input <?php checked( 'wporlogin_design_img_premium_zero', $active_design ); ?>
                                 value="wporlogin_design_img_premium_zero" 
@@ -306,22 +310,22 @@ $settings_display_style = ($active_design === 'wporlogin_design_img_premium_zero
                                 class="wporlogin-radio-hidden"
                                 data-hide="true">
                             
-                            <img class="bg-hero" src="<?php echo WPORLOGIN_URL . 'assets/img/wporlogin-design-premium-custom.png'; ?>">
+                            <img class="bg-hero" src="<?php echo esc_url( WPORLOGIN_URL . 'assets/img/wporlogin-design-premium-custom.png' ); ?>">
 
                             <div class="wporlogin-hero-content">
                                 <div style="font-size: 48px; margin-bottom: 10px; opacity: 0.9;">
                                     <span class="dashicons dashicons-art" style="font-size: 48px; width: 48px; height: 48px;"></span>
                                 </div>
-                                <h3 style="margin: 0; font-size: 24px; color: white;"><?php _e('Custom Design Builder', 'wporlogin'); ?></h3>
-                                <p style="margin: 10px 0 20px 0; opacity: 0.8; font-size: 14px;"><?php _e('Full control. Create your unique style using the live customizer.', 'wporlogin'); ?></p>
+                                <h3 style="margin: 0; font-size: 24px; color: white;"><?php esc_html_e( 'Custom Design Builder', 'wporlogin' ); ?></h3>
+                                <p style="margin: 10px 0 20px 0; opacity: 0.8; font-size: 14px;"><?php esc_html_e( 'Full control. Create your unique style using the live customizer.', 'wporlogin' ); ?></p>
                                 
                                 <a id="wporlogin-hero-btn" class="wporlogin-btn-hero state-inactive wporlogin-prevent-select" href="#">
                                     <span id="wporlogin-hero-icon" class="dashicons dashicons-admin-customizer" style="margin-right: 8px; display: none;"></span>
-                                    <span id="wporlogin-hero-text"><?php _e('Select Custom Design', 'wporlogin'); ?></span>
+                                    <span id="wporlogin-hero-text"><?php esc_html_e( 'Select Custom Design', 'wporlogin' ); ?></span>
                                 </a>
                                 
                                 <div id="wporlogin-hero-hint" class="wporlogin-hero-hint">
-                                    ⚠️ <?php _e('Don\'t forget to click "Save Changes" below first!', 'wporlogin'); ?>
+                                    ⚠️ <?php esc_html_e( 'Don\'t forget to click "Save Changes" below first!', 'wporlogin' ); ?>
                                 </div>
                             </div>
 
@@ -336,7 +340,7 @@ $settings_display_style = ($active_design === 'wporlogin_design_img_premium_zero
                             $data_hide_attr = $design_data['hide_settings'] ? 'true' : 'false';
                             $is_selected    = ($design_key === $active_design);
                         ?>
-                        <div class="wporlogin-card-preset wporlogin-card-trigger <?php echo $is_selected ? 'selected-design' : ''; ?>"
+                        <div class="wporlogin-card-preset wporlogin-card-trigger <?php echo esc_attr( $is_selected ? 'selected-design' : '' ); ?>"
                             onclick="wporloginSelectRadio('<?php echo esc_js( $design_key ); ?>')">
                             
                             <input <?php checked( $design_key, $active_design ); ?> 
@@ -348,7 +352,7 @@ $settings_display_style = ($active_design === 'wporlogin_design_img_premium_zero
                                 data-hide="<?php echo esc_attr( $data_hide_attr ); ?>">
                             
                             <img class="preset-img" 
-                                src="<?php echo WPORLOGIN_URL . 'assets/img/' . esc_attr( $design_data['img'] ); ?>" 
+                                src="<?php echo esc_url( WPORLOGIN_URL . 'assets/img/' . $design_data['img'] ); ?>" 
                                 alt="<?php echo esc_attr( $design_data['label'] ); ?>">
 
                             <div class="wporlogin-preset-overlay">
@@ -365,72 +369,72 @@ $settings_display_style = ($active_design === 'wporlogin_design_img_premium_zero
 
                 <div class="wporlogin-container-design-premium" style="padding-top: 40px; width: 90%; margin-left: auto; margin-right: auto;">
                     
-                    <table id="wporlogin-table-brand-color" class="form-table" role="presentation" style="margin-bottom: 0; <?php echo $brand_display_style; ?>">
+                    <table id="wporlogin-table-brand-color" class="form-table" role="presentation" style="margin-bottom: 0; <?php echo esc_attr( $brand_display_style ); ?>">
                         <tbody>
                             <tr>
                                 <th scope="row">
-                                    <label style="font-size: 1.5em;"><strong><?php _e('Brand Color', 'wporlogin'); ?></strong></label>
+                                    <label style="font-size: 1.5em;"><strong><?php esc_html_e( 'Brand Color', 'wporlogin' ); ?></strong></label>
                                 </th>
                                 <td><hr></td>
                             </tr>
                             <tr>
                                 <th scope="row">
-                                    <label for="wporlogin_color_principal_marca"><?php _e('Primary Color', 'wporlogin'); ?></label>
+                                    <label for="wporlogin_color_principal_marca"><?php esc_html_e( 'Primary Color', 'wporlogin' ); ?></label>
                                 </th>
                                 <td>
                                     <input type="text" id="wporlogin_color_principal_marca" name="wporlogin_color_principal_marca" 
                                         value="<?php echo esc_attr(get_option('wporlogin_color_principal_marca', '#1a73e8')); ?>" 
                                         class="wporlogin-color-picker" data-default-color="#1a73e8" />
-                                    <p class="description"><?php _e('Define the primary color of your brand.', 'wporlogin'); ?></p>
+                                    <p class="description"><?php esc_html_e( 'Define the primary color of your brand.', 'wporlogin' ); ?></p>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <div id="wporlogin-container-settings-table" style="<?php echo $settings_display_style; ?>">
+                    <div id="wporlogin-container-settings-table" style="<?php echo esc_attr( $settings_display_style ); ?>">
                         <table class="form-table" role="presentation">    
                             <tbody>
                                 <tr>
-                                    <th scope="row"><label style="font-size: 1.5em;"><strong><?php _e('Logo', 'wporlogin'); ?></strong></label></th>
+                                    <th scope="row"><label style="font-size: 1.5em;"><strong><?php esc_html_e( 'Logo', 'wporlogin' ); ?></strong></label></th>
                                     <td><hr></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><label for="wporlogin_url_logotipo_text"><?php _e('Logo', 'wporlogin'); ?></label></th>
+                                    <th scope="row"><label for="wporlogin_url_logotipo_text"><?php esc_html_e( 'Logo', 'wporlogin' ); ?></label></th>
                                     <td>
                                         <?php if(esc_url(get_option('wporlogin_url_logotipo'))){ ?>
                                             <img id="wporlogin_url_logotipo_img" src="<?php echo esc_url(get_option('wporlogin_url_logotipo')); ?>" style="background-color: #ffffff; margin-bottom: 10px; width: 220px; padding: 10px;  border: 2px dashed rgba(0,0,0,.1);"><br>
                                         <?php } ?>
                                         <input id="wporlogin_url_logotipo_text" type="text" name="wporlogin_url_logotipo" class="regular-text" style="margin-bottom: 10px;" value="<?php echo esc_url(get_option('wporlogin_url_logotipo')); ?>"/><br>
-                                        <input id="wporlogin_url_logotipo_button" type="button" class="button" value="<?php _e('Upload logo', 'wporlogin'); ?>" />
+                                        <input id="wporlogin_url_logotipo_button" type="button" class="button" value="<?php esc_attr_e( 'Upload logo', 'wporlogin' ); ?>" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><label for="wporlogin_ruta_url_logotipo_text"><?php _e('Logo URL', 'wporlogin'); ?></label></th>
+                                    <th scope="row"><label for="wporlogin_ruta_url_logotipo_text"><?php esc_html_e( 'Logo URL', 'wporlogin' ); ?></label></th>
                                     <td><input id="wporlogin_ruta_url_logotipo_text" type="text" name="wporlogin_ruta_url_logotipo" class="regular-text" value="<?php echo esc_html(get_option('wporlogin_ruta_url_logotipo')); ?>"/></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><label for="wporlogin_titulo_logotipo_text"><?php _e('Logo title', 'wporlogin'); ?></label></th>
+                                    <th scope="row"><label for="wporlogin_titulo_logotipo_text"><?php esc_html_e( 'Logo title', 'wporlogin' ); ?></label></th>
                                     <td><input id="wporlogin_titulo_logotipo_text" type="text" name="wporlogin_titulo_logotipo" class="regular-text" value="<?php echo esc_html(get_option('wporlogin_titulo_logotipo')); ?>"/></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><label style="font-size: 1.5em;"><strong><?php _e('Background image', 'wporlogin'); ?></strong></label></th>
+                                    <th scope="row"><label style="font-size: 1.5em;"><strong><?php esc_html_e( 'Background image', 'wporlogin' ); ?></strong></label></th>
                                     <td><hr></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><label><?php _e('Background image', 'wporlogin'); ?></label></th>
+                                    <th scope="row"><label><?php esc_html_e( 'Background image', 'wporlogin' ); ?></label></th>
                                     <td>
                                         <div style="margin-bottom: 20px;">
                                             <input type="radio" id="wporlogin_free_images" name="wporlogin_background_images" value="wporlogin_free_images" <?php checked(get_option('wporlogin_background_images'), 'wporlogin_free_images'); ?>>
-                                            <label for="wporlogin_free_images"><?php _e('Free images', 'wporlogin'); ?></label>
+                                            <label for="wporlogin_free_images"><?php esc_html_e( 'Free images', 'wporlogin' ); ?></label>
                                             <input type="radio" id="wporlogin_my_images" name="wporlogin_background_images" value="wporlogin_my_images" <?php checked(get_option('wporlogin_background_images'), 'wporlogin_my_images'); ?> style="margin-left: 20px;">
-                                            <label for="wporlogin_my_images"><?php _e('My images', 'wporlogin'); ?></label>
+                                            <label for="wporlogin_my_images"><?php esc_html_e( 'My images', 'wporlogin' ); ?></label>
                                         </div>
                                         <div id="wporlogin-container-background-my-image" style="<?php if( (get_option('wporlogin_background_images') == 'wporlogin_free_images' )){ echo 'display: none;'; } ?>">
                                             <?php if(esc_url(get_option('wporlogin_url_img_fondo'))){ ?>
                                                 <img id="wporlogin_url_img_fondo_img" src="<?php echo esc_url(get_option('wporlogin_url_img_fondo')); ?>" style="width: 220px; padding: 10px; background-color: #ffffff; border: 2px dashed rgba(0,0,0,.1);"><br>
                                             <?php } ?>
                                             <input id="wporlogin_url_img_fondo_text" type="text" name="wporlogin_url_img_fondo" class="regular-text" value="<?php echo esc_html(get_option('wporlogin_url_img_fondo')); ?>"/><br>
-                                            <input id="wporlogin_url_img_fondo_button" type="button" class="button" value="<?php _e('Upload Background', 'wporlogin'); ?>" />
+                                            <input id="wporlogin_url_img_fondo_button" type="button" class="button" value="<?php esc_attr_e( 'Upload Background', 'wporlogin' ); ?>" />
                                         </div>
                                         <div id="wporlogin-container-background-free-image" style="<?php if( get_option('wporlogin_background_images') == 'wporlogin_my_images' ){ echo 'display: none;'; } ?>">
                                             <div style="overflow: hidden;">
@@ -445,10 +449,10 @@ $settings_display_style = ($active_design === 'wporlogin_design_img_premium_zero
                                                         $is_checked = ($saved_filename === $current_filename) || ($i == 0 && empty($saved_free_image));
                                                     ?>
                                                     <div style="float: left;">
-                                                        <input type="radio" id="wporlogin-background-free-image-<?php echo $i; ?>" name="wporlogin-background-free-image" value="<?php echo esc_url($current_url); ?>" <?php checked( $is_checked, true ); ?>>
-                                                        <label for="wporlogin-background-free-image-<?php echo $i; ?>"><?php _e('Image ', 'wporlogin'); ?><?php echo $i+1; ?></label>
+                                                        <input type="radio" id="wporlogin-background-free-image-<?php echo esc_attr( $i ); ?>" name="wporlogin-background-free-image" value="<?php echo esc_url($current_url); ?>" <?php checked( $is_checked, true ); ?>>
+                                                        <label for="wporlogin-background-free-image-<?php echo esc_attr( $i ); ?>"><?php esc_html_e( 'Image ', 'wporlogin' ); ?><?php echo esc_html( $i + 1 ); ?></label>
                                                         <div style="padding-top: 10px; margin-right: 15px;">
-                                                            <img onclick="document.getElementById('wporlogin-background-free-image-<?php echo $i; ?>').checked=true;" src="<?php echo esc_url($current_url); ?>" style="width: 220px; padding: 10px; background-color: #ffffff; border: 2px dashed rgba(0,0,0,.1);">
+                                                            <img onclick="document.getElementById('wporlogin-background-free-image-<?php echo esc_attr( $i ); ?>').checked=true;" src="<?php echo esc_url($current_url); ?>" style="width: 220px; padding: 10px; background-color: #ffffff; border: 2px dashed rgba(0,0,0,.1);">
                                                         </div>
                                                     </div>
                                                     <?php } 
@@ -528,7 +532,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     heroBtn.onclick = null; // <--- ¡AQUÍ ESTÁ EL TRUCO! Borramos comportamientos viejos
                     
                     heroIcon.style.display = "inline-block";
-                    heroText.innerText = "<?php _e('Open Live Builder', 'wporlogin'); ?>";
+                    heroText.innerText = "<?php esc_html_e( 'Open Live Builder', 'wporlogin' ); ?>";
                     heroHint.classList.remove('visible');
                     
                 } else {
@@ -536,7 +540,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     heroBtn.className = "wporlogin-btn-hero state-warning wporlogin-prevent-select";
                     heroBtn.removeAttribute('href');
                     heroIcon.style.display = "none";
-                    heroText.innerText = "<?php _e('Save Changes to Activate', 'wporlogin'); ?>";
+                    heroText.innerText = "<?php esc_html_e( 'Save Changes to Activate', 'wporlogin' ); ?>";
                     heroHint.classList.add('visible');
                     
                     // Asignamos comportamiento de scroll
@@ -566,7 +570,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 };
                 
                 heroIcon.style.display = "none";
-                heroText.innerText = "<?php _e('Select Custom Design', 'wporlogin'); ?>";
+                heroText.innerText = "<?php esc_html_e( 'Select Custom Design', 'wporlogin' ); ?>";
                 heroHint.classList.remove('visible');
             }
         }

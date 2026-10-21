@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
  * Class responsible for registering Privacy Policy customization options.
  * * UX OPTIMIZED: Ordered by Color -> Spacing.

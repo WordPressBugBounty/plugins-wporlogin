@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
  * Vista del Dashboard Widget - Estilo "Apple Modern / iOS"
  * MÓDULOS CLICABLES COMPLETOS con indicador de enlace.
@@ -26,7 +30,7 @@ $url_main      = admin_url('admin.php?page=wporlogin-plugin');
 <style>
     .wpor-apple-widget {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        color: <?php echo $color_text; ?>;
+        color: <?php echo esc_html( $color_text ); ?>;
         box-sizing: border-box;
     }
     .wpor-apple-widget * { box-sizing: border-box; }
@@ -44,12 +48,12 @@ $url_main      = admin_url('admin.php?page=wporlogin-plugin');
         font-weight: 700;
         letter-spacing: -1px;
         line-height: 1;
-        color: <?php echo $color_text; ?>;
+        color: <?php echo esc_html( $color_text ); ?>;
     }
     .wpor-stat-label {
         font-size: 12px;
         font-weight: 500;
-        color: <?php echo $color_sub; ?>;
+        color: <?php echo esc_html( $color_sub ); ?>;
         text-transform: uppercase;
         letter-spacing: 0.5px;
         margin-top: 4px;
@@ -85,7 +89,7 @@ $url_main      = admin_url('admin.php?page=wporlogin-plugin');
         box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         min-height: 75px;
         text-decoration: none !important; /* Quitar subrayado del enlace */
-        color: <?php echo $color_text; ?> !important; /* Forzar color texto */
+        color: <?php echo esc_html( $color_text ); ?> !important; /* Forzar color texto */
     }
 
     /* Efecto Hover */
@@ -102,8 +106,8 @@ $url_main      = admin_url('admin.php?page=wporlogin-plugin');
     }
 
     /* Estados de borde */
-    .card-active { border-left: 3px solid <?php echo $color_success; ?>; }
-    .card-danger { border-left: 3px solid <?php echo $color_danger; ?>; }
+    .card-active { border-left: 3px solid <?php echo esc_html( $color_success ); ?>; }
+    .card-danger { border-left: 3px solid <?php echo esc_html( $color_danger ); ?>; }
     
     .wpor-card-title {
         font-size: 13px;
@@ -127,15 +131,15 @@ $url_main      = admin_url('admin.php?page=wporlogin-plugin');
 
     /* Badges */
     .wpor-status-badge { font-size: 11px; font-weight: 500; }
-    .badge-active { color: <?php echo $color_success; ?>; }
-    .badge-danger { color: <?php echo $color_danger; ?>; }
-    .badge-cta { color: <?php echo $color_blue; ?>; font-weight: 600; }
-    .badge-subtle { color: <?php echo $color_sub; ?>; }
+    .badge-active { color: <?php echo esc_html( $color_success ); ?>; }
+    .badge-danger { color: <?php echo esc_html( $color_danger ); ?>; }
+    .badge-cta { color: <?php echo esc_html( $color_blue ); ?>; font-weight: 600; }
+    .badge-subtle { color: <?php echo esc_html( $color_sub ); ?>; }
 
     /* Botón Principal */
     .wpor-btn-main {
         display: block;
-        background: <?php echo $color_blue; ?>;
+        background: <?php echo esc_html( $color_blue ); ?>;
         color: white !important;
         text-align: center;
         padding: 12px;
@@ -148,9 +152,9 @@ $url_main      = admin_url('admin.php?page=wporlogin-plugin');
     }
     .wpor-btn-main:hover { background: #0077ED; }
     
-    .wpor-icon { color: <?php echo $color_sub; ?>; font-size: 16px; width: 16px; height: 16px; margin-right: 2px; }
-    .card-active .wpor-icon { color: <?php echo $color_blue; ?>; }
-    .card-danger .wpor-icon { color: <?php echo $color_danger; ?>; }
+    .wpor-icon { color: <?php echo esc_html( $color_sub ); ?>; font-size: 16px; width: 16px; height: 16px; margin-right: 2px; }
+    .card-active .wpor-icon { color: <?php echo esc_html( $color_blue ); ?>; }
+    .card-danger .wpor-icon { color: <?php echo esc_html( $color_danger ); ?>; }
 </style>
 
 <div class="wpor-apple-widget">
@@ -158,103 +162,103 @@ $url_main      = admin_url('admin.php?page=wporlogin-plugin');
     <div class="wpor-header">
         <div>
             <div class="wpor-stat-big"><?php echo esc_html( $stats ); ?></div>
-            <div class="wpor-stat-label"><?php _e('Blocked Threats', 'wporlogin'); ?></div>
+            <div class="wpor-stat-label"><?php esc_html_e( 'Blocked Threats', 'wporlogin' ); ?></div>
         </div>
         <div style="text-align: right;">
-            <span class="dashicons dashicons-shield" style="font-size: 40px; width: 40px; height: 40px; color: <?php echo ($stats > 0) ? $color_danger : $color_success; ?>; opacity: 0.9;"></span>
+            <span class="dashicons dashicons-shield" style="font-size: 40px; width: 40px; height: 40px; color: <?php echo esc_html( ($stats > 0) ? $color_danger : $color_success ); ?>; opacity: 0.9;"></span>
         </div>
     </div>
 
     <div class="wpor-grid">
 
-        <a href="<?php echo $url_social; ?>" class="wpor-card <?php echo $modules['social'] ? 'card-active' : ''; ?>">
+        <a href="<?php echo esc_url( $url_social ); ?>" class="wpor-card <?php echo esc_attr( $modules['social'] ? 'card-active' : '' ); ?>">
             <span class="dashicons dashicons-arrow-right-alt2 wpor-arrow-indicator"></span>
             <div class="wpor-card-title">
-                <span class="dashicons dashicons-google wpor-icon"></span> <?php _e('Social Login', 'wporlogin'); ?>
+                <span class="dashicons dashicons-google wpor-icon"></span> <?php esc_html_e( 'Social Login', 'wporlogin' ); ?>
             </div>
             <div>
                 <?php if ($modules['social']): ?>
-                    <span class="wpor-status-badge badge-active"><?php _e('Active', 'wporlogin'); ?></span>
+                    <span class="wpor-status-badge badge-active"><?php esc_html_e( 'Active', 'wporlogin' ); ?></span>
                 <?php else: ?>
-                    <span class="wpor-status-badge badge-cta"><?php _e('Enable', 'wporlogin'); ?></span>
+                    <span class="wpor-status-badge badge-cta"><?php esc_html_e( 'Enable', 'wporlogin' ); ?></span>
                 <?php endif; ?>
             </div>
         </a>
 
-        <a href="<?php echo $url_hide; ?>" class="wpor-card <?php echo $modules['hide'] ? 'card-active' : 'card-danger'; ?>">
+        <a href="<?php echo esc_url( $url_hide ); ?>" class="wpor-card <?php echo esc_attr( $modules['hide'] ? 'card-active' : 'card-danger' ); ?>">
             <span class="dashicons dashicons-arrow-right-alt2 wpor-arrow-indicator"></span>
             <div class="wpor-card-title">
-                <span class="dashicons dashicons-hidden wpor-icon"></span> <?php _e('Hide Login', 'wporlogin'); ?>
+                <span class="dashicons dashicons-hidden wpor-icon"></span> <?php esc_html_e( 'Hide Login', 'wporlogin' ); ?>
             </div>
             <div>
                 <?php if ($modules['hide']): ?>
                     <span class="wpor-status-badge badge-active" title="/<?php echo esc_attr($modules['hide']); ?>">/<?php echo esc_html(substr($modules['hide'], 0, 6)); ?></span>
                 <?php else: ?>
-                    <span class="wpor-status-badge badge-danger"><?php _e('Insecure!', 'wporlogin'); ?></span>
+                    <span class="wpor-status-badge badge-danger"><?php esc_html_e( 'Insecure!', 'wporlogin' ); ?></span>
                 <?php endif; ?>
             </div>
         </a>
 
-        <a href="<?php echo $url_limit; ?>" class="wpor-card <?php echo $modules['limit'] ? 'card-active' : 'card-danger'; ?>">
+        <a href="<?php echo esc_url( $url_limit ); ?>" class="wpor-card <?php echo esc_attr( $modules['limit'] ? 'card-active' : 'card-danger' ); ?>">
             <span class="dashicons dashicons-arrow-right-alt2 wpor-arrow-indicator"></span>
             <div class="wpor-card-title">
-                <span class="dashicons dashicons-lock wpor-icon"></span> <?php _e('Limit Login', 'wporlogin'); ?>
+                <span class="dashicons dashicons-lock wpor-icon"></span> <?php esc_html_e( 'Limit Login', 'wporlogin' ); ?>
             </div>
             <div>
                 <?php if ($modules['limit']): ?>
-                    <span class="wpor-status-badge badge-active"><?php _e('Protected', 'wporlogin'); ?></span>
+                    <span class="wpor-status-badge badge-active"><?php esc_html_e( 'Protected', 'wporlogin' ); ?></span>
                 <?php else: ?>
-                    <span class="wpor-status-badge badge-danger"><?php _e('Vulnerable!', 'wporlogin'); ?></span>
+                    <span class="wpor-status-badge badge-danger"><?php esc_html_e( 'Vulnerable!', 'wporlogin' ); ?></span>
                 <?php endif; ?>
             </div>
         </a>
 
-        <a href="<?php echo $url_recaptcha; ?>" class="wpor-card <?php echo $modules['recaptcha'] ? 'card-active' : ''; ?>">
+        <a href="<?php echo esc_url( $url_recaptcha ); ?>" class="wpor-card <?php echo esc_attr( $modules['recaptcha'] ? 'card-active' : '' ); ?>">
             <span class="dashicons dashicons-arrow-right-alt2 wpor-arrow-indicator"></span>
             <div class="wpor-card-title">
-                <span class="dashicons dashicons-yes-alt wpor-icon"></span> <?php _e('reCaptcha', 'wporlogin'); ?>
+                <span class="dashicons dashicons-shield wpor-icon"></span> <?php esc_html_e( 'CAPTCHA Protection', 'wporlogin' ); ?>
             </div>
             <div>
                 <?php if ($modules['recaptcha']): ?>
                     <span class="wpor-status-badge badge-active"><?php echo esc_html($modules['recaptcha']); ?></span>
                 <?php else: ?>
-                    <span class="wpor-status-badge badge-subtle"><?php _e('Setup', 'wporlogin'); ?></span>
+                    <span class="wpor-status-badge badge-subtle"><?php esc_html_e( 'Setup', 'wporlogin' ); ?></span>
                 <?php endif; ?>
             </div>
         </a>
 
-        <a href="<?php echo $url_redirect; ?>" class="wpor-card <?php echo $modules['redirect'] ? 'card-active' : ''; ?>">
+        <a href="<?php echo esc_url( $url_redirect ); ?>" class="wpor-card <?php echo esc_attr( $modules['redirect'] ? 'card-active' : '' ); ?>">
             <span class="dashicons dashicons-arrow-right-alt2 wpor-arrow-indicator"></span>
             <div class="wpor-card-title">
-                <span class="dashicons dashicons-randomize wpor-icon"></span> <?php _e('Redirects', 'wporlogin'); ?>
+                <span class="dashicons dashicons-randomize wpor-icon"></span> <?php esc_html_e( 'Redirects', 'wporlogin' ); ?>
             </div>
             <div>
                 <?php if ($modules['redirect']): ?>
-                    <span class="wpor-status-badge badge-active"><?php _e('On', 'wporlogin'); ?></span>
+                    <span class="wpor-status-badge badge-active"><?php esc_html_e( 'On', 'wporlogin' ); ?></span>
                 <?php else: ?>
-                    <span class="wpor-status-badge badge-subtle"><?php _e('Setup', 'wporlogin'); ?></span>
+                    <span class="wpor-status-badge badge-subtle"><?php esc_html_e( 'Setup', 'wporlogin' ); ?></span>
                 <?php endif; ?>
             </div>
         </a>
 
-        <a href="<?php echo $url_lang; ?>" class="wpor-card <?php echo $modules['language'] ? 'card-active' : ''; ?>">
+        <a href="<?php echo esc_url( $url_lang ); ?>" class="wpor-card <?php echo esc_attr( $modules['language'] ? 'card-active' : '' ); ?>">
             <span class="dashicons dashicons-arrow-right-alt2 wpor-arrow-indicator"></span>
             <div class="wpor-card-title">
-                <span class="dashicons dashicons-translation wpor-icon"></span> <?php _e('Clean Language', 'wporlogin'); ?>
+                <span class="dashicons dashicons-translation wpor-icon"></span> <?php esc_html_e( 'Clean Language', 'wporlogin' ); ?>
             </div>
             <div>
                 <?php if ($modules['language']): ?>
-                    <span class="wpor-status-badge badge-active"><?php _e('Hidden', 'wporlogin'); ?></span>
+                    <span class="wpor-status-badge badge-active"><?php esc_html_e( 'Hidden', 'wporlogin' ); ?></span>
                 <?php else: ?>
-                    <span class="wpor-status-badge badge-cta"><?php _e('Clean up', 'wporlogin'); ?></span>
+                    <span class="wpor-status-badge badge-cta"><?php esc_html_e( 'Clean up', 'wporlogin' ); ?></span>
                 <?php endif; ?>
             </div>
         </a>
 
     </div>
 
-    <a href="<?php echo $url_main; ?>" class="wpor-btn-main">
-        <?php _e('Open Settings', 'wporlogin'); ?>
+    <a href="<?php echo esc_url( $url_main ); ?>" class="wpor-btn-main">
+        <?php esc_html_e( 'Open Settings', 'wporlogin' ); ?>
     </a>
 
 </div>

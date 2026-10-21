@@ -120,17 +120,17 @@ class Wporlogin_Admin_Notices {
                 </div>
                 <div class="wporlogin-text">
                     <h3>
-                        <?php _e( 'New Security Module Available!', 'wporlogin' ); ?> 
+                        <?php esc_html_e( 'New Security Module Available!', 'wporlogin' ); ?> 
                         <span style="background:#e5fdf4; color:#00a32a; font-size:10px; padding:2px 6px; border-radius:3px; border:1px solid #00a32a; text-transform:uppercase; vertical-align:middle; margin-left:5px;">New</span>
                     </h3>
                     <p>
-                        <?php _e( 'Protect your website from brute force attacks with the new <strong>Limit Login Attempts</strong> feature. Secure your login page now.', 'wporlogin' ); ?>
+                        <?php echo wp_kses_post( __( 'Protect your website from brute force attacks with the new <strong>Limit Login Attempts</strong> feature. Secure your login page now.', 'wporlogin' ) ); ?>
                     </p>
                 </div>
             </div>
             <div class="wporlogin-actions">
                 <a href="<?php echo esc_url( $setting_url ); ?>" class="wporlogin-btn-cta">
-                    <?php _e( 'Enable Protection', 'wporlogin' ); ?> &rarr;
+                    <?php esc_html_e( 'Enable Protection', 'wporlogin' ); ?> &rarr;
                 </a>
             </div>
             <script type="text/javascript">
@@ -138,7 +138,7 @@ class Wporlogin_Admin_Notices {
                 $('.wporlogin-limit-feature-notice').on('click', '.notice-dismiss', function() {
                     $.post(ajaxurl, {
                         action: 'wporlogin_dismiss_notice_generic',
-                        nonce: '<?php echo wp_create_nonce( "wporlogin_dismiss_nonce" ); ?>',
+                        nonce: '<?php echo esc_js( wp_create_nonce( "wporlogin_dismiss_nonce" ) ); ?>',
                         notice_id: 'wporlogin_dismiss_limit_msg'
                     });
                 });
@@ -220,17 +220,17 @@ class Wporlogin_Admin_Notices {
                 </div>
                 <div class="wporlogin-text">
                     <h3>
-                        <?php _e( 'New Security Feature: Hide Login URL!', 'wporlogin' ); ?> 
+                        <?php esc_html_e( 'New Security Feature: Hide Login URL!', 'wporlogin' ); ?> 
                         <span style="background:#e5fdf4; color:#00a32a; font-size:10px; padding:2px 6px; border-radius:3px; border:1px solid #00a32a; text-transform:uppercase; vertical-align:middle; margin-left:5px;">New</span>
                     </h3>
                     <p>
-                        <?php _e( 'Stop hackers from finding your login page. Change your default <strong>wp-login.php</strong> URL to something secret and secure.', 'wporlogin' ); ?>
+                        <?php echo wp_kses_post( __( 'Stop hackers from finding your login page. Change your default <strong>wp-login.php</strong> URL to something secret and secure.', 'wporlogin' ) ); ?>
                     </p>
                 </div>
             </div>
             <div class="wporlogin-actions">
                 <a href="<?php echo esc_url( $setting_url ); ?>" class="wporlogin-btn-cta">
-                    <?php _e( 'Hide My Login URL', 'wporlogin' ); ?> &rarr;
+                    <?php esc_html_e( 'Hide My Login URL', 'wporlogin' ); ?> &rarr;
                 </a>
             </div>
             <script type="text/javascript">
@@ -239,7 +239,7 @@ class Wporlogin_Admin_Notices {
                 $('.wporlogin-hide-login-feature-notice').on('click', '.notice-dismiss', function() {
                     $.post(ajaxurl, {
                         action: 'wporlogin_dismiss_notice_generic',
-                        nonce: '<?php echo wp_create_nonce( "wporlogin_dismiss_nonce" ); ?>',
+                        nonce: '<?php echo esc_js( wp_create_nonce( "wporlogin_dismiss_nonce" ) ); ?>',
                         notice_id: 'wporlogin_dismiss_hide_login_msg' // ID específico para este aviso
                     });
                 });
@@ -261,7 +261,7 @@ class Wporlogin_Admin_Notices {
         }
 
         // 2. Verificamos si la función YA está activa (Para no molestar al usuario si ya lo configuró)
-        if ( get_option( 'wporlogin_google_enable' ) === '1' ) {
+        if ( get_option( 'wporlogin_google_enable' ) === '1' || get_option( 'wporlogin_facebook_enable' ) === '1' || get_option( 'wporlogin_microsoft_enable' ) === '1' ) {
             return; 
         }
 
@@ -326,17 +326,17 @@ class Wporlogin_Admin_Notices {
                 </div>
                 <div class="wporlogin-text">
                     <h3>
-                        <?php _e( 'New Feature: Social Login!', 'wporlogin' ); ?> 
+                        <?php esc_html_e( 'New Feature: Social Login!', 'wporlogin' ); ?> 
                         <span style="background:#e5fdf4; color:#00a32a; font-size:10px; padding:2px 6px; border-radius:3px; border:1px solid #00a32a; text-transform:uppercase; vertical-align:middle; margin-left:5px;">New</span>
                     </h3>
                     <p>
-                        <?php _e( 'Allow users to register and log in using their <strong>Google Account</strong>. Increase conversions and simplify access.', 'wporlogin' ); ?>
+                        <?php echo wp_kses_post( __( 'Allow users to register and log in using their <strong>Google Account</strong>. Increase conversions and simplify access.', 'wporlogin' ) ); ?>
                     </p>
                 </div>
             </div>
             <div class="wporlogin-actions">
                 <a href="<?php echo esc_url( $setting_url ); ?>" class="wporlogin-btn-cta">
-                    <?php _e( 'Setup Social Login', 'wporlogin' ); ?> &rarr;
+                    <?php esc_html_e( 'Setup Social Login', 'wporlogin' ); ?> &rarr;
                 </a>
             </div>
             <script type="text/javascript">
@@ -345,7 +345,7 @@ class Wporlogin_Admin_Notices {
                 $('.wporlogin-social-login-feature-notice').on('click', '.notice-dismiss', function() {
                     $.post(ajaxurl, {
                         action: 'wporlogin_dismiss_notice_generic',
-                        nonce: '<?php echo wp_create_nonce( "wporlogin_dismiss_nonce" ); ?>',
+                        nonce: '<?php echo esc_js( wp_create_nonce( "wporlogin_dismiss_nonce" ) ); ?>',
                         notice_id: 'wporlogin_dismiss_social_login_msg' // ID único de la opción a guardar en BD
                     });
                 });
@@ -355,20 +355,49 @@ class Wporlogin_Admin_Notices {
         <?php
     }
 
+    /**
+     * Alert administrators if the selected CAPTCHA provider is incomplete.
+     * Keep this informational: an invalid setup must not silently lock out users.
+     */
     public function recaptcha_config_warning() {
-        $recaptcha_version = get_option('recaptcha_version_wporlogin', 'none');
-        if ($recaptcha_version === 'v2') {
-            $site_key   = get_option('recaptcha_v2_site_key_wporlogin');
-            $secret_key = get_option('recaptcha_v2_secret_key_wporlogin');
-            if (empty($site_key) || empty($secret_key)) {
-                echo '<div class="notice notice-error"><p>' . __('Google reCAPTCHA v2 is selected, but the site or secret keys are not configured.', 'wporlogin') . '</p></div>';
-            }
-        } elseif ($recaptcha_version === 'v3') {
-            $site_key = get_option('recaptcha_v3_site_key_wporlogin');
-            if (empty($site_key)) {
-                echo '<div class="notice notice-error"><p>' . __('Google reCAPTCHA v3 is selected, but the site or secret keys are not configured.', 'wporlogin') . '</p></div>';
-            }
+        if ( defined( 'WPORLOGIN_DISABLE_RECAPTCHA' ) && true === WPORLOGIN_DISABLE_RECAPTCHA ) {
+            echo '<div class="notice notice-warning"><p>' . esc_html__( 'WPOrLogin CAPTCHA protection is disabled by the emergency configuration constant.', 'wporlogin' ) . '</p></div>';
+            return;
         }
+
+        $version = get_option( 'recaptcha_version_wporlogin', false );
+        if ( false === $version ) {
+            $version = '1' === (string) get_option( 'recaptcha_v2_wporlogin', '0' ) ? 'v2' : 'none';
+        }
+        if ( ! in_array( $version, array( 'v2', 'v3', 'turnstile' ), true ) ) {
+            return;
+        }
+
+        $site_option = 'turnstile' === $version
+            ? 'wporlogin_turnstile_site_key' : 'recaptcha_' . $version . '_site_key_wporlogin';
+        $secret_option = 'turnstile' === $version
+            ? 'wporlogin_turnstile_secret_key' : 'recaptcha_' . $version . '_secret_key_wporlogin';
+
+        $site_key   = trim( (string) get_option( $site_option, '' ) );
+        $secret_key = trim( (string) get_option( $secret_option, '' ) );
+        if ( '' !== $site_key && '' !== $secret_key ) {
+            return;
+        }
+
+        $label = 'turnstile' === $version
+            ? __( 'Cloudflare Turnstile', 'wporlogin' )
+            : sprintf(
+                /* translators: %s: Google reCAPTCHA version (v2 or v3). */
+                __( 'Google reCAPTCHA %s', 'wporlogin' ), $version
+            );
+        printf(
+            '<div class="notice notice-error"><p>%s</p></div>',
+            esc_html( sprintf(
+                /* translators: %s: Selected CAPTCHA provider name and version. */
+                __( '%s is selected but its site key or secret key is missing. The selected forms are not protected until both keys are saved.', 'wporlogin' ),
+                $label
+            ) )
+        );
     }
 
     public function show_cache_warning() {
@@ -394,39 +423,42 @@ class Wporlogin_Admin_Notices {
      * AJAX: Cierra permanentemente el aviso de solicitud de reseña.
      */
     public function ajax_delete_notice() {
-        // 1. Verificación de Seguridad (Nonce)
-        if ( ! isset( $_POST['nonce'] ) ) {
-            wp_die( __( 'Error: Nonce missing', 'wporlogin' ) );
+        // Nonces protect against CSRF; capabilities authorize the operation.
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_die( esc_html__( 'You do not have permission to perform this action.', 'wporlogin' ), '', array( 'response' => 403 ) );
         }
 
-        $nonce = sanitize_text_field( $_POST['nonce'] );
-
-        if ( wp_verify_nonce( $nonce, 'my-ajax-nonce-wporlogin') ) {
-            // 2. Guardar en base de datos
-            update_option( 'delete_notice_wporlogin_condition', '1' );
-            _e('Excelente', 'wporlogin');
-        } else {
-            wp_die( __( 'Error de nonce', 'wporlogin' ) );
-        }
-        
+        check_ajax_referer( 'my-ajax-nonce-wporlogin', 'nonce' );
+        update_option( 'delete_notice_wporlogin_condition', '1' );
+        esc_html_e( 'Excelente', 'wporlogin' );
         wp_die();
     }
 
     /**
-     * Manejador AJAX Genérico para cerrar cualquier aviso.
+     * Dismisses only known WPOrLogin notices after nonce/capability checks.
+     * The option name must never be supplied by the browser unchecked.
      */
     public function ajax_dismiss_notice() {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_die( esc_html__( 'You do not have permission to perform this action.', 'wporlogin' ), '', array( 'response' => 403 ) );
+        }
         check_ajax_referer( 'wporlogin_dismiss_nonce', 'nonce' );
 
-        if ( isset( $_POST['notice_id'] ) ) {
-            $notice_id = sanitize_text_field( $_POST['notice_id'] );
-            
-            // Seguridad: Solo permitimos guardar opciones que empiecen por nuestro prefijo
-            if ( strpos( $notice_id, 'wporlogin_dismiss_' ) === 0 ) {
-                update_option( $notice_id, '1' );
-            }
+        $allowed_notices = array(
+            'wporlogin_dismiss_limit_msg',
+            'wporlogin_dismiss_hide_login_msg',
+            'wporlogin_dismiss_social_login_msg',
+        );
+        $notice_id = isset( $_POST['notice_id'] ) && is_string( $_POST['notice_id'] )
+            ? sanitize_key( wp_unslash( $_POST['notice_id'] ) )
+            : '';
+
+        if ( ! in_array( $notice_id, $allowed_notices, true ) ) {
+            wp_die( esc_html__( 'Unknown notice.', 'wporlogin' ), '', array( 'response' => 400 ) );
         }
 
+        update_option( $notice_id, '1' );
         wp_die();
     }
+
 }

@@ -147,8 +147,8 @@ class Wporlogin_Public_Hide_Login {
      */
     public function intercept_login_page() {
         $request_uri = $_SERVER['REQUEST_URI'];
-        $path = parse_url($request_uri, PHP_URL_PATH);
-        $base_path = parse_url(home_url(), PHP_URL_PATH);
+        $path = wp_parse_url($request_uri, PHP_URL_PATH);
+        $base_path = wp_parse_url(home_url(), PHP_URL_PATH);
         
         if ( $base_path && $base_path !== '/' ) {
             $path = str_replace($base_path, '', $path);

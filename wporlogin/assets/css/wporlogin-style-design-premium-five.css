@@ -200,9 +200,15 @@ body.login div#login form .wp-hide-pw:hover {
     color: var(--wporlogin-color-principal-marca) !important;
 }
 
+/* Premium Five: menos espacio entre la contraseña y «Recuérdame».
+   Solo afecta al formulario de inicio de sesión. */
+body.login div#login form#loginform input#user_pass {
+    margin-bottom: 10px !important;
+}
+
 /* 7. CHECKBOX REPARADO (Centrado Geométrico Perfecto) */
 body.login div#login form#loginform p.forgetmenot {
-    margin-top: 5px !important; margin-bottom: 25px !important;
+    margin-top: 2px !important; margin-bottom: 12px !important;
     display: flex; align-items: center; float: none !important;
 }
 
@@ -261,6 +267,11 @@ body.login div#login form p.submit input#wp-submit {
 }
 body.login div#login form p.submit input#wp-submit:hover {
     filter: brightness(0.9); transform: translateY(-1px);
+}
+
+/* Premium Five: distancia uniforme entre «Recuérdame» y «Acceder». */
+body.login div#login form#loginform p.submit input#wp-submit {
+    margin-top: 4px !important;
 }
 
 /* 9. FOOTER (Enlaces: Recuperar, Volver y Privacidad) */

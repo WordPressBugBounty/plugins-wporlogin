@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
  * Clase para gestionar los scripts de vista previa en vivo en el Personalizador de WordPress.
  *

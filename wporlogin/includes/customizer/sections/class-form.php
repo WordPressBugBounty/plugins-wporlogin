@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
  * Class responsible for registering Login Form customization options.
  * * UX IMPROVEMENT: Labels now include (Default: values) to guide the user.
@@ -136,7 +140,10 @@ if ( ! class_exists( 'WPORLogin_Customizer_Form' ) ) {
                 
                 // Label Example: "Padding Top (Default: 26px)"
                 $wp_customize->add_control( "{$setting_id}_control", array(
-                    'label'       => sprintf( __( 'Padding %s (Default: %spx)', 'wporlogin' ), ucfirst($side), $default ),
+                    'label'       => sprintf(
+                        /* translators: 1: Side (Top, Right, Bottom or Left); 2: Default padding in pixels. */
+                        __( 'Padding %1$s (Default: %2$spx)', 'wporlogin' ), ucfirst($side), $default
+                    ),
                     'section'     => 'wporlogin_login_form_section',
                     'settings'    => $setting_id,
                     'type'        => 'number',
@@ -160,7 +167,10 @@ if ( ! class_exists( 'WPORLogin_Customizer_Form' ) ) {
                 
                 // Label Example: "Margin Top (Default: 24px)"
                 $wp_customize->add_control( "{$setting_id}_control", array(
-                    'label'       => sprintf( __( 'Margin %s (Default: %spx)', 'wporlogin' ), ucfirst($side), $default ),
+                    'label'       => sprintf(
+                        /* translators: 1: Side (Top, Right, Bottom or Left); 2: Default margin in pixels. */
+                        __( 'Margin %1$s (Default: %2$spx)', 'wporlogin' ), ucfirst($side), $default
+                    ),
                     'section'     => 'wporlogin_login_form_section',
                     'settings'    => $setting_id,
                     'type'        => 'number',

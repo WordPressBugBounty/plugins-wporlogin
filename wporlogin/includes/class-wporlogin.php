@@ -127,6 +127,15 @@ class Wporlogin {
         // Se necesita en Front (para ocultar de Search/Archives)
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wporlogin-public-visibility.php';
 
+        // El avatar social es global: funciona en frontend, wp-admin y REST.
+        // No cargamos aquí el controlador público de login ni los proveedores OAuth.
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/social/class-wporlogin-social-providers.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/social/class-wporlogin-social-avatar.php';
+
+        // Google uses this helper to resolve native WordPress users.
+        // No custom login actions or redirection hooks are necessary.
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/social/class-wporlogin-social-identity.php';
+
         // [GLOBAL] Puente Customizer: Redirige tanto desde el editor (Admin) como desde la vista (Front).
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wporlogin-customizer-bridge.php';
 
@@ -307,7 +316,7 @@ class Wporlogin {
             
             $plugin_admin   = new Wporlogin_Admin( $this->get_plugin_name(), $this->get_version() );
             $plugin_notices = new Wporlogin_Admin_Notices( $this->get_plugin_name(), $this->get_version() );
-            
+
             // Menús y Ajustes
             $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_admin_menu' );
             $this->loader->add_action( 'admin_init', $plugin_admin, 'register_settings' );
@@ -393,27 +402,6 @@ class Wporlogin {
         // Opción A: Si usas el método init() interno de la clase (recomendado para mantener limpio el orquestador)
         $plugin_hide_login->init();
 
-        $plugin_social = new Wporlogin_Public_Social( $this->get_plugin_name(), $this->get_version() );
-
-        // 1. Mostrar botones
-        $this->loader->add_action( 'login_form', $plugin_social, 'render_social_buttons' );
-        $this->loader->add_action( 'register_form', $plugin_social, 'render_social_buttons' );
-        
-        // 2. Cargar estilos CSS del botón
-        $this->loader->add_action( 'login_enqueue_scripts', $plugin_social, 'enqueue_social_styles' );
-        // 3. Cargar Script JS (En el FOOTER)
-        $this->loader->add_action( 'login_footer', $plugin_social, 'output_social_footer_script' );
-
-        // 4. Callback de retorno
-        $this->loader->add_action( 'init', $plugin_social, 'handle_social_callback' );
-        
-        // [NUEVO] Manejo de errores de login (Mensaje rojo)
-        $this->loader->add_filter( 'wp_login_errors', $plugin_social, 'custom_login_error_message' );
-
-        // [NUEVO] Reemplazar Avatar (El efecto WOW)
-        // Prioridad 10, acepta 5 argumentos (estándar de WP)
-        $this->loader->add_filter( 'get_avatar', $plugin_social, 'replace_gravatar_with_social_image', 10, 5 );
-
         // --- MÓDULO DE PLANTILLAS (VISUALIZACIÓN) ---
         $template_engine = new Wporlogin_Public_Template();
 
@@ -486,6 +474,11 @@ class Wporlogin {
         $this->loader->add_action( 'template_redirect', $customizer_bridge, 'redirect_from_frontend' );
 
 
+        // Los avatares se usan en todo WordPress, también en wp-admin y REST.
+        // Las opciones existentes siguen gobernando si se sustituye Gravatar.
+        $this->loader->add_filter( 'get_avatar', 'Wporlogin_Social_Avatar', 'filter_avatar', 10, 5 );
+        $this->loader->add_filter( 'get_avatar_data', 'Wporlogin_Social_Avatar', 'filter_avatar_data', 10, 2 );
+
         // --- LÓGICA PURA DE FRONTEND ---
         // Solo instanciamos si NO es admin, o si es AJAX
         if ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
@@ -502,7 +495,7 @@ class Wporlogin {
 
             // Redirecciones
             $this->loader->add_filter( 'login_redirect', $public_redirects, 'custom_login_redirect', 10, 3 );
-            $this->loader->add_action( 'wp_logout', $public_redirects, 'custom_logout_redirect' );
+            $this->loader->add_filter( 'logout_redirect', $public_redirects, 'custom_logout_redirect', 10, 3 );
 
             // Diseño
             $this->loader->add_action( 'login_init', $public_design, 'remove_language_dropdown' );
@@ -516,7 +509,7 @@ class Wporlogin {
             // Seguridad (reCAPTCHA)
             $this->loader->add_action( 'login_enqueue_scripts', $public_security, 'enqueue_recaptcha_scripts' );
             $this->loader->add_action( 'login_form', $public_security, 'render_login_recaptcha' );
-            $this->loader->add_filter( 'wp_authenticate_user', $public_security, 'verify_login_recaptcha', 10, 2 );
+            $this->loader->add_filter( 'authenticate', $public_security, 'verify_login_recaptcha', 30, 3 );
             $this->loader->add_action( 'register_form', $public_security, 'render_register_recaptcha' );
             $this->loader->add_filter( 'registration_errors', $public_security, 'verify_register_recaptcha', 10, 3 );
             $this->loader->add_action( 'lostpassword_form', $public_security, 'render_lostpassword_recaptcha' );
@@ -536,12 +529,15 @@ class Wporlogin {
             // Social Login
             $plugin_social = new Wporlogin_Public_Social( $this->get_plugin_name(), $this->get_version() );
             $this->loader->add_action( 'login_form', $plugin_social, 'render_social_buttons' );
+            $this->loader->add_action( 'login_form', $plugin_social, 'render_link_inside_form' );
+            $this->loader->add_filter( 'login_body_class', $plugin_social, 'link_body_class' );
+            $this->loader->add_filter( 'login_message', $plugin_social, 'render_link_confirmation' );
+            $this->loader->add_filter( 'login_redirect', $plugin_social, 'preserve_link_redirect', 999, 3 );
             $this->loader->add_action( 'register_form', $plugin_social, 'render_social_buttons' );
             $this->loader->add_action( 'login_enqueue_scripts', $plugin_social, 'enqueue_social_styles' );
             $this->loader->add_action( 'login_footer', $plugin_social, 'output_social_footer_script' );
             $this->loader->add_action( 'init', $plugin_social, 'handle_social_callback' );
             $this->loader->add_filter( 'wp_login_errors', $plugin_social, 'custom_login_error_message' );
-            $this->loader->add_filter( 'get_avatar', $plugin_social, 'replace_gravatar_with_social_image', 10, 5 );
             // [NUEVO] Módulo de restricción de registro
             require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/social/class-wporlogin-social-only-register.php';
             $social_restriction = new Wporlogin_Social_Only_Register();

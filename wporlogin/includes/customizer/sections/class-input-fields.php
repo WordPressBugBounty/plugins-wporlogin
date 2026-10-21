@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
  * Class responsible for registering Input Fields (User/Pass) customization options.
  * * UX OPTIMIZED: Ordered by Background -> Text -> Border.

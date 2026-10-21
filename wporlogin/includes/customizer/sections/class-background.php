@@ -157,7 +157,7 @@ if ( ! class_exists( 'WPORLogin_Multi_Image_Control' ) ) {
                             if($url) {
                                 echo '<div class="wporlogin-thumb" data-id="'.esc_attr($id).'">
                                         <img src="'.esc_url($url).'">
-                                        <span class="wporlogin-remove" title="'.__('Remove', 'wporlogin').'">✕</span>
+                                        <span class="wporlogin-remove" title="'.esc_attr__( 'Remove', 'wporlogin' ).'">✕</span>
                                       </div>';
                             }
                         }
@@ -166,7 +166,7 @@ if ( ! class_exists( 'WPORLogin_Multi_Image_Control' ) ) {
                 </div>
                 
                 <button type="button" class="button button-secondary wporlogin-add-btn wporlogin-add-images" data-target="<?php echo esc_attr($this->id); ?>">
-                    <?php _e('Add/Edit Images', 'wporlogin'); ?>
+                    <?php esc_html_e( 'Add/Edit Images', 'wporlogin' ); ?>
                 </button>
                 <input type="hidden" id="<?php echo esc_attr($this->id); ?>" name="<?php echo esc_attr($this->id); ?>" value="<?php echo esc_attr( $this->value() ); ?>" <?php $this->link(); ?>>
             </div>
@@ -343,9 +343,9 @@ if ( ! class_exists( 'WPORLogin_Customizer_Background' ) ) {
                 'label' => __( 'Or Select from Gallery', 'wporlogin' ), 'section' => $section, 'choices' => Wporlogin::get_default_backgrounds(), 'active_callback' => array( $this, 'is_static_gallery_visible' ), 'priority' => 60,
             ) ) );
 
-            $this->add_legacy_select($wp_customize, 'repeat', 'Background Repeat', array('no-repeat'=>'No Repeat','repeat'=>'Repeat','repeat-x'=>'Repeat X','repeat-y'=>'Repeat Y'), 70);
-            $this->add_legacy_select($wp_customize, 'size', 'Background Size', array('cover'=>'Cover','contain'=>'Contain','auto'=>'Auto'), 80);
-            $this->add_legacy_select($wp_customize, 'position', 'Background Position', array('center center'=>'Center Center','left top'=>'Left Top','right bottom'=>'Right Bottom'), 90);
+            $this->add_legacy_select($wp_customize, 'repeat', __( 'Background Repeat', 'wporlogin' ), array('no-repeat'=>'No Repeat','repeat'=>'Repeat','repeat-x'=>'Repeat X','repeat-y'=>'Repeat Y'), 70);
+            $this->add_legacy_select($wp_customize, 'size', __( 'Background Size', 'wporlogin' ), array('cover'=>'Cover','contain'=>'Contain','auto'=>'Auto'), 80);
+            $this->add_legacy_select($wp_customize, 'position', __( 'Background Position', 'wporlogin' ), array('center center'=>'Center Center','left top'=>'Left Top','right bottom'=>'Right Bottom'), 90);
 
 
             // --- GRUPO B: RANDOM IMAGE (Transport: refresh) ---
@@ -435,7 +435,7 @@ if ( ! class_exists( 'WPORLogin_Customizer_Background' ) ) {
                 'default' => array_key_first($choices), 'type' => 'option', 'transport' => 'postMessage', 'sanitize_callback' => array( $this, 'sanitize_choices' ),
             ));
             $wp_customize->add_control( $id, array(
-                'label' => __( $label, 'wporlogin' ), 'section' => 'wporlogin_login_background_section', 'type' => 'select', 'choices' => $choices, 
+                'label' => $label, 'section' => 'wporlogin_login_background_section', 'type' => 'select', 'choices' => $choices, 
                 'active_callback' => array( $this, 'is_static_mode' ), 'priority' => $priority,
             ));
         }

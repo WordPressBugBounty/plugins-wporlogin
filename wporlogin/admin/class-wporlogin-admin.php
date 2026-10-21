@@ -15,6 +15,9 @@ class Wporlogin_Admin {
     private $plugin_name;
     private $version;
 
+    /** @var bool Whether a Hide Login URL changed during this request. */
+    private $hide_login_urls_changed = false;
+
     public function __construct( $plugin_name, $version ) {
         $this->plugin_name = $plugin_name;
         $this->version     = $version;
@@ -42,11 +45,11 @@ class Wporlogin_Admin {
             $icon_url 
         );
 
-        // Submenú Google reCAPTCHA
+        // CAPTCHA settings: preserve the existing slug for bookmarks and upgrades.
         add_submenu_page( 
             $menu_slug, 
-            __( 'Google reCAPTCHA', 'wporlogin' ), 
-            __( 'Google reCAPTCHA', 'wporlogin' ), 
+            __( 'CAPTCHA Protection', 'wporlogin' ), 
+            __( 'CAPTCHA Protection', 'wporlogin' ), 
             'manage_options', 
             'recaptcha-wporlogin-plugin', 
             array( $this, 'recaptcha_wporlogin_content_page_menu' )
@@ -170,162 +173,252 @@ class Wporlogin_Admin {
     //  REGISTRO DE AJUSTES (SETTINGS API)
     // -----------------------------------------------------------------
 
+    /**
+     * Registers admin options without performing writes from unverified POST data.
+     *
+     * WordPress options.php performs capability and nonce checks before updating
+     * options registered with the Settings API. Keep all writes on that path.
+     */
     public function register_settings() {
+        $this->initialize_legacy_defaults_once();
 
-        // 0. MIGRACIÓN
-        $recaptcha_v2_enabled = get_option('recaptcha_v2_wporlogin', 0); 
-        $recaptcha_version    = get_option('recaptcha_version_wporlogin', 'none');
+        // Run side-effects only when WordPress has actually updated an option.
+        // The shutdown callback runs after options.php processes all fields.
+        add_action( 'updated_option', array( $this, 'on_admin_option_updated' ), 10, 3 );
+        add_action( 'shutdown', array( $this, 'flush_hide_login_rules_if_needed' ) );
 
-        if ($recaptcha_version === 'none' && $recaptcha_v2_enabled == 1) {
-            update_option('recaptcha_version_wporlogin', 'v2');
-        }
-
-        // 1. INICIALIZACIÓN
-        if (isset($_POST['submit'])) { 
-            delete_option('wporlogin_design_img_premium_backup'); 
-        }
-
-        add_option('wporlogin_date_5_review', date("Y-m-d H:i:s"));
-        add_option('wporlogin_design', 'wporlogin_design_basic');
-        add_option('wporlogin_width_logotipo_text', '200');
-        add_option('wporlogin_background_position_logotipo_select', '7');
-        add_option('wporlogin_background_size_logotipo_select', '2');
-        add_option('wporlogin_background_images', 'wporlogin_free_images');
-        add_option( 'activa_acceso_recaptcha_v2_wporlogin', '1' );
-        add_option( 'activa_registro_recaptcha_v2_wporlogin', '1' );
-        
-        $default_backgrounds = Wporlogin::get_default_backgrounds();
-        add_option('wporlogin_url_img_fondo', esc_url($default_backgrounds[0]));
-        add_option('wporlogin_color_principal_marca', '#1a73e8');
-        add_option('wporlogin-design-img-premium', 'wporlogin_design_img_premium_one');
-
-        // 2. CÁLCULO DE COLORES
-        $color_principal = get_option('wporlogin_color_principal_marca', '#1a73e8');
-        $color_hover = self::darken_color($color_principal, 25);
-        update_option('wporlogin_color_hover_marca', $color_hover);
-        $color_text_submit = self::get_contrasting_text_color($color_principal);
-        update_option('wporlogin_color_principal_marca_text_submit', $color_text_submit);
-
-        // 3. REGISTRO DE GRUPOS
-
-        // --- Grupo: Apariencia ---
+        // Appearance: formats are validated, but existing design identifiers
+        // remain extensible for third-party integrations.
         $main_group = 'wporlogin_custom_admin_settings_group';
-        register_setting( $main_group, 'wporlogin_color_principal_marca');
-        register_setting( $main_group, 'wporlogin_design');
-        register_setting( $main_group, 'wporlogin-design-img-premium');
-        register_setting( $main_group, 'wporlogin_url_logotipo');
-        register_setting( $main_group, 'wporlogin_ruta_url_logotipo');
-        register_setting( $main_group, 'wporlogin_titulo_logotipo');
-        register_setting( $main_group, 'wporlogin_url_img_fondo');
-        register_setting( $main_group, 'wporlogin_background_images');
-        register_setting( $main_group, 'wporlogin-background-free-image');
+        register_setting( $main_group, 'wporlogin_color_principal_marca', array(
+            'sanitize_callback' => array( $this, 'sanitize_brand_color' ),
+        ) );
+        register_setting( $main_group, 'wporlogin_design', array( 'sanitize_callback' => 'sanitize_key' ) );
+        register_setting( $main_group, 'wporlogin-design-img-premium', array( 'sanitize_callback' => 'sanitize_key' ) );
+        register_setting( $main_group, 'wporlogin_url_logotipo', array( 'sanitize_callback' => 'esc_url_raw' ) );
+        register_setting( $main_group, 'wporlogin_ruta_url_logotipo', array( 'sanitize_callback' => 'esc_url_raw' ) );
+        register_setting( $main_group, 'wporlogin_titulo_logotipo', array( 'sanitize_callback' => 'sanitize_text_field' ) );
+        register_setting( $main_group, 'wporlogin_url_img_fondo', array( 'sanitize_callback' => 'esc_url_raw' ) );
+        register_setting( $main_group, 'wporlogin_background_images', array(
+            'sanitize_callback' => array( $this, 'sanitize_background_source' ),
+        ) );
+        register_setting( $main_group, 'wporlogin-background-free-image', array( 'sanitize_callback' => 'esc_url_raw' ) );
+        register_setting( $main_group, 'wporlogin_active_design', array( 'sanitize_callback' => 'sanitize_key' ) );
 
-        register_setting( $main_group, 'wporlogin_active_design');        
-
-        // --- Grupo: reCAPTCHA ---
+        // CAPTCHA providers share the existing settings group. Preserve all
+        // Google option names so older installations retain their credentials.
         $recaptcha_group = 'recaptcha_wporlogin_custom_admin_settings_group';
-        register_setting( $recaptcha_group, 'recaptcha_v2_wporlogin');
-        register_setting( $recaptcha_group, 'recaptcha_version_wporlogin');
-        register_setting( $recaptcha_group, 'recaptcha_v2_site_key_wporlogin');
-        register_setting( $recaptcha_group, 'recaptcha_v2_secret_key_wporlogin');
-        register_setting( $recaptcha_group, 'recaptcha_v3_site_key_wporlogin');
-        register_setting( $recaptcha_group, 'recaptcha_v3_secret_key_wporlogin');
-        register_setting( $recaptcha_group, 'activa_acceso_recaptcha_v2_wporlogin');
-        register_setting( $recaptcha_group, 'activa_registro_recaptcha_v2_wporlogin');
-        register_setting( $recaptcha_group, 'activa_recuperar_recaptcha_wporlogin');
-
-        // --- Grupo: Remove Language ---
-        /*$lang_group = 'remove_language_wporlogin_custom_admin_settings_group';
-        register_setting( $lang_group, 'remove_language_wporlogin');*/
-
-        $lang_group = 'remove_language_wporlogin_custom_admin_settings_group';
-
-        // 1. Registramos la opción con instrucciones específicas
-        register_setting( 
-            $lang_group, 
-            'remove_language_wporlogin', 
-            array(
-                'type'              => 'integer',
-                'sanitize_callback' => 'wporlogin_sanitize_checkbox_value' // Llamamos a la función de abajo
-            )
-        );
-
-        /**
-         * 2. Función auxiliar para convertir el valor del checkbox.
-         * Si el checkbox viene marcado, devuelve 1.
-         * Si el checkbox viene vacío (desmarcado), devuelve 0.
-         */
-        function wporlogin_sanitize_checkbox_value( $value ) {
-            return ( isset( $value ) && $value == 1 ) ? 1 : 0;
+        register_setting( $recaptcha_group, 'recaptcha_v2_wporlogin', array( 'sanitize_callback' => array( $this, 'sanitize_checkbox' ) ) );
+        register_setting( $recaptcha_group, 'recaptcha_version_wporlogin', array(
+            'sanitize_callback' => array( $this, 'sanitize_recaptcha_version' ),
+        ) );
+        foreach ( array(
+            'recaptcha_v2_site_key_wporlogin', 'recaptcha_v2_secret_key_wporlogin',
+            'recaptcha_v3_site_key_wporlogin', 'recaptcha_v3_secret_key_wporlogin',
+            'wporlogin_turnstile_site_key', 'wporlogin_turnstile_secret_key',
+        ) as $key_option ) {
+            register_setting( $recaptcha_group, $key_option, array( 'sanitize_callback' => 'sanitize_text_field' ) );
         }
-        
-        // --- Grupo: Redirects ---
+        foreach ( array(
+            'activa_acceso_recaptcha_v2_wporlogin',
+            'activa_registro_recaptcha_v2_wporlogin',
+            'activa_recuperar_recaptcha_wporlogin',
+        ) as $toggle_option ) {
+            register_setting( $recaptcha_group, $toggle_option, array( 'sanitize_callback' => array( $this, 'sanitize_checkbox' ) ) );
+        }
+
+        // Language (formerly relied on a function declared inside this method).
+        $lang_group = 'remove_language_wporlogin_custom_admin_settings_group';
+        register_setting( $lang_group, 'remove_language_wporlogin', array(
+            'type'              => 'integer',
+            'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+        ) );
+
+        // Redirects: preserve existing sanitizers and rule structures.
         $redirect_group = 'redirects_wporlogin_custom_admin_settings_group';
         register_setting( $redirect_group, 'wporlogin_login_redirect', array( 'sanitize_callback' => 'esc_url_raw' ) );
         register_setting( $redirect_group, 'wporlogin_logout_redirect', array( 'sanitize_callback' => 'esc_url_raw' ) );
-        register_setting( $redirect_group, 'wporlogin_enable_admin_redirect', array( 'sanitize_callback' => 'absint' ));
-        register_setting( $redirect_group, 'wporlogin_enable_login_redirect', array( 'sanitize_callback' => 'absint' ));
-        register_setting( $redirect_group, 'wporlogin_enable_logout_redirect', array( 'sanitize_callback' => 'absint' ) );
-        // [NUEVO] Opción Array para guardar reglas por rol
-        register_setting( $redirect_group, 'wporlogin_redirect_roles_rules', array(
-            'sanitize_callback' => array( $this, 'sanitize_redirect_rules' )
-        ));
-
-        // --- Grupo: Limit Login [NUEVO] ---
-        $limit_group = 'wporlogin_limit_settings_group';
-        register_setting( $limit_group, 'wporlogin_limit_enable' );
-        register_setting( $limit_group, 'wporlogin_limit_max_retries', array('sanitize_callback' => 'absint') );
-        register_setting( $limit_group, 'wporlogin_limit_lock_time', array('sanitize_callback' => 'absint') );
-        register_setting( $limit_group, 'wporlogin_limit_message', array('sanitize_callback' => 'sanitize_textarea_field') );
-        // [NUEVO] Campo Whitelist (Lista Blanca)
-        register_setting( $limit_group, 'wporlogin_limit_whitelist', array(
-            'sanitize_callback' => array( $this, 'sanitize_ip_whitelist' ) 
-        ));
-        
-        // ---------------------------------------------------------
-        // --- Grupo: Hide Login [NUEVO] ---
-        // ---------------------------------------------------------
-        $hide_login_group = 'wporlogin_hide_login_settings_group';
-
-        // 1. URL de Acceso
-        register_setting( $hide_login_group, 'wporlogin_hide_login_slug', array(
-            'sanitize_callback' => 'sanitize_title' // Usamos sanitize_title para asegurar que sea un slug válido (sin espacios ni ñ)
-        ));
-
-        // 2. URL de Registro
-        register_setting( $hide_login_group, 'wporlogin_hide_register_slug', array(
-            'sanitize_callback' => 'sanitize_title'
-        ));
-
-        // 3. URL de Recuperar Contraseña
-        register_setting( $hide_login_group, 'wporlogin_hide_recovery_slug', array(
-            'sanitize_callback' => 'sanitize_title'
-        ));
-
-        // IMPORTANTE: Detectar si se acaban de guardar estas opciones para regenerar los enlaces permanentes (Flush Rules)
-        // Esto evita el error 404 justo después de guardar.
-        if ( isset( $_POST['option_page'] ) && $_POST['option_page'] === $hide_login_group ) {
-            // Guardamos las opciones manualmente antes de hacer flush para que tome los nuevos valores
-            if ( isset($_POST['wporlogin_hide_login_slug']) ) update_option('wporlogin_hide_login_slug', sanitize_title($_POST['wporlogin_hide_login_slug']));
-            if ( isset($_POST['wporlogin_hide_register_slug']) ) update_option('wporlogin_hide_register_slug', sanitize_title($_POST['wporlogin_hide_register_slug']));
-            if ( isset($_POST['wporlogin_hide_recovery_slug']) ) update_option('wporlogin_hide_recovery_slug', sanitize_title($_POST['wporlogin_hide_recovery_slug']));
-            
-            flush_rewrite_rules();
+        foreach ( array(
+            'wporlogin_enable_admin_redirect', 'wporlogin_enable_login_redirect',
+            'wporlogin_enable_logout_redirect',
+        ) as $toggle_option ) {
+            register_setting( $redirect_group, $toggle_option, array( 'sanitize_callback' => 'absint' ) );
         }
-        // [NUEVO] Opción para redirección de wp-admin
+        register_setting( $redirect_group, 'wporlogin_redirect_roles_rules', array(
+            'sanitize_callback' => array( $this, 'sanitize_redirect_rules' ),
+        ) );
+
+        // Limit Login: existing limits and allowlist behavior remain unchanged.
+        $limit_group = 'wporlogin_limit_settings_group';
+        register_setting( $limit_group, 'wporlogin_limit_enable', array( 'sanitize_callback' => array( $this, 'sanitize_checkbox' ) ) );
+        register_setting( $limit_group, 'wporlogin_limit_max_retries', array( 'sanitize_callback' => 'absint' ) );
+        register_setting( $limit_group, 'wporlogin_limit_lock_time', array( 'sanitize_callback' => 'absint' ) );
+        register_setting( $limit_group, 'wporlogin_limit_message', array( 'sanitize_callback' => 'sanitize_textarea_field' ) );
+        register_setting( $limit_group, 'wporlogin_limit_whitelist', array(
+            'sanitize_callback' => array( $this, 'sanitize_ip_whitelist' ),
+        ) );
+
+        // Hide Login: ONLY Settings API writes these options. Never write
+        // directly from $_POST inside admin_init.
+        $hide_login_group = 'wporlogin_hide_login_settings_group';
+        foreach ( array(
+            'wporlogin_hide_login_slug',
+            'wporlogin_hide_register_slug',
+            'wporlogin_hide_recovery_slug',
+        ) as $slug_option ) {
+            register_setting( $hide_login_group, $slug_option, array( 'sanitize_callback' => 'sanitize_title' ) );
+        }
         register_setting( $hide_login_group, 'wporlogin_hide_wp_admin_redirect_slug', array(
-            'sanitize_callback' => 'sanitize_text_field' // Usamos text_field para permitir slugs simples
-        ));
+            'sanitize_callback' => 'sanitize_text_field',
+        ) );
 
-        // --- Grupo: Social Login ---
+        // Social Login: normalize booleans and keep existing credential values.
         $social_group = 'wporlogin_social_settings_group';
-        register_setting( $social_group, 'wporlogin_google_enable' );
-        register_setting( $social_group, 'wporlogin_google_client_id' );
-        register_setting( $social_group, 'wporlogin_google_client_secret' );
-        // [NUEVO] Opción para activar/desactivar la sincronización de avatares
-        register_setting( $social_group, 'wporlogin_social_avatar_sync' );
-        register_setting( $social_group, 'wporlogin_social_only_register' );
+        register_setting( $social_group, 'wporlogin_google_enable', array( 'sanitize_callback' => array( $this, 'sanitize_checkbox' ) ) );
+        register_setting( $social_group, 'wporlogin_google_client_id', array( 'sanitize_callback' => 'sanitize_text_field' ) );
+        register_setting( $social_group, 'wporlogin_google_client_secret', array( 'sanitize_callback' => 'sanitize_text_field' ) );
+        register_setting( $social_group, 'wporlogin_facebook_enable', array( 'sanitize_callback' => array( $this, 'sanitize_checkbox' ) ) );
+        register_setting( $social_group, 'wporlogin_facebook_app_id', array( 'sanitize_callback' => 'sanitize_text_field' ) );
+        register_setting( $social_group, 'wporlogin_facebook_app_secret', array( 'sanitize_callback' => 'sanitize_text_field' ) );
+        register_setting( $social_group, 'wporlogin_microsoft_enable', array( 'sanitize_callback' => array( $this, 'sanitize_checkbox' ) ) );
+        register_setting( $social_group, 'wporlogin_microsoft_client_id', array( 'sanitize_callback' => 'sanitize_text_field' ) );
+        register_setting( $social_group, 'wporlogin_microsoft_client_secret', array( 'sanitize_callback' => 'sanitize_text_field' ) );
+        register_setting( $social_group, 'wporlogin_social_avatar_sync', array( 'sanitize_callback' => array( $this, 'sanitize_checkbox' ) ) );
+        register_setting( $social_group, 'wporlogin_social_only_register', array( 'sanitize_callback' => array( $this, 'sanitize_checkbox' ) ) );
+    }
 
+    /**
+     * Initializes defaults once on existing sites without overwriting settings.
+     * A stored marker avoids repeated database queries on every admin page.
+     */
+    private function initialize_legacy_defaults_once() {
+        if ( '1' === get_option( 'wporlogin_admin_defaults_initialized', '0' ) ) {
+            return;
+        }
+
+        // Migrate only when the new setting has never been saved. Do not
+        // reactivate reCAPTCHA if an administrator intentionally chose "none".
+        if ( false === get_option( 'recaptcha_version_wporlogin', false )
+            && '1' === (string) get_option( 'recaptcha_v2_wporlogin', '0' ) ) {
+            add_option( 'recaptcha_version_wporlogin', 'v2' );
+        }
+
+        add_option( 'wporlogin_date_5_review', gmdate( 'Y-m-d H:i:s' ) );
+        add_option( 'wporlogin_design', 'wporlogin_design_basic' );
+        add_option( 'wporlogin_width_logotipo_text', '200' );
+        add_option( 'wporlogin_background_position_logotipo_select', '7' );
+        add_option( 'wporlogin_background_size_logotipo_select', '2' );
+        add_option( 'wporlogin_background_images', 'wporlogin_free_images' );
+        add_option( 'activa_acceso_recaptcha_v2_wporlogin', '1' );
+        add_option( 'activa_registro_recaptcha_v2_wporlogin', '1' );
+
+        $backgrounds = Wporlogin::get_default_backgrounds();
+        if ( isset( $backgrounds[0] ) ) {
+            add_option( 'wporlogin_url_img_fondo', esc_url_raw( $backgrounds[0] ) );
+        }
+        add_option( 'wporlogin_color_principal_marca', '#1a73e8' );
+        add_option( 'wporlogin-design-img-premium', 'wporlogin_design_img_premium_one' );
+
+        $color = get_option( 'wporlogin_color_principal_marca', '#1a73e8' );
+        if ( ! sanitize_hex_color( $color ) ) {
+            $color = '#1a73e8';
+        }
+        // Preserve existing derived colors; only fill missing values once.
+        add_option( 'wporlogin_color_hover_marca', self::darken_color( $color, 25 ) );
+        add_option( 'wporlogin_color_principal_marca_text_submit', self::get_contrasting_text_color( $color ) );
+
+        add_option( 'wporlogin_admin_defaults_initialized', '1', '', false );
+    }
+
+    /**
+     * Reacts to committed option changes, not unverified form submissions.
+     *
+     * @param string $option Name of the stored option.
+     * @param mixed  $old_value Previous value.
+     * @param mixed  $value New value.
+     */
+    public function on_admin_option_updated( $option, $old_value, $value ) {
+        if ( in_array( $option, array(
+            'wporlogin_hide_login_slug',
+            'wporlogin_hide_register_slug',
+            'wporlogin_hide_recovery_slug',
+        ), true ) ) {
+            $this->hide_login_urls_changed = true;
+        }
+
+        if ( 'wporlogin_color_principal_marca' === $option ) {
+            $this->update_derived_brand_colors( $value );
+        }
+
+        // The legacy backup is only removed after a legitimate appearance
+        // option update. Unrelated POST requests can no longer remove it.
+        if ( in_array( $option, array(
+            'wporlogin_active_design', 'wporlogin_design',
+            'wporlogin-design-img-premium', 'wporlogin_color_principal_marca',
+            'wporlogin_url_logotipo', 'wporlogin_ruta_url_logotipo',
+            'wporlogin_titulo_logotipo', 'wporlogin_url_img_fondo',
+            'wporlogin_background_images', 'wporlogin-background-free-image',
+        ), true ) ) {
+            delete_option( 'wporlogin_design_img_premium_backup' );
+        }
+    }
+
+    /**
+     * Flush only once, after ALL Hide Login settings have been committed.
+     * Using shutdown prevents a premature flush during admin_init.
+     */
+    public function flush_hide_login_rules_if_needed() {
+        if ( $this->hide_login_urls_changed ) {
+            flush_rewrite_rules();
+            $this->hide_login_urls_changed = false;
+        }
+    }
+
+    /** Update stored hover/text colors immediately when the base color changes. */
+    private function update_derived_brand_colors( $color ) {
+        if ( ! sanitize_hex_color( $color ) ) {
+            return;
+        }
+
+        update_option( 'wporlogin_color_hover_marca', self::darken_color( $color, 25 ) );
+        update_option( 'wporlogin_color_principal_marca_text_submit', self::get_contrasting_text_color( $color ) );
+    }
+
+    /** @return string One of the checkbox values used by the existing UI. */
+    public function sanitize_checkbox( $value ) {
+        return is_scalar( $value ) && '1' === (string) $value ? '1' : '0';
+    }
+
+    /** Reject invalid colors without destroying a previously valid choice. */
+    public function sanitize_brand_color( $value ) {
+        $color = is_string( $value ) ? sanitize_hex_color( $value ) : null;
+        if ( null !== $color && '' !== $color ) {
+            return $color;
+        }
+
+        add_settings_error(
+            'wporlogin_color_principal_marca',
+            'wporlogin_invalid_color',
+            __( 'Invalid color. The previous color was preserved.', 'wporlogin' ),
+            'error'
+        );
+        return get_option( 'wporlogin_color_principal_marca', '#1a73e8' );
+    }
+
+    /** Accept supported CAPTCHA providers without changing the legacy option name. */
+    public function sanitize_recaptcha_version( $value ) {
+        if ( is_string( $value ) && in_array( $value, array( 'none', 'v2', 'v3', 'turnstile' ), true ) ) {
+            return $value;
+        }
+        return get_option( 'recaptcha_version_wporlogin', 'none' );
+    }
+
+    /** @return string The selected valid source for background images. */
+    public function sanitize_background_source( $value ) {
+        if ( in_array( $value, array( 'wporlogin_free_images', 'wporlogin_my_images' ), true ) ) {
+            return $value;
+        }
+        return get_option( 'wporlogin_background_images', 'wporlogin_free_images' );
     }
 
     // -----------------------------------------------------------------
@@ -359,8 +452,17 @@ class Wporlogin_Admin {
             wp_enqueue_script('wporlogin_my_upload'); 
             wp_set_script_translations('wporlogin_my_upload', 'wporlogin'); 
             
-            wp_register_script('wporlogin-recaptcha-version', WPORLOGIN_URL . 'assets/js/wporlogin-recaptcha-version.js', array('jquery', 'wp-i18n'), $this->version, true);
-            wp_enqueue_script('wporlogin-recaptcha-version');
+        }
+
+        // Provider fields are only needed on the existing CAPTCHA settings page.
+        if ( 'wporlogin_page_recaptcha-wporlogin-plugin' === $hook ) {
+            wp_enqueue_script(
+                'wporlogin-recaptcha-version',
+                WPORLOGIN_URL . 'assets/js/wporlogin-recaptcha-version.js',
+                array(),
+                $this->version,
+                true
+            );
         }
 
         // Color Picker (Solo principal)
@@ -386,7 +488,7 @@ class Wporlogin_Admin {
 
     public function recaptcha_wporlogin_content_page_menu() {
         
-        // Variable necesaria para la vista de reCAPTCHA
+        // The historical option name remains stable for upgrade compatibility.
         $recaptcha_version = get_option('recaptcha_version_wporlogin', 'none');
 
         require_once WPORLOGIN_PATH . 'admin/partials/wporlogin-admin-recaptcha.php';
@@ -428,19 +530,26 @@ class Wporlogin_Admin {
      * VERSIÓN SQL: Compatible con la tabla personalizada.
      */
     public function process_unlock_ip_action() {
-        if ( isset( $_GET['page'] ) && $_GET['page'] === 'limit-login-wporlogin-plugin' && isset( $_GET['action'] ) && $_GET['action'] === 'unlock_ip' ) {
+        // These GET values select an admin action; they do not replace its nonce.
+        $page   = isset( $_GET['page'] ) && is_string( $_GET['page'] )
+            ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+        $action = isset( $_GET['action'] ) && is_string( $_GET['action'] )
+            ? sanitize_key( wp_unslash( $_GET['action'] ) ) : '';
+        if ( 'limit-login-wporlogin-plugin' === $page && 'unlock_ip' === $action ) {
             
             // 1. Seguridad
-            if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'wporlogin_unlock_ip' ) ) {
-                wp_die( __( 'Security check failed.', 'wporlogin' ) );
+            $nonce = isset( $_GET['_wpnonce'] ) && is_string( $_GET['_wpnonce'] )
+                ? sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) : '';
+            if ( ! wp_verify_nonce( $nonce, 'wporlogin_unlock_ip' ) ) {
+                wp_die( esc_html__( 'Security check failed.', 'wporlogin' ) );
             }
             if ( ! current_user_can( 'manage_options' ) ) {
-                wp_die( __( 'You do not have permission to perform this action.', 'wporlogin' ) );
+                wp_die( esc_html__( 'You do not have permission to perform this action.', 'wporlogin' ) );
             }
 
             // 2. Ejecución
-            if ( isset( $_GET['ip'] ) ) {
-                $raw_ip = sanitize_text_field( $_GET['ip'] );
+            if ( isset( $_GET['ip'] ) && is_string( $_GET['ip'] ) ) {
+                $raw_ip = sanitize_text_field( wp_unslash( $_GET['ip'] ) );
                 
                 // Usamos el ID del usuario actual para que el mensaje sea único para él
                 $user_id = get_current_user_id();
@@ -499,13 +608,17 @@ class Wporlogin_Admin {
         
         if ( is_array( $input ) ) {
             foreach ( $input as $role => $url ) {
+                // Un formulario manipulado no debe provocar errores de tipo.
+                if ( ! is_string( $url ) || ! is_string( $role ) ) {
+                    continue;
+                }
                 // Limpiamos espacios en blanco
                 $url = trim( $url );
                 
                 // Solo guardamos si hay algo escrito
                 if ( ! empty( $url ) ) {
                     // esc_url_raw es la función correcta para guardar URLs en BD
-                    $clean_rules[ $role ] = esc_url_raw( $url );
+                    $clean_rules[ sanitize_key( $role ) ] = esc_url_raw( $url );
                 }
             }
         }
@@ -520,8 +633,17 @@ class Wporlogin_Admin {
     private function get_blocked_ips_data() {
         global $wpdb;
         $table_name = $wpdb->prefix . 'wporlogin_activity';
+        // La consulta usa un identificador SQL, no un valor: admitir solo caracteres válidos de WordPress.
+        if ( ! preg_match( '/\A[A-Za-z0-9_]+\z/D', $table_name ) ) {
+            return array();
+        }
 
-        if ( $wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name ) {
+        // El nombre de la tabla es interno; LIKE debe tratar '_' como carácter literal.
+        $table_exists = $wpdb->get_var( $wpdb->prepare(
+            'SHOW TABLES LIKE %s',
+            $wpdb->esc_like( $table_name )
+        ) );
+        if ( $table_exists !== $table_name ) {
             return [];
         }
 
@@ -530,7 +652,7 @@ class Wporlogin_Admin {
         // CAMBIO EXPERTO: Quitamos el "WHERE locked_until > NOW()"
         // Queremos ver todo el historial de los últimos 30 días (que maneja el cron).
         $results = $wpdb->get_results( 
-            "SELECT * FROM $table_name ORDER BY last_attempt DESC" 
+            "SELECT * FROM `{$table_name}` ORDER BY last_attempt DESC"
         );
 
         $report_data = [];
@@ -582,6 +704,9 @@ class Wporlogin_Admin {
      */
     public function sanitize_ip_whitelist( $input ) {
         if ( empty( $input ) ) return '';
+        if ( ! is_string( $input ) ) {
+            return get_option( 'wporlogin_limit_whitelist', '' );
+        }
 
         $lines = preg_split( '/[\r\n,]+/', $input );
         $valid_ips = array();
@@ -623,6 +748,10 @@ class Wporlogin_Admin {
         if ( ! empty( $valid_ips ) ) {
             global $wpdb;
             $table_name = $wpdb->prefix . 'wporlogin_activity';
+            // Nombre de tabla interno y validado: impedir interpolar identificadores inesperados.
+            if ( ! preg_match( '/\A[A-Za-z0-9_]+\z/D', $table_name ) ) {
+                return;
+            }
 
             // Preparamos los placeholders
             $placeholders = implode( ',', array_fill( 0, count( $valid_ips ), '%s' ) );
@@ -631,12 +760,12 @@ class Wporlogin_Admin {
             // Usamos UPDATE en lugar de DELETE.
             // Esto pone el contador a 0 y quita el bloqueo, PERO mantiene la fila
             // para que aparezca en el reporte como "Unlocked".
-            $sql = "UPDATE $table_name 
-                    SET attempts = 0, locked_until = NULL 
-                    WHERE ip IN ($placeholders)";
-
-            // Ejecutamos
-            $result = $wpdb->query( $wpdb->prepare( $sql, $valid_ips ) );
+            // Los identificadores se validan arriba; las IP se preparan como datos.
+            // Se usa el formato inline para que Plugin Check pueda verificar prepare().
+            $result = $wpdb->query( $wpdb->prepare(
+                "UPDATE `{$table_name}` SET attempts = 0, locked_until = NULL WHERE ip IN ({$placeholders})",
+                $valid_ips
+            ) );
             
             // [CORREGIDO] Invalidad caché para que el widget del dashboard se actualice
             if ($result !== false) {

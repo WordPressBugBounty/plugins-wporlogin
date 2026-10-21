@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
  * Class responsible for registering Login Button customization options.
  * * UX OPTIMIZED: Ordered by Layout -> Colors -> Typography -> Radius.

@@ -25,37 +25,169 @@ class Wporlogin_Public_Limit_Login {
     }
 
     /**
-     * Obtiene la IP del cliente de forma compatible con CDNs (Cloudflare, SiteGround).
+     * Rangos oficiales de los proxies de Cloudflare (IPv4 e IPv6).
+     *
+     * Fuente: https://www.cloudflare.com/ips-v4 y https://www.cloudflare.com/ips-v6
+     * Revisados: 2026-10-19. Actualizar la lista si Cloudflare modifica sus rangos.
+     * Solo confiamos en CF-Connecting-IP cuando REMOTE_ADDR está en esta lista.
+     *
+     * @var string[]
+     */
+    private const CLOUDFLARE_IP_RANGES = array(
+        '173.245.48.0/20',
+        '103.21.244.0/22',
+        '103.22.200.0/22',
+        '103.31.4.0/22',
+        '141.101.64.0/18',
+        '108.162.192.0/18',
+        '190.93.240.0/20',
+        '188.114.96.0/20',
+        '197.234.240.0/22',
+        '198.41.128.0/17',
+        '162.158.0.0/15',
+        '104.16.0.0/13',
+        '104.24.0.0/14',
+        '172.64.0.0/13',
+        '131.0.72.0/22',
+        '2400:cb00::/32',
+        '2606:4700::/32',
+        '2803:f800::/32',
+        '2405:b500::/32',
+        '2405:8100::/32',
+        '2a06:98c0::/29',
+        '2c0f:f248::/32',
+    );
+
+    /**
+     * Resuelve la IP para bloqueos y lista blanca sin confiar en cabeceras arbitrarias.
+     *
+     * - Directo: REMOTE_ADDR (IP observada por el servidor).
+     * - Cloudflare: CF-Connecting-IP solo si REMOTE_ADDR pertenece a Cloudflare.
+     * - Otro proxy: X-Forwarded-For, únicamente cuando el administrador declara
+     *   sus IP/CIDR confiables mediante WPORLOGIN_TRUSTED_PROXIES en wp-config.php.
+     *   Se recorre la cadena de derecha a izquierda, nunca se toma la primera
+     *   dirección sin validar la cadena de proxies.
+     *
+     * Si no se puede establecer el origen con seguridad, se conserva REMOTE_ADDR.
+     * Los servidores que reescriben REMOTE_ADDR con la IP real no requieren ajustes.
+     *
+     * @return string IP válida, o cadena vacía si el servidor no proporciona una.
      */
     private function get_client_ip() {
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $remote_ip = isset( $_SERVER['REMOTE_ADDR'] ) && is_string( $_SERVER['REMOTE_ADDR'] )
+            ? trim( $_SERVER['REMOTE_ADDR'] )
+            : '';
 
-        // 1. Prioridad: Cloudflare
-        // Si existe esta cabecera, es muy probable que venga de Cloudflare y es la IP real.
-        if ( ! empty( $_SERVER['HTTP_CF_CONNECTING_IP'] ) ) {
-            $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
-        }
-        // 2. Estándar: X-Forwarded-For (SiteGround, AWS, Varnish, Nginx)
-        // Esta cabecera suele ser una lista: "IP_REAL, PROXY_1, PROXY_2"
-        elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-            // Convertimos la lista en array
-            $ip_list = explode( ',', $_SERVER['HTTP_X_FORWARDED_FOR'] );
-            // Tomamos SIEMPRE la primera IP, que corresponde al cliente original
-            $ip = trim( reset( $ip_list ) );
-        }
-        // 3. Otros posibles proxies (Opcional, pero X-Forwarded-For suele bastar)
-        elseif ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        if ( ! filter_var( $remote_ip, FILTER_VALIDATE_IP ) ) {
+            return '';
         }
 
-        // 4. VALIDACIÓN DE SEGURIDAD (CRÍTICO)
-        // Nos aseguramos de que lo que capturamos parezca una IP real (IPv4 o IPv6).
-        // Si un hacker mandó texto basura o código malicioso, esto lo limpia y vuelve a la IP del servidor.
-        if ( filter_var( $ip, FILTER_VALIDATE_IP ) ) {
-            return $ip;
+        // CF-Connecting-IP solo es confiable si nos conecta una IP de Cloudflare.
+        if ( $this->ip_in_ranges( $remote_ip, self::CLOUDFLARE_IP_RANGES ) ) {
+            $cf_ip = isset( $_SERVER['HTTP_CF_CONNECTING_IP'] ) && is_string( $_SERVER['HTTP_CF_CONNECTING_IP'] )
+                ? trim( $_SERVER['HTTP_CF_CONNECTING_IP'] )
+                : '';
+
+            // No usar X-Forwarded-For como respaldo: el origen de sus entradas
+            // puede ser ambiguo. Si falta la cabecera esperada, usamos REMOTE_ADDR.
+            return filter_var( $cf_ip, FILTER_VALIDATE_IP ) ? $cf_ip : $remote_ip;
         }
 
-        return $_SERVER['REMOTE_ADDR'];
+        // Otros proxies: deben configurarse explícitamente en wp-config.php.
+        // Jamás confiar automáticamente en direcciones privadas (por ejemplo, 127.0.0.1).
+        $trusted_proxies = defined( 'WPORLOGIN_TRUSTED_PROXIES' ) && is_array( WPORLOGIN_TRUSTED_PROXIES )
+            ? WPORLOGIN_TRUSTED_PROXIES
+            : array();
+
+        if ( ! $this->ip_in_ranges( $remote_ip, $trusted_proxies ) ) {
+            return $remote_ip;
+        }
+
+        $forwarded_for = isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) && is_string( $_SERVER['HTTP_X_FORWARDED_FOR'] )
+            ? $_SERVER['HTTP_X_FORWARDED_FOR']
+            : '';
+
+        // Un límite conservador evita procesar cabeceras excesivamente largas.
+        if ( '' === $forwarded_for || strlen( $forwarded_for ) > 2048 ) {
+            return $remote_ip;
+        }
+
+        $chain = explode( ',', $forwarded_for );
+        if ( count( $chain ) > 20 ) {
+            return $remote_ip;
+        }
+
+        // El proxy inmediato es confiable; recorremos saltos anteriores desde
+        // el más próximo hasta encontrar el primer origen NO confiable.
+        for ( $index = count( $chain ) - 1; $index >= 0; $index-- ) {
+            $candidate = trim( $chain[ $index ] );
+
+            if ( ! filter_var( $candidate, FILTER_VALIDATE_IP ) ) {
+                return $remote_ip;
+            }
+
+            if ( ! $this->ip_in_ranges( $candidate, $trusted_proxies ) ) {
+                return $candidate;
+            }
+        }
+
+        // Todos los saltos declarados eran proxies: no se infiere otro origen.
+        return $remote_ip;
+    }
+
+    /**
+     * Determina si una IP pertenece a alguna dirección o bloque CIDR confiable.
+     * Compatible con IPv4, IPv6 y PHP 7.4; no utiliza servicios externos.
+     *
+     * @param string $ip     IP a comprobar.
+     * @param array  $ranges Direcciones individuales o rangos CIDR.
+     * @return bool
+     */
+    private function ip_in_ranges( $ip, $ranges ) {
+        $ip_binary = @inet_pton( $ip );
+        if ( false === $ip_binary || ! is_array( $ranges ) ) {
+            return false;
+        }
+
+        foreach ( $ranges as $range ) {
+            if ( ! is_string( $range ) ) {
+                continue;
+            }
+
+            $parts          = explode( '/', trim( $range ), 2 );
+            $network_binary = @inet_pton( $parts[0] );
+
+            if ( false === $network_binary || strlen( $ip_binary ) !== strlen( $network_binary ) ) {
+                continue;
+            }
+
+            $maximum_bits = strlen( $ip_binary ) * 8;
+            $prefix_bits  = isset( $parts[1] ) ? $parts[1] : (string) $maximum_bits;
+
+            // Rechazar prefijos vacíos, negativos, fuera de rango o mal escritos.
+            if ( ! ctype_digit( (string) $prefix_bits ) || (int) $prefix_bits > $maximum_bits ) {
+                continue;
+            }
+
+            $prefix_bits = (int) $prefix_bits;
+            $whole_bytes = intdiv( $prefix_bits, 8 );
+            $leftover    = $prefix_bits % 8;
+
+            if ( $whole_bytes > 0 && substr( $ip_binary, 0, $whole_bytes ) !== substr( $network_binary, 0, $whole_bytes ) ) {
+                continue;
+            }
+
+            if ( $leftover > 0 ) {
+                $mask = ( 0xff << ( 8 - $leftover ) ) & 0xff;
+                if ( ( ord( $ip_binary[ $whole_bytes ] ) & $mask ) !== ( ord( $network_binary[ $whole_bytes ] ) & $mask ) ) {
+                    continue;
+                }
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -99,6 +231,9 @@ class Wporlogin_Public_Limit_Login {
         if ( $this->is_whitelisted() ) return $user;
 
         $ip = $this->get_client_ip();
+        if ( '' === $ip ) {
+            return $user;
+        }
         global $wpdb;
 
         // CORRECCIÓN TIMEZONE: Usamos current_time('mysql') en lugar de NOW()
@@ -132,6 +267,9 @@ class Wporlogin_Public_Limit_Login {
         if ( $this->is_whitelisted() ) return;
 
         $ip = $this->get_client_ip();
+        if ( '' === $ip ) {
+            return;
+        }
         $max_retries = (int) get_option( 'wporlogin_limit_max_retries', 3 );
         $lock_time   = (int) get_option( 'wporlogin_limit_lock_time', 20 );
         
@@ -171,7 +309,7 @@ class Wporlogin_Public_Limit_Login {
 
             // Verificamos si ALCANZÓ el límite con este nuevo error
             if ( $new_attempts >= $max_retries ) {
-                $locked_until = date( 'Y-m-d H:i:s', $current_timestamp + ( $lock_time * 60 ) );
+                $locked_until = gmdate( 'Y-m-d H:i:s', $current_timestamp + ( $lock_time * 60 ) );
             }
 
             // [BUG FIXED] Asignamos el retorno a $result
@@ -192,7 +330,7 @@ class Wporlogin_Public_Limit_Login {
             $locked_until = NULL;
             // Caso borde: Si el admin puso Max Retries = 1, se bloquea a la primera
             if ( $max_retries <= 1 ) {
-                 $locked_until = date( 'Y-m-d H:i:s', $current_timestamp + ( $lock_time * 60 ) );
+                 $locked_until = gmdate( 'Y-m-d H:i:s', $current_timestamp + ( $lock_time * 60 ) );
             }
 
             // [BUG FIXED] Asignamos el retorno a $result
@@ -227,6 +365,9 @@ class Wporlogin_Public_Limit_Login {
         }
 
         $ip = $this->get_client_ip();
+        if ( '' === $ip ) {
+            return $error;
+        }
         global $wpdb;
 
         $record = $wpdb->get_row( $wpdb->prepare( "SELECT attempts, locked_until FROM {$this->table_name} WHERE ip = %s", $ip ) );
@@ -245,6 +386,7 @@ class Wporlogin_Public_Limit_Login {
 
         if ( $remaining <= 1 ) {
             $warning = sprintf( 
+                /* translators: %d: Remaining failed login attempts before the account or IP is locked. */
                 __( ' <strong>Warning</strong>: Only %d attempt remaining before lockout.', 'wporlogin' ), 
                 $remaining 
             );
@@ -305,12 +447,16 @@ class Wporlogin_Public_Limit_Login {
         // Usamos current_time('mysql') para consistencia
         $now = current_time( 'mysql' );
         
-        $sql = "DELETE FROM {$this->table_name} 
-                WHERE (locked_until IS NULL OR locked_until < %s) 
-                AND last_attempt < DATE_SUB(%s, INTERVAL %d DAY)";
-
-        // [BUG FIXED] Asignamos $result
-        $result = $wpdb->query( $wpdb->prepare( $sql, $now, $now, $days_retention ) );
+        // El nombre de la tabla procede del prefijo interno de WordPress;
+        // todos los datos variables se envían mediante placeholders.
+        $result = $wpdb->query( $wpdb->prepare(
+            "DELETE FROM {$this->table_name}
+             WHERE (locked_until IS NULL OR locked_until < %s)
+             AND last_attempt < DATE_SUB(%s, INTERVAL %d DAY)",
+            $now,
+            $now,
+            $days_retention
+        ) );
 
         // [NUEVO] Si borramos logs viejos, el contador baja, así que limpiamos caché.
         if ( $result !== false && $result > 0 ) {

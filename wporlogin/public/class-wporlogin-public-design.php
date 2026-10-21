@@ -175,9 +175,9 @@ class Wporlogin_Public_Design {
             <style>
             :root {
                 --wporlogin-logo: url('<?php echo esc_url( $final_url ); ?>') !important;
-                --wporlogin-width: <?php echo $dimensions['width']; ?> !important;
-                --wporlogin-height: <?php echo $dimensions['height']; ?> !important;
-                --background-position: <?php echo $bg_pos; ?> !important;
+                --wporlogin-width: <?php echo esc_html( $dimensions['width'] ); ?> !important;
+                --wporlogin-height: <?php echo esc_html( $dimensions['height'] ); ?> !important;
+                --background-position: <?php echo esc_html( $bg_pos ); ?> !important;
                 --background-size: contain !important;
             }
             
